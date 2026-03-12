@@ -23,6 +23,9 @@ class APISearchAgent {
       chatHistory: input.chatHistory,
       followUp: input.followUp,
       llm: input.config.llm,
+    }).catch((err) => {
+      console.error(`Error executing widgets: ${err}`);
+      return [];
     });
 
     let searchPromise: Promise<ResearcherOutput> | null = null;
