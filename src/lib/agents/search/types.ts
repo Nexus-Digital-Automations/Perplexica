@@ -59,6 +59,7 @@ export type ClassifierOutput = {
     discussionSearch: boolean;
     showStockWidget: boolean;
     showCalculationWidget: boolean;
+    showWeatherWidget: boolean;
   };
   standaloneFollowUp: string;
 };

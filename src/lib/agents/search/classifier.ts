@@ -23,6 +23,9 @@ const schema = z.object({
     showCalculationWidget: z
       .boolean()
       .describe('Indicates whether to show the calculation widget.'),
+    showWeatherWidget: z
+      .boolean()
+      .describe('Indicates whether to show the weather widget.'),
   }),
   standaloneFollowUp: z
     .string()

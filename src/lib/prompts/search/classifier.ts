@@ -31,6 +31,10 @@ NOTE: BY GENERAL KNOWLEDGE WE MEAN INFORMATION THAT IS OBVIOUS, WIDELY KNOWN, OR
    - Set it to true if the user's query involves mathematical calculations, conversions, or any computation-related tasks.
    - Set it to true for queries like "What is 25% of 80?" or "Convert 100 USD to EUR" or "Calculate the square root of 256" or "What is 2 * 3 + 5?" or other mathematical expressions.
    - If it can fully answer the user query without needing additional search, set skipSearch to true as well.
+7. showWeatherWidget (boolean): Determine if displaying a weather widget would sufficiently fulfill the user's request.
+   - Set it to true if the user's query is specifically about current weather conditions or forecasts for a location.
+   - Set it to true for queries like "What's the weather in [City]?" or "Is it going to rain tomorrow?" or "What is the temperature in [City]?".
+   - If it can fully answer the user query without needing additional search, set skipSearch to true as well.
 </labels>
 
 <standalone_followup>
@@ -52,6 +56,7 @@ You must respond in the following JSON format without any extra text, explanatio
     "discussionSearch": boolean,
     "showStockWidget": boolean,
     "showCalculationWidget": boolean,
+    "showWeatherWidget": boolean,
   },
   "standaloneFollowUp": string
 }
