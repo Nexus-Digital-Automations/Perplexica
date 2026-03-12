@@ -1,5 +1,11 @@
 import { sql } from 'drizzle-orm';
-import { text, integer, real, sqliteTable } from 'drizzle-orm/sqlite-core';
+import {
+  text,
+  integer,
+  real,
+  sqliteTable,
+  unique,
+} from 'drizzle-orm/sqlite-core';
 import { Block } from '../types';
 import { SearchSources } from '../agents/search/types';
 
@@ -72,7 +78,34 @@ export const rssItems = sqliteTable('rss_items', {
     .default(false),
 });
 
+export const discoverTopics = sqliteTable('discover_topics', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  label: text('label').notNull(),
+  parentPath: text('parent_path'),
+  searchQueries: text('search_queries').notNull().default('[]'),
+  sortOrder: integer('sort_order').default(0),
+  createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const discoverInteractions = sqliteTable(
+  'discover_interactions',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    articleUrl: text('article_url').notNull(),
+    articleTitle: text('article_title'),
+    articleThumbnail: text('article_thumbnail'),
+    topicKey: text('topic_key'),
+    action: text('action', {
+      enum: ['like', 'dislike', 'save'],
+    }).notNull(),
+    createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
+  },
+  (t) => [unique().on(t.articleUrl, t.action)],
+);
+
 export type RssFeed = typeof rssFeeds.$inferSelect;
 export type NewRssFeed = typeof rssFeeds.$inferInsert;
 export type RssItem = typeof rssItems.$inferSelect;
 export type NewRssItem = typeof rssItems.$inferInsert;
+export type DiscoverTopic = typeof discoverTopics.$inferSelect;
+export type DiscoverInteraction = typeof discoverInteractions.$inferSelect;

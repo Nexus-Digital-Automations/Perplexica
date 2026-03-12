@@ -1,11 +1,13 @@
 'use client';
 
-import { Globe2Icon } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Bookmark, Globe2Icon } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import SmallNewsCard from '@/components/Discover/SmallNewsCard';
 import MajorNewsCard from '@/components/Discover/MajorNewsCard';
+import TopicSelector from '@/components/Discover/TopicSelector';
+import { getAllLeaves } from '@/lib/discover/taxonomy';
 
 export interface Discover {
   title: string;
@@ -14,64 +16,298 @@ export interface Discover {
   thumbnail: string;
 }
 
-const topics: { key: string; display: string }[] = [
-  {
-    display: 'Tech & Science',
-    key: 'tech',
-  },
-  {
-    display: 'Finance',
-    key: 'finance',
-  },
-  {
-    display: 'Art & Culture',
-    key: 'art',
-  },
-  {
-    display: 'Sports',
-    key: 'sports',
-  },
-  {
-    display: 'Entertainment',
-    key: 'entertainment',
-  },
-];
+interface SavedArticle {
+  id: number;
+  articleUrl: string;
+  articleTitle: string | null;
+  articleThumbnail: string | null;
+  topicKey: string | null;
+  createdAt: string | null;
+}
+
+type InteractionMap = Record<
+  string,
+  { like: boolean; dislike: boolean; save: boolean }
+>;
+
+const DEFAULT_LEAF = getAllLeaves()[0];
 
 const Page = () => {
   const [discover, setDiscover] = useState<Discover[] | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTopic, setActiveTopic] = useState<string>(topics[0].key);
+  const [topicKey, setTopicKey] = useState<string>(DEFAULT_LEAF?.key ?? 'tech');
+  const [topicDisplay, setTopicDisplay] = useState<string>(
+    DEFAULT_LEAF?.display ?? 'Machine Learning',
+  );
+  const [savedMode, setSavedMode] = useState(false);
+  const [savedArticles, setSavedArticles] = useState<SavedArticle[]>([]);
+  const [interactions, setInteractions] = useState<InteractionMap>({});
 
-  const fetchArticles = async (topic: string) => {
+  const fetchInteractions = useCallback(async (urls: string[]) => {
+    if (urls.length === 0) return;
+    try {
+      const params = new URLSearchParams();
+      urls.forEach((u) => params.append('url', u));
+      // We build interaction state client-side from the saved/like/dislike endpoints
+      // For initial hydration, fetch all saved articles and stored interactions
+      const [savedRes] = await Promise.all([
+        fetch('/api/discover/saved'),
+      ]);
+      if (savedRes.ok) {
+        const { articles } = await savedRes.json();
+        const map: InteractionMap = {};
+        for (const url of urls) {
+          map[url] = { like: false, dislike: false, save: false };
+        }
+        for (const art of articles as SavedArticle[]) {
+          if (map[art.articleUrl]) {
+            map[art.articleUrl].save = true;
+          }
+        }
+        setInteractions((prev) => ({ ...prev, ...map }));
+      }
+    } catch {
+      // ignore hydration errors
+    }
+  }, []);
+
+  const fetchArticles = useCallback(
+    async (key: string) => {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/discover?topic=${encodeURIComponent(key)}`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.message);
+        }
+
+        const filtered: Discover[] = (data.blogs as Discover[]).filter(
+          (blog) => blog.thumbnail,
+        );
+        setDiscover(filtered);
+        await fetchInteractions(filtered.map((b) => b.url));
+      } catch (err: any) {
+        console.error('Error fetching data:', err.message);
+        toast.error('Error fetching data');
+      } finally {
+        setLoading(false);
+      }
+    },
+    [fetchInteractions],
+  );
+
+  const fetchSaved = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/discover?topic=${topic}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
+      const res = await fetch('/api/discover/saved');
       const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message);
-      }
-
-      data.blogs = data.blogs.filter((blog: Discover) => blog.thumbnail);
-
-      setDiscover(data.blogs);
+      if (!res.ok) throw new Error(data.message);
+      setSavedArticles(data.articles ?? []);
     } catch (err: any) {
-      console.error('Error fetching data:', err.message);
-      toast.error('Error fetching data');
+      console.error('Error fetching saved:', err.message);
+      toast.error('Error fetching saved articles');
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    fetchArticles(activeTopic);
-  }, [activeTopic]);
+    if (savedMode) {
+      fetchSaved();
+    } else {
+      fetchArticles(topicKey);
+    }
+  }, [topicKey, savedMode, fetchArticles, fetchSaved]);
+
+  const handleTopicChange = (key: string, display: string) => {
+    setTopicKey(key);
+    setTopicDisplay(display);
+    setSavedMode(false);
+  };
+
+  const handleSaveChange = (url: string, saved: boolean) => {
+    setInteractions((prev) => ({
+      ...prev,
+      [url]: { ...(prev[url] ?? { like: false, dislike: false, save: false }), save: saved },
+    }));
+    if (savedMode && !saved) {
+      setSavedArticles((prev) => prev.filter((a) => a.articleUrl !== url));
+    }
+  };
+
+  // Convert saved articles to Discover items for rendering
+  const savedAsDiscover: Discover[] = savedArticles
+    .filter((a) => a.articleTitle && a.articleThumbnail)
+    .map((a) => ({
+      title: a.articleTitle ?? '',
+      content: '',
+      url: a.articleUrl,
+      thumbnail: a.articleThumbnail ?? '',
+    }));
+
+  const displayItems = savedMode ? savedAsDiscover : discover;
+
+  const renderCards = (items: Discover[], mobile: boolean) => {
+    if (mobile) {
+      return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {items.map((item, i) => (
+            <SmallNewsCard
+              key={`mobile-${i}`}
+              item={item}
+              topicKey={topicKey}
+              interactions={interactions[item.url]}
+              onSaveChange={(s) => handleSaveChange(item.url, s)}
+            />
+          ))}
+        </div>
+      );
+    }
+
+    // Desktop alternating layout
+    const sections: React.ReactNode[] = [];
+    let index = 0;
+
+    while (index < items.length) {
+      if (sections.length > 0) {
+        sections.push(
+          <hr
+            key={`sep-${index}`}
+            className="border-t border-light-200/20 dark:border-dark-200/20 my-3 w-full"
+          />,
+        );
+      }
+
+      if (index < items.length) {
+        sections.push(
+          <MajorNewsCard
+            key={`major-${index}`}
+            item={items[index]}
+            isLeft={false}
+            topicKey={topicKey}
+            interactions={interactions[items[index].url]}
+            onSaveChange={(s) => handleSaveChange(items[index].url, s)}
+          />,
+        );
+        index++;
+      }
+
+      if (index < items.length) {
+        sections.push(
+          <hr
+            key={`sep-${index}-after`}
+            className="border-t border-light-200/20 dark:border-dark-200/20 my-3 w-full"
+          />,
+        );
+      }
+
+      if (index < items.length) {
+        const smallCards = items.slice(index, index + 3);
+        sections.push(
+          <div
+            key={`small-group-${index}`}
+            className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4"
+          >
+            {smallCards.map((item, i) => (
+              <SmallNewsCard
+                key={`small-${index + i}`}
+                item={item}
+                topicKey={topicKey}
+                interactions={interactions[item.url]}
+                onSaveChange={(s) => handleSaveChange(item.url, s)}
+              />
+            ))}
+          </div>,
+        );
+        index += 3;
+      }
+
+      if (index < items.length) {
+        sections.push(
+          <hr
+            key={`sep-${index}-after-small`}
+            className="border-t border-light-200/20 dark:border-dark-200/20 my-3 w-full"
+          />,
+        );
+      }
+
+      if (index < items.length - 1) {
+        const twoMajorCards = items.slice(index, index + 2);
+        twoMajorCards.forEach((item, i) => {
+          sections.push(
+            <MajorNewsCard
+              key={`double-${index + i}`}
+              item={item}
+              isLeft={i === 0}
+              topicKey={topicKey}
+              interactions={interactions[item.url]}
+              onSaveChange={(s) => handleSaveChange(item.url, s)}
+            />,
+          );
+          if (i === 0) {
+            sections.push(
+              <hr
+                key={`sep-double-${index + i}`}
+                className="border-t border-light-200/20 dark:border-dark-200/20 my-3 w-full"
+              />,
+            );
+          }
+        });
+        index += 2;
+      } else if (index < items.length) {
+        sections.push(
+          <MajorNewsCard
+            key={`final-major-${index}`}
+            item={items[index]}
+            isLeft={true}
+            topicKey={topicKey}
+            interactions={interactions[items[index].url]}
+            onSaveChange={(s) => handleSaveChange(items[index].url, s)}
+          />,
+        );
+        index++;
+      }
+
+      if (index < items.length) {
+        sections.push(
+          <hr
+            key={`sep-${index}-after-major`}
+            className="border-t border-light-200/20 dark:border-dark-200/20 my-3 w-full"
+          />,
+        );
+      }
+
+      if (index < items.length) {
+        const smallCards = items.slice(index, index + 3);
+        sections.push(
+          <div
+            key={`small-group-2-${index}`}
+            className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4"
+          >
+            {smallCards.map((item, i) => (
+              <SmallNewsCard
+                key={`small-2-${index + i}`}
+                item={item}
+                topicKey={topicKey}
+                interactions={interactions[item.url]}
+                onSaveChange={(s) => handleSaveChange(item.url, s)}
+              />
+            ))}
+          </div>,
+        );
+        index += 3;
+      }
+    }
+
+    return sections;
+  };
+
+  const isEmpty = !loading && (displayItems === null || displayItems.length === 0);
 
   return (
     <>
@@ -87,23 +323,36 @@ const Page = () => {
                 Discover
               </h1>
             </div>
-            <div className="flex flex-row items-center space-x-2 overflow-x-auto">
-              {topics.map((t, i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    'border-[0.1px] rounded-full text-sm px-3 py-1 text-nowrap transition duration-200 cursor-pointer',
-                    activeTopic === t.key
-                      ? 'text-cyan-700 dark:text-cyan-300 bg-cyan-300/20 border-cyan-700/60 dar:bg-cyan-300/30 dark:border-cyan-300/40'
-                      : 'border-black/30 dark:border-white/30 text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white hover:border-black/40 dark:hover:border-white/40 hover:bg-black/5 dark:hover:bg-white/5',
-                  )}
-                  onClick={() => setActiveTopic(t.key)}
-                >
-                  <span>{t.display}</span>
-                </div>
-              ))}
+            <div className="flex flex-row items-center gap-2">
+              <TopicSelector
+                selectedKey={topicKey}
+                onSelect={handleTopicChange}
+              />
+              <button
+                type="button"
+                title="Saved articles"
+                onClick={() => setSavedMode((m) => !m)}
+                className={cn(
+                  'border-[0.1px] rounded-full p-2 transition duration-200 cursor-pointer',
+                  savedMode
+                    ? 'text-cyan-700 dark:text-cyan-300 bg-cyan-300/20 border-cyan-700/60 dark:border-cyan-300/40'
+                    : 'border-black/30 dark:border-white/30 text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white hover:border-black/40 dark:hover:border-white/40 hover:bg-black/5 dark:hover:bg-white/5',
+                )}
+              >
+                <Bookmark size={15} fill={savedMode ? 'currentColor' : 'none'} />
+              </button>
             </div>
           </div>
+          {savedMode && (
+            <p className="text-xs text-black/40 dark:text-white/40 mt-2 text-center lg:text-right">
+              Saved articles
+            </p>
+          )}
+          {!savedMode && topicDisplay && (
+            <p className="text-xs text-black/40 dark:text-white/40 mt-2 text-center lg:text-right">
+              {topicDisplay}
+            </p>
+          )}
         </div>
 
         {loading ? (
@@ -125,141 +374,25 @@ const Page = () => {
               />
             </svg>
           </div>
+        ) : isEmpty ? (
+          <div className="flex flex-col items-center justify-center min-h-[40vh] gap-3 text-center px-4">
+            <Globe2Icon size={40} className="text-black/20 dark:text-white/20" />
+            <p className="text-black/50 dark:text-white/50 text-lg">
+              {savedMode ? 'No saved articles yet' : 'No articles available'}
+            </p>
+            {!savedMode && (
+              <p className="text-black/30 dark:text-white/30 text-sm">
+                Configure a SearxNG URL in Settings to enable content discovery.
+              </p>
+            )}
+          </div>
         ) : (
           <div className="flex flex-col gap-4 pb-28 pt-5 lg:pb-8 w-full">
             <div className="block lg:hidden">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {discover?.map((item, i) => (
-                  <SmallNewsCard key={`mobile-${i}`} item={item} />
-                ))}
-              </div>
+              {renderCards(displayItems ?? [], true)}
             </div>
-
             <div className="hidden lg:block">
-              {discover &&
-                discover.length > 0 &&
-                (() => {
-                  const sections = [];
-                  let index = 0;
-
-                  while (index < discover.length) {
-                    if (sections.length > 0) {
-                      sections.push(
-                        <hr
-                          key={`sep-${index}`}
-                          className="border-t border-light-200/20 dark:border-dark-200/20 my-3 w-full"
-                        />,
-                      );
-                    }
-
-                    if (index < discover.length) {
-                      sections.push(
-                        <MajorNewsCard
-                          key={`major-${index}`}
-                          item={discover[index]}
-                          isLeft={false}
-                        />,
-                      );
-                      index++;
-                    }
-
-                    if (index < discover.length) {
-                      sections.push(
-                        <hr
-                          key={`sep-${index}-after`}
-                          className="border-t border-light-200/20 dark:border-dark-200/20 my-3 w-full"
-                        />,
-                      );
-                    }
-
-                    if (index < discover.length) {
-                      const smallCards = discover.slice(index, index + 3);
-                      sections.push(
-                        <div
-                          key={`small-group-${index}`}
-                          className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4"
-                        >
-                          {smallCards.map((item, i) => (
-                            <SmallNewsCard
-                              key={`small-${index + i}`}
-                              item={item}
-                            />
-                          ))}
-                        </div>,
-                      );
-                      index += 3;
-                    }
-
-                    if (index < discover.length) {
-                      sections.push(
-                        <hr
-                          key={`sep-${index}-after-small`}
-                          className="border-t border-light-200/20 dark:border-dark-200/20 my-3 w-full"
-                        />,
-                      );
-                    }
-
-                    if (index < discover.length - 1) {
-                      const twoMajorCards = discover.slice(index, index + 2);
-                      twoMajorCards.forEach((item, i) => {
-                        sections.push(
-                          <MajorNewsCard
-                            key={`double-${index + i}`}
-                            item={item}
-                            isLeft={i === 0}
-                          />,
-                        );
-                        if (i === 0) {
-                          sections.push(
-                            <hr
-                              key={`sep-double-${index + i}`}
-                              className="border-t border-light-200/20 dark:border-dark-200/20 my-3 w-full"
-                            />,
-                          );
-                        }
-                      });
-                      index += 2;
-                    } else if (index < discover.length) {
-                      sections.push(
-                        <MajorNewsCard
-                          key={`final-major-${index}`}
-                          item={discover[index]}
-                          isLeft={true}
-                        />,
-                      );
-                      index++;
-                    }
-
-                    if (index < discover.length) {
-                      sections.push(
-                        <hr
-                          key={`sep-${index}-after-major`}
-                          className="border-t border-light-200/20 dark:border-dark-200/20 my-3 w-full"
-                        />,
-                      );
-                    }
-
-                    if (index < discover.length) {
-                      const smallCards = discover.slice(index, index + 3);
-                      sections.push(
-                        <div
-                          key={`small-group-2-${index}`}
-                          className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4"
-                        >
-                          {smallCards.map((item, i) => (
-                            <SmallNewsCard
-                              key={`small-2-${index + i}`}
-                              item={item}
-                            />
-                          ))}
-                        </div>,
-                      );
-                      index += 3;
-                    }
-                  }
-
-                  return sections;
-                })()}
+              {renderCards(displayItems ?? [], false)}
             </div>
           </div>
         )}

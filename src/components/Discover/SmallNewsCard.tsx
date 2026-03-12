@@ -1,7 +1,18 @@
 import { Discover } from '@/app/discover/page';
 import Link from 'next/link';
+import ArticleInteractions from './ArticleInteractions';
 
-const SmallNewsCard = ({ item }: { item: Discover }) => (
+const SmallNewsCard = ({
+  item,
+  topicKey = '',
+  interactions,
+  onSaveChange,
+}: {
+  item: Discover;
+  topicKey?: string;
+  interactions?: { like: boolean; dislike: boolean; save: boolean };
+  onSaveChange?: (saved: boolean) => void;
+}) => (
   <Link
     href={`/?q=Summary: ${item.url}`}
     className="rounded-3xl overflow-hidden bg-light-secondary dark:bg-dark-secondary shadow-sm shadow-light-200/10 dark:shadow-black/25 group flex flex-col"
@@ -18,13 +29,23 @@ const SmallNewsCard = ({ item }: { item: Discover }) => (
         alt={item.title}
       />
     </div>
-    <div className="p-4">
+    <div className="p-4 flex flex-col flex-1">
       <h3 className="font-semibold text-sm mb-2 leading-tight line-clamp-2 group-hover:text-cyan-500 dark:group-hover:text-cyan-300 transition duration-200">
         {item.title}
       </h3>
-      <p className="text-black/60 dark:text-white/60 text-xs leading-relaxed line-clamp-2">
+      <p className="text-black/60 dark:text-white/60 text-xs leading-relaxed line-clamp-2 flex-1">
         {item.content}
       </p>
+      <div className="mt-2 flex justify-end">
+        <ArticleInteractions
+          articleUrl={item.url}
+          articleTitle={item.title}
+          articleThumbnail={item.thumbnail}
+          topicKey={topicKey}
+          initialInteractions={interactions}
+          onSaveChange={onSaveChange}
+        />
+      </div>
     </div>
   </Link>
 );
