@@ -1,0 +1,26 @@
+services:
+  searxng:
+    image: searxng/searxng:latest
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./searxng:/etc/searxng:ro
+    environment:
+      - SEARXNG_SECRET=devsecret
+    restart: unless-stopped
+
+  vane-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/home/vane
+      - /home/vane/node_modules
+    environment:
+      - NODE_ENV=development
+      - SEARXNG_API_URL=http://searxng:8080
+    depends_on:
+      - searxng
+    restart: unless-stopped

@@ -4,8 +4,9 @@
   "license": "MIT",
   "author": "ItzCrazyKns",
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "dev": "next dev --turbopack",
+    "dev:docker": "docker compose -f docker-compose.dev.yaml up --build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "format:write": "prettier . --write",
