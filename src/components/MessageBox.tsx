@@ -1,7 +1,7 @@
 'use client';
 
 /* eslint-disable @next/next/no-img-element */
-import React, { MutableRefObject } from 'react';
+import React, { useMemo, MutableRefObject } from 'react';
 import { cn } from '@/lib/utils';
 import {
   BookCopy,
@@ -23,10 +23,11 @@ import ThinkBox from './ThinkBox';
 import { useChat, Section } from '@/lib/hooks/useChat';
 import Citation from './MessageRenderer/Citation';
 import ActivityFeed from './ActivityFeed';
-import { VerificationBlock as VerificationBlockType } from '@/lib/types';
+import { CostBlock as CostBlockType, VerificationBlock as VerificationBlockType } from '@/lib/types';
 import Renderer from './Widgets/Renderer';
 import CodeBlock from './MessageRenderer/CodeBlock';
 import VerificationBadge from './VerificationBadge';
+import CostBadge from './CostBadge';
 
 const ThinkTagProcessor = ({
   children,
@@ -40,7 +41,7 @@ const ThinkTagProcessor = ({
   );
 };
 
-const MessageBox = ({
+const MessageBox = React.memo(function MessageBox({
   section,
   sectionIndex,
   dividerRef,
@@ -50,7 +51,7 @@ const MessageBox = ({
   sectionIndex: number;
   dividerRef?: MutableRefObject<HTMLDivElement | null>;
   isLast: boolean;
-}) => {
+}) {
   const {
     loading,
     sendMessage,
@@ -65,45 +66,55 @@ const MessageBox = ({
   const speechMessage = section.speechMessage || '';
   const thinkingEnded = section.thinkingEnded;
 
-  const sourceBlocks = section.message.responseBlocks.filter(
-    (block): block is typeof block & { type: 'source' } =>
-      block.type === 'source',
+  const sourceBlocks = useMemo(
+    () =>
+      section.message.responseBlocks.filter(
+        (block): block is typeof block & { type: 'source' } =>
+          block.type === 'source',
+      ),
+    [section.message.responseBlocks],
   );
 
-  const sources = sourceBlocks.flatMap((block) => block.data);
+  const sources = useMemo(
+    () => sourceBlocks.flatMap((block) => block.data),
+    [sourceBlocks],
+  );
 
   const hasContent = section.parsedTextBlocks.length > 0;
 
   const { speechStatus, start, stop } = useSpeech({ text: speechMessage });
 
-  const markdownOverrides: MarkdownToJSX.Options = {
-    renderRule(next, node, renderChildren, state) {
-      if (node.type === RuleType.codeInline) {
-        return `\`${node.text}\``;
-      }
+  const markdownOverrides = useMemo<MarkdownToJSX.Options>(
+    () => ({
+      renderRule(next, node, renderChildren, state) {
+        if (node.type === RuleType.codeInline) {
+          return `\`${node.text}\``;
+        }
 
-      if (node.type === RuleType.codeBlock) {
-        return (
-          <CodeBlock key={state.key} language={node.lang || ''}>
-            {node.text}
-          </CodeBlock>
-        );
-      }
+        if (node.type === RuleType.codeBlock) {
+          return (
+            <CodeBlock key={state.key} language={node.lang || ''}>
+              {node.text}
+            </CodeBlock>
+          );
+        }
 
-      return next();
-    },
-    overrides: {
-      think: {
-        component: ThinkTagProcessor,
-        props: {
-          thinkingEnded: thinkingEnded,
+        return next();
+      },
+      overrides: {
+        think: {
+          component: ThinkTagProcessor,
+          props: {
+            thinkingEnded: thinkingEnded,
+          },
+        },
+        citation: {
+          component: Citation,
         },
       },
-      citation: {
-        component: Citation,
-      },
-    },
-  };
+    }),
+    [thinkingEnded],
+  );
 
   return (
     <div className="space-y-6">
@@ -181,14 +192,24 @@ const MessageBox = ({
                   </div>
                 )}
 
-                {section.message.responseBlocks
-                  .filter(
-                    (block): block is VerificationBlockType =>
-                      block.type === 'verification',
-                  )
-                  .map((block) => (
-                    <VerificationBadge key={block.id} block={block} />
-                  ))}
+                <div className="flex flex-wrap items-center gap-2">
+                  {section.message.responseBlocks
+                    .filter(
+                      (block): block is VerificationBlockType =>
+                        block.type === 'verification',
+                    )
+                    .map((block) => (
+                      <VerificationBadge key={block.id} block={block} />
+                    ))}
+                  {section.message.responseBlocks
+                    .filter(
+                      (block): block is CostBlockType =>
+                        block.type === 'cost',
+                    )
+                    .map((block) => (
+                      <CostBadge key={block.id} block={block} />
+                    ))}
+                </div>
 
                 {loading && isLast ? null : (
                   <div className="flex flex-row items-center justify-between w-full text-black dark:text-white py-4">
@@ -288,6 +309,6 @@ const MessageBox = ({
       </div>
     </div>
   );
-};
+});
 
 export default MessageBox;

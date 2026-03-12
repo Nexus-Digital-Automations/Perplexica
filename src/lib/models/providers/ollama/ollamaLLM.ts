@@ -176,6 +176,8 @@ class OllamaLLM extends BaseLLM<OllamaConfig> {
         done: chunk.done,
         additionalInfo: {
           reasoning: chunk.message.thinking,
+          // Ollama is a local model — no API cost applies.
+          usage: chunk.done ? null : undefined,
         },
       };
     }

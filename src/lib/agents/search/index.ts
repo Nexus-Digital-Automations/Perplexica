@@ -10,6 +10,7 @@ import { and, eq, gt } from 'drizzle-orm';
 import { streamWithVerification } from '@/lib/verification/streamVerifier';
 import { resolvePipelineConfig, toVerificationConfig } from '@/lib/config/pipeline';
 import { searchSearxng } from '@/lib/searxng';
+import { calculateCost } from '@/lib/pricing/modelPricing';
 
 class SearchAgent {
   async searchAsync(session: SessionManager, input: SearchAgentInput) {
@@ -178,7 +179,7 @@ class SearchAgent {
 
     const verificationConfig = toVerificationConfig(resolved);
 
-    await streamWithVerification({
+    const writerResult = await streamWithVerification({
       session,
       llm: input.config.llm,
       streamInput: {
@@ -198,6 +199,17 @@ class SearchAgent {
       config: verificationConfig,
       emitMode: 'blocks',
     });
+
+    const modelId = (input.config.llm as any).config?.model as string ?? '';
+    const cost = calculateCost(writerResult.usage, modelId);
+    if (cost !== null) {
+      session.emitBlock({
+        id: crypto.randomUUID(),
+        type: 'cost',
+        costUsd: cost,
+        modelId,
+      });
+    }
 
     session.emit('end', {});
 

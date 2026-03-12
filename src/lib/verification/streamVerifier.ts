@@ -14,9 +14,13 @@ type StreamWithVerificationOpts = {
   emitMode: 'blocks' | 'events';
 };
 
+type StreamWithVerificationResult = {
+  usage: { prompt_tokens: number; completion_tokens: number } | null;
+};
+
 export async function streamWithVerification(
   opts: StreamWithVerificationOpts,
-): Promise<void> {
+): Promise<StreamWithVerificationResult> {
   const { session, llm, streamInput, sources, config, emitMode } = opts;
 
   const inputWithTemp: GenerateTextInput = {
@@ -30,12 +34,17 @@ export async function streamWithVerification(
   const answerStream = llm.streamText(inputWithTemp);
   let fullText = '';
   let responseBlockId = '';
+  let capturedUsage: { prompt_tokens: number; completion_tokens: number } | null = null;
 
   if (emitMode === 'blocks') {
     for await (const chunk of answerStream) {
+      if (chunk.additionalInfo?.usage !== undefined) {
+        capturedUsage = chunk.additionalInfo.usage;
+      }
       fullText += chunk.contentChunk;
 
       if (!responseBlockId) {
+        if (!chunk.contentChunk) continue;
         const block: TextBlock = {
           id: crypto.randomUUID(),
           type: 'text',
@@ -55,16 +64,21 @@ export async function streamWithVerification(
     }
   } else {
     for await (const chunk of answerStream) {
+      if (chunk.additionalInfo?.usage !== undefined) {
+        capturedUsage = chunk.additionalInfo.usage;
+      }
       fullText += chunk.contentChunk;
-      session.emit('data', {
-        type: 'response',
-        data: chunk.contentChunk,
-      });
+      if (chunk.contentChunk) {
+        session.emit('data', {
+          type: 'response',
+          data: chunk.contentChunk,
+        });
+      }
     }
   }
 
   if (!config.enabled || sources.length === 0) {
-    return;
+    return { usage: capturedUsage };
   }
 
   session.emit('data', { type: 'verificationStart' });
@@ -83,7 +97,7 @@ export async function streamWithVerification(
         wasCorrected: false,
       },
     });
-    return;
+    return { usage: capturedUsage };
   }
 
   if (report.failed > 0 && config.maxCorrectionRetries > 0) {
@@ -133,4 +147,6 @@ export async function streamWithVerification(
       wasCorrected: report.wasCorrected,
     },
   });
+
+  return { usage: capturedUsage };
 }

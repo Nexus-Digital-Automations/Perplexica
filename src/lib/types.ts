@@ -9,6 +9,7 @@ export type AssistantMessage = {
   role: 'assistant';
   content: string;
   tool_calls?: ToolCall[];
+  reasoning_content?: string;
 };
 
 export type UserMessage = {
@@ -137,6 +138,13 @@ export type ClassificationBlock = {
   };
 };
 
+export type CostBlock = {
+  id: string;
+  type: 'cost';
+  costUsd: number;
+  modelId: string;
+};
+
 export type Block =
   | TextBlock
   | SourceBlock
@@ -144,4 +152,5 @@ export type Block =
   | WidgetBlock
   | ResearchBlock
   | VerificationBlock
-  | ClassificationBlock;
+  | ClassificationBlock
+  | CostBlock;
