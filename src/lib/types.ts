@@ -115,9 +115,23 @@ export type ResearchBlock = {
   };
 };
 
+export type VerificationBlock = {
+  id: string;
+  type: 'verification';
+  data: {
+    status: 'verified' | 'partial' | 'none';
+    totalCitations: number;
+    passed: number;
+    weak: number;
+    failed: number;
+    wasCorrected: boolean;
+  };
+};
+
 export type Block =
   | TextBlock
   | SourceBlock
   | SuggestionBlock
   | WidgetBlock
-  | ResearchBlock;
+  | ResearchBlock
+  | VerificationBlock;
