@@ -12,6 +12,26 @@ import { resolvePipelineConfig, toVerificationConfig } from '@/lib/config/pipeli
 
 class SearchAgent {
   async searchAsync(session: SessionManager, input: SearchAgentInput) {
+    try {
+      await this._run(session, input);
+    } catch (err: any) {
+      console.error('SearchAgent error:', err);
+      session.emit('error', { data: err?.message ?? 'An unknown error occurred.' });
+      await db
+        .update(messages)
+        .set({ status: 'error' })
+        .where(
+          and(
+            eq(messages.chatId, input.chatId),
+            eq(messages.messageId, input.messageId),
+          ),
+        )
+        .execute()
+        .catch(() => {});
+    }
+  }
+
+  private async _run(session: SessionManager, input: SearchAgentInput) {
     const exists = await db.query.messages.findFirst({
       where: and(
         eq(messages.chatId, input.chatId),
@@ -59,6 +79,15 @@ class SearchAgent {
       enabledSources: input.config.sources,
       query: input.followUp,
       llm: input.config.llm,
+    });
+
+    session.emitBlock({
+      id: crypto.randomUUID(),
+      type: 'classification',
+      data: {
+        standaloneFollowUp: classification.standaloneFollowUp,
+        skipSearch: classification.classification.skipSearch,
+      },
     });
 
     const widgetPromise = WidgetExecutor.executeAll({

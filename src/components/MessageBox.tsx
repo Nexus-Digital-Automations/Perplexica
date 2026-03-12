@@ -22,8 +22,8 @@ import { useSpeech } from 'react-text-to-speech';
 import ThinkBox from './ThinkBox';
 import { useChat, Section } from '@/lib/hooks/useChat';
 import Citation from './MessageRenderer/Citation';
-import AssistantSteps from './AssistantSteps';
-import { ResearchBlock, VerificationBlock as VerificationBlockType } from '@/lib/types';
+import ActivityFeed from './ActivityFeed';
+import { VerificationBlock as VerificationBlockType } from '@/lib/types';
 import Renderer from './Widgets/Renderer';
 import CodeBlock from './MessageRenderer/CodeBlock';
 import VerificationBadge from './VerificationBadge';
@@ -130,34 +130,17 @@ const MessageBox = ({
             </div>
           )}
 
-          {section.message.responseBlocks
-            .filter(
-              (block): block is ResearchBlock =>
-                block.type === 'research' && block.data.subSteps.length > 0,
-            )
-            .map((researchBlock) => (
-              <div key={researchBlock.id} className="flex flex-col space-y-2">
-                <AssistantSteps
-                  block={researchBlock}
-                  status={section.message.status}
-                  isLast={isLast}
-                />
-              </div>
-            ))}
-
-          {isLast &&
-            loading &&
-            !researchEnded &&
-            !section.message.responseBlocks.some(
-              (b) => b.type === 'research' && b.data.subSteps.length > 0,
-            ) && (
-              <div className="flex items-center gap-2 p-3 rounded-lg bg-light-secondary dark:bg-dark-secondary border border-light-200 dark:border-dark-200">
-                <Disc3 className="w-4 h-4 text-black dark:text-white animate-spin" />
-                <span className="text-sm text-black/70 dark:text-white/70">
-                  Brainstorming...
-                </span>
-              </div>
-            )}
+          {((isLast && loading) ||
+            section.message.responseBlocks.some(
+              (b) => b.type === 'research' || b.type === 'classification',
+            )) && (
+            <ActivityFeed
+              blocks={section.message.responseBlocks}
+              loading={loading && isLast}
+              researchEnded={researchEnded}
+              isLast={isLast}
+            />
+          )}
 
           {section.widgets.length > 0 && <Renderer widgets={section.widgets} />}
 

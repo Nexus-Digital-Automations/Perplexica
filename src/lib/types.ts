@@ -128,10 +128,20 @@ export type VerificationBlock = {
   };
 };
 
+export type ClassificationBlock = {
+  id: string;
+  type: 'classification';
+  data: {
+    standaloneFollowUp: string;
+    skipSearch: boolean;
+  };
+};
+
 export type Block =
   | TextBlock
   | SourceBlock
   | SuggestionBlock
   | WidgetBlock
   | ResearchBlock
-  | VerificationBlock;
+  | VerificationBlock
+  | ClassificationBlock;
