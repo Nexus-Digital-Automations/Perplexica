@@ -453,34 +453,6 @@ server.addTool({
 });
 
 server.addTool({
-  name: 'get_weather',
-  description:
-    'Get current weather for a location. ' +
-    'Does not require an AI model — calls Open-Meteo API directly.',
-  parameters: z.object({
-    lat: z.number().describe('Latitude'),
-    lng: z.number().describe('Longitude'),
-    measureUnit: z
-      .enum(['Metric', 'Imperial'])
-      .optional()
-      .default('Metric')
-      .describe('Temperature/wind speed unit system'),
-  }),
-  execute: async (args) => {
-    const result = await fetchJSON('/api/weather', {
-      method: 'POST',
-      body: JSON.stringify({
-        lat: args.lat,
-        lng: args.lng,
-        measureUnit: args.measureUnit,
-      }),
-    });
-
-    return JSON.stringify(result, null, 2);
-  },
-});
-
-server.addTool({
   name: 'list_chats',
   description: 'List all saved chat conversations in Perplexica.',
   parameters: z.object({}),

@@ -4,9 +4,13 @@ import { classify } from './classifier';
 import Researcher from './researcher';
 import { getWriterPrompt } from '@/lib/prompts/search/writer';
 import { WidgetExecutor } from './widgets';
+import { streamWithVerification } from '@/lib/verification/streamVerifier';
+import { resolvePipelineConfig, toVerificationConfig } from '@/lib/config/pipeline';
 
 class APISearchAgent {
   async searchAsync(session: SessionManager, input: SearchAgentInput) {
+    const resolved = resolvePipelineConfig(input.config.mode, input.config.overrides);
+
     const classification = await classify({
       chatHistory: input.chatHistory,
       enabledSources: input.config.sources,
@@ -30,6 +34,7 @@ class APISearchAgent {
         followUp: input.followUp,
         classification: classification,
         config: input.config,
+        maxIterations: resolved.maxIterations,
       });
     }
 
@@ -68,29 +73,31 @@ class APISearchAgent {
     const writerPrompt = getWriterPrompt(
       finalContextWithWidgets,
       input.config.systemInstructions,
-      input.config.mode,
+      resolved.responseLength,
     );
 
-    const answerStream = input.config.llm.streamText({
-      messages: [
-        {
-          role: 'system',
-          content: writerPrompt,
-        },
-        ...input.chatHistory,
-        {
-          role: 'user',
-          content: input.followUp,
-        },
-      ],
-    });
+    const verificationConfig = toVerificationConfig(resolved);
 
-    for await (const chunk of answerStream) {
-      session.emit('data', {
-        type: 'response',
-        data: chunk.contentChunk,
-      });
-    }
+    await streamWithVerification({
+      session,
+      llm: input.config.llm,
+      streamInput: {
+        messages: [
+          {
+            role: 'system',
+            content: writerPrompt,
+          },
+          ...input.chatHistory,
+          {
+            role: 'user',
+            content: input.followUp,
+          },
+        ],
+      },
+      sources: searchResults?.searchFindings || [],
+      config: verificationConfig,
+      emitMode: 'events',
+    });
 
     session.emit('end', {});
   }

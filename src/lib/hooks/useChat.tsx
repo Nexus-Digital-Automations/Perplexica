@@ -18,6 +18,7 @@ import { MinimalProvider } from '../models/types';
 import { getAutoMediaSearch } from '../config/clientRegistry';
 import { applyPatch } from 'rfc6902';
 import { Widget } from '@/components/ChatWindow';
+import { PipelineOverrides } from '@/lib/config/pipeline';
 
 export type Section = {
   message: Message;
@@ -46,8 +47,11 @@ type ChatContext = {
   chatModelProvider: ChatModelProvider;
   embeddingModelProvider: EmbeddingModelProvider;
   researchEnded: boolean;
+  verifying: boolean;
+  pipelineOverrides: PipelineOverrides;
   setResearchEnded: (ended: boolean) => void;
   setOptimizationMode: (mode: string) => void;
+  setPipelineOverrides: (overrides: PipelineOverrides) => void;
   setSources: (sources: string[]) => void;
   setFiles: (files: File[]) => void;
   setFileIds: (fileIds: string[]) => void;
@@ -114,6 +118,11 @@ const checkConfig = async (
 
     const chatModelProvider =
       providers.find((p) => p.id === chatModelProviderId) ??
+      providers.find(
+        (p) =>
+          p.chatModels.length > 0 &&
+          p.name.toLowerCase().includes('deepseek'),
+      ) ??
       providers.find((p) => p.chatModels.length > 0);
 
     if (!chatModelProvider) {
@@ -126,6 +135,9 @@ const checkConfig = async (
 
     const chatModel =
       chatModelProvider.chatModels.find((m) => m.key === chatModelKey) ??
+      chatModelProvider.chatModels.find((m) =>
+        m.name.toLowerCase().includes('deepseek'),
+      ) ??
       chatModelProvider.chatModels[0];
     chatModelKey = chatModel.key;
 
@@ -256,12 +268,15 @@ export const chatContext = createContext<ChatContext>({
   chatModelProvider: { key: '', providerId: '' },
   embeddingModelProvider: { key: '', providerId: '' },
   researchEnded: false,
+  verifying: false,
+  pipelineOverrides: {},
   rewrite: () => {},
   sendMessage: async () => {},
   setFileIds: () => {},
   setFiles: () => {},
   setSources: () => {},
   setOptimizationMode: () => {},
+  setPipelineOverrides: () => {},
   setChatModelProvider: () => {},
   setEmbeddingModelProvider: () => {},
   setResearchEnded: () => {},
@@ -280,6 +295,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   const [messageAppeared, setMessageAppeared] = useState(false);
 
   const [researchEnded, setResearchEnded] = useState(false);
+  const [verifying, setVerifying] = useState(false);
 
   const chatHistory = useRef<[string, string][]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -289,6 +305,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [sources, setSources] = useState<string[]>(['web']);
   const [optimizationMode, setOptimizationMode] = useState('speed');
+  const [pipelineOverrides, setPipelineOverrides] = useState<PipelineOverrides>({});
 
   const [isMessagesLoaded, setIsMessagesLoaded] = useState(false);
 
@@ -575,6 +592,32 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         }
       }
 
+      if (data.type === 'verificationStart') {
+        setVerifying(true);
+      }
+
+      if (data.type === 'verificationComplete') {
+        setVerifying(false);
+        if (data.data && data.data.totalCitations > 0) {
+          const verificationBlock: Block = {
+            id: crypto.randomBytes(7).toString('hex'),
+            type: 'verification',
+            data: data.data,
+          };
+          setMessages((prev) =>
+            prev.map((msg) => {
+              if (msg.messageId === messageId) {
+                return {
+                  ...msg,
+                  responseBlocks: [...msg.responseBlocks, verificationBlock],
+                };
+              }
+              return msg;
+            }),
+          );
+        }
+      }
+
       if (data.type === 'block') {
         setMessages((prev) =>
           prev.map((msg) => {
@@ -758,6 +801,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         files: fileIds,
         sources: sources,
         optimizationMode: optimizationMode,
+        overrides: Object.keys(pipelineOverrides).length > 0 ? pipelineOverrides : undefined,
         history: rewrite
           ? chatHistory.current.slice(
               0,
@@ -826,6 +870,8 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         setFiles,
         setSources,
         setOptimizationMode,
+        setPipelineOverrides,
+        pipelineOverrides,
         rewrite,
         sendMessage,
         setChatModelProvider,
@@ -833,6 +879,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         embeddingModelProvider,
         setEmbeddingModelProvider,
         researchEnded,
+        verifying,
         setResearchEnded,
       }}
     >

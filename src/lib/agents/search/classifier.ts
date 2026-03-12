@@ -17,9 +17,6 @@ const schema = z.object({
     discussionSearch: z
       .boolean()
       .describe('Indicates whether to perform a discussion search.'),
-    showWeatherWidget: z
-      .boolean()
-      .describe('Indicates whether to show the weather widget.'),
     showStockWidget: z
       .boolean()
       .describe('Indicates whether to show the stock widget.'),

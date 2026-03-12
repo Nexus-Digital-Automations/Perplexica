@@ -10,7 +10,7 @@ const nextConfig = {
       },
     ],
   },
-  serverExternalPackages: ['pdf-parse'],
+  serverExternalPackages: ['pdf-parse', 'better-sqlite3'],
   outputFileTracingIncludes: {
     '/api/**': [
       './node_modules/@napi-rs/canvas/**',

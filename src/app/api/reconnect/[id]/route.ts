@@ -46,6 +46,23 @@ export const POST = async (
               }) + '\n',
             ),
           );
+        } else if (data.type === 'verificationStart') {
+          writer.write(
+            encoder.encode(
+              JSON.stringify({
+                type: 'verificationStart',
+              }) + '\n',
+            ),
+          );
+        } else if (data.type === 'verificationComplete') {
+          writer.write(
+            encoder.encode(
+              JSON.stringify({
+                type: 'verificationComplete',
+                data: data.data,
+              }) + '\n',
+            ),
+          );
         }
       } else if (event === 'end') {
         writer.write(

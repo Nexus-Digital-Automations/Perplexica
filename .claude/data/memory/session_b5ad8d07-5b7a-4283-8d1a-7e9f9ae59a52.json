@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "b5ad8d07-5b7a-4283-8d1a-7e9f9ae59a52",
+    "data": {
+      "session_id": "b5ad8d07-5b7a-4283-8d1a-7e9f9ae59a52",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/b5ad8d07-5b7a-4283-8d1a-7e9f9ae59a52.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": false,
+      "last_assistant_message": "All weather references are gone. Here's a summary of what was removed:\n\n**Deleted:**\n- `src/lib/agents/search/widgets/weatherWidget.ts`\n- `src/app/api/weather/route.ts`\n- `src/components/Widgets/Weather.tsx`\n- `src/components/WeatherWidget.tsx`\n- `public/weather-ico/` (SVG icon assets)\n\n**Edited:**\n- `widgets/index.ts` \u2014 removed weatherWidget registration\n- `types.ts` \u2014 removed `showWeatherWidget` from ClassifierOutput\n- `classifier.ts` \u2014 removed field from zod schema\n- `prompts/search/classifier.ts` \u2014 removed label, renumbered, cleaned skipSearch text\n- `Widgets/Renderer.tsx` \u2014 removed `case 'weather'` block\n- `EmptyChat.tsx` \u2014 removed WeatherWidget and showWeather state\n- `config/clientRegistry.ts` \u2014 removed `getShowWeatherWidget`\n- `config/index.ts` \u2014 removed \"Show weather widget\" and \"Measurement Unit\" settings\n\nTypeScript compiles clean. The build error (`better-sqlite3` bindings) is pre-existing and unrelated."
+    },
+    "persisted_at": "2026-03-11T15:00:57.266097"
+  },
+  "stored_at": "2026-03-11T15:00:57.266236"
+}

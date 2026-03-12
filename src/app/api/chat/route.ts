@@ -31,6 +31,18 @@ const embeddingModelSchema: z.ZodType<ModelWithProvider> = z.object({
   key: z.string({ message: 'Embedding model key must be provided' }),
 });
 
+const overridesSchema = z.object({
+  maxIterations: z.number().min(1).max(50).optional(),
+  responseLength: z.enum(['brief', 'standard', 'comprehensive']).optional(),
+  writerTemperature: z.number().min(0).max(1).optional(),
+  verificationEnabled: z.boolean().optional(),
+  passThreshold: z.number().min(0).max(1).optional(),
+  weakThreshold: z.number().min(0).max(1).optional(),
+  maxCorrectionRetries: z.number().min(0).max(5).optional(),
+  correctionTimeoutMs: z.number().min(0).max(60000).optional(),
+  correctionTemperature: z.number().min(0).max(1).optional(),
+}).optional();
+
 const bodySchema = z.object({
   message: messageSchema,
   optimizationMode: z.enum(['speed', 'balanced', 'quality'], {
@@ -45,6 +57,7 @@ const bodySchema = z.object({
   chatModel: chatModelSchema,
   embeddingModel: embeddingModelSchema,
   systemInstructions: z.string().nullable().optional().default(''),
+  overrides: overridesSchema,
 });
 
 type Body = z.infer<typeof bodySchema>;
@@ -185,6 +198,23 @@ export const POST = async (req: Request) => {
               }) + '\n',
             ),
           );
+        } else if (data.type === 'verificationStart') {
+          writer.write(
+            encoder.encode(
+              JSON.stringify({
+                type: 'verificationStart',
+              }) + '\n',
+            ),
+          );
+        } else if (data.type === 'verificationComplete') {
+          writer.write(
+            encoder.encode(
+              JSON.stringify({
+                type: 'verificationComplete',
+                data: data.data,
+              }) + '\n',
+            ),
+          );
         }
       } else if (event === 'end') {
         writer.write(
@@ -222,6 +252,7 @@ export const POST = async (req: Request) => {
         mode: body.optimizationMode,
         fileIds: body.files,
         systemInstructions: body.systemInstructions || 'None',
+        overrides: body.overrides,
       },
     });
 

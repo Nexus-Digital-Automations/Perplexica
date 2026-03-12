@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "4d772600-e70e-4185-a952-fce80931b91d",
+    "data": {
+      "session_id": "4d772600-e70e-4185-a952-fce80931b91d",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/4d772600-e70e-4185-a952-fce80931b91d.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "default",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "## Validation Report\n\n**Task:** Explore the Perplexica codebase and write a documentation markdown file.\n\n### Root Folder Status\n**Result:** CLEAN (confirmed by stop hook automatically)\n\n> Note: The \"warnings\" about `next-env.d.ts`, `tailwind.config.ts`, `drizzle.config.ts`, and `postcss.config.js` are false positives \u2014 these are standard Next.js framework config files that are **required** at the project root and cannot be moved.\n\n### File Created\n**Path:** `docs/CODEBASE_OVERVIEW.md`\n**Size:** 23,157 bytes | **Lines:** 539\n**Sections:** 10 top-level sections with full subsections covering all major subsystems\n\n**Command:** `ls -la docs/ && wc -l docs/CODEBASE_OVERVIEW.md`\n**Result:** File present at correct location, proper size\n\n### Section Headings Verified\nAll 10 top-level sections confirmed: What it does, Tech stack, Project structure, Request lifecycle, Core subsystems (7 sub-sections), API routes, Database, Frontend, Search modes, Supported sources, Supported providers, Deployment.\n\n### Git Status\n**Command:** `git status`\n**Result:** `docs/CODEBASE_OVERVIEW.md` is the only untracked file \u2014 no unintended changes made anywhere in the codebase."
+    },
+    "persisted_at": "2026-03-07T14:36:29.262420"
+  },
+  "stored_at": "2026-03-07T14:36:29.262604"
+}

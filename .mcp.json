@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "perplexica-verification": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "tsx",
+        "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica/src/mcp-server/index.ts"
+      ],
+      "env": {}
+    }
+  }
+}

@@ -1,22 +1,11 @@
 import React from 'react';
 import { Widget } from '../ChatWindow';
-import Weather from './Weather';
 import Calculation from './Calculation';
 import Stock from './Stock';
 
 const Renderer = ({ widgets }: { widgets: Widget[] }) => {
   return widgets.map((widget, index) => {
     switch (widget.widgetType) {
-      case 'weather':
-        return (
-          <Weather
-            key={index}
-            location={widget.params.location}
-            current={widget.params.current}
-            daily={widget.params.daily}
-            timezone={widget.params.timezone}
-          />
-        );
       case 'calculation_result':
         return (
           <Calculation

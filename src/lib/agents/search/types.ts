@@ -3,6 +3,7 @@ import BaseLLM from '../../models/base/llm';
 import BaseEmbedding from '@/lib/models/base/embedding';
 import SessionManager from '@/lib/session';
 import { ChatTurnMessage, Chunk } from '@/lib/types';
+import { PipelineOverrides } from '@/lib/config/pipeline';
 
 export type SearchSources = 'web' | 'discussions' | 'academic';
 
@@ -13,6 +14,7 @@ export type SearchAgentConfig = {
   embedding: BaseEmbedding<any>;
   mode: 'speed' | 'balanced' | 'quality';
   systemInstructions: string;
+  overrides?: PipelineOverrides;
 };
 
 export type SearchAgentInput = {
@@ -55,7 +57,6 @@ export type ClassifierOutput = {
     personalSearch: boolean;
     academicSearch: boolean;
     discussionSearch: boolean;
-    showWeatherWidget: boolean;
     showStockWidget: boolean;
     showCalculationWidget: boolean;
   };
@@ -73,6 +74,7 @@ export type ResearcherInput = {
   followUp: string;
   classification: ClassifierOutput;
   config: SearchAgentConfig;
+  maxIterations?: number;
 };
 
 export type ResearcherOutput = {

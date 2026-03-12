@@ -23,9 +23,10 @@ import ThinkBox from './ThinkBox';
 import { useChat, Section } from '@/lib/hooks/useChat';
 import Citation from './MessageRenderer/Citation';
 import AssistantSteps from './AssistantSteps';
-import { ResearchBlock } from '@/lib/types';
+import { ResearchBlock, VerificationBlock as VerificationBlockType } from '@/lib/types';
 import Renderer from './Widgets/Renderer';
 import CodeBlock from './MessageRenderer/CodeBlock';
+import VerificationBadge from './VerificationBadge';
 
 const ThinkTagProcessor = ({
   children,
@@ -57,6 +58,7 @@ const MessageBox = ({
     messages,
     researchEnded,
     chatHistory,
+    verifying,
   } = useChat();
 
   const parsedMessage = section.parsedTextBlocks.join('\n\n');
@@ -186,6 +188,24 @@ const MessageBox = ({
                 >
                   {parsedMessage}
                 </Markdown>
+
+                {isLast && verifying && (
+                  <div className="flex items-center gap-2 p-3 rounded-lg bg-light-secondary dark:bg-dark-secondary border border-light-200 dark:border-dark-200 mt-3">
+                    <Disc3 className="w-4 h-4 text-black dark:text-white animate-spin" />
+                    <span className="text-sm text-black/70 dark:text-white/70">
+                      Verifying sources...
+                    </span>
+                  </div>
+                )}
+
+                {section.message.responseBlocks
+                  .filter(
+                    (block): block is VerificationBlockType =>
+                      block.type === 'verification',
+                  )
+                  .map((block) => (
+                    <VerificationBadge key={block.id} block={block} />
+                  ))}
 
                 {loading && isLast ? null : (
                   <div className="flex flex-row items-center justify-between w-full text-black dark:text-white py-4">

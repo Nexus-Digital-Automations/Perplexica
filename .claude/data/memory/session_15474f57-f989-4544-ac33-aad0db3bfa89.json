@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "15474f57-f989-4544-ac33-aad0db3bfa89",
+    "data": {
+      "session_id": "15474f57-f989-4544-ac33-aad0db3bfa89",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/15474f57-f989-4544-ac33-aad0db3bfa89.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "Authorized. The plan is ready whenever you want to proceed with implementation."
+    },
+    "persisted_at": "2026-03-11T22:19:03.457161"
+  },
+  "stored_at": "2026-03-11T22:19:03.457613"
+}

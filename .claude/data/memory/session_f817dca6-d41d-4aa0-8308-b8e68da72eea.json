@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "f817dca6-d41d-4aa0-8308-b8e68da72eea",
+    "data": {
+      "session_id": "f817dca6-d41d-4aa0-8308-b8e68da72eea",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/f817dca6-d41d-4aa0-8308-b8e68da72eea.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "Done. Worth noting: the stop hook flags `.next` every time the dev server or `tsc` runs, since it's a standard Next.js build directory. You may want to add `.next` to the stop hook's whitelist to avoid this recurring \u2014 let me know if you'd like me to do that."
+    },
+    "persisted_at": "2026-03-10T16:39:36.465745"
+  },
+  "stored_at": "2026-03-10T16:39:36.466086"
+}

@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "fa8721e2-4a57-487f-bbab-44ce011622cb",
+    "data": {
+      "session_id": "fa8721e2-4a57-487f-bbab-44ce011622cb",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/fa8721e2-4a57-487f-bbab-44ce011622cb.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "plan",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "Done. Note: `tsc --noEmit` keeps regenerating `tsconfig.tsbuildinfo` at root because the tsconfig has `incremental: true`. I'll avoid using that validation method going forward to prevent this from recurring."
+    },
+    "persisted_at": "2026-03-10T15:53:14.182133"
+  },
+  "stored_at": "2026-03-10T15:53:14.182378"
+}

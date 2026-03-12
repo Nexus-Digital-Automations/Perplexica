@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "d1af8ddd-9bee-4e02-a9ef-809a095e3133",
+    "data": {
+      "session_id": "d1af8ddd-9bee-4e02-a9ef-809a095e3133",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/d1af8ddd-9bee-4e02-a9ef-809a095e3133.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "## Validation Report\n\n### Change Applied\n`next.config.mjs` line 13: `serverExternalPackages: ['pdf-parse', 'better-sqlite3']` \u2705\n\n### TypeScript\n**Command:** `npx tsc --noEmit`\n**Result:** \u2705 PASS \u2014 zero errors\n\n### ESLint\n**Command:** `npx eslint next.config.mjs`\n**Result:** \u2705 PASS \u2014 no issues\n\n### File Verification\n**Confirmed:** `better-sqlite3` is now in `serverExternalPackages` alongside `pdf-parse`\n\n### `.next` Cache\n**Cleared:** `rm -rf .next` \u2014 fresh compilation guaranteed on next `yarn dev`\n\nStop authorized. Run `yarn dev` to confirm the fix."
+    },
+    "persisted_at": "2026-03-11T20:22:27.368765"
+  },
+  "stored_at": "2026-03-11T20:22:27.369056"
+}

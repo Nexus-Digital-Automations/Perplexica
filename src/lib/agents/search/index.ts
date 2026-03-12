@@ -7,7 +7,8 @@ import { WidgetExecutor } from './widgets';
 import db from '@/lib/db';
 import { chats, messages } from '@/lib/db/schema';
 import { and, eq, gt } from 'drizzle-orm';
-import { TextBlock } from '@/lib/types';
+import { streamWithVerification } from '@/lib/verification/streamVerifier';
+import { resolvePipelineConfig, toVerificationConfig } from '@/lib/config/pipeline';
 
 class SearchAgent {
   async searchAsync(session: SessionManager, input: SearchAgentInput) {
@@ -51,6 +52,8 @@ class SearchAgent {
         .execute();
     }
 
+    const resolved = resolvePipelineConfig(input.config.mode, input.config.overrides);
+
     const classification = await classify({
       chatHistory: input.chatHistory,
       enabledSources: input.config.sources,
@@ -86,6 +89,7 @@ class SearchAgent {
         followUp: input.followUp,
         classification: classification,
         config: input.config,
+        maxIterations: resolved.maxIterations,
       });
     }
 
@@ -117,53 +121,31 @@ class SearchAgent {
     const writerPrompt = getWriterPrompt(
       finalContextWithWidgets,
       input.config.systemInstructions,
-      input.config.mode,
+      resolved.responseLength,
     );
-    const answerStream = input.config.llm.streamText({
-      messages: [
-        {
-          role: 'system',
-          content: writerPrompt,
-        },
-        ...input.chatHistory,
-        {
-          role: 'user',
-          content: input.followUp,
-        },
-      ],
-    });
 
-    let responseBlockId = '';
+    const verificationConfig = toVerificationConfig(resolved);
 
-    for await (const chunk of answerStream) {
-      if (!responseBlockId) {
-        const block: TextBlock = {
-          id: crypto.randomUUID(),
-          type: 'text',
-          data: chunk.contentChunk,
-        };
-
-        session.emitBlock(block);
-
-        responseBlockId = block.id;
-      } else {
-        const block = session.getBlock(responseBlockId) as TextBlock | null;
-
-        if (!block) {
-          continue;
-        }
-
-        block.data += chunk.contentChunk;
-
-        session.updateBlock(block.id, [
+    await streamWithVerification({
+      session,
+      llm: input.config.llm,
+      streamInput: {
+        messages: [
           {
-            op: 'replace',
-            path: '/data',
-            value: block.data,
+            role: 'system',
+            content: writerPrompt,
           },
-        ]);
-      }
-    }
+          ...input.chatHistory,
+          {
+            role: 'user',
+            content: input.followUp,
+          },
+        ],
+      },
+      sources: searchResults?.searchFindings || [],
+      config: verificationConfig,
+      emitMode: 'blocks',
+    });
 
     session.emit('end', {});
 

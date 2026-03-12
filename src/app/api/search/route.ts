@@ -4,6 +4,7 @@ import SessionManager from '@/lib/session';
 import { ChatTurnMessage } from '@/lib/types';
 import { SearchSources } from '@/lib/agents/search/types';
 import APISearchAgent from '@/lib/agents/search/api';
+import { PipelineOverrides } from '@/lib/config/pipeline';
 
 interface ChatRequestBody {
   optimizationMode: 'speed' | 'balanced' | 'quality';
@@ -14,6 +15,7 @@ interface ChatRequestBody {
   history: Array<[string, string]>;
   stream?: boolean;
   systemInstructions?: string;
+  overrides?: PipelineOverrides;
 }
 
 export const POST = async (req: Request) => {
@@ -60,6 +62,7 @@ export const POST = async (req: Request) => {
         mode: body.optimizationMode,
         fileIds: [],
         systemInstructions: body.systemInstructions || '',
+        overrides: body.overrides,
       },
       followUp: body.query,
       chatId: crypto.randomUUID(),
@@ -157,6 +160,32 @@ export const POST = async (req: Request) => {
                     JSON.stringify({
                       type: 'sources',
                       data: sources,
+                    }) + '\n',
+                  ),
+                );
+              } else if (data.type === 'verificationStart') {
+                controller.enqueue(
+                  encoder.encode(
+                    JSON.stringify({
+                      type: 'verificationStart',
+                    }) + '\n',
+                  ),
+                );
+              } else if (data.type === 'verificationComplete') {
+                controller.enqueue(
+                  encoder.encode(
+                    JSON.stringify({
+                      type: 'verificationComplete',
+                      data: data.data,
+                    }) + '\n',
+                  ),
+                );
+              } else if (data.type === 'correctedResponse') {
+                controller.enqueue(
+                  encoder.encode(
+                    JSON.stringify({
+                      type: 'correctedResponse',
+                      data: data.data,
                     }) + '\n',
                   ),
                 );
