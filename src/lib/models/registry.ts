@@ -14,6 +14,9 @@ class ModelRegistry {
 
   private chatModelCache = new Map<string, BaseLLM<any>>();
   private embeddingModelCache = new Map<string, BaseEmbedding<any>>();
+  private modelListCache: { data: MinimalProvider[]; timestamp: number } | null =
+    null;
+  private readonly MODEL_LIST_TTL_MS = 30_000; // 30 seconds
 
   constructor() {
     this.initializeActiveProviders();
@@ -40,6 +43,14 @@ class ModelRegistry {
   }
 
   async getActiveProviders() {
+    const now = Date.now();
+    if (
+      this.modelListCache &&
+      now - this.modelListCache.timestamp < this.MODEL_LIST_TTL_MS
+    ) {
+      return this.modelListCache.data;
+    }
+
     const providers: MinimalProvider[] = [];
 
     await Promise.all(
@@ -73,6 +84,7 @@ class ModelRegistry {
       }),
     );
 
+    this.modelListCache = { data: providers, timestamp: Date.now() };
     return providers;
   }
 
@@ -143,6 +155,7 @@ class ModelRegistry {
       ...newProvider,
       provider: instance,
     });
+    this.modelListCache = null;
 
     return {
       ...newProvider,
@@ -157,6 +170,7 @@ class ModelRegistry {
       (p) => p.id !== providerId,
     );
     this._clearProviderCache(providerId);
+    this.modelListCache = null;
     return;
   }
 
@@ -215,6 +229,7 @@ class ModelRegistry {
       ...updated,
       provider: instance,
     });
+    this.modelListCache = null;
 
     return {
       ...updated,

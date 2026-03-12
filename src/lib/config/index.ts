@@ -247,17 +247,23 @@ class ConfigManager {
       }
     });
 
+    const dirty = newProviders.length > 0;
+
     this.currentConfig.modelProviders.push(...newProviders);
 
     /* search section */
+    let searchDirty = false;
     this.uiConfigSections.search.forEach((f) => {
       if (f.env && !this.currentConfig.search[f.key]) {
         this.currentConfig.search[f.key] =
           process.env[f.env] ?? f.default ?? '';
+        searchDirty = true;
       }
     });
 
-    this.saveConfig();
+    if (dirty || searchDirty) {
+      this.saveConfig();
+    }
   }
 
   public getConfig(key: string, defaultValue?: any): any {
@@ -404,7 +410,7 @@ class ConfigManager {
   }
 
   public getCurrentConfig(): Config {
-    return JSON.parse(JSON.stringify(this.currentConfig));
+    return structuredClone(this.currentConfig);
   }
 }
 
