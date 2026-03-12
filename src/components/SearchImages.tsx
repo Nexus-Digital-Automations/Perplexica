@@ -1,8 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImagesIcon, PlusIcon } from 'lucide-react';
-import { useState } from 'react';
-import Lightbox from 'yet-another-react-lightbox';
+import { memo, useState } from 'react';
+import dynamic from 'next/dynamic';
 import 'yet-another-react-lightbox/styles.css';
+const Lightbox = dynamic(() => import('yet-another-react-lightbox'), {
+  ssr: false,
+});
 import { Message } from './ChatWindow';
 
 type Image = {
@@ -149,4 +152,4 @@ const SearchImages = ({
   );
 };
 
-export default SearchImages;
+export default memo(SearchImages);

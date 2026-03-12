@@ -1,8 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { PlayCircle, PlayIcon, PlusIcon, VideoIcon } from 'lucide-react';
-import { useRef, useState } from 'react';
-import Lightbox, { GenericSlide, VideoSlide } from 'yet-another-react-lightbox';
+import { memo, useRef, useState } from 'react';
+import type { GenericSlide, VideoSlide } from 'yet-another-react-lightbox';
+import dynamic from 'next/dynamic';
 import 'yet-another-react-lightbox/styles.css';
+const Lightbox = dynamic(() => import('yet-another-react-lightbox'), {
+  ssr: false,
+});
 import { Message } from './ChatWindow';
 
 type Video = {
@@ -220,4 +224,4 @@ const Searchvideos = ({
   );
 };
 
-export default Searchvideos;
+export default memo(Searchvideos);

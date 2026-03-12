@@ -4,11 +4,16 @@ import { getConfiguredModelProviders } from '../config/serverRegistry';
 import { providers } from './providers';
 import { MinimalProvider, ModelList } from './types';
 import configManager from '../config';
+import BaseLLM from './base/llm';
+import BaseEmbedding from './base/embedding';
 
 class ModelRegistry {
   activeProviders: (ConfigModelProvider & {
     provider: BaseModelProvider<any>;
   })[] = [];
+
+  private chatModelCache = new Map<string, BaseLLM<any>>();
+  private embeddingModelCache = new Map<string, BaseEmbedding<any>>();
 
   constructor() {
     this.initializeActiveProviders();
@@ -72,22 +77,28 @@ class ModelRegistry {
   }
 
   async loadChatModel(providerId: string, modelName: string) {
-    const provider = this.activeProviders.find((p) => p.id === providerId);
+    const cacheKey = `${providerId}::${modelName}`;
+    const cached = this.chatModelCache.get(cacheKey);
+    if (cached) return cached;
 
+    const provider = this.activeProviders.find((p) => p.id === providerId);
     if (!provider) throw new Error('Invalid provider id');
 
     const model = await provider.provider.loadChatModel(modelName);
-
+    this.chatModelCache.set(cacheKey, model);
     return model;
   }
 
   async loadEmbeddingModel(providerId: string, modelName: string) {
-    const provider = this.activeProviders.find((p) => p.id === providerId);
+    const cacheKey = `${providerId}::${modelName}`;
+    const cached = this.embeddingModelCache.get(cacheKey);
+    if (cached) return cached;
 
+    const provider = this.activeProviders.find((p) => p.id === providerId);
     if (!provider) throw new Error('Invalid provider id');
 
     const model = await provider.provider.loadEmbeddingModel(modelName);
-
+    this.embeddingModelCache.set(cacheKey, model);
     return model;
   }
 
@@ -145,8 +156,21 @@ class ModelRegistry {
     this.activeProviders = this.activeProviders.filter(
       (p) => p.id !== providerId,
     );
-
+    this._clearProviderCache(providerId);
     return;
+  }
+
+  private _clearProviderCache(providerId: string) {
+    for (const key of this.chatModelCache.keys()) {
+      if (key.startsWith(`${providerId}::`)) {
+        this.chatModelCache.delete(key);
+      }
+    }
+    for (const key of this.embeddingModelCache.keys()) {
+      if (key.startsWith(`${providerId}::`)) {
+        this.embeddingModelCache.delete(key);
+      }
+    }
   }
 
   async updateProvider(
@@ -154,6 +178,7 @@ class ModelRegistry {
     name: string,
     config: any,
   ): Promise<ConfigModelProvider> {
+    this._clearProviderCache(providerId);
     const updated = await configManager.updateModelProvider(
       providerId,
       name,
@@ -219,3 +244,8 @@ class ModelRegistry {
 }
 
 export default ModelRegistry;
+
+// Module-level singleton — shared across requests in the same server process.
+// Existing mutation methods (addProvider, removeProvider, updateProvider) already
+// update this.activeProviders in place, so the singleton stays current.
+export const modelRegistry = new ModelRegistry();

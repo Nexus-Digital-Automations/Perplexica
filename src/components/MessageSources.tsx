@@ -7,8 +7,18 @@ import {
   TransitionChild,
 } from '@headlessui/react';
 import { File } from 'lucide-react';
-import { Fragment, useState } from 'react';
+import { Fragment, memo, useState } from 'react';
 import { Chunk } from '@/lib/types';
+
+const faviconCache = new Map<string, string>();
+
+const getFaviconUrl = (url: string): string => {
+  if (faviconCache.has(url)) return faviconCache.get(url)!;
+  const domain = new URL(url).origin;
+  const favicon = `https://s2.googleusercontent.com/s2/favicons?domain_url=${url}`;
+  faviconCache.set(url, favicon);
+  return favicon;
+};
 
 const MessageSources = ({ sources }: { sources: Chunk[] }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -43,7 +53,7 @@ const MessageSources = ({ sources }: { sources: Chunk[] }) => {
                 </div>
               ) : (
                 <img
-                  src={`https://s2.googleusercontent.com/s2/favicons?domain_url=${source.metadata.url}`}
+                  src={getFaviconUrl(source.metadata.url)}
                   width={16}
                   height={16}
                   alt="favicon"
@@ -80,7 +90,7 @@ const MessageSources = ({ sources }: { sources: Chunk[] }) => {
               ) : (
                 <img
                   key={i}
-                  src={`https://s2.googleusercontent.com/s2/favicons?domain_url=${source.metadata.url}`}
+                  src={getFaviconUrl(source.metadata.url)}
                   width={16}
                   height={16}
                   alt="favicon"
@@ -130,7 +140,7 @@ const MessageSources = ({ sources }: { sources: Chunk[] }) => {
                               </div>
                             ) : (
                               <img
-                                src={`https://s2.googleusercontent.com/s2/favicons?domain_url=${source.metadata.url}`}
+                                src={getFaviconUrl(source.metadata.url)}
                                 width={16}
                                 height={16}
                                 alt="favicon"
@@ -162,4 +172,4 @@ const MessageSources = ({ sources }: { sources: Chunk[] }) => {
   );
 };
 
-export default MessageSources;
+export default memo(MessageSources);

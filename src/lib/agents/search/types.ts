@@ -76,6 +76,7 @@ export type ResearcherInput = {
   classification: ClassifierOutput;
   config: SearchAgentConfig;
   maxIterations?: number;
+  initialActionOutput?: ActionOutput[];
 };
 
 export type ResearcherOutput = {

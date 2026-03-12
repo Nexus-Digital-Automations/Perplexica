@@ -1,4 +1,4 @@
-import { ResearcherOutput, SearchAgentInput } from './types';
+import { ActionOutput, ResearcherOutput, SearchAgentInput } from './types';
 import SessionManager from '@/lib/session';
 import { classify } from './classifier';
 import Researcher from './researcher';
@@ -9,6 +9,7 @@ import { chats, messages } from '@/lib/db/schema';
 import { and, eq, gt } from 'drizzle-orm';
 import { streamWithVerification } from '@/lib/verification/streamVerifier';
 import { resolvePipelineConfig, toVerificationConfig } from '@/lib/config/pipeline';
+import { searchSearxng } from '@/lib/searxng';
 
 class SearchAgent {
   async searchAsync(session: SessionManager, input: SearchAgentInput) {
@@ -74,12 +75,20 @@ class SearchAgent {
 
     const resolved = resolvePipelineConfig(input.config.mode, input.config.overrides);
 
-    const classification = await classify({
-      chatHistory: input.chatHistory,
-      enabledSources: input.config.sources,
-      query: input.followUp,
-      llm: input.config.llm,
-    });
+    const [classification, prelimSearxng] = await Promise.all([
+      classify({
+        chatHistory: input.chatHistory,
+        enabledSources: input.config.sources,
+        query: input.followUp,
+        llm: input.config.llm,
+      }),
+      input.config.sources.includes('web')
+        ? searchSearxng(input.followUp, {
+            categories: ['general'],
+            engines: ['google'],
+          }).catch(() => ({ results: [], suggestions: [] as string[] }))
+        : Promise.resolve({ results: [], suggestions: [] as string[] }),
+    ]);
 
     session.emitBlock({
       id: crypto.randomUUID(),
@@ -112,6 +121,19 @@ class SearchAgent {
     let searchPromise: Promise<ResearcherOutput> | null = null;
 
     if (!classification.classification.skipSearch) {
+      const prelimActionOutput: ActionOutput[] =
+        prelimSearxng.results.length > 0
+          ? [
+              {
+                type: 'search_results',
+                results: prelimSearxng.results.map((r) => ({
+                  content: r.content || r.title,
+                  metadata: { title: r.title, url: r.url },
+                })),
+              },
+            ]
+          : [];
+
       const researcher = new Researcher();
       searchPromise = researcher.research(session, {
         chatHistory: input.chatHistory,
@@ -119,6 +141,7 @@ class SearchAgent {
         classification: classification,
         config: input.config,
         maxIterations: resolved.maxIterations,
+        initialActionOutput: prelimActionOutput,
       });
     }
 

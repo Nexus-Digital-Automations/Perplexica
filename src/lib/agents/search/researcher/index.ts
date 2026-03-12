@@ -11,7 +11,6 @@ class Researcher {
     session: SessionManager,
     input: ResearcherInput,
   ): Promise<ResearcherOutput> {
-    let actionOutput: ActionOutput[] = [];
     let maxIteration = input.maxIterations ??
       (input.config.mode === 'speed'
         ? 2
@@ -44,15 +43,25 @@ class Researcher {
       },
     });
 
-    const agentMessageHistory: Message[] = [
-      {
-        role: 'user',
-        content: `
+    let actionOutput: ActionOutput[] = input.initialActionOutput
+      ? [...input.initialActionOutput]
+      : [];
+
+    let initialContent = `
           <conversation>
           ${formatChatHistoryAsString(input.chatHistory.slice(-10))}
            User: ${input.followUp} (Standalone question: ${input.classification.standaloneFollowUp})
            </conversation>
-        `,
+        `;
+
+    if (input.initialActionOutput && input.initialActionOutput.length > 0) {
+      initialContent += `\n<preliminary_search_results>The following search results were pre-fetched. If they sufficiently answer the question, call done() immediately rather than searching again.\n${JSON.stringify(input.initialActionOutput)}\n</preliminary_search_results>`;
+    }
+
+    const agentMessageHistory: Message[] = [
+      {
+        role: 'user',
+        content: initialContent,
       },
     ];
 

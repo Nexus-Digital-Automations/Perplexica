@@ -4,6 +4,7 @@ import { Message } from '@/components/ChatWindow';
 import { Block } from '@/lib/types';
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -250,6 +251,92 @@ const loadMessages = async (
   setIsMessagesLoaded(true);
 };
 
+const buildSection = (msg: Message): Section => {
+  const textBlocks: string[] = [];
+  let speechMessage = '';
+  let thinkingEnded = false;
+  let suggestions: string[] = [];
+
+  const sourceBlocks = msg.responseBlocks.filter(
+    (block): block is Block & { type: 'source' } => block.type === 'source',
+  );
+  const sources = sourceBlocks.flatMap((block) => block.data);
+
+  const widgetBlocks = msg.responseBlocks
+    .filter((b) => b.type === 'widget')
+    .map((b) => b.data) as Widget[];
+
+  msg.responseBlocks.forEach((block) => {
+    if (block.type === 'text') {
+      let processedText = block.data;
+      const citationRegex = /\[([^\]]+)\]/g;
+      const regex = /\[(\d+)\]/g;
+
+      if (processedText.includes('<think>')) {
+        const openThinkTag = processedText.match(/<think>/g)?.length || 0;
+        const closeThinkTag = processedText.match(/<\/think>/g)?.length || 0;
+
+        if (openThinkTag && !closeThinkTag) {
+          processedText += '</think> <a> </a>';
+        }
+      }
+
+      if (block.data.includes('</think>')) {
+        thinkingEnded = true;
+      }
+
+      if (sources.length > 0) {
+        processedText = processedText.replace(
+          citationRegex,
+          (_, capturedContent: string) => {
+            const numbers = capturedContent
+              .split(',')
+              .map((numStr) => numStr.trim());
+
+            const linksHtml = numbers
+              .map((numStr) => {
+                const number = parseInt(numStr);
+
+                if (isNaN(number) || number <= 0) {
+                  return `[${numStr}]`;
+                }
+
+                const source = sources[number - 1];
+                const url = source?.metadata?.url;
+
+                if (url) {
+                  return `<citation href="${url}">${numStr}</citation>`;
+                } else {
+                  return ``;
+                }
+              })
+              .join('');
+
+            return linksHtml;
+          },
+        );
+        speechMessage += block.data.replace(regex, '');
+      } else {
+        processedText = processedText.replace(regex, '');
+        speechMessage += block.data.replace(regex, '');
+      }
+
+      textBlocks.push(processedText);
+    } else if (block.type === 'suggestion') {
+      suggestions = block.data;
+    }
+  });
+
+  return {
+    message: msg,
+    parsedTextBlocks: textBlocks,
+    speechMessage,
+    thinkingEnded,
+    suggestions,
+    widgets: widgetBlocks,
+  };
+};
+
 export const chatContext = createContext<ChatContext>({
   chatHistory: [],
   chatId: '',
@@ -329,94 +416,25 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   const [isReady, setIsReady] = useState(false);
 
   const messagesRef = useRef<Message[]>([]);
+  const sendMessageRef = useRef<ChatContext['sendMessage']>(async () => {});
+
+  const prevSectionsRef = useRef<Map<string, Section>>(new Map());
 
   const sections = useMemo<Section[]>(() => {
-    return messages.map((msg) => {
-      const textBlocks: string[] = [];
-      let speechMessage = '';
-      let thinkingEnded = false;
-      let suggestions: string[] = [];
-
-      const sourceBlocks = msg.responseBlocks.filter(
-        (block): block is Block & { type: 'source' } => block.type === 'source',
-      );
-      const sources = sourceBlocks.flatMap((block) => block.data);
-
-      const widgetBlocks = msg.responseBlocks
-        .filter((b) => b.type === 'widget')
-        .map((b) => b.data) as Widget[];
-
-      msg.responseBlocks.forEach((block) => {
-        if (block.type === 'text') {
-          let processedText = block.data;
-          const citationRegex = /\[([^\]]+)\]/g;
-          const regex = /\[(\d+)\]/g;
-
-          if (processedText.includes('<think>')) {
-            const openThinkTag = processedText.match(/<think>/g)?.length || 0;
-            const closeThinkTag =
-              processedText.match(/<\/think>/g)?.length || 0;
-
-            if (openThinkTag && !closeThinkTag) {
-              processedText += '</think> <a> </a>';
-            }
-          }
-
-          if (block.data.includes('</think>')) {
-            thinkingEnded = true;
-          }
-
-          if (sources.length > 0) {
-            processedText = processedText.replace(
-              citationRegex,
-              (_, capturedContent: string) => {
-                const numbers = capturedContent
-                  .split(',')
-                  .map((numStr) => numStr.trim());
-
-                const linksHtml = numbers
-                  .map((numStr) => {
-                    const number = parseInt(numStr);
-
-                    if (isNaN(number) || number <= 0) {
-                      return `[${numStr}]`;
-                    }
-
-                    const source = sources[number - 1];
-                    const url = source?.metadata?.url;
-
-                    if (url) {
-                      return `<citation href="${url}">${numStr}</citation>`;
-                    } else {
-                      return ``;
-                    }
-                  })
-                  .join('');
-
-                return linksHtml;
-              },
-            );
-            speechMessage += block.data.replace(regex, '');
-          } else {
-            processedText = processedText.replace(regex, '');
-            speechMessage += block.data.replace(regex, '');
-          }
-
-          textBlocks.push(processedText);
-        } else if (block.type === 'suggestion') {
-          suggestions = block.data;
-        }
-      });
-
-      return {
-        message: msg,
-        parsedTextBlocks: textBlocks,
-        speechMessage,
-        thinkingEnded,
-        suggestions,
-        widgets: widgetBlocks,
-      };
+    const cache = prevSectionsRef.current;
+    const next = messages.map((msg) => {
+      const prev = cache.get(msg.messageId);
+      if (prev && prev.message === msg) return prev;
+      const built = buildSection(msg);
+      cache.set(msg.messageId, built);
+      return built;
     });
+    // Evict stale entries for messages no longer present
+    const currentIds = new Set(messages.map((m) => m.messageId));
+    for (const id of cache.keys()) {
+      if (!currentIds.has(id)) cache.delete(id);
+    }
+    return next;
   }, [messages]);
 
   const isReconnectingRef = useRef(false);
@@ -540,8 +558,10 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [isMessagesLoaded, isConfigReady, newChatCreated]);
 
-  const rewrite = (messageId: string) => {
-    const index = messages.findIndex((msg) => msg.messageId === messageId);
+  const rewrite = useCallback((messageId: string) => {
+    const index = messagesRef.current.findIndex(
+      (msg) => msg.messageId === messageId,
+    );
 
     if (index === -1) return;
 
@@ -549,9 +569,9 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
     chatHistory.current = chatHistory.current.slice(0, index * 2);
 
-    const messageToRewrite = messages[index];
-    sendMessage(messageToRewrite.query, messageToRewrite.messageId, true);
-  };
+    const messageToRewrite = messagesRef.current[index];
+    sendMessageRef.current(messageToRewrite.query, messageToRewrite.messageId, true);
+  }, []);
 
   useEffect(() => {
     if (isReady && initialMessage && isConfigReady) {
@@ -754,100 +774,115 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     };
   };
 
-  const sendMessage: ChatContext['sendMessage'] = async (
-    message,
-    messageId,
-    rewrite = false,
-  ) => {
-    if (loading || !message) return;
-    setLoading(true);
-    setResearchEnded(false);
-    setMessageAppeared(false);
+  const sendMessage: ChatContext['sendMessage'] = useCallback(
+    async (message, messageId, rewrite = false) => {
+      if (loading || !message) return;
+      setLoading(true);
+      setResearchEnded(false);
+      setMessageAppeared(false);
 
-    if (messages.length <= 1) {
-      window.history.replaceState(null, '', `/c/${chatId}`);
-    }
-
-    messageId = messageId ?? crypto.randomBytes(7).toString('hex');
-    const backendId = crypto.randomBytes(20).toString('hex');
-
-    const newMessage: Message = {
-      messageId,
-      chatId: chatId!,
-      backendId,
-      query: message,
-      responseBlocks: [],
-      status: 'answering',
-      createdAt: new Date(),
-    };
-
-    setMessages((prevMessages) => [...prevMessages, newMessage]);
-
-    const messageIndex = messages.findIndex((m) => m.messageId === messageId);
-
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        content: message,
-        message: {
-          messageId: messageId,
-          chatId: chatId!,
-          content: message,
-        },
-        chatId: chatId!,
-        files: fileIds,
-        sources: sources,
-        optimizationMode: optimizationMode,
-        overrides: Object.keys(pipelineOverrides).length > 0 ? pipelineOverrides : undefined,
-        history: rewrite
-          ? chatHistory.current.slice(
-              0,
-              messageIndex === -1 ? undefined : messageIndex,
-            )
-          : chatHistory.current,
-        chatModel: {
-          key: chatModelProvider.key,
-          providerId: chatModelProvider.providerId,
-        },
-        embeddingModel: {
-          key: embeddingModelProvider.key,
-          providerId: embeddingModelProvider.providerId,
-        },
-        systemInstructions: localStorage.getItem('systemInstructions'),
-      }),
-    });
-
-    if (!res.body) throw new Error('No response body');
-
-    const reader = res.body?.getReader();
-    const decoder = new TextDecoder('utf-8');
-
-    let partialChunk = '';
-
-    const messageHandler = getMessageHandler(newMessage);
-
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-
-      partialChunk += decoder.decode(value, { stream: true });
-
-      try {
-        const messages = partialChunk.split('\n');
-        for (const msg of messages) {
-          if (!msg.trim()) continue;
-          const json = JSON.parse(msg);
-          messageHandler(json);
-        }
-        partialChunk = '';
-      } catch (error) {
-        console.warn('Incomplete JSON, waiting for next chunk...');
+      if (messagesRef.current.length <= 1) {
+        window.history.replaceState(null, '', `/c/${chatId}`);
       }
-    }
-  };
+
+      messageId = messageId ?? crypto.randomBytes(7).toString('hex');
+      const backendId = crypto.randomBytes(20).toString('hex');
+
+      const newMessage: Message = {
+        messageId,
+        chatId: chatId!,
+        backendId,
+        query: message,
+        responseBlocks: [],
+        status: 'answering',
+        createdAt: new Date(),
+      };
+
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+
+      const messageIndex = messagesRef.current.findIndex(
+        (m) => m.messageId === messageId,
+      );
+
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          content: message,
+          message: {
+            messageId: messageId,
+            chatId: chatId!,
+            content: message,
+          },
+          chatId: chatId!,
+          files: fileIds,
+          sources: sources,
+          optimizationMode: optimizationMode,
+          overrides:
+            Object.keys(pipelineOverrides).length > 0
+              ? pipelineOverrides
+              : undefined,
+          history: rewrite
+            ? chatHistory.current.slice(
+                0,
+                messageIndex === -1 ? undefined : messageIndex,
+              )
+            : chatHistory.current,
+          chatModel: {
+            key: chatModelProvider.key,
+            providerId: chatModelProvider.providerId,
+          },
+          embeddingModel: {
+            key: embeddingModelProvider.key,
+            providerId: embeddingModelProvider.providerId,
+          },
+          systemInstructions: localStorage.getItem('systemInstructions'),
+        }),
+      });
+
+      if (!res.body) throw new Error('No response body');
+
+      const reader = res.body?.getReader();
+      const decoder = new TextDecoder('utf-8');
+
+      let partialChunk = '';
+
+      const messageHandler = getMessageHandler(newMessage);
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        partialChunk += decoder.decode(value, { stream: true });
+
+        try {
+          const chunks = partialChunk.split('\n');
+          for (const msg of chunks) {
+            if (!msg.trim()) continue;
+            const json = JSON.parse(msg);
+            messageHandler(json);
+          }
+          partialChunk = '';
+        } catch (error) {
+          console.warn('Incomplete JSON, waiting for next chunk...');
+        }
+      }
+    },
+    [
+      loading,
+      chatId,
+      fileIds,
+      sources,
+      optimizationMode,
+      pipelineOverrides,
+      chatModelProvider,
+      embeddingModelProvider,
+    ],
+  );
+
+  sendMessageRef.current = sendMessage;
 
   return (
     <chatContext.Provider
