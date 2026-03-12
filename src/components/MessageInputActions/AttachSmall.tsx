@@ -8,7 +8,8 @@ import { File, LoaderCircle, Paperclip, Plus, Trash } from 'lucide-react';
 import { Fragment, useRef, useState } from 'react';
 import { useChat } from '@/lib/hooks/useChat';
 import { AnimatePresence } from 'motion/react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
+import { toast } from 'sonner';
 
 const AttachSmall = () => {
   const { files, setFiles, setFileIds, fileIds } = useChat();
@@ -18,30 +19,49 @@ const AttachSmall = () => {
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
-    const data = new FormData();
+    try {
+      const embeddingModelProvider = localStorage.getItem(
+        'embeddingModelProviderId',
+      );
+      const embeddingModel = localStorage.getItem('embeddingModelKey');
 
-    for (let i = 0; i < e.target.files!.length; i++) {
-      data.append('files', e.target.files![i]);
+      if (!embeddingModelProvider || !embeddingModel) {
+        toast.error('Please configure an embedding model in settings first.');
+        return;
+      }
+
+      const data = new FormData();
+
+      for (let i = 0; i < e.target.files!.length; i++) {
+        data.append('files', e.target.files![i]);
+      }
+
+      data.append('embedding_model_provider_id', embeddingModelProvider);
+      data.append('embedding_model_key', embeddingModel);
+
+      const res = await fetch('/api/uploads', {
+        method: 'POST',
+        body: data,
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(
+          (errData as { message?: string }).message || 'Upload failed',
+        );
+      }
+
+      const resData = await res.json();
+      setFiles([...files, ...resData.files]);
+      setFileIds([
+        ...fileIds,
+        ...resData.files.map((file: any) => file.fileId),
+      ]);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Upload failed');
+    } finally {
+      setLoading(false);
     }
-
-    const embeddingModelProvider = localStorage.getItem(
-      'embeddingModelProviderId',
-    );
-    const embeddingModel = localStorage.getItem('embeddingModelKey');
-
-    data.append('embedding_model_provider_id', embeddingModelProvider!);
-    data.append('embedding_model_key', embeddingModel!);
-
-    const res = await fetch(`/api/uploads`, {
-      method: 'POST',
-      body: data,
-    });
-
-    const resData = await res.json();
-
-    setFiles([...files, ...resData.files]);
-    setFileIds([...fileIds, ...resData.files.map((file: any) => file.fileId)]);
-    setLoading(false);
   };
 
   return loading ? (
