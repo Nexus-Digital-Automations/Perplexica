@@ -4,6 +4,7 @@ import {
   BrainCog,
   ChevronLeft,
   ExternalLink,
+  Rss,
   Search,
   Sliders,
   ToggleRight,
@@ -18,6 +19,7 @@ import Models from './Sections/Models/Section';
 import SearchSection from './Sections/Search';
 import Select from '@/components/ui/Select';
 import Personalization from './Sections/Personalization';
+import FeedsSettings from './Sections/Feeds';
 
 const sections = [
   {
@@ -51,6 +53,14 @@ const sections = [
     icon: Search,
     component: SearchSection,
     dataAdd: 'search',
+  },
+  {
+    key: 'feeds',
+    name: 'Feeds',
+    description: 'Manage RSS feed subscriptions and scoring.',
+    icon: Rss,
+    component: FeedsSettings,
+    dataAdd: 'feeds',
   },
 ];
 

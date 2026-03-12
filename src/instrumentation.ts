@@ -9,5 +9,8 @@ export const register = async () => {
     }
 
     await import('./lib/config/index');
+
+    const { startRssPoller } = await import('./lib/rss/poller');
+    startRssPoller();
   }
 };

@@ -475,6 +475,123 @@ server.addTool({
   },
 });
 
+// ---------------------------------------------------------------------------
+// RSS Feed Tools
+// ---------------------------------------------------------------------------
+
+server.addTool({
+  name: 'list_feeds',
+  description:
+    'List all registered RSS feeds with their unread item counts.',
+  parameters: z.object({}),
+  execute: async () => {
+    const result = await fetchJSON('/api/feeds');
+    return JSON.stringify(result, null, 2);
+  },
+});
+
+server.addTool({
+  name: 'add_feed',
+  description:
+    'Add a new RSS feed by URL. The feed is validated by fetching it; returns an error if the URL is not a valid RSS feed.',
+  parameters: z.object({
+    url: z.string().url().describe('RSS feed URL to add'),
+  }),
+  execute: async (args: { url: string }) => {
+    const result = await fetchJSON('/api/feeds', {
+      method: 'POST',
+      body: JSON.stringify({ url: args.url }),
+    });
+    return JSON.stringify(result, null, 2);
+  },
+});
+
+server.addTool({
+  name: 'get_feed_items',
+  description:
+    'Get RSS feed items. Optionally filter by feed ID and/or item status.',
+  parameters: z.object({
+    feedId: z
+      .string()
+      .optional()
+      .describe('Filter items by feed ID (omit for all feeds)'),
+    filter: z
+      .enum(['all', 'unread', 'important'])
+      .optional()
+      .default('all')
+      .describe('Filter items by status'),
+    limit: z
+      .number()
+      .int()
+      .min(1)
+      .max(100)
+      .optional()
+      .default(20)
+      .describe('Number of items to return'),
+    page: z.number().int().min(1).optional().default(1).describe('Page number'),
+  }),
+  execute: async (args: {
+    feedId?: string;
+    filter: string;
+    limit: number;
+    page: number;
+  }) => {
+    const params = new URLSearchParams();
+    if (args.feedId) params.set('feedId', args.feedId);
+    params.set('filter', args.filter);
+    params.set('limit', String(args.limit));
+    params.set('page', String(args.page));
+
+    const result = await fetchJSON(`/api/feeds/items?${params.toString()}`);
+    return JSON.stringify(result, null, 2);
+  },
+});
+
+server.addTool({
+  name: 'mark_feed_item_read',
+  description: 'Mark a feed item as read by its ID.',
+  parameters: z.object({
+    itemId: z.string().describe('The feed item ID to mark as read'),
+  }),
+  execute: async (args: { itemId: string }) => {
+    const result = await fetchJSON(
+      `/api/feeds/items/${encodeURIComponent(args.itemId)}`,
+      {
+        method: 'PATCH',
+        body: JSON.stringify({ isRead: true }),
+      },
+    );
+    return JSON.stringify(result, null, 2);
+  },
+});
+
+server.addTool({
+  name: 'research_feed_item',
+  description:
+    'Get the redirect URL to research a feed item in Perplexica. Marks the item as read and returns a URL you can use to open a research chat.',
+  parameters: z.object({
+    itemId: z.string().describe('The feed item ID to research'),
+  }),
+  execute: async (args: { itemId: string }) => {
+    const result = await fetchJSON(
+      `/api/feeds/items/${encodeURIComponent(args.itemId)}/research`,
+      { method: 'POST' },
+    );
+    return JSON.stringify(result, null, 2);
+  },
+});
+
+server.addTool({
+  name: 'poll_feeds',
+  description:
+    'Trigger an immediate poll of all due RSS feeds. Returns the number of feeds polled.',
+  parameters: z.object({}),
+  execute: async () => {
+    const result = await fetchJSON('/api/feeds/poll', { method: 'POST' });
+    return JSON.stringify(result, null, 2);
+  },
+});
+
 server.start({
   transportType: 'stdio',
 });

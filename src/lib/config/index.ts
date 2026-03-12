@@ -19,8 +19,52 @@ class ConfigManager {
     search: {
       searxngURL: '',
     },
+    feeds: {
+      interestKeywords: '',
+      defaultPollIntervalMinutes: 30,
+      importanceThreshold: 0.4,
+    },
   };
   uiConfigSections: UIConfigSections = {
+    feeds: [
+      {
+        name: 'Interest Keywords',
+        key: 'interestKeywords',
+        type: 'string',
+        required: false,
+        description:
+          'Comma-separated keywords to score feed items by importance (e.g. AI, technology, finance).',
+        placeholder: 'e.g. AI, climate, finance',
+        default: '',
+        scope: 'server',
+      },
+      {
+        name: 'Default Poll Interval',
+        key: 'defaultPollIntervalMinutes',
+        type: 'select',
+        required: false,
+        description: 'How often to check feeds for new items by default.',
+        default: '30',
+        scope: 'server',
+        options: [
+          { name: '15 minutes', value: '15' },
+          { name: '30 minutes', value: '30' },
+          { name: '1 hour', value: '60' },
+          { name: '4 hours', value: '240' },
+        ],
+      },
+      {
+        name: 'Importance Threshold',
+        key: 'importanceThreshold',
+        type: 'string',
+        required: false,
+        description:
+          'Score threshold (0–1) above which items are flagged as important.',
+        placeholder: '0.4',
+        default: '0.4',
+        scope: 'server',
+      },
+    ],
     preferences: [
       {
         name: 'Theme',
@@ -140,7 +184,14 @@ class ConfigManager {
   }
 
   private migrateConfig(config: Config): Config {
-    /* TODO: Add migrations */
+    // Ensure feeds section exists for configs created before this feature
+    if (!config.feeds) {
+      config.feeds = {
+        interestKeywords: '',
+        defaultPollIntervalMinutes: 30,
+        importanceThreshold: 0.4,
+      };
+    }
     return config;
   }
 
