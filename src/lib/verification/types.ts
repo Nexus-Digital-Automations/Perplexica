@@ -22,17 +22,16 @@ export type VerificationReport = {
 
 export type VerificationConfig = {
   enabled: boolean;
-  mode: 'speed' | 'balanced' | 'quality';
   passThreshold: number;
+  verbatimPassThreshold: number;
   weakThreshold: number;
   maxCorrectionRetries: number;
   correctionTimeoutMs: number;
   writerTemperature: number;
   correctionTemperature: number;
+  credibilityThresholdAdjustment: number;
 };
 
-export const getVerificationConfig = (
-  mode: 'speed' | 'balanced' | 'quality',
-): VerificationConfig => {
-  return toVerificationConfig(resolvePipelineConfig(mode));
+export const getVerificationConfig = (): VerificationConfig => {
+  return toVerificationConfig(resolvePipelineConfig());
 };

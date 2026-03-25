@@ -1,7 +1,7 @@
 import { Chunk } from '@/lib/types';
 import BaseLLM from '@/lib/models/base/llm';
 import { extractCitations } from './citationExtractor';
-import { bestWindowMatch } from './textSimilarity';
+import { bestWindowMatch, hasNegation } from './textSimilarity';
 import {
   VerificationConfig,
   VerificationReport,
@@ -49,13 +49,39 @@ export function verifyCitations(
         source.content,
       );
 
+      // Use stricter threshold for verbatim sources — the writer received
+      // an exact quote, so we expect high token overlap.
+      const isVerbatim = source.metadata.isVerbatim === true;
+      const basePassThreshold = isVerbatim
+        ? config.verbatimPassThreshold
+        : config.passThreshold;
+
+      // Adjust thresholds by source credibility tier:
+      // Higher-tier sources (1-2) get easier thresholds (trusted);
+      // Lower-tier sources (4-5) get harder thresholds (require stronger evidence).
+      const tierNumber = (source.metadata.credibilityTier as number) || 5;
+      const tierOffset =
+        (tierNumber - 3) * (config.credibilityThresholdAdjustment ?? 0);
+      const effectivePassThreshold = basePassThreshold + tierOffset;
+      const effectiveWeakThreshold = config.weakThreshold + tierOffset;
+
       let status: VerificationStatus;
-      if (score >= config.passThreshold) {
+      if (score >= effectivePassThreshold) {
         status = 'pass';
-      } else if (score >= config.weakThreshold) {
+      } else if (score >= effectiveWeakThreshold) {
         status = 'weak';
       } else {
         status = 'fail';
+      }
+
+      // Negation detection: if the claim and matched snippet disagree
+      // on negation, demote 'pass' to 'weak' for human review.
+      if (status === 'pass' && snippet) {
+        const claimNeg = hasNegation(citation.sentenceText);
+        const snippetNeg = hasNegation(snippet);
+        if (claimNeg !== snippetNeg) {
+          status = 'weak';
+        }
       }
 
       results.push({

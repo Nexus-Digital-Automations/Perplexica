@@ -1,78 +1,67 @@
 import type { VerificationConfig } from '@/lib/verification/types';
 
 export type ResponseLength = 'brief' | 'standard' | 'comprehensive';
-export type OptimizationMode = 'speed' | 'balanced' | 'quality';
 
-export type ResolvedPipelineConfig = {
-  mode: OptimizationMode;
-  maxIterations: number;
+export type PipelineConfig = {
+  sourcesPerQuestion: number;
   responseLength: ResponseLength;
   writerTemperature: number;
   verificationEnabled: boolean;
   passThreshold: number;
+  verbatimPassThreshold: number;
   weakThreshold: number;
   maxCorrectionRetries: number;
   correctionTimeoutMs: number;
   correctionTemperature: number;
+  numQuestions: number;
+  questionsParallel: boolean;
+  budgetUsd: number | null;
+  interactiveQuestions: boolean;
+  credibilityThresholdAdjustment: number;
 };
 
-export type PipelineOverrides = Partial<Omit<ResolvedPipelineConfig, 'mode'>>;
+export type PipelineOverrides = Partial<PipelineConfig>;
 
-const MODE_DEFAULTS: Record<OptimizationMode, Omit<ResolvedPipelineConfig, 'mode'>> = {
-  speed: {
-    maxIterations: 2,
-    responseLength: 'brief',
-    writerTemperature: 0.7,
-    verificationEnabled: false,
-    passThreshold: 0.3,
-    weakThreshold: 0.15,
-    maxCorrectionRetries: 0,
-    correctionTimeoutMs: 0,
-    correctionTemperature: 0.1,
-  },
-  balanced: {
-    maxIterations: 3,
-    responseLength: 'standard',
-    writerTemperature: 0.4,
-    verificationEnabled: true,
-    passThreshold: 0.4,
-    weakThreshold: 0.2,
-    maxCorrectionRetries: 0,
-    correctionTimeoutMs: 12000,
-    correctionTemperature: 0.1,
-  },
-  quality: {
-    maxIterations: 12,
-    responseLength: 'comprehensive',
-    writerTemperature: 0.3,
-    verificationEnabled: true,
-    passThreshold: 0.5,
-    weakThreshold: 0.3,
-    maxCorrectionRetries: 2,
-    correctionTimeoutMs: 20000,
-    correctionTemperature: 0.1,
-  },
+const DEFAULTS: PipelineConfig = {
+  sourcesPerQuestion: 2,
+  responseLength: 'standard',
+  writerTemperature: 0.2,
+  verificationEnabled: true,
+  passThreshold: 0.30,
+  verbatimPassThreshold: 0.50,
+  weakThreshold: 0.18,
+  maxCorrectionRetries: 1,
+  correctionTimeoutMs: 12000,
+  correctionTemperature: 0.1,
+  numQuestions: 5,
+  questionsParallel: true,
+  budgetUsd: null,
+  interactiveQuestions: true,
+  credibilityThresholdAdjustment: 0.03,
 };
+
+export { DEFAULTS as PIPELINE_DEFAULTS };
 
 export function resolvePipelineConfig(
-  mode: OptimizationMode,
   overrides?: PipelineOverrides,
-): ResolvedPipelineConfig {
-  const defaults = MODE_DEFAULTS[mode];
-  return { ...defaults, mode, ...overrides };
+): PipelineConfig {
+  return { ...DEFAULTS, ...overrides };
 }
 
 export function toVerificationConfig(
-  resolved: ResolvedPipelineConfig,
+  resolved: PipelineConfig,
 ): VerificationConfig {
   return {
     enabled: resolved.verificationEnabled,
-    mode: resolved.mode,
     passThreshold: resolved.passThreshold,
+    verbatimPassThreshold: resolved.verbatimPassThreshold,
     weakThreshold: resolved.weakThreshold,
     maxCorrectionRetries: resolved.maxCorrectionRetries,
     correctionTimeoutMs: resolved.correctionTimeoutMs,
     writerTemperature: resolved.writerTemperature,
     correctionTemperature: resolved.correctionTemperature,
+    credibilityThresholdAdjustment: resolved.credibilityThresholdAdjustment,
   };
 }
+
+export const PIPELINE_OVERRIDES_LS_KEY = 'perplexica_pipeline_overrides';
