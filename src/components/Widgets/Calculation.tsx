@@ -34,7 +34,7 @@ const Calculation = ({ expression, result }: CalculationWidgetProps) => {
           </div>
           <div className="rounded-xl border border-light-200 dark:border-dark-200 bg-light-secondary dark:bg-dark-secondary p-5">
             <div className="text-4xl font-bold text-black dark:text-white font-mono tabular-nums">
-              {result.toLocaleString()}
+              {result != null ? result.toLocaleString() : '—'}
             </div>
           </div>
         </div>
