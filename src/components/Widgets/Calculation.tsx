@@ -4,7 +4,7 @@ import { Calculator, Equal } from 'lucide-react';
 
 type CalculationWidgetProps = {
   expression: string;
-  result: number;
+  result: number | undefined;
 };
 
 const Calculation = ({ expression, result }: CalculationWidgetProps) => {
