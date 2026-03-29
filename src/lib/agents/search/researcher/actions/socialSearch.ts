@@ -2,6 +2,8 @@ import z from 'zod';
 import { ResearchAction } from '../../types';
 import { Chunk, SearchResultsResearchBlock } from '@/lib/types';
 import { searchSearxng } from '@/lib/searxng';
+import { classifySource } from '@/lib/utils/sourceCredibility';
+import { enrichWithVerbatimPassages } from './enrichResults';
 
 const schema = z.object({
   queries: z.array(z.string()).describe('List of social search queries'),
@@ -62,13 +64,18 @@ const socialSearchAction: ResearchAction<typeof schema> = {
         engines: ['reddit'],
       });
 
-      const resultChunks: Chunk[] = res.results.map((r) => ({
-        content: r.content || r.title,
-        metadata: {
-          title: r.title,
-          url: r.url,
-        },
-      }));
+      const resultChunks: Chunk[] = res.results.map((r) => {
+        const cred = classifySource(r.url, r.engine, r.engines);
+        return {
+          content: r.content || r.title,
+          metadata: {
+            title: r.title,
+            url: r.url,
+            credibilityTier: cred.tierNumber,
+            credibilityLabel: cred.tierLabel,
+          },
+        };
+      });
 
       results.push(...resultChunks);
 
@@ -118,6 +125,12 @@ const socialSearchAction: ResearchAction<typeof schema> = {
     };
 
     await Promise.all(input.queries.map(search));
+
+    await enrichWithVerbatimPassages(
+      results,
+      input.queries,
+      additionalConfig.urlCache,
+    );
 
     return {
       type: 'search_results',

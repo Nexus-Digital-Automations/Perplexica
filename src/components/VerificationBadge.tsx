@@ -1,18 +1,40 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ShieldCheck, ShieldAlert, ChevronDown, ChevronUp } from 'lucide-react';
+import { ShieldCheck, ShieldAlert, ShieldX, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { VerificationBlock } from '@/lib/types';
 
 const VerificationBadge = ({ block }: { block: VerificationBlock }) => {
   const [expanded, setExpanded] = useState(false);
-  const { status, totalCitations, passed, weak, failed, wasCorrected } =
-    block.data;
+  const {
+    totalCitations,
+    passed,
+    weak,
+    failed,
+    wasCorrected,
+    accuracyScore,
+  } = block.data;
 
   if (totalCitations === 0) return null;
 
-  const allPassed = status === 'verified';
+  const score = accuracyScore ?? 0;
+  const tier =
+    score >= 70 ? 'high' : score >= 40 ? 'medium' : 'low';
+
+  const Icon =
+    tier === 'high'
+      ? ShieldCheck
+      : tier === 'medium'
+        ? ShieldAlert
+        : ShieldX;
+
+  const colorCls =
+    tier === 'high'
+      ? 'bg-green-500/10 text-green-600 dark:text-green-400 hover:bg-green-500/20'
+      : tier === 'medium'
+        ? 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-500/20'
+        : 'bg-red-500/10 text-red-500 dark:text-red-400 hover:bg-red-500/20';
 
   return (
     <div className="mt-3">
@@ -20,16 +42,12 @@ const VerificationBadge = ({ block }: { block: VerificationBlock }) => {
         onClick={() => setExpanded(!expanded)}
         className={cn(
           'flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs transition duration-200',
-          allPassed
-            ? 'bg-green-500/10 text-green-600 dark:text-green-400 hover:bg-green-500/20'
-            : 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-500/20',
+          colorCls,
         )}
       >
-        {allPassed ? <ShieldCheck size={14} /> : <ShieldAlert size={14} />}
+        <Icon size={14} />
         <span>
-          {allPassed
-            ? `All ${totalCitations} citations verified`
-            : `${passed} of ${totalCitations} citations fully verified`}
+          {score}% accuracy &middot; {totalCitations} citation{totalCitations !== 1 ? 's' : ''}
         </span>
         {wasCorrected && (
           <span className="text-[10px] opacity-70 ml-1">(corrected)</span>

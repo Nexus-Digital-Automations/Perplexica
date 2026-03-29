@@ -1,0 +1,10 @@
+{
+  "session_id": "4a7440ce-732c-401f-9a35-34cb8f3ea50c",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "request",
+    "prompt": "<task-notification>\n<task-id>byl1cfr5y</task-id>\n<tool-use-id>toolu_01WjSNnYab5GwM56iQTbuZSr</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/e7da9068-6129-4198-a751-df82c7567078/tasks/byl1cfr5y.output</output-file>\n<status>completed</status>\n<summary>Background command \"Record fresh app start\" completed (exit code 0)</summary>\n</task-notification>\nRead the output file to retrieve the result: /private/tmp/claude-501/-Users-jeremypar",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-23T16:55:36.976041"
+}

@@ -4,6 +4,7 @@ import BaseEmbedding from '@/lib/models/base/embedding';
 import SessionManager from '@/lib/session';
 import { ChatTurnMessage, Chunk } from '@/lib/types';
 import { PipelineOverrides } from '@/lib/config/pipeline';
+import { BudgetTracker } from '@/lib/pricing/budgetTracker';
 
 export type SearchSources = 'web' | 'discussions' | 'academic';
 
@@ -12,7 +13,6 @@ export type SearchAgentConfig = {
   fileIds: string[];
   llm: BaseLLM<any>;
   embedding: BaseEmbedding<any>;
-  mode: 'speed' | 'balanced' | 'quality';
   systemInstructions: string;
   overrides?: PipelineOverrides;
 };
@@ -68,6 +68,7 @@ export type AdditionalConfig = {
   llm: BaseLLM<any>;
   embedding: BaseEmbedding<any>;
   session: SessionManager;
+  urlCache?: Map<string, string>;
 };
 
 export type ResearcherInput = {
@@ -77,6 +78,10 @@ export type ResearcherInput = {
   config: SearchAgentConfig;
   maxIterations?: number;
   initialActionOutput?: ActionOutput[];
+  question?: string;
+  questionIndex?: number;
+  questionTotal?: number;
+  budgetTracker?: BudgetTracker;
 };
 
 export type ResearcherOutput = {
@@ -108,12 +113,11 @@ export interface ResearchAction<
 > {
   name: string;
   schema: z.ZodObject<any>;
-  getToolDescription: (config: { mode: SearchAgentConfig['mode'] }) => string;
-  getDescription: (config: { mode: SearchAgentConfig['mode'] }) => string;
+  getToolDescription: () => string;
+  getDescription: () => string;
   enabled: (config: {
     classification: ClassifierOutput;
     fileIds: string[];
-    mode: SearchAgentConfig['mode'];
     sources: SearchSources[];
   }) => boolean;
   execute: (

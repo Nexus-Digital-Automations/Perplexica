@@ -1,0 +1,10 @@
+{
+  "session_id": "59228d33-6bfd-49c5-8d48-54cd007515da",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "feature",
+    "prompt": "<task-notification>\n<task-id>bhpmra491</task-id>\n<tool-use-id>toolu_01JCrmYSbw8R2T7ZhF6tg3dV</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/59228d33-6bfd-49c5-8d48-54cd007515da/tasks/bhpmra491.output</output-file>\n<status>completed</status>\n<summary>Background command \"cd \"/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica\" &amp;&amp; yarn add --dev vitest @vitest/coverage-v8 2&gt;&amp;1 | tail -5\" completed (exit code ",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-22T16:20:41.260356"
+}

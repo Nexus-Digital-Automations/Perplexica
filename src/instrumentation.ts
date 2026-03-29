@@ -8,11 +8,6 @@ export const register = async () => {
       console.error('Failed to run database migrations:', error);
     }
 
-    // Config init and poller start are independent — run in parallel
-    const [, { startRssPoller }] = await Promise.all([
-      import('./lib/config/index'),
-      import('./lib/rss/poller'),
-    ]);
-    startRssPoller();
+    await import('./lib/config/index');
   }
 };

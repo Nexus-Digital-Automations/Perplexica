@@ -16,7 +16,8 @@ class ModelRegistry {
   private embeddingModelCache = new Map<string, BaseEmbedding<any>>();
   private modelListCache: { data: MinimalProvider[]; timestamp: number } | null =
     null;
-  private readonly MODEL_LIST_TTL_MS = 30_000; // 30 seconds
+  private readonly MODEL_LIST_TTL_MS = 5 * 60_000; // 5 minutes
+  private isRevalidating = false;
 
   constructor() {
     this.initializeActiveProviders();
@@ -44,14 +45,34 @@ class ModelRegistry {
 
   async getActiveProviders() {
     const now = Date.now();
-    if (
-      this.modelListCache &&
-      now - this.modelListCache.timestamp < this.MODEL_LIST_TTL_MS
-    ) {
-      return this.modelListCache.data;
+    const hasCache = this.modelListCache !== null;
+    const isStale =
+      hasCache &&
+      now - this.modelListCache!.timestamp >= this.MODEL_LIST_TTL_MS;
+
+    if (hasCache && !isStale) {
+      return this.modelListCache!.data; // fresh — return immediately
     }
 
-    const providers: MinimalProvider[] = [];
+    if (hasCache && isStale && !this.isRevalidating) {
+      // stale — return immediately, refresh in background
+      this.isRevalidating = true;
+      this.refreshAllProviders().finally(() => {
+        this.isRevalidating = false;
+      });
+      return this.modelListCache!.data;
+    }
+
+    if (hasCache && this.isRevalidating) {
+      return this.modelListCache!.data; // refresh in progress, use stale
+    }
+
+    // No cache — must wait (first load / after invalidation)
+    return this.refreshAllProviders();
+  }
+
+  private async refreshAllProviders(): Promise<MinimalProvider[]> {
+    const providerResults: MinimalProvider[] = [];
 
     await Promise.all(
       this.activeProviders.map(async (p) => {
@@ -75,7 +96,7 @@ class ModelRegistry {
           };
         }
 
-        providers.push({
+        providerResults.push({
           id: p.id,
           name: p.name,
           chatModels: m.chat,
@@ -84,8 +105,8 @@ class ModelRegistry {
       }),
     );
 
-    this.modelListCache = { data: providers, timestamp: Date.now() };
-    return providers;
+    this.modelListCache = { data: providerResults, timestamp: Date.now() };
+    return providerResults;
   }
 
   async loadChatModel(providerId: string, modelName: string) {
@@ -255,6 +276,28 @@ class ModelRegistry {
   ): Promise<void> {
     configManager.removeProviderModel(providerId, type, modelKey);
     return;
+  }
+
+  async refreshProvider(providerId: string): Promise<MinimalProvider> {
+    this._clearProviderCache(providerId);
+    this.modelListCache = null;
+
+    const p = this.activeProviders.find((p) => p.id === providerId);
+    if (!p) throw new Error('Provider not found');
+
+    let m: ModelList = { chat: [], embedding: [] };
+    try {
+      m = await p.provider.getModelList();
+    } catch (err: any) {
+      m = { chat: [{ key: 'error', name: err.message }], embedding: [] };
+    }
+
+    return {
+      id: p.id,
+      name: p.name,
+      chatModels: m.chat,
+      embeddingModels: m.embedding,
+    };
   }
 }
 

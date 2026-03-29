@@ -1,7 +1,7 @@
 import { Chunk } from '@/lib/types';
 import BaseLLM from '@/lib/models/base/llm';
 import { extractCitations } from './citationExtractor';
-import { bestWindowMatch, hasNegation } from './textSimilarity';
+import { bestWindowMatch, hasNegation, normalizeText } from './textSimilarity';
 import {
   VerificationConfig,
   VerificationReport,
@@ -27,6 +27,15 @@ export function verifyCitations(
     };
   }
 
+  // Pre-normalize source content to avoid redundant regex processing
+  // when the same source is cited multiple times
+  const normalizedSourceCache = new Map<number, string>();
+  for (let i = 0; i < sources.length; i++) {
+    if (sources[i]?.content) {
+      normalizedSourceCache.set(i, normalizeText(sources[i].content));
+    }
+  }
+
   const results: VerificationResult[] = [];
 
   for (const citation of citations) {
@@ -47,6 +56,8 @@ export function verifyCitations(
       const { score, snippet } = bestWindowMatch(
         citation.sentenceText,
         source.content,
+        3,
+        normalizedSourceCache.get(citIndex - 1),
       );
 
       // Use stricter threshold for verbatim sources — the writer received
@@ -59,7 +70,7 @@ export function verifyCitations(
       // Adjust thresholds by source credibility tier:
       // Higher-tier sources (1-2) get easier thresholds (trusted);
       // Lower-tier sources (4-5) get harder thresholds (require stronger evidence).
-      const tierNumber = (source.metadata.credibilityTier as number) || 5;
+      const tierNumber = (source.metadata.credibilityTier as number) || 3;
       const tierOffset =
         (tierNumber - 3) * (config.credibilityThresholdAdjustment ?? 0);
       const effectivePassThreshold = basePassThreshold + tierOffset;

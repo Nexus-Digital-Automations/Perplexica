@@ -1,0 +1,10 @@
+{
+  "session_id": "b158d9c0-73f4-4876-adf1-15804d106ef9",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "feature",
+    "prompt": "search is not working. \n\n\nMY original plan was for the questions to be come up with by the agent, then searches performed for each question, the number of each determined by the user in the configuration.\n\nI'd like to be able to see each question and whatnot. this should be available via dropdown in the activity log\n\nthen please test it with playwright to make sure everything works. have it so 5 questions are made and 2 sources for each question",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-23T03:39:55.008755"
+}

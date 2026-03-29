@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "4a6c9e48-2b74-4620-9cca-b650df2310bb",
+    "data": {
+      "session_id": "4a6c9e48-2b74-4620-9cca-b650df2310bb",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/4a6c9e48-2b74-4620-9cca-b650df2310bb.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "I'm not trying to stop \u2014 I'm waiting for your answer to my question about the Advanced Config options. The stop hook keeps firing on its own.\n\nWhat would you like me to do with the Advanced Search Config? Should each option get its own icon/dropdown, or something else?"
+    },
+    "persisted_at": "2026-03-23T03:18:10.282476"
+  },
+  "stored_at": "2026-03-23T03:18:10.282767"
+}

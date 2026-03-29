@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "ce27e148-1f92-48e2-9cf2-d583e6ccef4d",
+    "data": {
+      "session_id": "ce27e148-1f92-48e2-9cf2-d583e6ccef4d",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/ce27e148-1f92-48e2-9cf2-d583e6ccef4d.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "Security scan: 0 critical findings, 5 warnings. Stop authorized. We're done."
+    },
+    "persisted_at": "2026-03-12T18:26:00.660897"
+  },
+  "stored_at": "2026-03-12T18:26:00.661429"
+}

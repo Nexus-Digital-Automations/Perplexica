@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "6ab72e08-f965-4851-8d5c-0af98a238be4",
+    "data": {
+      "session_id": "6ab72e08-f965-4851-8d5c-0af98a238be4",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/6ab72e08-f965-4851-8d5c-0af98a238be4.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "Authorized. SearXNG confirmed returning HTTP 200, `tsc --noEmit` exits 0 \u2014 the fix is complete."
+    },
+    "persisted_at": "2026-03-15T14:00:46.236174"
+  },
+  "stored_at": "2026-03-15T14:00:46.236695"
+}

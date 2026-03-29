@@ -1,0 +1,10 @@
+{
+  "session_id": "e9dedfc1-d73f-4226-acfb-bc9222260866",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "bug",
+    "prompt": "\u279c  Perplexica git:(master) \u2717 yarn dev\nyarn run v1.22.22\n$ bash scripts/dev.sh\nSearXNG not set up \u2014 running setup (one-time, ~60s)...\nUsing: python3.13 (Python 3.13.12)\nSearXNG repo already cloned \u2014 skipping.\nCreating venv...\nGenerated: /Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica/.searxng/conf/settings.yml\n\nSearXNG setup complete at /Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica/.searxng\n  Run: yarn dev  (updated dev.sh handles startup automatically)\nClearing port",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-23T16:57:34.575220"
+}

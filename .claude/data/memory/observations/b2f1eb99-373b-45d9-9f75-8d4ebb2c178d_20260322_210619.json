@@ -1,0 +1,10 @@
+{
+  "session_id": "b2f1eb99-373b-45d9-9f75-8d4ebb2c178d",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "request",
+    "prompt": "<task-notification>\n<task-id>btfzpdwfx</task-id>\n<tool-use-id>toolu_015YhTf6Azg9rM2hGWmmufUw</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/59228d33-6bfd-49c5-8d48-54cd007515da/tasks/btfzpdwfx.output</output-file>\n<status>completed</status>\n<summary>Background command \"Start Next.js dev server in background\" completed (exit code 0)</summary>\n</task-notification>\nRead the output file to retrieve the result: /private/tmp/claude-501/",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-22T21:06:19.903911"
+}

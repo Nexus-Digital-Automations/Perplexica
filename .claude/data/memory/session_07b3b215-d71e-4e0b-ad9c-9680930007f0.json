@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "07b3b215-d71e-4e0b-ad9c-9680930007f0",
+    "data": {
+      "session_id": "07b3b215-d71e-4e0b-ad9c-9680930007f0",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/07b3b215-d71e-4e0b-ad9c-9680930007f0.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "Authorized. All work is complete \u2014 upstream sync done, TypeScript fix committed, build passing."
+    },
+    "persisted_at": "2026-03-12T01:55:24.797615"
+  },
+  "stored_at": "2026-03-12T01:55:24.798209"
+}

@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "3e2fc1f3-ee3e-498c-85ed-ed6f62064338",
+    "data": {
+      "session_id": "3e2fc1f3-ee3e-498c-85ed-ed6f62064338",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/3e2fc1f3-ee3e-498c-85ed-ed6f62064338.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "All done. Settings frontend redesign complete \u2014 8 files updated with refined depth aesthetic, zero security findings, 147 tests passing."
+    },
+    "persisted_at": "2026-03-23T02:50:02.031403"
+  },
+  "stored_at": "2026-03-23T02:50:02.031981"
+}

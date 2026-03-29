@@ -3,7 +3,6 @@ import { z } from 'zod';
 import {
   resolvePipelineConfig,
   toVerificationConfig,
-  type OptimizationMode,
   type PipelineOverrides,
 } from '../lib/config/pipeline.js';
 import { verifyCitations } from '../lib/verification/verifier.js';
@@ -42,17 +41,17 @@ interface ProviderInfo {
   embeddingModels?: Array<{ key: string; displayName?: string }>;
 }
 
-interface ResolvedModels {
-  chatModel: { providerId: string; key: string };
-  embeddingModel: { providerId: string; key: string };
-}
-
 async function resolveModels(opts?: {
   chatModelProvider?: string;
   chatModelKey?: string;
   embeddingModelProvider?: string;
   embeddingModelKey?: string;
-}): Promise<ResolvedModels> {
+  requireEmbedding?: boolean;
+}): Promise<{
+  chatModel: { providerId: string; key: string };
+  embeddingModel?: { providerId: string; key: string };
+}> {
+  const requireEmbedding = opts?.requireEmbedding !== false;
   const data = (await fetchJSON('/api/providers')) as {
     providers: ProviderInfo[];
   };
@@ -67,10 +66,7 @@ async function resolveModels(opts?: {
 
   let chatModel: { providerId: string; key: string };
   if (opts?.chatModelProvider && opts?.chatModelKey) {
-    chatModel = {
-      providerId: opts.chatModelProvider,
-      key: opts.chatModelKey,
-    };
+    chatModel = { providerId: opts.chatModelProvider, key: opts.chatModelKey };
   } else {
     const chatProvider = providers.find(
       (p) => p.chatModels && p.chatModels.length > 0,
@@ -85,6 +81,10 @@ async function resolveModels(opts?: {
       providerId: chatProvider.id,
       key: chatProvider.chatModels[0].key,
     };
+  }
+
+  if (!requireEmbedding) {
+    return { chatModel };
   }
 
   let embeddingModel: { providerId: string; key: string };
@@ -112,13 +112,8 @@ async function resolveModels(opts?: {
   return { chatModel, embeddingModel };
 }
 
-const server = new FastMCP({
-  name: 'perplexica',
-  version: '2.0.0',
-});
-
 // ---------------------------------------------------------------------------
-// Pipeline / Verification Tools (existing, unchanged)
+// Shared schema fragments
 // ---------------------------------------------------------------------------
 
 const overridesSchema = {
@@ -132,6 +127,23 @@ const overridesSchema = {
   correctionTimeoutMs: z.number().min(0).max(60000).optional(),
   correctionTemperature: z.number().min(0).max(1).optional(),
 };
+
+const chatHistorySchema = z
+  .array(z.tuple([z.string(), z.string()]))
+  .optional()
+  .default([])
+  .describe(
+    'Chat history as [role, content] tuples, e.g. [["human","hi"],["assistant","hello"]]',
+  );
+
+const server = new FastMCP({
+  name: 'perplexica',
+  version: '4.0.0',
+});
+
+// ---------------------------------------------------------------------------
+// Tool 1: verify_citations
+// ---------------------------------------------------------------------------
 
 server.addTool({
   name: 'verify_citations',
@@ -153,22 +165,15 @@ server.addTool({
         }),
       )
       .describe('Array of source documents to verify citations against'),
-    mode: z
-      .enum(['speed', 'balanced', 'quality'])
-      .optional()
-      .default('balanced')
-      .describe('Pipeline mode preset'),
     overrides: z.object(overridesSchema).optional().describe('Override individual parameters'),
   }),
   execute: async (args: {
     text: string;
     sources: Array<{ content: string; metadata: { title: string; url: string } }>;
-    mode: string;
     overrides?: Record<string, unknown>;
   }) => {
-    const { text, sources, mode, overrides } = args;
+    const { text, sources, overrides } = args;
     const resolved = resolvePipelineConfig(
-      mode as OptimizationMode,
       overrides as PipelineOverrides | undefined,
     );
     const config = toVerificationConfig(resolved);
@@ -186,6 +191,10 @@ server.addTool({
   },
 });
 
+// ---------------------------------------------------------------------------
+// Tool 2: extract_citations
+// ---------------------------------------------------------------------------
+
 server.addTool({
   name: 'extract_citations',
   description:
@@ -198,6 +207,10 @@ server.addTool({
     return JSON.stringify(citations, null, 2);
   },
 });
+
+// ---------------------------------------------------------------------------
+// Tool 3: check_similarity
+// ---------------------------------------------------------------------------
 
 server.addTool({
   name: 'check_similarity',
@@ -213,146 +226,100 @@ server.addTool({
   },
 });
 
-server.addTool({
-  name: 'get_pipeline_config',
-  description:
-    'Get the fully resolved pipeline configuration for a given mode and optional overrides. Useful for inspecting what parameters any mode+override combination produces.',
-  parameters: z.object({
-    mode: z
-      .enum(['speed', 'balanced', 'quality'])
-      .describe('Pipeline mode preset'),
-    overrides: z.object(overridesSchema).optional().describe('Override individual parameters'),
-  }),
-  execute: async (args: { mode: string; overrides?: Record<string, unknown> }) => {
-    const resolved = resolvePipelineConfig(
-      args.mode as OptimizationMode,
-      args.overrides as PipelineOverrides | undefined,
-    );
-    return JSON.stringify(resolved, null, 2);
-  },
-});
-
 // ---------------------------------------------------------------------------
-// Search Tools (new — HTTP calls to running Perplexica instance)
+// Tool 4: search (consolidated: web + images + videos)
 // ---------------------------------------------------------------------------
-
-const chatHistorySchema = z
-  .array(z.tuple([z.string(), z.string()]))
-  .optional()
-  .default([])
-  .describe(
-    'Chat history as [role, content] tuples, e.g. [["human","hi"],["assistant","hello"]]',
-  );
-
-const modelParamsSchema = {
-  chatModelProvider: z
-    .string()
-    .optional()
-    .describe('Chat model provider ID (auto-detected if omitted)'),
-  chatModelKey: z
-    .string()
-    .optional()
-    .describe('Chat model key (auto-detected if omitted)'),
-  embeddingModelProvider: z
-    .string()
-    .optional()
-    .describe('Embedding model provider ID (auto-detected if omitted)'),
-  embeddingModelKey: z
-    .string()
-    .optional()
-    .describe('Embedding model key (auto-detected if omitted)'),
-};
-
-const chatOnlyModelParamsSchema = {
-  chatModelProvider: z
-    .string()
-    .optional()
-    .describe('Chat model provider ID (auto-detected if omitted)'),
-  chatModelKey: z
-    .string()
-    .optional()
-    .describe('Chat model key (auto-detected if omitted)'),
-};
 
 server.addTool({
   name: 'search',
-  description:
-    'Search the web using Perplexica and get an AI-generated answer with citations. ' +
-    'Supports web, academic, and discussion sources. ' +
-    'Quality mode produces more thorough results but takes longer (30+ seconds).',
+  description: `Search using Perplexica. Use 'type' to select what to search:
+- web (default): AI-generated answer with citations. Supports sources, systemInstructions, overrides, and embedding model params.
+- images: Returns image URLs, source pages, and titles.
+- videos: Returns video thumbnails, URLs, titles, and embed links.
+All types accept: query, chatHistory, chatModelProvider, chatModelKey.`,
   parameters: z.object({
     query: z.string().describe('The search query'),
+    type: z
+      .enum(['web', 'images', 'videos'])
+      .optional()
+      .default('web')
+      .describe('Search type: web (AI answer with citations), images, or videos'),
+    // web-only params
     sources: z
       .array(z.enum(['web', 'discussions', 'academic']))
       .optional()
       .default(['web'])
-      .describe('Source types to search'),
-    optimizationMode: z
-      .enum(['speed', 'balanced', 'quality'])
-      .optional()
-      .default('balanced')
-      .describe('Speed/quality tradeoff'),
-    history: chatHistorySchema,
+      .describe('(web only) Source types to search'),
     systemInstructions: z
       .string()
       .optional()
-      .describe('Custom system instructions for the AI writer'),
-    ...modelParamsSchema,
+      .describe('(web only) Custom system instructions for the AI writer'),
     overrides: z
       .object(overridesSchema)
       .optional()
-      .describe('Pipeline parameter overrides'),
-  }),
-  execute: async (args) => {
-    const models = await resolveModels({
-      chatModelProvider: args.chatModelProvider,
-      chatModelKey: args.chatModelKey,
-      embeddingModelProvider: args.embeddingModelProvider,
-      embeddingModelKey: args.embeddingModelKey,
-    });
-
-    const body: Record<string, unknown> = {
-      query: args.query,
-      sources: args.sources,
-      optimizationMode: args.optimizationMode,
-      history: args.history,
-      stream: false,
-      chatModel: models.chatModel,
-      embeddingModel: models.embeddingModel,
-    };
-
-    if (args.systemInstructions) {
-      body.systemInstructions = args.systemInstructions;
-    }
-    if (args.overrides) {
-      body.overrides = args.overrides;
-    }
-
-    const result = await fetchJSON('/api/search', {
-      method: 'POST',
-      body: JSON.stringify(body),
-    });
-
-    return JSON.stringify(result, null, 2);
-  },
-});
-
-server.addTool({
-  name: 'search_images',
-  description:
-    'Search for images related to a query. Returns image URLs, source pages, and titles.',
-  parameters: z.object({
-    query: z.string().describe('The image search query'),
+      .describe('(web only) Pipeline parameter overrides'),
+    embeddingModelProvider: z
+      .string()
+      .optional()
+      .describe('(web only) Embedding model provider ID (auto-detected if omitted)'),
+    embeddingModelKey: z
+      .string()
+      .optional()
+      .describe('(web only) Embedding model key (auto-detected if omitted)'),
+    // all types
     chatHistory: chatHistorySchema,
-    ...chatOnlyModelParamsSchema,
+    chatModelProvider: z
+      .string()
+      .optional()
+      .describe('Chat model provider ID (auto-detected if omitted)'),
+    chatModelKey: z
+      .string()
+      .optional()
+      .describe('Chat model key (auto-detected if omitted)'),
   }),
   execute: async (args) => {
+    const type = args.type ?? 'web';
+
+    if (type === 'web') {
+      const models = await resolveModels({
+        chatModelProvider: args.chatModelProvider,
+        chatModelKey: args.chatModelKey,
+        embeddingModelProvider: args.embeddingModelProvider,
+        embeddingModelKey: args.embeddingModelKey,
+      });
+
+      const body: Record<string, unknown> = {
+        query: args.query,
+        sources: args.sources,
+        history: args.chatHistory,
+        stream: false,
+        chatModel: models.chatModel,
+        embeddingModel: models.embeddingModel,
+      };
+
+      if (args.systemInstructions) {
+        body.systemInstructions = args.systemInstructions;
+      }
+      if (args.overrides) {
+        body.overrides = args.overrides;
+      }
+
+      const result = await fetchJSON('/api/search', {
+        method: 'POST',
+        body: JSON.stringify(body),
+      });
+      return JSON.stringify(result, null, 2);
+    }
+
+    // images / videos — chat model only, no embedding needed
     const models = await resolveModels({
       chatModelProvider: args.chatModelProvider,
       chatModelKey: args.chatModelKey,
+      requireEmbedding: false,
     });
 
-    const result = await fetchJSON('/api/images', {
+    const endpoint = type === 'images' ? '/api/images' : '/api/videos';
+    const result = await fetchJSON(endpoint, {
       method: 'POST',
       body: JSON.stringify({
         query: args.query,
@@ -360,65 +327,13 @@ server.addTool({
         chatModel: models.chatModel,
       }),
     });
-
     return JSON.stringify(result, null, 2);
   },
 });
 
-server.addTool({
-  name: 'search_videos',
-  description:
-    'Search for videos related to a query. Returns video thumbnails, URLs, titles, and embed links.',
-  parameters: z.object({
-    query: z.string().describe('The video search query'),
-    chatHistory: chatHistorySchema,
-    ...chatOnlyModelParamsSchema,
-  }),
-  execute: async (args) => {
-    const models = await resolveModels({
-      chatModelProvider: args.chatModelProvider,
-      chatModelKey: args.chatModelKey,
-    });
-
-    const result = await fetchJSON('/api/videos', {
-      method: 'POST',
-      body: JSON.stringify({
-        query: args.query,
-        chatHistory: args.chatHistory,
-        chatModel: models.chatModel,
-      }),
-    });
-
-    return JSON.stringify(result, null, 2);
-  },
-});
-
-server.addTool({
-  name: 'discover',
-  description:
-    'Get trending/curated news content by topic. ' +
-    'Does not require an AI model — uses SearXNG directly.',
-  parameters: z.object({
-    topic: z
-      .enum(['tech', 'finance', 'art', 'sports', 'entertainment'])
-      .optional()
-      .default('tech')
-      .describe('Topic category'),
-    mode: z
-      .enum(['normal', 'preview'])
-      .optional()
-      .default('normal')
-      .describe('normal = comprehensive results, preview = quick sample'),
-  }),
-  execute: async (args) => {
-    const params = new URLSearchParams();
-    params.set('topic', args.topic);
-    params.set('mode', args.mode);
-
-    const result = await fetchJSON(`/api/discover?${params.toString()}`);
-    return JSON.stringify(result, null, 2);
-  },
-});
+// ---------------------------------------------------------------------------
+// Tool 5: get_suggestions
+// ---------------------------------------------------------------------------
 
 server.addTool({
   name: 'get_suggestions',
@@ -432,7 +347,14 @@ server.addTool({
       .describe(
         'Chat history as [role, content] tuples (min 1), e.g. [["human","What is AI?"],["assistant","AI is..."]]',
       ),
-    ...chatOnlyModelParamsSchema,
+    chatModelProvider: z
+      .string()
+      .optional()
+      .describe('Chat model provider ID (auto-detected if omitted)'),
+    chatModelKey: z
+      .string()
+      .optional()
+      .describe('Chat model key (auto-detected if omitted)'),
   }),
   execute: async (args) => {
     const models = await resolveModels({
@@ -452,143 +374,227 @@ server.addTool({
   },
 });
 
-server.addTool({
-  name: 'list_chats',
-  description: 'List all saved chat conversations in Perplexica.',
-  parameters: z.object({}),
-  execute: async () => {
-    const result = await fetchJSON('/api/chats');
-    return JSON.stringify(result, null, 2);
-  },
-});
+// ---------------------------------------------------------------------------
+// Tool 7: config (consolidated: get, update, test_searxng, resolve_pipeline)
+// ---------------------------------------------------------------------------
 
 server.addTool({
-  name: 'get_chat',
-  description:
-    'Get a specific chat conversation with all its messages.',
+  name: 'config',
+  description: `Manage Perplexica configuration. Actions:
+- get: Get current config values, UI sections, and active providers.
+- update: Update a single config key-value pair (requires: key, value). Use 'get' first to see available keys.
+- test_searxng: Test connectivity to the SearXNG instance (optional: url to test a specific URL). Returns {ok, latencyMs?, message?}.
+- resolve_pipeline: Resolve the full pipeline config for given overrides. Shows default values merged with any overrides.`,
   parameters: z.object({
-    chatId: z.string().describe('The chat ID to retrieve'),
+    action: z.enum(['get', 'update', 'test_searxng', 'resolve_pipeline']),
+    // update
+    key: z.string().optional().describe('(update) Configuration key to update'),
+    value: z.string().optional().describe('(update) New value for the configuration key'),
+    // test_searxng
+    url: z
+      .string()
+      .url()
+      .optional()
+      .describe('(test_searxng) SearXNG URL to test (uses configured URL if omitted)'),
+    // resolve_pipeline
+    overrides: z
+      .object(overridesSchema)
+      .optional()
+      .describe('(resolve_pipeline) Override individual parameters'),
   }),
   execute: async (args) => {
-    const result = await fetchJSON(`/api/chats/${encodeURIComponent(args.chatId)}`);
-    return JSON.stringify(result, null, 2);
+    switch (args.action) {
+      case 'get': {
+        const result = await fetchJSON('/api/config');
+        return JSON.stringify(result, null, 2);
+      }
+      case 'update': {
+        if (!args.key || args.value === undefined) {
+          throw new Error('update action requires key and value');
+        }
+        const result = await fetchJSON('/api/config', {
+          method: 'POST',
+          body: JSON.stringify({ key: args.key, value: args.value }),
+        });
+        return JSON.stringify(result, null, 2);
+      }
+      case 'test_searxng': {
+        const body: Record<string, string> = {};
+        if (args.url) body.url = args.url;
+        const result = await fetchJSON('/api/config/test-searxng', {
+          method: 'POST',
+          body: JSON.stringify(body),
+        });
+        return JSON.stringify(result, null, 2);
+      }
+      case 'resolve_pipeline': {
+        const resolved = resolvePipelineConfig(
+          args.overrides as PipelineOverrides | undefined,
+        );
+        return JSON.stringify(resolved, null, 2);
+      }
+    }
   },
 });
 
 // ---------------------------------------------------------------------------
-// RSS Feed Tools
+// Tool 8: providers (consolidated: list, add, update, delete, reload, add_model, delete_model)
 // ---------------------------------------------------------------------------
 
 server.addTool({
-  name: 'list_feeds',
-  description:
-    'List all registered RSS feeds with their unread item counts.',
-  parameters: z.object({}),
-  execute: async () => {
-    const result = await fetchJSON('/api/feeds');
-    return JSON.stringify(result, null, 2);
-  },
-});
-
-server.addTool({
-  name: 'add_feed',
-  description:
-    'Add a new RSS feed by URL. The feed is validated by fetching it; returns an error if the URL is not a valid RSS feed.',
+  name: 'providers',
+  description: `Manage Perplexica model providers. Actions:
+- list: List all configured providers with chat and embedding models.
+- add: Add a new provider (requires: type, name, config).
+- update: Update a provider's name or config (requires: providerId; optional: name, config).
+- delete: Delete a provider (requires: providerId).
+- reload: Refresh a provider's model list from source (requires: providerId). Useful after adding models to Ollama.
+- add_model: Manually add a model to a provider (requires: providerId, modelType, key, modelName).
+- delete_model: Remove a model from a provider (requires: providerId, modelType, key).`,
   parameters: z.object({
-    url: z.string().url().describe('RSS feed URL to add'),
-  }),
-  execute: async (args: { url: string }) => {
-    const result = await fetchJSON('/api/feeds', {
-      method: 'POST',
-      body: JSON.stringify({ url: args.url }),
-    });
-    return JSON.stringify(result, null, 2);
-  },
-});
-
-server.addTool({
-  name: 'get_feed_items',
-  description:
-    'Get RSS feed items. Optionally filter by feed ID and/or item status.',
-  parameters: z.object({
-    feedId: z
+    action: z.enum(['list', 'add', 'update', 'delete', 'reload', 'add_model', 'delete_model']),
+    // provider-level
+    providerId: z
       .string()
       .optional()
-      .describe('Filter items by feed ID (omit for all feeds)'),
-    filter: z
-      .enum(['all', 'unread', 'important'])
+      .describe('Provider ID (required for: update, delete, reload, add_model, delete_model)'),
+    type: z
+      .string()
       .optional()
-      .default('all')
-      .describe('Filter items by status'),
-    limit: z
-      .number()
-      .int()
-      .min(1)
-      .max(100)
+      .describe('(add) Provider type, e.g. "openai", "anthropic", "ollama"'),
+    name: z.string().optional().describe('(add/update) Provider display name'),
+    config: z
+      .record(z.string())
       .optional()
-      .default(20)
-      .describe('Number of items to return'),
-    page: z.number().int().min(1).optional().default(1).describe('Page number'),
+      .describe('(add/update) Provider-specific config (apiKey, baseUrl, etc.)'),
+    // model-level
+    modelType: z
+      .enum(['chat', 'embedding'])
+      .optional()
+      .describe('(add_model/delete_model) Model type'),
+    key: z
+      .string()
+      .optional()
+      .describe('(add_model/delete_model) Model key/identifier, e.g. "gpt-4o"'),
+    modelName: z.string().optional().describe('(add_model) Display name for the model'),
   }),
-  execute: async (args: {
-    feedId?: string;
-    filter: string;
-    limit: number;
-    page: number;
-  }) => {
-    const params = new URLSearchParams();
-    if (args.feedId) params.set('feedId', args.feedId);
-    params.set('filter', args.filter);
-    params.set('limit', String(args.limit));
-    params.set('page', String(args.page));
-
-    const result = await fetchJSON(`/api/feeds/items?${params.toString()}`);
-    return JSON.stringify(result, null, 2);
+  execute: async (args) => {
+    switch (args.action) {
+      case 'list': {
+        const result = await fetchJSON('/api/providers');
+        return JSON.stringify(result, null, 2);
+      }
+      case 'add': {
+        if (!args.type || !args.name || !args.config) {
+          throw new Error('add action requires type, name, and config');
+        }
+        const result = await fetchJSON('/api/providers', {
+          method: 'POST',
+          body: JSON.stringify({ type: args.type, name: args.name, config: args.config }),
+        });
+        return JSON.stringify(result, null, 2);
+      }
+      case 'update': {
+        if (!args.providerId) {
+          throw new Error('update action requires providerId');
+        }
+        const body: Record<string, unknown> = {};
+        if (args.name !== undefined) body.name = args.name;
+        if (args.config !== undefined) body.config = args.config;
+        const result = await fetchJSON(
+          `/api/providers/${encodeURIComponent(args.providerId)}`,
+          { method: 'PATCH', body: JSON.stringify(body) },
+        );
+        return JSON.stringify(result, null, 2);
+      }
+      case 'delete': {
+        if (!args.providerId) {
+          throw new Error('delete action requires providerId');
+        }
+        const result = await fetchJSON(
+          `/api/providers/${encodeURIComponent(args.providerId)}`,
+          { method: 'DELETE' },
+        );
+        return JSON.stringify(result, null, 2);
+      }
+      case 'reload': {
+        if (!args.providerId) {
+          throw new Error('reload action requires providerId');
+        }
+        const result = await fetchJSON(
+          `/api/providers/${encodeURIComponent(args.providerId)}/reload`,
+          { method: 'POST' },
+        );
+        return JSON.stringify(result, null, 2);
+      }
+      case 'add_model': {
+        if (!args.providerId || !args.modelType || !args.key || !args.modelName) {
+          throw new Error('add_model action requires providerId, modelType, key, and modelName');
+        }
+        const result = await fetchJSON(
+          `/api/providers/${encodeURIComponent(args.providerId)}/models`,
+          {
+            method: 'POST',
+            body: JSON.stringify({ type: args.modelType, key: args.key, name: args.modelName }),
+          },
+        );
+        return JSON.stringify(result, null, 2);
+      }
+      case 'delete_model': {
+        if (!args.providerId || !args.modelType || !args.key) {
+          throw new Error('delete_model action requires providerId, modelType, and key');
+        }
+        const result = await fetchJSON(
+          `/api/providers/${encodeURIComponent(args.providerId)}/models`,
+          {
+            method: 'DELETE',
+            body: JSON.stringify({ type: args.modelType, key: args.key }),
+          },
+        );
+        return JSON.stringify(result, null, 2);
+      }
+    }
   },
 });
 
+// ---------------------------------------------------------------------------
+// Tool 9: chats (consolidated: list, get, delete)
+// ---------------------------------------------------------------------------
+
 server.addTool({
-  name: 'mark_feed_item_read',
-  description: 'Mark a feed item as read by its ID.',
+  name: 'chats',
+  description: `Manage saved chat conversations. Actions:
+- list: List all saved conversations.
+- get: Get a specific conversation with all messages (requires: chatId).
+- delete: Permanently delete a conversation (requires: chatId). Cannot be undone.`,
   parameters: z.object({
-    itemId: z.string().describe('The feed item ID to mark as read'),
+    action: z.enum(['list', 'get', 'delete']),
+    chatId: z.string().optional().describe('Chat ID (required for: get, delete)'),
   }),
-  execute: async (args: { itemId: string }) => {
-    const result = await fetchJSON(
-      `/api/feeds/items/${encodeURIComponent(args.itemId)}`,
-      {
-        method: 'PATCH',
-        body: JSON.stringify({ isRead: true }),
-      },
-    );
-    return JSON.stringify(result, null, 2);
-  },
-});
-
-server.addTool({
-  name: 'research_feed_item',
-  description:
-    'Get the redirect URL to research a feed item in Perplexica. Marks the item as read and returns a URL you can use to open a research chat.',
-  parameters: z.object({
-    itemId: z.string().describe('The feed item ID to research'),
-  }),
-  execute: async (args: { itemId: string }) => {
-    const result = await fetchJSON(
-      `/api/feeds/items/${encodeURIComponent(args.itemId)}/research`,
-      { method: 'POST' },
-    );
-    return JSON.stringify(result, null, 2);
-  },
-});
-
-server.addTool({
-  name: 'poll_feeds',
-  description:
-    'Trigger an immediate poll of all due RSS feeds. Returns the number of feeds polled.',
-  parameters: z.object({}),
-  execute: async () => {
-    const result = await fetchJSON('/api/feeds/poll', { method: 'POST' });
-    return JSON.stringify(result, null, 2);
+  execute: async (args) => {
+    switch (args.action) {
+      case 'list': {
+        const result = await fetchJSON('/api/chats');
+        return JSON.stringify(result, null, 2);
+      }
+      case 'get': {
+        if (!args.chatId) {
+          throw new Error('get action requires chatId');
+        }
+        const result = await fetchJSON(`/api/chats/${encodeURIComponent(args.chatId)}`);
+        return JSON.stringify(result, null, 2);
+      }
+      case 'delete': {
+        if (!args.chatId) {
+          throw new Error('delete action requires chatId');
+        }
+        const result = await fetchJSON(
+          `/api/chats/${encodeURIComponent(args.chatId)}`,
+          { method: 'DELETE' },
+        );
+        return JSON.stringify(result, null, 2);
+      }
+    }
   },
 });
 

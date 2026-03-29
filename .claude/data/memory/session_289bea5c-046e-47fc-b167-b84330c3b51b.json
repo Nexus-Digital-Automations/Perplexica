@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "289bea5c-046e-47fc-b167-b84330c3b51b",
+    "data": {
+      "session_id": "289bea5c-046e-47fc-b167-b84330c3b51b",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/289bea5c-046e-47fc-b167-b84330c3b51b.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "All verification passed. Discover and Feeds have been cleanly stripped from Perplexica."
+    },
+    "persisted_at": "2026-03-22T22:32:26.872617"
+  },
+  "stored_at": "2026-03-22T22:32:26.872829"
+}

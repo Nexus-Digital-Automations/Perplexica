@@ -1,0 +1,10 @@
+{
+  "session_id": "59228d33-6bfd-49c5-8d48-54cd007515da",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "feature",
+    "prompt": "<task-notification>\n<task-id>b32r51ctk</task-id>\n<tool-use-id>toolu_01SkbXrtECG3TXbjVrLz85Zu</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/59228d33-6bfd-49c5-8d48-54cd007515da/tasks/b32r51ctk.output</output-file>\n<status>completed</status>\n<summary>Background command \"cd \"/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica\" &amp;&amp; yarn build 2&gt;&amp;1 | bash ~/.claude/commands/check-build.sh &amp;&amp; npm run lin",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-22T17:32:30.843018"
+}

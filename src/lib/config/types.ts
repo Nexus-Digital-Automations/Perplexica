@@ -73,12 +73,6 @@ type Config = {
   search: {
     [key: string]: any;
   };
-  feeds: {
-    interestKeywords: string;
-    defaultPollIntervalMinutes: number;
-    importanceThreshold: number;
-    [key: string]: any;
-  };
 };
 
 type EnvMap = {
@@ -99,7 +93,6 @@ type UIConfigSections = {
   personalization: UIConfigField[];
   modelProviders: ModelProviderUISection[];
   search: UIConfigField[];
-  feeds: UIConfigField[];
 };
 
 export type {

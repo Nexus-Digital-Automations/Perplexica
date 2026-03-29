@@ -1,0 +1,13 @@
+{
+  "session_id": "47a0294b-a407-4f07-a375-2fbc329cfe94",
+  "prompts": [
+    "what if we gave it more memory? like 6 gb?",
+    "proceed with the orbstack then",
+    "what does the hybrid mode do? how is it faster?",
+    "cd \"/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica\" && yarn dev:hybrid\n\nis this the correct command?",
+    "cd \"/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica\" && yarn dev:hybrid\n\nis this the correct command?",
+    "yarn run v1.22.22\n$ docker compose -f docker-compose.search.yaml up -d && yarn dev\nunable to get image 'searxng/searxng:latest': Cannot connect to the Docker daemon at unix:///Users/jeremyparker/.docker/run/docker.sock. Is the docker daemon running?\nerror Command failed with exit code 1.\ninfo Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.\n\u279c  Perplexica git:(master) \u2717\n\nmake sure you fix it and it works. also, I thought we weren't going to use docker anymore.",
+    "you install orbstack"
+  ],
+  "task_type": "mixed"
+}

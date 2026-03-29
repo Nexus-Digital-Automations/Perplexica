@@ -9,7 +9,7 @@ const Personalization = ({
   values: Record<string, any>;
 }) => {
   return (
-    <div className="flex-1 space-y-6 overflow-y-auto px-6 py-6">
+    <div className="flex-1 space-y-4 overflow-y-auto px-8 py-6">
       {fields.map((field) => (
         <SettingsField
           key={field.key}

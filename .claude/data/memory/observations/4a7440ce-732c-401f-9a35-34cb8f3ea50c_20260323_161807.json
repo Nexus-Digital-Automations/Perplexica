@@ -1,0 +1,10 @@
+{
+  "session_id": "4a7440ce-732c-401f-9a35-34cb8f3ea50c",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "request",
+    "prompt": "http://localhost:3000/c/4952f1b0369bf6b453ea0a52ba809fee81d19ef7\n\nthis search is not working. it's not writing anything, even though it shows it did searches",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-23T16:18:07.370425"
+}

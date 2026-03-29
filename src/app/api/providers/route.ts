@@ -1,9 +1,9 @@
-import ModelRegistry from '@/lib/models/registry';
+import { modelRegistry } from '@/lib/models/registry';
 import { NextRequest } from 'next/server';
 
 export const GET = async (req: Request) => {
   try {
-    const registry = new ModelRegistry();
+    const registry = modelRegistry;
 
     const activeProviders = await registry.getActiveProviders();
 
@@ -17,6 +17,9 @@ export const GET = async (req: Request) => {
       },
       {
         status: 200,
+        headers: {
+          'Cache-Control': 'private, max-age=60, stale-while-revalidate=300',
+        },
       },
     );
   } catch (err) {
@@ -48,7 +51,7 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const registry = new ModelRegistry();
+    const registry = modelRegistry;
 
     const newProvider = await registry.addProvider(type, name, config);
 

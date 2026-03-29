@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "cb73d2da-5104-4b4a-a1c4-afc868bb156f",
+    "data": {
+      "session_id": "cb73d2da-5104-4b4a-a1c4-afc868bb156f",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/cb73d2da-5104-4b4a-a1c4-afc868bb156f.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": false,
+      "last_assistant_message": "Zero TypeScript errors. All changes are complete:\n\n---\n\n**Summary of changes:**\n\n| File | Change |\n|---|---|\n| `package.json` | Removed `--webpack` from `dev` and `build` \u2192 Turbopack in dev, SWC in prod |\n| `src/components/MessageRenderer/CodeBlock/index.tsx` | Lazy-loaded `react-syntax-highlighter` via `next/dynamic` (ssr: false) |\n| `src/lib/models/registry.ts` | Exported `modelRegistry` singleton at module level |\n| `src/app/api/chat/route.ts` | Uses singleton |\n| `src/app/api/search/route.ts` | Uses singleton |\n| `src/app/api/providers/route.ts` | Uses singleton (mutation routes \u2014 critical for consistency) |\n| `src/app/api/providers/[id]/route.ts` | Uses singleton |\n| `src/app/api/providers/[id]/models/route.ts` | Uses singleton |\n| `src/app/api/suggestions/route.ts` | Uses singleton |\n| `src/app/api/images/route.ts` | Uses singleton |\n| `src/app/api/videos/route.ts` | Uses singleton |\n| `src/app/api/uploads/route.ts` | Uses singleton |\n| `src/app/api/config/route.ts` | Uses singleton |\n| `src/lib/verification/textSimilarity.ts` | Eliminated redundant `normalizeText` in sliding window \u2014 O(n\u00d7m) \u2192 O(window_size) |\n\n**Key note on singleton scope:** The plan called for updating only `chat` and `search`, but the mutation routes (`addProvider`, `removeProvider`, `updateProvider`) also needed the singleton to stay in sync \u2014 otherwise adding/removing a provider via the settings UI would update the config file but not the singleton, breaking subsequent chat requests. All 10 routes now share the same instance."
+    },
+    "persisted_at": "2026-03-12T01:51:46.975101"
+  },
+  "stored_at": "2026-03-12T01:51:46.975889"
+}

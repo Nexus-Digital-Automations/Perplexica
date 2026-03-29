@@ -1,0 +1,10 @@
+{
+  "session_id": "4a7440ce-732c-401f-9a35-34cb8f3ea50c",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "bug",
+    "prompt": "the budget and amount spent for each query isn't being shown. please fix this",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-23T14:58:45.153562"
+}

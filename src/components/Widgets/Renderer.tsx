@@ -1,7 +1,9 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { Widget } from '../ChatWindow';
 import Calculation from './Calculation';
-import Stock from './Stock';
+
+const Stock = dynamic(() => import('./Stock'), { ssr: false });
 
 const Renderer = ({ widgets }: { widgets: Widget[] }) => {
   return widgets.map((widget, index) => {

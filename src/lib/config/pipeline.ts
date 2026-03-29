@@ -18,6 +18,7 @@ export type PipelineConfig = {
   budgetUsd: number | null;
   interactiveQuestions: boolean;
   credibilityThresholdAdjustment: number;
+  maxConcurrentResearchers: number;
 };
 
 export type PipelineOverrides = Partial<PipelineConfig>;
@@ -38,6 +39,7 @@ const DEFAULTS: PipelineConfig = {
   budgetUsd: null,
   interactiveQuestions: true,
   credibilityThresholdAdjustment: 0.03,
+  maxConcurrentResearchers: 5,
 };
 
 export { DEFAULTS as PIPELINE_DEFAULTS };

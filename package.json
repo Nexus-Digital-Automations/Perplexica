@@ -4,31 +4,40 @@
   "license": "MIT",
   "author": "ItzCrazyKns",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "bash scripts/dev.sh",
     "dev:docker": "docker compose -f docker-compose.dev.yaml up --build",
+    "dev:hybrid": "bash scripts/dev-hybrid.sh",
+    "dev:native": "bash scripts/dev.sh",
+    "dev:setup": "bash scripts/setup-searxng.sh",
+    "dev:colima": "bash scripts/dev-colima.sh",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
     "format:write": "prettier . --write",
-    "mcp-server": "npx tsx src/mcp-server/index.ts"
+    "mcp-server": "npx tsx src/mcp-server/index.ts",
+    "build:mcp": "esbuild src/mcp-server/index.ts --bundle --platform=node --target=node20 --packages=external --outfile=dist/mcp-server.js --tsconfig=tsconfig.json"
   },
   "dependencies": {
     "@google/genai": "^1.34.0",
     "@headlessui/react": "^2.2.0",
     "@headlessui/tailwindcss": "^0.2.2",
     "@huggingface/transformers": "^3.8.1",
-    "@icons-pack/react-simple-icons": "^12.3.0",
+
     "@phosphor-icons/react": "^2.1.10",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@tailwindcss/typography": "^0.5.12",
     "@toolsycc/json-repair": "^0.1.22",
-    "axios": "^1.8.3",
+
     "better-sqlite3": "^11.9.1",
     "clsx": "^2.1.0",
     "drizzle-orm": "^0.40.1",
     "fastmcp": "^3.34.0",
     "js-tiktoken": "^1.0.21",
-    "jspdf": "^3.0.4",
+    "jspdf": "^4.2.0",
     "lightweight-charts": "^5.0.9",
     "lucide-react": "^0.556.0",
     "mammoth": "^1.9.1",
@@ -48,7 +57,6 @@
     "react-text-to-speech": "^0.14.5",
     "react-textarea-autosize": "^8.5.3",
     "rfc6902": "^5.1.2",
-    "rss-parser": "^3.13.0",
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.2.2",
     "turndown": "^7.2.2",
@@ -57,6 +65,7 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@types/better-sqlite3": "^7.6.12",
     "@types/jspdf": "^2.0.0",
     "@types/node": "^24.8.1",
@@ -65,14 +74,20 @@
     "@types/react-dom": "^18",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@types/turndown": "^5.0.6",
+    "@vitest/coverage-v8": "^2",
     "autoprefixer": "^10.0.1",
-    "drizzle-kit": "^0.30.5",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.4",
+    "drizzle-kit": "^0.31.9",
+    "eslint": "^9",
+    "eslint-config-next": "^16.1.6",
     "postcss": "^8",
     "prettier": "^3.2.5",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^2"
+  },
+  "resolutions": {
+    "minimatch": "^9.0.5",
+    "brace-expansion": "^2.0.1"
   },
   "optionalDependencies": {
     "@napi-rs/canvas": "^0.1.87"

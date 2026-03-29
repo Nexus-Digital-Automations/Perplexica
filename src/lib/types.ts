@@ -113,7 +113,18 @@ export type ResearchBlock = {
   type: 'research';
   data: {
     subSteps: ResearchBlockSubStep[];
+    question?: string;
+    questionIndex?: number;
+    questionTotal?: number;
   };
+};
+
+export type CitationDetail = {
+  citationIndex: number;
+  status: 'pass' | 'weak' | 'fail';
+  similarity: number;
+  matchedSnippet: string;
+  sentence: string;
 };
 
 export type VerificationBlock = {
@@ -126,6 +137,8 @@ export type VerificationBlock = {
     weak: number;
     failed: number;
     wasCorrected: boolean;
+    accuracyScore?: number;
+    results?: CitationDetail[];
   };
 };
 
@@ -143,6 +156,24 @@ export type CostBlock = {
   type: 'cost';
   costUsd: number;
   modelId: string;
+  totalSpentUsd?: number;
+  budgetUsd?: number | null;
+};
+
+export type QuestionCategory = {
+  category: string;
+  questions: string[];
+};
+
+export type QuestionsBlock = {
+  id: string;
+  type: 'questions';
+  data: {
+    sessionId: string;
+    categories: QuestionCategory[];
+    status: 'pending' | 'confirmed';
+    selectedQuestions?: string[];
+  };
 };
 
 export type Block =
@@ -153,4 +184,5 @@ export type Block =
   | ResearchBlock
   | VerificationBlock
   | ClassificationBlock
-  | CostBlock;
+  | CostBlock
+  | QuestionsBlock;

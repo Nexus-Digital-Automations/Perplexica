@@ -1,7 +1,7 @@
 'use client';
 
 import { Message } from '@/components/ChatWindow';
-import { Block } from '@/lib/types';
+import { Block, QuestionCategory } from '@/lib/types';
 import {
   createContext,
   useCallback,
@@ -16,10 +16,13 @@ import { useParams, useSearchParams } from 'next/navigation';
 import { toast } from 'sonner';
 import { getSuggestions } from '../actions';
 import { MinimalProvider } from '../models/types';
-import { getAutoMediaSearch } from '../config/clientRegistry';
 import { applyPatch } from 'rfc6902';
 import { Widget } from '@/components/ChatWindow';
-import { PipelineOverrides } from '@/lib/config/pipeline';
+import { PipelineOverrides, PIPELINE_OVERRIDES_LS_KEY } from '@/lib/config/pipeline';
+
+// Pre-compiled regex patterns used in buildSection (avoid re-creation per call)
+const CITATION_REGEX_PATTERN = /\[([^\]]+)\]/g;
+const DIGIT_CITATION_REGEX_PATTERN = /\[(\d+)\]/g;
 
 export type Section = {
   message: Message;
@@ -38,21 +41,29 @@ type ChatContext = {
   fileIds: string[];
   sources: string[];
   chatId: string | undefined;
-  optimizationMode: string;
   isMessagesLoaded: boolean;
   loading: boolean;
   notFound: boolean;
   messageAppeared: boolean;
   isReady: boolean;
   hasError: boolean;
+  errorMessage: string;
   chatModelProvider: ChatModelProvider;
   embeddingModelProvider: EmbeddingModelProvider;
   researchEnded: boolean;
+  researchProgress: { questionsCompleted: number; questionTotal: number } | null;
   verifying: boolean;
   pipelineOverrides: PipelineOverrides;
+  pendingQuestions: {
+    sessionId: string;
+    categories: QuestionCategory[];
+  } | null;
   setResearchEnded: (ended: boolean) => void;
-  setOptimizationMode: (mode: string) => void;
   setPipelineOverrides: (overrides: PipelineOverrides) => void;
+  submitQuestionSelection: (
+    sessionId: string,
+    selectedQuestions: string[],
+  ) => Promise<void>;
   setSources: (sources: string[]) => void;
   setFiles: (files: File[]) => void;
   setFileIds: (fileIds: string[]) => void;
@@ -87,6 +98,7 @@ const checkConfig = async (
   setEmbeddingModelProvider: (provider: EmbeddingModelProvider) => void,
   setIsConfigReady: (ready: boolean) => void,
   setHasError: (hasError: boolean) => void,
+  setErrorMessage: (msg: string) => void,
 ) => {
   try {
     let chatModelKey = localStorage.getItem('chatModelKey');
@@ -113,7 +125,7 @@ const checkConfig = async (
 
     if (providers.length === 0) {
       throw new Error(
-        'No chat model providers found, please configure them in the settings page.',
+        'No chat model providers found. Please configure them in the settings page.',
       );
     }
 
@@ -128,7 +140,7 @@ const checkConfig = async (
 
     if (!chatModelProvider) {
       throw new Error(
-        'No chat models found, pleae configure them in the settings page.',
+        'No chat models found, please configure them in the settings page.',
       );
     }
 
@@ -148,7 +160,7 @@ const checkConfig = async (
 
     if (!embeddingModelProvider) {
       throw new Error(
-        'No embedding models found, pleae configure them in the settings page.',
+        'No embedding models found, please configure them in the settings page.',
       );
     }
 
@@ -181,6 +193,7 @@ const checkConfig = async (
     toast.error(err.message);
     setIsConfigReady(false);
     setHasError(true);
+    setErrorMessage(err.message ?? 'Failed to connect to the server.');
   }
 };
 
@@ -269,8 +282,8 @@ const buildSection = (msg: Message): Section => {
   msg.responseBlocks.forEach((block) => {
     if (block.type === 'text') {
       let processedText = block.data;
-      const citationRegex = /\[([^\]]+)\]/g;
-      const regex = /\[(\d+)\]/g;
+      const citationRegex = new RegExp(CITATION_REGEX_PATTERN);
+      const regex = new RegExp(DIGIT_CITATION_REGEX_PATTERN);
 
       if (processedText.includes('<think>')) {
         const openThinkTag = processedText.match(/<think>/g)?.length || 0;
@@ -305,7 +318,7 @@ const buildSection = (msg: Message): Section => {
                 const url = source?.metadata?.url;
 
                 if (url) {
-                  return `<citation href="${url}">${numStr}</citation>`;
+                  return `<citation href="${url}" data-index="${number}">${numStr}</citation>`;
                 } else {
                   return ``;
                 }
@@ -344,6 +357,7 @@ export const chatContext = createContext<ChatContext>({
   files: [],
   sources: [],
   hasError: false,
+  errorMessage: '',
   isMessagesLoaded: false,
   isReady: false,
   loading: false,
@@ -351,18 +365,19 @@ export const chatContext = createContext<ChatContext>({
   messages: [],
   sections: [],
   notFound: false,
-  optimizationMode: '',
   chatModelProvider: { key: '', providerId: '' },
   embeddingModelProvider: { key: '', providerId: '' },
   researchEnded: false,
+  researchProgress: null,
   verifying: false,
   pipelineOverrides: {},
+  pendingQuestions: null,
   rewrite: () => {},
   sendMessage: async () => {},
+  submitQuestionSelection: async () => {},
   setFileIds: () => {},
   setFiles: () => {},
   setSources: () => {},
-  setOptimizationMode: () => {},
   setPipelineOverrides: () => {},
   setChatModelProvider: () => {},
   setEmbeddingModelProvider: () => {},
@@ -382,7 +397,15 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   const [messageAppeared, setMessageAppeared] = useState(false);
 
   const [researchEnded, setResearchEnded] = useState(false);
+  const [researchProgress, setResearchProgress] = useState<{
+    questionsCompleted: number;
+    questionTotal: number;
+  } | null>(null);
   const [verifying, setVerifying] = useState(false);
+  const [pendingQuestions, setPendingQuestions] = useState<{
+    sessionId: string;
+    categories: QuestionCategory[];
+  } | null>(null);
 
   const chatHistory = useRef<[string, string][]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -390,9 +413,15 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   const [files, setFiles] = useState<File[]>([]);
   const [fileIds, setFileIds] = useState<string[]>([]);
 
-  const [sources, setSources] = useState<string[]>(['web']);
-  const [optimizationMode, setOptimizationMode] = useState('speed');
-  const [pipelineOverrides, setPipelineOverrides] = useState<PipelineOverrides>({});
+  const [sources, setSources] = useState<string[]>(['web', 'academic']);
+  const [pipelineOverrides, setPipelineOverrides] = useState<PipelineOverrides>(() => {
+    if (typeof window === 'undefined') return {};
+    try {
+      const stored = localStorage.getItem(PIPELINE_OVERRIDES_LS_KEY);
+      if (stored) return JSON.parse(stored) as PipelineOverrides;
+    } catch { /* ignore */ }
+    return {};
+  });
 
   const [isMessagesLoaded, setIsMessagesLoaded] = useState(false);
 
@@ -413,10 +442,34 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [isConfigReady, setIsConfigReady] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [isReady, setIsReady] = useState(false);
 
   const messagesRef = useRef<Message[]>([]);
   const sendMessageRef = useRef<ChatContext['sendMessage']>(async () => {});
+
+  // SSE batching: collect rapid setMessages updaters and flush once per frame
+  const pendingUpdatesRef = useRef<Array<(msgs: Message[]) => Message[]>>([]);
+  const batchScheduledRef = useRef(false);
+
+  const flushMessageUpdates = useCallback(() => {
+    batchScheduledRef.current = false;
+    const updates = pendingUpdatesRef.current;
+    if (updates.length === 0) return;
+    pendingUpdatesRef.current = [];
+    setMessages((prev) => updates.reduce((msgs, fn) => fn(msgs), prev));
+  }, []);
+
+  const enqueueMessageUpdate = useCallback(
+    (updater: (msgs: Message[]) => Message[]) => {
+      pendingUpdatesRef.current.push(updater);
+      if (!batchScheduledRef.current) {
+        batchScheduledRef.current = true;
+        requestAnimationFrame(flushMessageUpdates);
+      }
+    },
+    [flushMessageUpdates],
+  );
 
   const prevSectionsRef = useRef<Map<string, Section>>(new Map());
 
@@ -476,16 +529,17 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
             partialChunk += decoder.decode(value, { stream: true });
 
-            try {
-              const messages = partialChunk.split('\n');
-              for (const msg of messages) {
-                if (!msg.trim()) continue;
-                const json = JSON.parse(msg);
+            const lines = partialChunk.split('\n');
+            partialChunk = lines.pop() ?? '';
+
+            for (const line of lines) {
+              if (!line.trim()) continue;
+              try {
+                const json = JSON.parse(line);
                 messageHandler(json);
+              } catch {
+                // Malformed line — skip it
               }
-              partialChunk = '';
-            } catch (error) {
-              console.warn('Incomplete JSON, waiting for next chunk...');
             }
           }
         } finally {
@@ -501,6 +555,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       setEmbeddingModelProvider,
       setIsConfigReady,
       setHasError,
+      setErrorMessage,
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -558,6 +613,26 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [isMessagesLoaded, isConfigReady, newChatCreated]);
 
+  const submitQuestionSelection = useCallback(
+    async (sessionId: string, selectedQuestions: string[]) => {
+      setPendingQuestions(null);
+      try {
+        const res = await fetch('/api/chat/select-questions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId, selectedQuestions }),
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          console.error('Question selection failed:', data);
+        }
+      } catch (err) {
+        console.error('Question selection request failed:', err);
+      }
+    },
+    [],
+  );
+
   const rewrite = useCallback((messageId: string) => {
     const index = messagesRef.current.findIndex(
       (msg) => msg.messageId === messageId,
@@ -591,6 +666,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       if (data.type === 'error') {
         toast.error(data.data);
         setLoading(false);
+        flushMessageUpdates();
         setMessages((prev) =>
           prev.map((msg) =>
             msg.messageId === messageId
@@ -599,6 +675,13 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
           ),
         );
         return;
+      }
+
+      if (data.type === 'researchProgress') {
+        setResearchProgress({
+          questionsCompleted: data.questionsCompleted,
+          questionTotal: data.questionTotal,
+        });
       }
 
       if (data.type === 'researchComplete') {
@@ -624,7 +707,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
             type: 'verification',
             data: data.data,
           };
-          setMessages((prev) =>
+          enqueueMessageUpdate((prev) =>
             prev.map((msg) => {
               if (msg.messageId === messageId) {
                 return {
@@ -639,7 +722,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       }
 
       if (data.type === 'block') {
-        setMessages((prev) =>
+        enqueueMessageUpdate((prev) =>
           prev.map((msg) => {
             if (msg.messageId === messageId) {
               const exists = msg.responseBlocks.findIndex(
@@ -666,6 +749,23 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         );
 
         if (
+          data.block.type === 'questions' &&
+          data.block.data?.status === 'pending'
+        ) {
+          setPendingQuestions({
+            sessionId: data.block.data.sessionId,
+            categories: data.block.data.categories,
+          });
+        }
+
+        if (
+          data.block.type === 'questions' &&
+          data.block.data?.status === 'confirmed'
+        ) {
+          setPendingQuestions(null);
+        }
+
+        if (
           (data.block.type === 'source' && data.block.data.length > 0) ||
           data.block.type === 'text'
         ) {
@@ -674,7 +774,17 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       }
 
       if (data.type === 'updateBlock') {
-        setMessages((prev) =>
+        // Clear pending questions when the block is confirmed
+        const patchSetsConfirmed = Array.isArray(data.patch) &&
+          data.patch.some(
+            (p: any) =>
+              p.path === '/data/status' && p.value === 'confirmed',
+          );
+        if (patchSetsConfirmed) {
+          setPendingQuestions(null);
+        }
+
+        enqueueMessageUpdate((prev) =>
           prev.map((msg) => {
             if (msg.messageId === messageId) {
               const updatedBlocks = msg.responseBlocks.map((block) => {
@@ -698,6 +808,9 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         }
 
         handledMessageEndRef.current.add(messageId);
+
+        // Flush any pending batched updates before final state changes
+        flushMessageUpdates();
 
         const currentMsg = messagesRef.current.find(
           (msg) => msg.messageId === messageId,
@@ -726,20 +839,6 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         setLoading(false);
 
         const lastMsg = messagesRef.current[messagesRef.current.length - 1];
-
-        const autoMediaSearch = getAutoMediaSearch();
-
-        if (autoMediaSearch) {
-          setTimeout(() => {
-            document
-              .getElementById(`search-images-${lastMsg.messageId}`)
-              ?.click();
-
-            document
-              .getElementById(`search-videos-${lastMsg.messageId}`)
-              ?.click();
-          }, 200);
-        }
 
         // Check if there are sources and no suggestions
 
@@ -779,6 +878,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       if (loading || !message) return;
       setLoading(true);
       setResearchEnded(false);
+      setResearchProgress(null);
       setMessageAppeared(false);
 
       if (messagesRef.current.length <= 1) {
@@ -819,7 +919,6 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
           chatId: chatId!,
           files: fileIds,
           sources: sources,
-          optimizationMode: optimizationMode,
           overrides:
             Object.keys(pipelineOverrides).length > 0
               ? pipelineOverrides
@@ -857,25 +956,38 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
         partialChunk += decoder.decode(value, { stream: true });
 
-        try {
-          const chunks = partialChunk.split('\n');
-          for (const msg of chunks) {
-            if (!msg.trim()) continue;
-            const json = JSON.parse(msg);
+        const lines = partialChunk.split('\n');
+        // Keep the last element — it may be an incomplete line
+        partialChunk = lines.pop() ?? '';
+
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          try {
+            const json = JSON.parse(line);
             messageHandler(json);
+          } catch {
+            // Malformed line — skip it
           }
-          partialChunk = '';
-        } catch (error) {
-          console.warn('Incomplete JSON, waiting for next chunk...');
         }
       }
+
+      // Safety net: if the stream ended without a proper messageEnd/error event,
+      // reset any stuck loading state so the UI doesn't hang indefinitely.
+      flushMessageUpdates();
+      setLoading(false);
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.messageId === messageId && msg.status === 'answering'
+            ? { ...msg, status: 'error' as const }
+            : msg,
+        ),
+      );
     },
     [
       loading,
       chatId,
       fileIds,
       sources,
-      optimizationMode,
       pipelineOverrides,
       chatModelProvider,
       embeddingModelProvider,
@@ -895,25 +1007,27 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         sources,
         chatId,
         hasError,
+        errorMessage,
         isMessagesLoaded,
         isReady,
         loading,
         messageAppeared,
         notFound,
-        optimizationMode,
         setFileIds,
         setFiles,
         setSources,
-        setOptimizationMode,
         setPipelineOverrides,
         pipelineOverrides,
+        pendingQuestions,
         rewrite,
         sendMessage,
+        submitQuestionSelection,
         setChatModelProvider,
         chatModelProvider,
         embeddingModelProvider,
         setEmbeddingModelProvider,
         researchEnded,
+        researchProgress,
         verifying,
         setResearchEnded,
       }}

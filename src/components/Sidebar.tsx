@@ -4,55 +4,21 @@ import { cn } from '@/lib/utils';
 import {
   BookOpenText,
   Home,
-  Rss,
-  Search,
-  SquarePen,
-  Settings,
   Plus,
-  ArrowLeft,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useSelectedLayoutSegments } from 'next/navigation';
-import React, { useEffect, useState, type ReactNode } from 'react';
+import React, { useState, type ReactNode } from 'react';
 import Layout from './Layout';
-import {
-  Description,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-} from '@headlessui/react';
 import SettingsButton from './Settings/SettingsButton';
 
 const VerticalIconContainer = ({ children }: { children: ReactNode }) => {
   return <div className="flex flex-col items-center w-full">{children}</div>;
 };
 
-function useFeedUnreadCount() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const fetch_ = async () => {
-      try {
-        const res = await fetch('/api/feeds');
-        if (!res.ok) return;
-        const data = await res.json();
-        setCount(data.totalUnread ?? 0);
-      } catch {
-        // silent
-      }
-    };
-    fetch_();
-    const interval = setInterval(fetch_, 60_000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return count;
-}
-
 const Sidebar = ({ children }: { children: React.ReactNode }) => {
   const segments = useSelectedLayoutSegments();
   const [isOpen, setIsOpen] = useState<boolean>(true);
-  const feedUnreadCount = useFeedUnreadCount();
 
   const navLinks = [
     {
@@ -60,19 +26,6 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
       href: '/',
       active: segments.length === 0 || segments.includes('c'),
       label: 'Home',
-    },
-    {
-      icon: Search,
-      href: '/discover',
-      active: segments.includes('discover'),
-      label: 'Discover',
-    },
-    {
-      icon: Rss,
-      href: '/feeds',
-      active: segments.includes('feeds'),
-      label: 'Feeds',
-      badge: feedUnreadCount,
     },
     {
       icon: BookOpenText,
@@ -117,11 +70,6 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                       'transition duration:200 m-1.5',
                     )}
                   />
-                  {'badge' in link && (link as any).badge > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-cyan-500 text-white text-[9px] font-bold rounded-full min-w-[14px] h-[14px] flex items-center justify-center px-0.5">
-                      {(link as any).badge > 99 ? '99+' : (link as any).badge}
-                    </span>
-                  )}
                 </div>
                 <p
                   className={cn(

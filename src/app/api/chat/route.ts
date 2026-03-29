@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import ModelRegistry from '@/lib/models/registry';
+import { modelRegistry } from '@/lib/models/registry';
 import { ModelWithProvider } from '@/lib/models/types';
 import SearchAgent from '@/lib/agents/search';
 import SessionManager from '@/lib/session';
@@ -32,22 +32,24 @@ const embeddingModelSchema: z.ZodType<ModelWithProvider> = z.object({
 });
 
 const overridesSchema = z.object({
-  maxIterations: z.number().min(1).max(50).optional(),
+  numQuestions: z.number().min(1).max(50).optional(),
+  sourcesPerQuestion: z.number().min(1).max(25).optional(),
+  questionsParallel: z.boolean().optional(),
+  budgetUsd: z.number().min(0).nullable().optional(),
   responseLength: z.enum(['brief', 'standard', 'comprehensive']).optional(),
   writerTemperature: z.number().min(0).max(1).optional(),
   verificationEnabled: z.boolean().optional(),
   passThreshold: z.number().min(0).max(1).optional(),
+  verbatimPassThreshold: z.number().min(0).max(1).optional(),
   weakThreshold: z.number().min(0).max(1).optional(),
   maxCorrectionRetries: z.number().min(0).max(5).optional(),
   correctionTimeoutMs: z.number().min(0).max(60000).optional(),
   correctionTemperature: z.number().min(0).max(1).optional(),
+  interactiveQuestions: z.boolean().optional(),
 }).optional();
 
 const bodySchema = z.object({
   message: messageSchema,
-  optimizationMode: z.enum(['speed', 'balanced', 'quality'], {
-    message: 'Optimization mode must be one of: speed, balanced, quality',
-  }),
   sources: z.array(z.string()).optional().default([]),
   history: z
     .array(z.tuple([z.string(), z.string()]))
@@ -138,11 +140,9 @@ export const POST = async (req: Request) => {
       );
     }
 
-    const registry = new ModelRegistry();
-
     const [llm, embedding] = await Promise.all([
-      registry.loadChatModel(body.chatModel.providerId, body.chatModel.key),
-      registry.loadEmbeddingModel(
+      modelRegistry.loadChatModel(body.chatModel.providerId, body.chatModel.key),
+      modelRegistry.loadEmbeddingModel(
         body.embeddingModel.providerId,
         body.embeddingModel.key,
       ),
@@ -187,6 +187,16 @@ export const POST = async (req: Request) => {
                 type: 'updateBlock',
                 blockId: data.blockId,
                 patch: data.patch,
+              }) + '\n',
+            ),
+          );
+        } else if (data.type === 'researchProgress') {
+          writer.write(
+            encoder.encode(
+              JSON.stringify({
+                type: 'researchProgress',
+                questionsCompleted: data.questionsCompleted,
+                questionTotal: data.questionTotal,
               }) + '\n',
             ),
           );
@@ -249,7 +259,6 @@ export const POST = async (req: Request) => {
         llm,
         embedding: embedding,
         sources: body.sources as SearchSources[],
-        mode: body.optimizationMode,
         fileIds: body.files,
         systemInstructions: body.systemInstructions || 'None',
         overrides: body.overrides,

@@ -1,10 +1,8 @@
 import z from 'zod';
 import { ResearchAction } from '../../types';
 import { Chunk, ReadingResearchBlock } from '@/lib/types';
-import TurnDown from 'turndown';
+import { turndown as turndownService } from '@/lib/utils/fetchPageContent';
 import path from 'path';
-
-const turndownService = new TurnDown();
 
 const schema = z.object({
   urls: z.array(z.string()).describe('A list of URLs to scrape content from.'),

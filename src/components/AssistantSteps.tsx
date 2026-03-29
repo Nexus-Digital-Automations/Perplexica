@@ -37,15 +37,19 @@ const getStepTitle = (
   if (step.type === 'reasoning') {
     return isStreaming && !step.reasoning ? 'Thinking...' : 'Thinking';
   } else if (step.type === 'searching') {
-    return `Searching ${step.searching.length} ${step.searching.length === 1 ? 'query' : 'queries'}`;
+    const n = Array.isArray(step.searching) ? step.searching.length : 0;
+    return `Searching ${n} ${n === 1 ? 'query' : 'queries'}`;
   } else if (step.type === 'search_results') {
-    return `Found ${step.reading.length} ${step.reading.length === 1 ? 'result' : 'results'}`;
+    const n = Array.isArray(step.reading) ? step.reading.length : 0;
+    return `Found ${n} ${n === 1 ? 'result' : 'results'}`;
   } else if (step.type === 'reading') {
-    return `Reading ${step.reading.length} ${step.reading.length === 1 ? 'source' : 'sources'}`;
+    const n = Array.isArray(step.reading) ? step.reading.length : 0;
+    return `Reading ${n} ${n === 1 ? 'source' : 'sources'}`;
   } else if (step.type === 'upload_searching') {
     return 'Scanning your uploaded documents';
   } else if (step.type === 'upload_search_results') {
-    return `Reading ${step.results.length} ${step.results.length === 1 ? 'document' : 'documents'}`;
+    const n = Array.isArray(step.results) ? step.results.length : 0;
+    return `Reading ${n} ${n === 1 ? 'document' : 'documents'}`;
   }
 
   return 'Processing';
@@ -84,8 +88,9 @@ const AssistantSteps = ({
         <div className="flex items-center gap-2">
           <Brain className="w-4 h-4 text-black dark:text-white" />
           <span className="text-sm font-medium text-black dark:text-white">
-            Research Progress ({block.data.subSteps.length}{' '}
-            {block.data.subSteps.length === 1 ? 'step' : 'steps'})
+            {block.data.question
+              ? `Q${block.data.questionIndex}/${block.data.questionTotal}: ${block.data.question.length > 60 ? block.data.question.slice(0, 57) + '…' : block.data.question}`
+              : `Research Progress (${block.data.subSteps.length} ${block.data.subSteps.length === 1 ? 'step' : 'steps'})`}
           </span>
         </div>
         {isExpanded ? (
@@ -160,6 +165,7 @@ const AssistantSteps = ({
                       )}
 
                       {step.type === 'searching' &&
+                        Array.isArray(step.searching) &&
                         step.searching.length > 0 && (
                           <div className="flex flex-wrap gap-1.5 mt-1.5">
                             {step.searching.map((query, idx) => (
@@ -175,6 +181,7 @@ const AssistantSteps = ({
 
                       {(step.type === 'search_results' ||
                         step.type === 'reading') &&
+                        Array.isArray(step.reading) &&
                         step.reading.length > 0 && (
                           <div className="flex flex-wrap gap-1.5 mt-1.5">
                             {step.reading.slice(0, 4).map((result, idx) => {
@@ -210,6 +217,7 @@ const AssistantSteps = ({
                         )}
 
                       {step.type === 'upload_searching' &&
+                        Array.isArray(step.queries) &&
                         step.queries.length > 0 && (
                           <div className="flex flex-wrap gap-1.5 mt-1.5">
                             {step.queries.map((query, idx) => (
@@ -224,6 +232,7 @@ const AssistantSteps = ({
                         )}
 
                       {step.type === 'upload_search_results' &&
+                        Array.isArray(step.results) &&
                         step.results.length > 0 && (
                           <div className="mt-1.5 grid gap-3 lg:grid-cols-3">
                             {step.results.slice(0, 4).map((result, idx) => {

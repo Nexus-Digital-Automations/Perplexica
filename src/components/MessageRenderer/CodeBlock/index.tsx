@@ -3,7 +3,11 @@
 import { CheckIcon, CopyIcon } from '@phosphor-icons/react';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTheme } from 'next-themes';
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import dynamic from 'next/dynamic';
+
+const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'), {
+  ssr: false,
+});
 import darkTheme from './CodeBlockDarkTheme';
 import lightTheme from './CodeBlockLightTheme';
 

@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "47a0294b-a407-4f07-a375-2fbc329cfe94",
+    "data": {
+      "session_id": "47a0294b-a407-4f07-a375-2fbc329cfe94",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/47a0294b-a407-4f07-a375-2fbc329cfe94.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "Done. Run `yarn dev:hybrid` from the project directory whenever you're ready."
+    },
+    "persisted_at": "2026-03-13T17:47:09.453306"
+  },
+  "stored_at": "2026-03-13T17:47:09.453528"
+}

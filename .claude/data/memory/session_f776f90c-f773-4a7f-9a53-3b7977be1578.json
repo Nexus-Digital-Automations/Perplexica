@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "f776f90c-f773-4a7f-9a53-3b7977be1578",
+    "data": {
+      "session_id": "f776f90c-f773-4a7f-9a53-3b7977be1578",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/f776f90c-f773-4a7f-9a53-3b7977be1578.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": false,
+      "last_assistant_message": "Understood \u2014 I'll wait for your direction. Let me know if you want to adjust the plan before approving it, or if you'd like to take a different approach entirely."
+    },
+    "persisted_at": "2026-03-12T03:35:20.567111"
+  },
+  "stored_at": "2026-03-12T03:35:20.567506"
+}

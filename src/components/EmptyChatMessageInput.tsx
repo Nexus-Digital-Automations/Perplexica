@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import Sources from './MessageInputActions/Sources';
-import Optimization from './MessageInputActions/Optimization';
+import AdvancedSearchConfig from './MessageInputActions/AdvancedSearchConfig';
 import Attach from './MessageInputActions/Attach';
 import { useChat } from '@/lib/hooks/useChat';
 import ModelSelector from './MessageInputActions/ChatModelSelector';
@@ -64,10 +64,10 @@ const EmptyChatMessageInput = () => {
           className="px-2 bg-transparent placeholder:text-[15px] placeholder:text-black/50 dark:placeholder:text-white/50 text-sm text-black dark:text-white resize-none focus:outline-none w-full max-h-24 lg:max-h-36 xl:max-h-48"
           placeholder="Ask anything..."
         />
-        <div className="flex flex-row items-center justify-between mt-4">
-          <Optimization />
+        <div className="flex flex-row items-center justify-end mt-4">
           <div className="flex flex-row items-center space-x-2">
             <div className="flex flex-row items-center space-x-1">
+              <AdvancedSearchConfig />
               <Sources />
               <ModelSelector />
               <Attach />

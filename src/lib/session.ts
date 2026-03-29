@@ -8,20 +8,26 @@ if (process.env.NODE_ENV !== 'production') {
   (global as any)._sessionManagerSessions = sessions;
 }
 
+const ACTIVE_TTL_MS = 30 * 60 * 1000;
+const ENDED_TTL_MS = 5 * 60 * 1000;
+
 class SessionManager {
   private static sessions: Map<string, SessionManager> = sessions;
   readonly id: string;
   private blocks = new Map<string, Block>();
   private events: { event: string; data: any }[] = [];
   private emitter = new EventEmitter();
-  private TTL_MS = 30 * 60 * 1000;
+  private cleanupTimer: ReturnType<typeof setTimeout>;
+  private ended = false;
+  private endedAt = 0;
+  private selectionResolver: ((selected: string[]) => void) | null = null;
 
   constructor(id?: string) {
     this.id = id ?? crypto.randomUUID();
 
-    setTimeout(() => {
+    this.cleanupTimer = setTimeout(() => {
       SessionManager.sessions.delete(this.id);
-    }, this.TTL_MS);
+    }, ACTIVE_TTL_MS);
   }
 
   static getSession(id: string): SessionManager | undefined {
@@ -43,8 +49,27 @@ class SessionManager {
   }
 
   emit(event: string, data: any) {
-    this.emitter.emit(event, data);
+    // Node EventEmitter throws on 'error' events with no listener.
+    // Guard against this so late errors (after SSE disconnect) don't crash the process.
+    if (event === 'error' && this.emitter.listenerCount('error') === 0) {
+      console.error('SessionManager: undelivered error event', data);
+    } else {
+      this.emitter.emit(event, data);
+    }
     this.events.push({ event, data });
+    if (this.events.length > 100) {
+      this.events = this.events.slice(-100);
+    }
+
+    // Reschedule cleanup to shorter TTL when session ends
+    if (!this.ended && (event === 'end' || event === 'error')) {
+      this.ended = true;
+      this.endedAt = Date.now();
+      clearTimeout(this.cleanupTimer);
+      this.cleanupTimer = setTimeout(() => {
+        SessionManager.sessions.delete(this.id);
+      }, ENDED_TTL_MS);
+    }
   }
 
   emitBlock(block: Block) {
@@ -77,6 +102,23 @@ class SessionManager {
     return Array.from(this.blocks.values());
   }
 
+  waitForSelection(): Promise<string[]> {
+    return new Promise<string[]>((resolve) => {
+      this.selectionResolver = resolve;
+    });
+  }
+
+  submitSelection(selectedQuestions: string[]): boolean {
+    if (!this.selectionResolver) return false;
+    this.selectionResolver(selectedQuestions);
+    this.selectionResolver = null;
+    return true;
+  }
+
+  hasActiveSelection(): boolean {
+    return this.selectionResolver !== null;
+  }
+
   subscribe(listener: (event: string, data: any) => void): () => void {
     const currentEventsLength = this.events.length;
 
@@ -101,5 +143,15 @@ class SessionManager {
     };
   }
 }
+
+// Periodic sweep to clean up ended sessions that survived their timer
+setInterval(() => {
+  const now = Date.now();
+  for (const [id, session] of SessionManager['sessions']) {
+    if (session['ended'] && now - session['endedAt'] > ENDED_TTL_MS) {
+      SessionManager['sessions'].delete(id);
+    }
+  }
+}, ENDED_TTL_MS);
 
 export default SessionManager;

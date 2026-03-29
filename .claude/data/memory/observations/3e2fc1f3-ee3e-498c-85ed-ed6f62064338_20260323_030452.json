@@ -1,0 +1,10 @@
+{
+  "session_id": "3e2fc1f3-ee3e-498c-85ed-ed6f62064338",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "request",
+    "prompt": "would it be better to have these in their own ui sections? just like the model selector? would that be cleaner? if so, come up with a plan for it. use impeccable",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-23T03:04:52.868437"
+}

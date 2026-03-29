@@ -3,9 +3,8 @@ import BaseEmbedding from "../models/base/embedding"
 import crypto from "crypto"
 import fs from 'fs';
 import { splitText } from "../utils/splitText";
-import { PDFParse } from 'pdf-parse';
-import { CanvasFactory } from 'pdf-parse/worker';
-import officeParser from 'officeparser'
+// PDF and Office parsers are dynamically imported where used to avoid
+// loading these heavy modules on every request.
 
 const supportedMimeTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'] as const
 
@@ -33,6 +32,7 @@ class UploadManager {
     private embeddingModel: BaseEmbedding<any>;
     static uploadsDir = path.join(process.cwd(), 'data', 'uploads');
     static uploadedFilesRecordPath = path.join(this.uploadsDir, 'uploaded_files.json');
+    private static cachedFiles: RecordedFile[] | null = null;
 
     constructor(private params: UploadManagerParams) {
         this.embeddingModel = params.embeddingModel;
@@ -51,16 +51,21 @@ class UploadManager {
     }
 
     private static getRecordedFiles(): RecordedFile[] {
-        const data = fs.readFileSync(UploadManager.uploadedFilesRecordPath, 'utf-8');
-        return JSON.parse(data).files;
+        if (UploadManager.cachedFiles) return UploadManager.cachedFiles;
+        try {
+            const data = fs.readFileSync(UploadManager.uploadedFilesRecordPath, 'utf-8');
+            UploadManager.cachedFiles = JSON.parse(data).files;
+        } catch {
+            UploadManager.cachedFiles = [];
+        }
+        return UploadManager.cachedFiles!;
     }
 
     private static addNewRecordedFile(fileRecord: RecordedFile) {
-        const currentData = this.getRecordedFiles()
-
-        currentData.push(fileRecord);
-
-        fs.writeFileSync(UploadManager.uploadedFilesRecordPath, JSON.stringify({ files: currentData }, null, 2));
+        const files = this.getRecordedFiles();
+        files.push(fileRecord);
+        UploadManager.cachedFiles = files;
+        fs.writeFileSync(UploadManager.uploadedFilesRecordPath, JSON.stringify({ files }, null, 2));
     }
 
     static getFile(fileId: string): RecordedFile | null {
@@ -115,6 +120,8 @@ class UploadManager {
             case 'application/pdf':
                 const pdfBuffer = fs.readFileSync(filePath);
 
+                const { PDFParse } = await import('pdf-parse');
+                const { CanvasFactory } = await import('pdf-parse/worker');
                 const parser = new PDFParse({
                     data: pdfBuffer,
                     CanvasFactory
@@ -146,6 +153,7 @@ class UploadManager {
             case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
                 const docBuffer = fs.readFileSync(filePath);
 
+                const officeParser = (await import('officeparser')).default;
                 const docText = await officeParser.parseOfficeAsync(docBuffer)
 
                 const docSplittedText = splitText(docText, 512, 128)

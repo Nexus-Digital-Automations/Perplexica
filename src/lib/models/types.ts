@@ -64,6 +64,7 @@ type GenerateTextOutput = {
 type StreamTextOutput = {
   contentChunk: string;
   toolCallChunk: ToolCall[];
+  reasoningContentChunk?: string;
   additionalInfo?: Record<string, any>;
   done?: boolean;
 };

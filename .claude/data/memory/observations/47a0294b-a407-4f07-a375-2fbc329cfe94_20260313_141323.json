@@ -1,0 +1,10 @@
+{
+  "session_id": "47a0294b-a407-4f07-a375-2fbc329cfe94",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "request",
+    "prompt": "cd \"/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica\" && yarn dev:hybrid\n\nis this the correct command?",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-13T14:13:23.201239"
+}

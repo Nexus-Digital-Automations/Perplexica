@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "1138adea-e43a-4900-ac1e-92e85b8ba93e",
+    "data": {
+      "session_id": "1138adea-e43a-4900-ac1e-92e85b8ba93e",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/1138adea-e43a-4900-ac1e-92e85b8ba93e.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "## Validation Report\n\n### Source Code (AttachSmall.tsx)\n- **TypeScript:** \u2705 `tsc --noEmit` \u2014 no errors\n- **ESLint:** \u2705 \u2014 no warnings or errors\n- **Committed:** \u2705 `69e3bc5` (previous session)\n- **Playwright test:** \u23f3 Requires Claude Code restart \u2014 the whole point of this session was fixing the MCP config so the next restart works\n\n### Playwright MCP Config Fix\n- **Root cause found:** Plugin reads from cache at `~/.claude/plugins/cache/claude-plugins-official/playwright/b36fd4b75301/.mcp.json`, not from the `marketplaces/` source file we edited last session\n- **Fix applied:** Added `--headless --isolated` to the active cache file\n- **To verify:** Restart Claude Code \u2192 Playwright will use headless mode \u2192 no more Chrome single-instance conflict"
+    },
+    "persisted_at": "2026-03-12T14:44:53.404880"
+  },
+  "stored_at": "2026-03-12T14:44:53.405538"
+}

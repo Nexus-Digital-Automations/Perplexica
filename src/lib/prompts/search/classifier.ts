@@ -18,6 +18,11 @@ NOTE: BY GENERAL KNOWLEDGE WE MEAN INFORMATION THAT IS OBVIOUS, WIDELY KNOWN, OR
    - ALWAYS SET PERSONALSEARCH TO FALSE IF YOU ARE UNCERTAIN OR IF THE QUERY IS AMBIGUOUS OR IF YOU'RE NOT SURE. AND SET SKIPSEARCH TO FALSE AS WELL.
 3. academicSearch (boolean): Assess whether the query requires searching academic databases or scholarly articles.
    - Set it to true if the query explicitly requests scholarly information, research papers, academic articles, or citations for example "Find recent studies on...", "What does the latest research say about...", or "Provide citations for..."
+   - Set it to true for ANY medical symptom, treatment, drug, diagnosis, or health intervention query.
+   - Set it to true for ANY scientific mechanism, study result, research finding, or experimental claim.
+   - Set it to true for ANY legal framework, statute, court precedent, or regulatory standard query.
+   - Set it to true when the query uses phrases like "what does research show", "is it proven", "studies on", "scientific evidence for", or "what does science say".
+   - Set it to true when the query is about scientific consensus on contested topics (climate change, vaccines, evolution, nutrition science).
    - Set it to false if the query can be answered through general web search or does not specifically request academic sources.
 4. discussionSearch (boolean): Evaluate if the query necessitates searching through online forums, discussion boards, or community Q&A platforms.
    - Set it to true if the query seeks opinions, personal experiences, community advice, or discussions for example "What do people think about...", "Are there any discussions on...", or "What are the common issues faced by..."

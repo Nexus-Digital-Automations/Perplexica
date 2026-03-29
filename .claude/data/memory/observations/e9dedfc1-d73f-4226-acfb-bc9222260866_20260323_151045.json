@@ -1,0 +1,10 @@
+{
+  "session_id": "e9dedfc1-d73f-4226-acfb-bc9222260866",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "request",
+    "prompt": "<task-notification>\n<task-id>bru8jx8mu</task-id>\n<tool-use-id>toolu_01DSGcuP8yPZ48U4f4GN9Fys</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/3e2fc1f3-ee3e-498c-85ed-ed6f62064338/tasks/bru8jx8mu.output</output-file>\n<status>completed</status>\n<summary>Background command \"Restart app and pipe startup logs to check-app-starts\" completed (exit code 0)</summary>\n</task-notification>\nRead the output file to retrieve the result: /private/",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-23T15:10:45.945109"
+}

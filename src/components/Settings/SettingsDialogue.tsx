@@ -4,13 +4,12 @@ import {
   BrainCog,
   ChevronLeft,
   ExternalLink,
-  Rss,
   Search,
   Sliders,
   ToggleRight,
 } from 'lucide-react';
 import Preferences from './Sections/Preferences';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import Loader from '../ui/Loader';
@@ -19,7 +18,6 @@ import Models from './Sections/Models/Section';
 import SearchSection from './Sections/Search';
 import Select from '@/components/ui/Select';
 import Personalization from './Sections/Personalization';
-import FeedsSettings from './Sections/Feeds';
 
 const sections = [
   {
@@ -53,14 +51,6 @@ const sections = [
     icon: Search,
     component: SearchSection,
     dataAdd: 'search',
-  },
-  {
-    key: 'feeds',
-    name: 'Feeds',
-    description: 'Manage RSS feed subscriptions and scoring.',
-    icon: Rss,
-    component: FeedsSettings,
-    dataAdd: 'feeds',
   },
 ];
 
@@ -116,114 +106,157 @@ const SettingsDialogue = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.1 }}
-        className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-black/30 backdrop-blur-sm h-screen"
+        transition={{ duration: 0.15 }}
+        className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-black/40 backdrop-blur-md h-screen"
       >
-        <DialogPanel className="space-y-4 border border-light-200 dark:border-dark-200 bg-light-primary dark:bg-dark-primary backdrop-blur-lg rounded-xl h-[calc(100vh-2%)] w-[calc(100vw-2%)] md:h-[calc(100vh-7%)] md:w-[calc(100vw-7%)] lg:h-[calc(100vh-20%)] lg:w-[calc(100vw-30%)] overflow-hidden flex flex-col">
-          {isLoading ? (
-            <div className="flex items-center justify-center h-full w-full">
-              <Loader />
-            </div>
-          ) : (
-            <div className="flex flex-1 inset-0 h-full overflow-hidden">
-              <div className="hidden lg:flex flex-col justify-between w-[240px] border-r border-white-200 dark:border-dark-200 h-full px-3 pt-3 overflow-y-auto">
-                <div className="flex flex-col">
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="group flex flex-row items-center hover:bg-light-200 hover:dark:bg-dark-200 p-2 rounded-lg"
-                  >
-                    <ChevronLeft
-                      size={18}
-                      className="text-black/50 dark:text-white/50 group-hover:text-black/70 group-hover:dark:text-white/70"
-                    />
-                    <p className="text-black/50 dark:text-white/50 group-hover:text-black/70 group-hover:dark:text-white/70 text-[14px]">
-                      Back
-                    </p>
-                  </button>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97, y: 8 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.97, y: 8 }}
+          transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+          className="w-full h-full flex items-center justify-center"
+        >
+          <DialogPanel className="border border-light-200/80 dark:border-dark-200/60 bg-light-primary dark:bg-dark-primary rounded-2xl h-[95vh] w-[95vw] md:h-[90vh] md:w-[90vw] lg:h-[85vh] lg:w-[min(72vw,900px)] overflow-hidden flex flex-col shadow-2xl shadow-black/10 dark:shadow-black/40">
+            {isLoading ? (
+              <div className="flex items-center justify-center h-full w-full">
+                <Loader />
+              </div>
+            ) : (
+              <div className="flex flex-1 inset-0 h-full overflow-hidden">
+                {/* Desktop sidebar */}
+                <div className="hidden lg:flex flex-col justify-between w-[260px] border-r border-light-200/70 dark:border-dark-200/50 h-full bg-light-secondary/40 dark:bg-dark-secondary/30 overflow-y-auto">
+                  <div className="flex flex-col px-4 pt-5">
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="group flex flex-row items-center gap-1.5 px-2 py-2 rounded-lg hover:bg-light-200/60 hover:dark:bg-dark-200/40 transition-all duration-200 mb-1"
+                    >
+                      <ChevronLeft
+                        size={16}
+                        className="text-black/40 dark:text-white/40 group-hover:text-black/60 group-hover:dark:text-white/60 transition-colors"
+                      />
+                      <span className="text-black/40 dark:text-white/40 group-hover:text-black/60 group-hover:dark:text-white/60 text-[13px] transition-colors">
+                        Back
+                      </span>
+                    </button>
 
-                  <div className="flex flex-col items-start space-y-1 mt-8">
-                    {sections.map((section) => (
-                      <button
-                        key={section.dataAdd}
-                        className={cn(
-                          `flex flex-row items-center space-x-2 px-2 py-1.5 rounded-lg w-full text-sm hover:bg-light-200 hover:dark:bg-dark-200 transition duration-200 active:scale-95`,
-                          activeSection === section.key
-                            ? 'bg-light-200 dark:bg-dark-200 text-black/90 dark:text-white/90'
-                            : ' text-black/70 dark:text-white/70',
-                        )}
-                        onClick={() => setActiveSection(section.key)}
-                      >
-                        <section.icon size={17} />
-                        <p>{section.name}</p>
-                      </button>
-                    ))}
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-black/30 dark:text-white/25 px-2 mt-6 mb-3">
+                      Settings
+                    </p>
+
+                    <div className="flex flex-col gap-0.5">
+                      {sections.map((section) => {
+                        const isActive = activeSection === section.key;
+                        return (
+                          <button
+                            key={section.dataAdd}
+                            className={cn(
+                              'group relative flex flex-row items-center gap-3 px-3 py-2.5 rounded-xl w-full text-[13px] transition-all duration-200',
+                              isActive
+                                ? 'bg-light-200/80 dark:bg-dark-200/60 text-black dark:text-white shadow-sm shadow-black/[0.03] dark:shadow-black/10'
+                                : 'text-black/55 dark:text-white/50 hover:text-black/80 hover:dark:text-white/70 hover:bg-light-200/40 hover:dark:bg-dark-200/30',
+                            )}
+                            onClick={() => setActiveSection(section.key)}
+                          >
+                            <div
+                              className={cn(
+                                'flex items-center justify-center w-7 h-7 rounded-lg transition-all duration-200',
+                                isActive
+                                  ? 'bg-sky-500/10 dark:bg-sky-400/10 text-sky-600 dark:text-sky-400'
+                                  : 'text-black/40 dark:text-white/35 group-hover:text-black/60 group-hover:dark:text-white/50',
+                              )}
+                            >
+                              <section.icon size={15} strokeWidth={isActive ? 2 : 1.5} />
+                            </div>
+                            <span className={cn(isActive && 'font-medium')}>
+                              {section.name}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1.5 py-5 px-6 border-t border-light-200/50 dark:border-dark-200/30">
+                    <p className="text-[11px] text-black/35 dark:text-white/30 tabular-nums">
+                      v{process.env.NEXT_PUBLIC_VERSION}
+                    </p>
+                    <a
+                      href="https://github.com/itzcrazykns/vane"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] text-black/35 dark:text-white/30 flex flex-row gap-1 items-center transition duration-200 hover:text-black/60 hover:dark:text-white/50"
+                    >
+                      <span>GitHub</span>
+                      <ExternalLink size={10} />
+                    </a>
                   </div>
                 </div>
-                <div className="flex flex-col space-y-1 py-[18px] px-2">
-                  <p className="text-xs text-black/70 dark:text-white/70">
-                    Version: {process.env.NEXT_PUBLIC_VERSION}
-                  </p>
-                  <a
-                    href="https://github.com/itzcrazykns/vane"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-black/70 dark:text-white/70 flex flex-row space-x-1 items-center transition duration-200 hover:text-black/90 hover:dark:text-white/90"
-                  >
-                    <span>GitHub</span>
-                    <ExternalLink size={12} />
-                  </a>
-                </div>
-              </div>
-              <div className="w-full flex flex-col overflow-hidden">
-                <div className="flex flex-row lg:hidden w-full justify-between px-[20px] my-4 flex-shrink-0">
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="group flex flex-row items-center hover:bg-light-200 hover:dark:bg-dark-200 rounded-lg mr-[40%]"
-                  >
-                    <ArrowLeft
-                      size={18}
-                      className="text-black/50 dark:text-white/50 group-hover:text-black/70 group-hover:dark:text-white/70"
+
+                {/* Content area */}
+                <div className="w-full flex flex-col overflow-hidden">
+                  {/* Mobile header */}
+                  <div className="flex flex-row lg:hidden w-full justify-between items-center px-5 py-4 flex-shrink-0 border-b border-light-200/60 dark:border-dark-200/40">
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="group flex items-center justify-center w-8 h-8 rounded-lg hover:bg-light-200/60 hover:dark:bg-dark-200/40 transition-colors"
+                    >
+                      <ArrowLeft
+                        size={18}
+                        className="text-black/50 dark:text-white/50 group-hover:text-black/70 group-hover:dark:text-white/70"
+                      />
+                    </button>
+                    <Select
+                      options={sections.map((section) => {
+                        return {
+                          value: section.key,
+                          key: section.key,
+                          label: section.name,
+                        };
+                      })}
+                      value={activeSection}
+                      onChange={(e) => {
+                        setActiveSection(e.target.value);
+                      }}
+                      className="!text-xs lg:!text-sm"
                     />
-                  </button>
-                  <Select
-                    options={sections.map((section) => {
-                      return {
-                        value: section.key,
-                        key: section.key,
-                        label: section.name,
-                      };
-                    })}
-                    value={activeSection}
-                    onChange={(e) => {
-                      setActiveSection(e.target.value);
-                    }}
-                    className="!text-xs lg:!text-sm"
-                  />
-                </div>
-                {selectedSection.component && (
-                  <div className="flex flex-1 flex-col overflow-hidden">
-                    <div className="border-b border-light-200/60 px-6 pb-6 lg:pt-6 dark:border-dark-200/60 flex-shrink-0">
-                      <div className="flex flex-col">
-                        <h4 className="font-medium text-black dark:text-white text-sm lg:text-sm">
-                          {selectedSection.name}
-                        </h4>
-                        <p className="text-[11px] lg:text-xs text-black/50 dark:text-white/50">
-                          {selectedSection.description}
-                        </p>
+                  </div>
+
+                  {selectedSection.component && (
+                    <div className="flex flex-1 flex-col overflow-hidden">
+                      {/* Section header */}
+                      <div className="px-8 pt-6 pb-5 flex-shrink-0 border-b border-light-200/40 dark:border-dark-200/30">
+                        <AnimatePresence mode="wait">
+                          <motion.div
+                            key={selectedSection.key}
+                            initial={{ opacity: 0, y: 4 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -4 }}
+                            transition={{ duration: 0.15 }}
+                            className="flex flex-col gap-1"
+                          >
+                            <h2 className="font-medium text-black dark:text-white text-sm tracking-tight">
+                              {selectedSection.name}
+                            </h2>
+                            <p className="text-[11px] lg:text-xs text-black/45 dark:text-white/40">
+                              {selectedSection.description}
+                            </p>
+                          </motion.div>
+                        </AnimatePresence>
+                      </div>
+
+                      {/* Section content */}
+                      <div className="flex-1 overflow-y-auto">
+                        <selectedSection.component
+                          fields={config.fields[selectedSection.dataAdd]}
+                          values={config.values[selectedSection.dataAdd]}
+                        />
                       </div>
                     </div>
-                    <div className="flex-1 overflow-y-auto">
-                      <selectedSection.component
-                        fields={config.fields[selectedSection.dataAdd]}
-                        values={config.values[selectedSection.dataAdd]}
-                      />
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
-          )}
-        </DialogPanel>
+            )}
+          </DialogPanel>
+        </motion.div>
       </motion.div>
     </Dialog>
   );

@@ -2,16 +2,13 @@
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["@playwright/mcp@latest", "--headless", "--browser", "chromium"]
-    },
-    "perplexica-verification": {
-      "type": "stdio",
-      "command": "npx",
       "args": [
-        "tsx",
-        "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica/src/mcp-server/index.ts"
-      ],
-      "env": {}
+        "@playwright/mcp@latest",
+        "--headless",
+        "--isolated",
+        "--browser",
+        "chromium"
+      ]
     }
   }
 }

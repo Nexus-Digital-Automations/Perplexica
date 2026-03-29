@@ -1,7 +1,8 @@
-import { ActionOutput, ResearcherOutput, SearchAgentInput } from './types';
+import { ActionOutput, SearchAgentInput } from './types';
 import SessionManager from '@/lib/session';
 import { classify } from './classifier';
 import Researcher from './researcher';
+import QuestionGenerator from './question-generator';
 import { getWriterPrompt } from '@/lib/prompts/search/writer';
 import { WidgetExecutor } from './widgets';
 import db from '@/lib/db';
@@ -11,6 +12,21 @@ import { streamWithVerification } from '@/lib/verification/streamVerifier';
 import { resolvePipelineConfig, toVerificationConfig } from '@/lib/config/pipeline';
 import { searchSearxng } from '@/lib/searxng';
 import { calculateCost } from '@/lib/pricing/modelPricing';
+import { BudgetTracker } from '@/lib/pricing/budgetTracker';
+import { Chunk, QuestionCategory } from '@/lib/types';
+import { aggregateEvidence } from './aggregator';
+
+function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error(`${label} timed out after ${ms}ms`)), ms),
+    ),
+  ]);
+}
+
+const SELECTION_TIMEOUT_MS = 120_000; // 2 minutes
+const PER_QUESTION_TIMEOUT_MS = 90_000; // 90s per question — generous but prevents infinite hangs
 
 class SearchAgent {
   async searchAsync(session: SessionManager, input: SearchAgentInput) {
@@ -74,21 +90,58 @@ class SearchAgent {
         .execute();
     }
 
-    const resolved = resolvePipelineConfig(input.config.mode, input.config.overrides);
+    const resolved = resolvePipelineConfig(input.config.overrides);
+    const budgetTracker = new BudgetTracker(resolved.budgetUsd);
 
-    const [classification, prelimSearxng] = await Promise.all([
-      classify({
-        chatHistory: input.chatHistory,
-        enabledSources: input.config.sources,
-        query: input.followUp,
-        llm: input.config.llm,
-      }),
+    const questionGenerator = new QuestionGenerator();
+    const useInteractive =
+      resolved.numQuestions > 1 && resolved.interactiveQuestions;
+
+    // Generate questions: categorized if interactive, flat if not
+    const [classification, prelimSearxng, questionResult] = await Promise.all([
+      withTimeout(
+        classify({
+          chatHistory: input.chatHistory,
+          enabledSources: input.config.sources,
+          query: input.followUp,
+          llm: input.config.llm,
+        }),
+        20_000,
+        'classifier',
+      ),
       input.config.sources.includes('web')
         ? searchSearxng(input.followUp, {
             categories: ['general'],
             engines: ['google'],
           }).catch(() => ({ results: [], suggestions: [] as string[] }))
         : Promise.resolve({ results: [], suggestions: [] as string[] }),
+      resolved.numQuestions > 1
+        ? useInteractive
+          ? withTimeout(
+              questionGenerator.generateCategorized(
+                input.followUp,
+                resolved.numQuestions,
+                input.config.llm,
+                input.chatHistory,
+              ),
+              30_000,
+              'question-generator',
+            ).catch(
+              (): QuestionCategory[] => [
+                { category: 'General', questions: [input.followUp] },
+              ],
+            )
+          : withTimeout(
+              questionGenerator.generate(
+                input.followUp,
+                resolved.numQuestions,
+                input.config.llm,
+                input.chatHistory,
+              ),
+              30_000,
+              'question-generator',
+            ).catch(() => [input.followUp])
+        : Promise.resolve([input.followUp]),
     ]);
 
     session.emitBlock({
@@ -119,49 +172,166 @@ class SearchAgent {
       return widgetOutputs;
     });
 
-    let searchPromise: Promise<ResearcherOutput> | null = null;
+    let mergedSearchFindings: Chunk[] = [];
 
     if (!classification.classification.skipSearch) {
-      const prelimActionOutput: ActionOutput[] =
-        prelimSearxng.results.length > 0
-          ? [
-              {
-                type: 'search_results',
-                results: prelimSearxng.results.map((r) => ({
-                  content: r.content || r.title,
-                  metadata: { title: r.title, url: r.url },
-                })),
-              },
-            ]
-          : [];
+      const numQuestions = resolved.numQuestions;
 
-      const researcher = new Researcher();
-      searchPromise = researcher.research(session, {
-        chatHistory: input.chatHistory,
-        followUp: input.followUp,
-        classification: classification,
-        config: input.config,
-        maxIterations: resolved.maxIterations,
-        initialActionOutput: prelimActionOutput,
-      });
+      if (numQuestions === 1) {
+        // --- Single-question path ---
+        const prelimActionOutput: ActionOutput[] =
+          prelimSearxng.results.length > 0
+            ? [
+                {
+                  type: 'search_results',
+                  results: prelimSearxng.results.map((r) => ({
+                    content: r.content || r.title,
+                    metadata: { title: r.title, url: r.url },
+                  })),
+                },
+              ]
+            : [];
+
+        const researcher = new Researcher();
+        const result = await researcher.research(session, {
+          chatHistory: input.chatHistory,
+          followUp: input.followUp,
+          classification: classification,
+          config: input.config,
+          maxIterations: resolved.sourcesPerQuestion,
+          initialActionOutput: prelimActionOutput,
+          budgetTracker,
+        });
+        mergedSearchFindings = result.searchFindings;
+      } else {
+        // --- Multi-question path ---
+        let questions: string[];
+
+        if (useInteractive) {
+          // Interactive: emit QuestionsBlock and wait for user selection
+          const categories = questionResult as QuestionCategory[];
+          const questionsBlockId = crypto.randomUUID();
+
+          session.emitBlock({
+            id: questionsBlockId,
+            type: 'questions',
+            data: {
+              sessionId: session.id,
+              categories,
+              status: 'pending',
+            },
+          });
+
+          // Wait for user selection or auto-proceed on timeout
+          const allQuestions = categories.flatMap((c) => c.questions);
+
+          const selectedQuestions = await Promise.race([
+            session.waitForSelection(),
+            new Promise<string[]>((resolve) =>
+              setTimeout(() => resolve(allQuestions), SELECTION_TIMEOUT_MS),
+            ),
+          ]);
+
+          // Update block to confirmed
+          session.updateBlock(questionsBlockId, [
+            { op: 'replace', path: '/data/status', value: 'confirmed' },
+            {
+              op: 'add',
+              path: '/data/selectedQuestions',
+              value: selectedQuestions,
+            },
+          ]);
+
+          questions = selectedQuestions;
+        } else {
+          // Non-interactive: use all generated questions directly
+          questions = questionResult as string[];
+        }
+
+        const questionTotal = questions.length;
+
+        let completedCount = 0;
+
+        const runResearcher = async (
+          question: string,
+          questionIndex: number,
+        ): Promise<Chunk[]> => {
+          if (budgetTracker.hasExceeded()) return [];
+          const researcher = new Researcher();
+          const result = await withTimeout(
+            researcher.research(session, {
+              chatHistory: input.chatHistory,
+              followUp: question,
+              classification: classification,
+              config: input.config,
+              maxIterations: resolved.sourcesPerQuestion,
+              question,
+              questionIndex,
+              questionTotal,
+              budgetTracker,
+            }),
+            PER_QUESTION_TIMEOUT_MS,
+            `research Q${questionIndex}`,
+          ).catch((err) => {
+            console.warn(`Research Q${questionIndex} failed/timed out:`, err.message);
+            return { findings: [], searchFindings: [] as Chunk[] };
+          });
+
+          completedCount++;
+          session.emit('data', {
+            type: 'researchProgress',
+            questionsCompleted: completedCount,
+            questionTotal,
+          });
+
+          return result.searchFindings;
+        };
+
+        let allFindings: Chunk[];
+
+        if (resolved.questionsParallel) {
+          const results = await Promise.all(
+            questions.map((q, i) => runResearcher(q, i + 1)),
+          );
+          allFindings = results.flat();
+        } else {
+          allFindings = [];
+          for (let i = 0; i < questions.length; i++) {
+            if (budgetTracker.hasExceeded()) break;
+            const qFindings = await runResearcher(questions[i], i + 1);
+            allFindings.push(...qFindings);
+          }
+        }
+
+        // Deduplicate by URL across all questions
+        const seenUrls = new Map<string, number>();
+        const deduped: Chunk[] = [];
+        for (const result of allFindings) {
+          if (result.metadata.url && !seenUrls.has(result.metadata.url)) {
+            seenUrls.set(result.metadata.url, deduped.length);
+            deduped.push(result);
+          } else if (result.metadata.url && seenUrls.has(result.metadata.url)) {
+            const existingIndex = seenUrls.get(result.metadata.url)!;
+            if (deduped[existingIndex].content.length < 20_000) {
+              deduped[existingIndex].content += `\n\n${result.content}`;
+            }
+          } else {
+            deduped.push(result);
+          }
+        }
+        mergedSearchFindings = deduped;
+      }
     }
 
-    const [widgetOutputs, searchResults] = await Promise.all([
-      widgetPromise,
-      searchPromise,
-    ]);
+    const [widgetOutputs] = await Promise.all([widgetPromise]);
 
     session.emit('data', {
       type: 'researchComplete',
     });
 
-    const finalContext =
-      searchResults?.searchFindings
-        .map(
-          (f, index) =>
-            `<result index=${index + 1} title=${f.metadata.title}>${f.content}</result>`,
-        )
-        .join('\n') || '';
+    const finalContext = mergedSearchFindings.length > 0
+      ? aggregateEvidence(mergedSearchFindings)
+      : '';
 
     const widgetContext = widgetOutputs
       .map((o) => {
@@ -175,6 +345,7 @@ class SearchAgent {
       finalContextWithWidgets,
       input.config.systemInstructions,
       resolved.responseLength,
+      classification.classification.skipSearch,
     );
 
     const verificationConfig = toVerificationConfig(resolved);
@@ -195,7 +366,7 @@ class SearchAgent {
           },
         ],
       },
-      sources: searchResults?.searchFindings || [],
+      sources: mergedSearchFindings,
       config: verificationConfig,
       emitMode: 'blocks',
     });
@@ -203,11 +374,14 @@ class SearchAgent {
     const modelId = (input.config.llm as any).config?.model as string ?? '';
     const cost = calculateCost(writerResult.usage, modelId);
     if (cost !== null) {
+      budgetTracker.record(cost);
       session.emitBlock({
         id: crypto.randomUUID(),
         type: 'cost',
         costUsd: cost,
         modelId,
+        totalSpentUsd: budgetTracker.spent,
+        budgetUsd: resolved.budgetUsd,
       });
     }
 

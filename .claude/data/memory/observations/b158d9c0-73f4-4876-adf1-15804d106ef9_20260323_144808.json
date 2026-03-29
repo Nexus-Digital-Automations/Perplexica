@@ -1,0 +1,10 @@
+{
+  "session_id": "b158d9c0-73f4-4876-adf1-15804d106ef9",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "question",
+    "prompt": "what if we also required it to include the snippets from its sources as much as appropriate/possible?",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-23T14:48:08.406621"
+}

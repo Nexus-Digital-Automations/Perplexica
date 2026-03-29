@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "6ec0bab6-060d-4c0e-9f86-f564511eab2d",
+    "data": {
+      "session_id": "6ec0bab6-060d-4c0e-9f86-f564511eab2d",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/6ec0bab6-060d-4c0e-9f86-f564511eab2d.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "All checks passed. Build evidence: `tsc --noEmit`, exit code 0, 0 errors across 4,660 files checked (TypeScript Version 5.x)."
+    },
+    "persisted_at": "2026-03-13T19:49:53.604546"
+  },
+  "stored_at": "2026-03-13T19:49:53.604867"
+}

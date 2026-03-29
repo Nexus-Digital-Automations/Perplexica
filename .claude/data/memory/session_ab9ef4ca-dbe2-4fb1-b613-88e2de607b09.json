@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "ab9ef4ca-dbe2-4fb1-b613-88e2de607b09",
+    "data": {
+      "session_id": "ab9ef4ca-dbe2-4fb1-b613-88e2de607b09",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/ab9ef4ca-dbe2-4fb1-b613-88e2de607b09.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": false,
+      "last_assistant_message": "The progress bar is rendering correctly. The accessibility tree confirms:\n\n```\n\"All 5 questions researched\"    \"100%\"\n```\n\nThis sits between the \"Selected 5 of 5 questions\" summary and the Q1/5 dropdown, exactly as designed. It's just scrolled off in that screenshot. The feature is complete and working:\n\n**Summary of changes (5 files):**\n\n1. **`src/lib/agents/search/index.ts`** \u2014 Increased per-question timeout from 45s to 90s. Added `completedCount` counter and `researchProgress` event emission after each question completes. Removed the global research phase timeout (individual question timeouts are sufficient).\n\n2. **`src/lib/agents/search/researcher/actions/enrichResults.ts`** \u2014 Increased enrichment timeout from 15s to 20s. Kept concurrency limit (5) and result cap (10).\n\n3. **`src/app/api/chat/route.ts`** \u2014 Added `researchProgress` event forwarding in the SSE subscriber.\n\n4. **`src/lib/hooks/useChat.tsx`** \u2014 Added `researchProgress` state, handler for the new SSE event, reset on new message, and exposed through context.\n\n5. **`src/components/ActivityFeed.tsx`** \u2014 Added progress bar between QuestionSelector and per-question dropdowns. Shows blue \"Researching X of Y questions... N%\" during research, green \"All Y questions researched 100%\" when complete. Thin `h-1.5` pill bar with smooth 500ms transition."
+    },
+    "persisted_at": "2026-03-26T04:50:35.038784"
+  },
+  "stored_at": "2026-03-26T04:50:35.039065"
+}

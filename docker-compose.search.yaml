@@ -1,0 +1,12 @@
+name: perplexica-search
+
+services:
+  searxng:
+    image: searxng/searxng:latest
+    ports:
+      - '4000:8080'
+    volumes:
+      - ./searxng:/etc/searxng:ro
+    environment:
+      - SEARXNG_SECRET=devsecret
+    restart: unless-stopped

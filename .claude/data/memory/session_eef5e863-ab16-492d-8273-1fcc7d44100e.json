@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "eef5e863-ab16-492d-8273-1fcc7d44100e",
+    "data": {
+      "session_id": "eef5e863-ab16-492d-8273-1fcc7d44100e",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/eef5e863-ab16-492d-8273-1fcc7d44100e.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": false,
+      "last_assistant_message": "Waiting for your direction \u2014 let me know if you'd like any changes to the plan before we start implementing."
+    },
+    "persisted_at": "2026-03-11T23:53:29.661019"
+  },
+  "stored_at": "2026-03-11T23:53:29.661190"
+}

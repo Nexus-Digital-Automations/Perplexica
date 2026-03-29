@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "2ef7dacd-82cb-469c-9096-e7b6efe68207",
+    "data": {
+      "session_id": "2ef7dacd-82cb-469c-9096-e7b6efe68207",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/2ef7dacd-82cb-469c-9096-e7b6efe68207.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "plan",
+      "hook_event_name": "Stop",
+      "stop_hook_active": false,
+      "last_assistant_message": "Done. Here's what changed across 4 files:\n\n**`pipeline.ts`** \u2014 replaced `maxIterations` + `questionsIterations` with `sourcesPerQuestion` (defaults: speed=2, balanced=3, quality=5)\n\n**`search/index.ts`** + **`search/api.ts`** \u2014 both paths now pass `resolved.sourcesPerQuestion` as `maxIterations` to the researcher\n\n**`AdvancedSearchConfig.tsx`** \u2014 the Research Questions section now shows:\n1. Questions to Research\n2. Sources per Question (range 1\u201325)\n3. Parallel Research toggle\n\nTwo confusing sliders \u2192 one clear one. `tsc --noEmit` exits clean."
+    },
+    "persisted_at": "2026-03-15T14:26:56.398282"
+  },
+  "stored_at": "2026-03-15T14:26:56.398401"
+}

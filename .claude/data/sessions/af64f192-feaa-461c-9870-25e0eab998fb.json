@@ -1,0 +1,6 @@
+{
+  "session_id": "af64f192-feaa-461c-9870-25e0eab998fb",
+  "prompts": [
+    "http://searxng:8080\n\nthe searxng url isn't working\n\nit started up via @scripts/dev.sh \n\nplease fix this for good"
+  ]
+}

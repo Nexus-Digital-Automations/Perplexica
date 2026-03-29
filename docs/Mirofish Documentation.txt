@@ -1,0 +1,7216 @@
+DeepWiki
+Index your code with
+Devin
+Share
+Which repo would you like to understand?
+Add repo
+microsoft/vscode
+
+Visual Studio Code
+
+182.3k
+huggingface/transformers
+
+🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training.
+
+157.3k
+microsoft/playwright
+
+Playwright is a framework for Web Testing and Automation. It allows testing Chromium, Firefox and WebKit with a single API.
+
+83.5k
+opendatalab/MinerU
+
+Transforms complex documents like PDFs into LLM-ready markdown/JSON for your Agentic workflows.
+
+55.4k
+karpathy/nanochat
+
+The best ChatGPT that $100 can buy.
+
+44.5k
+celery/celery
+Tencent/ncnn
+
+ncnn is a high-performance neural network inference framework optimized for the mobile platform
+
+22.8k
+eosphoros-ai/DB-GPT
+
+AI Native Data App Development framework with AWEL(Agentic Workflow Expression Language) and Agents
+
+18.2k
+linshenkx/prompt-optimizer
+
+一款提示词优化器，助力于编写高质量的提示词
+
+23.0k
+nextapps-de/flexsearch
+
+Next-generation full-text search library for Browser and Node.js
+
+13.6k
+agent0ai/agent-zero
+
+Agent Zero AI framework
+
+15.8k
+hackjutsu/Lepton
+
+💻 Democratizing Snippet Management (macOS/Win/Linux)
+
+10.3k
+langchain-ai/langchain
+
+The agent engineering platform
+
+128.2k
+openai/openai-python
+
+The official Python library for the OpenAI API
+
+30.1k
+anthropics/anthropic-sdk-python
+2.9k
+redis/redis
+infiniflow/ragflow
+
+RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs
+
+74.2k
+colinhacks/zod
+
+TypeScript-first schema validation with static type inference
+
+42.0k
+mermaid-js/mermaid
+
+Generation of diagrams like flowcharts or sequence diagrams from text in a similar manner as markdown
+
+86.4k
+codecrafters-io/build-your-own-x
+
+Master programming by recreating your favorite technologies from scratch.
+
+472.0k
+freeCodeCamp/freeCodeCamp
+
+freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.
+
+437.7k
+public-apis/public-apis
+
+A collective list of free APIs
+
+403.9k
+EbookFoundation/free-programming-books
+
+:books: Freely available programming books
+
+383.6k
+kamranahmedse/developer-roadmap
+
+Interactive roadmaps, guides and other educational content to help developers grow in their careers.
+
+350.1k
+jwasham/coding-interview-university
+
+A complete computer science study plan to become a software engineer.
+
+337.6k
+donnemartin/system-design-primer
+
+Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.
+
+337.2k
+996icu/996.ICU
+
+Repo for counting stars and contributing. Press F to pay respect to glorious developers.
+
+275.6k
+practical-tutorials/project-based-learning
+
+Curated list of project-based tutorials
+
+260.0k
+openclaw/openclaw
+
+Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
+
+258.8k
+facebook/react
+
+The library for web and native user interfaces.
+
+243.6k
+torvalds/linux
+
+Linux kernel source tree
+
+220.8k
+TheAlgorithms/Python
+
+All Algorithms implemented in Python
+
+218.3k
+vuejs/vue
+
+This is the repo for Vue 2. For Vue 3, go to https://github.com/vuejs/core
+
+209.9k
+trimstray/the-book-of-secret-knowledge
+
+A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools and more.
+
+208.6k
+ossu/computer-science
+
+🎓 Path to a free self-taught education in Computer Science!
+
+202.1k
+trekhleb/javascript-algorithms
+
+📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings
+
+195.7k
+tensorflow/tensorflow
+
+An Open Source Machine Learning Framework for Everyone
+
+194.0k
+getify/You-Dont-Know-JS
+
+A book series (2 published editions) on the JS language.
+
+184.5k
+CyC2018/CS-Notes
+
+:books: 技术面试必备基础知识、Leetcode、计算机操作系统、计算机网络、系统设计
+
+183.8k
+Significant-Gravitas/AutoGPT
+
+AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.
+
+182.2k
+jackfrued/Python-100-Days
+
+Python - 100天从新手到大师
+
+179.2k
+n8n-io/n8n
+
+Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.
+
+177.5k
+flutter/flutter
+
+Flutter makes it easy and fast to build beautiful apps for mobile and beyond
+
+175.4k
+twbs/bootstrap
+
+The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web.
+
+174.0k
+github/gitignore
+
+A collection of useful .gitignore templates
+
+172.8k
+massgravel/Microsoft-Activation-Scripts
+
+Open-source Windows and Office activator featuring HWID, Ohook, TSforge, and Online KMS activation methods, along with advanced troubleshooting.
+
+167.7k
+ollama/ollama
+
+Get up and running with Kimi-K2.5, GLM-5, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.
+
+164.0k
+AUTOMATIC1111/stable-diffusion-webui
+
+Stable Diffusion web UI
+
+161.5k
+jlevy/the-art-of-command-line
+
+Master the command line, in one page
+
+160.0k
+Snailclimb/JavaGuide
+
+Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发与系统设计。准备后端技术面试，首选 JavaGuide！
+
+154.0k
+DigitalPlatDev/FreeDomain
+
+DigitalPlat FreeDomain: Free Domain For Everyone
+
+150.6k
+yt-dlp/yt-dlp
+
+A feature-rich command-line audio/video downloader
+
+149.5k
+airbnb/javascript
+
+JavaScript Style Guide
+
+148.1k
+langflow-ai/langflow
+
+Langflow is a powerful tool for building and deploying AI-powered agents and workflows.
+
+145.2k
+521xueweihan/HelloGitHub
+
+:octocat: 分享 GitHub 上有趣、入门级的开源项目。Share interesting, entry-level open source projects on GitHub.
+
+144.7k
+ytdl-org/youtube-dl
+
+Command-line program to download videos from YouTube.com and other video sites
+
+139.8k
+vercel/next.js
+
+The React Framework
+
+138.1k
+yangshun/tech-interview-handbook
+
+Curated coding interview preparation materials for busy software engineers
+
+138.0k
+Genymobile/scrcpy
+
+Display and control your Android device
+
+136.5k
+labuladong/fucking-algorithm
+
+Crack LeetCode, not only how, but also why.
+
+132.9k
+golang/go
+
+The Go programming language
+
+132.8k
+langgenius/dify
+
+Production-ready platform for agentic workflow development.
+
+131.2k
+microsoft/PowerToys
+
+Microsoft PowerToys is a collection of utilities that supercharge productivity and customization on Windows
+
+130.2k
+x1xhlol/system-prompts-and-models-of-ai-tools
+
+FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, V...
+
+127.8k
+Chalarangelo/30-seconds-of-code
+
+Coding articles to level up your development skills
+
+126.9k
+open-webui/open-webui
+
+User-friendly AI Interface (Supports Ollama, OpenAI API, ...)
+
+125.7k
+facebook/react-native
+
+A framework for building native applications using React
+
+125.5k
+krahets/hello-algo
+
+《Hello 算法》：动画图解、一键运行的数据结构与算法教程。支持简中、繁中、English、日本語，提供 Python, Java, C++, C, C#, JS, Go, Swift, Rust, Ruby, Kotlin, TS, Dart 等代码实现
+
+122.6k
+kubernetes/kubernetes
+
+Production-Grade Container Scheduling and Management
+
+120.9k
+electron/electron
+
+:electron: Build cross-platform desktop apps with JavaScript, HTML, and CSS
+
+120.3k
+ripienaar/free-for-dev
+
+A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev
+
+118.5k
+excalidraw/excalidraw
+
+Virtual whiteboard for sketching hand-drawn like diagrams
+
+117.9k
+justjavac/free-programming-books-zh_CN
+
+:books: 免费的计算机编程类中文书籍，欢迎投稿
+
+116.4k
+nodejs/node
+
+Node.js JavaScript runtime ✨🐢🚀✨
+
+116.0k
+d3/d3
+
+Bring data to life with SVG, Canvas and HTML. :bar_chart::chart_with_upwards_trend::tada:
+
+112.5k
+iptv-org/iptv
+
+Collection of publicly available IPTV channels from all over the world
+
+112.4k
+rust-lang/rust
+
+Empowering everyone to build reliable and efficient software.
+
+110.8k
+rustdesk/rustdesk
+
+An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.
+
+108.6k
+axios/axios
+
+Promise based HTTP client for the browser and node.js
+
+108.6k
+microsoft/TypeScript
+
+TypeScript is a superset of JavaScript that compiles to clean JavaScript output.
+
+108.0k
+shadcn-ui/ui
+
+A set of beautifully-designed, accessible components and a code distribution platform. Works with your favorite frameworks. Open Source. Open Code.
+
+107.7k
+microsoft/generative-ai-for-beginners
+
+21 Lessons, Get Started Building with Generative AI
+
+107.5k
+godotengine/godot
+
+Godot Engine – Multi-platform 2D and 3D game engine
+
+107.3k
+denoland/deno
+
+A modern runtime for JavaScript and TypeScript.
+
+106.3k
+goldbergyoni/nodebestpractices
+
+:white_check_mark: The Node.js best practices list (July 2024)
+
+105.1k
+fatedier/frp
+
+A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet.
+
+104.9k
+Comfy-Org/ComfyUI
+
+The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.
+
+104.8k
+facebook/create-react-app
+
+Set up a modern web app by running one command.
+
+103.8k
+papers-we-love/papers-we-love
+
+Papers from the computer science community to read and discuss.
+
+103.8k
+tauri-apps/tauri
+
+Build smaller, faster, and more secure desktop and mobile applications with a web frontend.
+
+103.6k
+microsoft/terminal
+
+The new Windows Terminal and the original Windows console host, all in the same place!
+
+102.0k
+deepseek-ai/DeepSeek-V3
+101.9k
+clash-verge-rev/clash-verge-rev
+
+A modern GUI client based on Tauri, designed to run in Windows, macOS and Linux for tailored proxy experience
+
+100.3k
+angular/angular
+
+Deliver web apps with confidence 🚀
+
+100.0k
+supabase/supabase
+
+The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications.
+
+98.5k
+Anduin2017/HowToCook
+
+程序员在家做饭方法指南。Programmer's guide about how to cook at home (Simplified Chinese only).
+
+98.5k
+mtdvio/every-programmer-should-know
+
+A collection of (mostly) technical things every software developer should know about
+
+98.2k
+mui/material-ui
+
+Material UI: Comprehensive React component library that implements Google's Material Design. Free forever.
+
+98.0k
+pytorch/pytorch
+
+Tensors and Dynamic neural networks in Python with strong GPU acceleration
+
+97.9k
+2dust/v2rayN
+
+A GUI client for Windows, Linux and macOS, support Xray and sing-box and others
+
+97.9k
+ant-design/ant-design
+
+An enterprise-class UI design language and React UI library
+
+97.6k
+neovim/neovim
+
+Vim-fork focused on extensibility and usability
+
+96.9k
+ggml-org/llama.cpp
+
+LLM inference in C/C++
+
+96.6k
+fastapi/fastapi
+
+FastAPI framework, high performance, easy to learn, fast to code, ready for production
+
+95.8k
+nvbn/thefuck
+
+Magnificent app which corrects your previous console command.
+
+95.6k
+openai/whisper
+
+Robust Speech Recognition via Large-Scale Weak Supervision
+
+95.4k
+microsoft/Web-Dev-For-Beginners
+
+24 Lessons, 12 Weeks, Get Started as a Web Developer
+
+95.4k
+ryanmcdermott/clean-code-javascript
+
+Clean Code concepts adapted for JavaScript
+
+94.3k
+immich-app/immich
+
+High performance self-hosted photo and video management solution.
+
+94.0k
+tailwindlabs/tailwindcss
+
+A utility-first CSS framework for rapid UI development.
+
+93.9k
+iluwatar/java-design-patterns
+
+Design patterns implemented in Java
+
+93.8k
+puppeteer/puppeteer
+
+JavaScript API for Chrome and Firefox
+
+93.7k
+nvm-sh/nvm
+
+Node Version Manager - POSIX-compliant bash script to manage multiple active node.js versions
+
+92.0k
+deepseek-ai/DeepSeek-R1
+91.9k
+florinpop17/app-ideas
+
+A Collection of application ideas which can be used to improve your coding skills.
+
+90.9k
+PanJiaChen/vue-element-admin
+
+:tada: A magical vue admin https://panjiachen.github.io/vue-element-admin
+
+90.3k
+microsoft/markitdown
+
+Python tool for converting files and office documents to Markdown.
+
+90.0k
+storybookjs/storybook
+
+Storybook is the industry standard workshop for building, documenting, and testing UI components in isolation
+
+89.4k
+bitcoin/bitcoin
+
+Bitcoin Core integration/staging tree
+
+88.3k
+gin-gonic/gin
+
+Gin is a high-performance HTTP web framework written in Go. It provides a Martini-like API but with significantly better performance—up to 40 times faster—thanks to httprouter. Gin is designed for bui...
+
+88.2k
+firecrawl/firecrawl
+
+🔥 The Web Data API for AI - Turn entire websites into LLM-ready markdown or structured data
+
+88.0k
+oven-sh/bun
+
+Incredibly fast JavaScript runtime, bundler, test runner, and package manager – all in one
+
+87.8k
+ChatGPTNextWeb/NextChat
+
+✨ Light and Fast AI Assistant. Support: Web | iOS | MacOS | Android | Linux | Windows
+
+87.4k
+rasbt/LLMs-from-scratch
+
+Implement a ChatGPT-like LLM in PyTorch from scratch, step by step
+
+87.0k
+django/django
+
+The Web framework for perfectionists with deadlines.
+
+87.0k
+gohugoio/hugo
+
+The world’s fastest framework for building websites.
+
+86.9k
+opencv/opencv
+
+Open Source Computer Vision Library
+
+86.4k
+sveltejs/svelte
+
+web development for the rest of us
+
+86.0k
+ruanyf/weekly
+
+科技爱好者周刊，每周五发布
+
+85.1k
+home-assistant/core
+
+:house_with_garden: Open source home automation that puts local control and privacy first.
+
+85.1k
+3b1b/manim
+
+Animation engine for explanatory math videos
+
+85.0k
+microsoft/ML-For-Beginners
+
+12 weeks, 26 lessons, 52 quizzes, classic Machine Learning for all
+
+84.1k
+laravel/laravel
+
+Laravel is a web application framework with expressive, elegant syntax. We’ve already laid the foundation for your next big idea — freeing you to create without sweating the small things.
+
+83.8k
+louislam/uptime-kuma
+
+A fancy self-hosted monitoring tool
+
+83.6k
+anthropics/skills
+
+Public repository for Agent Skills
+
+83.3k
+macrozheng/mall
+
+mall项目是一套电商系统，包括前台商城系统及后台管理系统，基于Spring Boot+MyBatis实现，采用Docker容器化部署。 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、设置等模块。
+
+83.0k
+realworld-apps/realworld
+
+"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more
+
+82.9k
+animate-css/animate.css
+
+🍿 A cross-browser library of CSS animations. As easy to use as an easy thing.
+
+82.6k
+bregman-arie/devops-exercises
+
+Linux, Jenkins, AWS, SRE, Prometheus, Docker, Python, Ansible, Git, Kubernetes, Terraform, OpenStack, SQL, NoSQL, Azure, GCP, DNS, Elastic, Network, Virtualization. DevOps Interview Questions
+
+81.4k
+tonsky/FiraCode
+
+Free monospaced font with programming ligatures
+
+81.2k
+syncthing/syncthing
+
+Open Source Continuous File Synchronization
+
+80.5k
+astral-sh/uv
+
+An extremely fast Python package and project manager, written in Rust.
+
+80.2k
+spring-projects/spring-boot
+
+Spring Boot helps you to create Spring-powered, production-grade applications and services with absolute minimum fuss.
+
+80.1k
+modelcontextprotocol/servers
+
+Model Context Protocol Servers
+
+80.1k
+ByteByteGoHq/system-design-101
+
+Explain complex systems using visuals and simple terms. Help you prepare for system design interviews.
+
+80.0k
+hacksider/Deep-Live-Cam
+
+real time face swap and one-click video deepfake with only a single image
+
+79.8k
+browser-use/browser-use
+
+🌐 Make websites accessible for AI agents. Automate tasks online with ease.
+
+79.6k
+fighting41love/funNLP
+
+中英文敏感词、语言检测、中外手机/电话归属地/运营商查询、名字推断性别、手机号抽取、身份证抽取、邮箱抽取、中日文人名库、中文缩写库、拆字词典、词汇情感值、停用词、反动词表、暴恐词表、繁简体转换、英文模拟中文发音、汪峰歌词生成器、职业名称词库、同义词库、反义词库、否定词库、汽车品牌词库、汽车零件词库、连续英文切割、各种中文词向量、公司名字大全、古诗词库、IT词库、财经词库、成语词库、地名词库、历史名...
+
+79.2k
+doocs/advanced-java
+
+😮 Core Interview Questions & Answers For Experienced Java(Backend) Developers | 互联网 Java 工程师进阶知识完全扫盲：涵盖高并发、分布式、高可用、微服务、海量数据处理等领域知识
+
+78.9k
+anuraghazra/github-readme-stats
+
+:zap: Dynamically generated stats for your github readmes
+
+78.6k
+vitejs/vite
+
+Next generation frontend tooling. It's fast!
+
+78.6k
+junegunn/fzf
+
+:cherry_blossom: A command-line fuzzy finder
+
+78.3k
+hoppscotch/hoppscotch
+
+Open-Source API Development Ecosystem • https://hoppscotch.io • Offline, On-Prem & Cloud • Web, Desktop & CLI • Open-Source Alternative to Postman, Insomnia
+
+78.1k
+netdata/netdata
+
+The fastest path to AI-powered full stack observability, even for lean teams.
+
+78.0k
+tensorflow/models
+
+Models and examples built with TensorFlow
+
+77.7k
+nomic-ai/gpt4all
+
+GPT4All: Run Local LLMs on Any Device. Open-source and available for commercial use.
+
+77.2k
+MisterBooo/LeetCodeAnimation
+
+Demonstrate all the questions on LeetCode in the form of animation.（用动画的形式呈现解LeetCode题目的思路）
+
+76.7k
+coder/code-server
+
+VS Code in the browser
+
+76.5k
+FortAwesome/Font-Awesome
+
+The iconic SVG, font, and CSS toolkit
+
+76.4k
+zed-industries/zed
+
+Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.
+
+76.3k
+mlabonne/llm-course
+
+Course to get into Large Language Models (LLMs) with roadmaps and Colab notebooks.
+
+76.0k
+d2l-ai/d2l-zh
+
+《动手学深度学习》：面向中文读者、能运行、可讨论。中英文版被70多个国家的500多所大学用于教学。
+
+76.0k
+localsend/localsend
+
+An open-source cross-platform alternative to AirDrop
+
+75.9k
+sdmg15/Best-websites-a-programmer-should-visit
+
+:link: Some useful websites for programmers.
+
+75.8k
+Developer-Y/cs-video-courses
+
+List of Computer Science courses with video lectures.
+
+75.7k
+swisskyrepo/PayloadsAllTheThings
+
+A list of useful payloads and bypass for Web Application Security and Pentest/CTF
+
+75.7k
+typicode/json-server
+
+Get a full fake REST API with zero coding in less than 30 seconds (seriously)
+
+75.6k
+Stirling-Tools/Stirling-PDF
+
+#1 PDF Application on GitHub that lets you edit PDFs on any device anywhere
+
+74.9k
+nestjs/nest
+
+A progressive Node.js framework for building efficient, scalable, and enterprise-grade server-side applications with TypeScript/JavaScript 🚀
+
+74.8k
+ventoy/Ventoy
+
+A new bootable USB solution.
+
+74.8k
+unionlabs/union
+
+The trust-minimized, zero-knowledge bridging protocol, designed for censorship resistance, extremely high security, and usage in decentralized finance.
+
+74.3k
+github/spec-kit
+
+💫 Toolkit to help you get started with Spec-Driven Development
+
+73.9k
+anthropics/claude-code
+
+Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows ...
+
+73.5k
+jesseduffield/lazygit
+
+simple terminal UI for git commands
+
+73.4k
+sherlock-project/sherlock
+
+Hunt down social media accounts by username across social networks
+
+73.3k
+lobehub/lobehub
+
+The ultimate space for work and life — to find, build, and collaborate with agent teammates that grow with you. We are taking agent harness to the next level — enabling multi-agent collaboration, effo...
+
+73.0k
+twitter/the-algorithm
+
+Source code for the X Recommendation Algorithm
+
+72.8k
+tesseract-ocr/tesseract
+
+Tesseract Open Source OCR Engine (main repository)
+
+72.7k
+CompVis/stable-diffusion
+
+A latent text-to-image diffusion model
+
+72.6k
+grafana/grafana
+
+The open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple sources like Prometheus, Loki, Elasticsearch, InfluxDB, Postgres and many more....
+
+72.5k
+thedaviddias/Front-End-Checklist
+
+🗂 The perfect Front-End Checklist for modern websites and meticulous developers
+
+72.3k
+vllm-project/vllm
+
+A high-throughput and memory-efficient inference and serving engine for LLMs
+
+71.9k
+openai/openai-cookbook
+
+Examples and guides for using the OpenAI API
+
+71.8k
+python/cpython
+
+The Python programming language
+
+71.8k
+abi/screenshot-to-code
+
+Drop in a screenshot and convert it to clean code (HTML/Tailwind/React/Vue)
+
+71.8k
+ocornut/imgui
+
+Dear ImGui: Bloat-free Graphical User interface for C++ with minimal dependencies
+
+71.7k
+PKUFlyingPig/cs-self-learning
+
+计算机自学指南
+
+71.6k
+PaddlePaddle/PaddleOCR
+
+Turn any PDF or image document into structured data for your AI. A powerful, lightweight OCR toolkit that bridges the gap between images/PDFs and LLMs. Supports 100+ languages.
+
+71.5k
+moby/moby
+
+The Moby Project - a collaborative project for the container ecosystem to assemble container-based systems
+
+71.5k
+strapi/strapi
+
+🚀 Strapi is the leading open-source headless CMS. It’s 100% JavaScript/TypeScript, fully customizable, and developer-first.
+
+71.5k
+pallets/flask
+
+The Python micro framework for building web applications.
+
+71.3k
+dair-ai/Prompt-Engineering-Guide
+
+🐙 Guides, papers, lessons, notebooks and resources for prompt engineering, context engineering, RAG, and AI Agents.
+
+71.1k
+apache/superset
+
+Apache Superset is a Data Visualization and Data Exploration Platform
+
+70.8k
+protocolbuffers/protobuf
+
+Protocol Buffers - Google's data interchange format
+
+70.8k
+obsproject/obs-studio
+
+OBS Studio - Free and open source software for live streaming and screen recording
+
+70.7k
+hakimel/reveal.js
+
+The HTML Presentation Framework
+
+70.7k
+caddyserver/caddy
+
+Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS
+
+70.5k
+obra/superpowers
+
+An agentic skills framework & software development methodology that works.
+
+70.2k
+binary-husky/gpt_academic
+
+为GPT/GLM等LLM大语言模型提供实用化交互接口，特别优化论文阅读/润色/写作体验，模块化设计，支持自定义快捷按钮&函数插件，支持Python和C++等项目剖析&自译解功能，PDF/LaTex论文翻译&总结功能，支持并行问询多种LLM模型，支持chatglm3等本地模型。接入通义千问, deepseekcoder, 讯飞星火, 文心一言, llama2, rwkv, claude2, moss...
+
+70.2k
+swiftlang/swift
+
+The Swift Programming Language
+
+69.8k
+Eugeny/tabby
+
+A terminal for a more modern age
+
+69.3k
+danielmiessler/SecLists
+
+SecLists is the security tester's companion. It's a collection of multiple types of lists used during security assessments, collected in one place. List types include usernames, passwords, URLs, sensi...
+
+69.2k
+nektos/act
+
+Run your GitHub Actions locally 🚀
+
+69.1k
+base/node
+
+Everything required to run your own Base node
+
+68.7k
+OpenHands/OpenHands
+
+🙌 OpenHands: AI-Driven Development
+
+68.5k
+AppFlowy-IO/AppFlowy
+
+Bring projects, wikis, and teams together with AI. AppFlowy is the AI collaborative workspace where you achieve more without losing control of your data. The leading open source Notion alternative.
+
+68.4k
+ansible/ansible
+
+Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy and maintain. Automate everything from code deployment to network configuration to cloud ...
+
+68.2k
+hiyouga/LlamaFactory
+
+Unified Efficient Fine-Tuning of 100+ LLMs & VLMs (ACL 2024)
+
+67.9k
+chartjs/Chart.js
+
+Simple HTML5 Charts using the <canvas> tag
+
+67.2k
+juliangarnier/anime
+
+JavaScript animation engine
+
+66.7k
+leonardomso/33-js-concepts
+
+📜 33 JavaScript concepts every developer should know.
+
+66.3k
+webpack/webpack
+
+A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows for loading parts of the application on demand. Through "loaders", modules can be CommonJs, AM...
+
+66.0k
+labmlai/annotated_deep_learning_paper_implementations
+
+🧑‍🏫 60+ Implementations/tutorials of deep learning papers with side-by-side notes 📝; including transformers (original, xl, switch, feedback, vit, ...), optimizers (adam, adabelief, sophia, ...), ga...
+
+65.9k
+apache/echarts
+
+Apache ECharts is a powerful, interactive charting and data visualization library for browser
+
+65.8k
+xtekky/gpt4free
+
+The official gpt4free repository | various collection of powerful language models | opus 4.6 gpt 5.3 kimi 2.5 deepseek v3.2 gemini 3
+
+65.7k
+TapXWorld/ChinaTextbook
+
+所有小初高、大学PDF教材。
+
+65.5k
+NationalSecurityAgency/ghidra
+
+Ghidra is a software reverse engineering (SRE) framework
+
+65.3k
+lydiahallie/javascript-questions
+
+A long list of (advanced) JavaScript questions, and their explanations :sparkles:
+
+65.3k
+scikit-learn/scikit-learn
+
+scikit-learn: machine learning in Python
+
+65.3k
+TheAlgorithms/Java
+
+All Algorithms implemented in Java
+
+65.1k
+bradtraversy/design-resources-for-developers
+
+Curated list of design and UI resources from stock photos, web templates, CSS frameworks, UI libraries, tools and much more
+
+64.9k
+kdn251/interviews
+
+Everything you need to know to get the job.
+
+64.9k
+kelseyhightower/nocode
+
+The best way to write secure and reliable applications. Write nothing; deploy nowhere.
+
+64.9k
+FoundationAgents/MetaGPT
+
+🌟 The Multi-Agent Framework: First AI Software Company, Towards Natural Language Programming
+
+64.8k
+chrislgarry/Apollo-11
+
+Original Apollo 11 Guidance Computer (AGC) source code for the command and lunar modules.
+
+64.6k
+localstack/localstack
+
+💻 A fully functional local AWS cloud stack. Develop and test your cloud & Serverless apps offline
+
+64.5k
+facebook/docusaurus
+
+Easy to maintain open source documentation websites.
+
+64.0k
+keras-team/keras
+
+Deep Learning for humans
+
+63.9k
+toeverything/AFFiNE
+
+There can be more than Notion and Miro. AFFiNE(pronounced [ə‘fain]) is a next-gen knowledge base that brings planning, sorting and creating all together. Privacy first, open-source, customizable and r...
+
+63.5k
+prometheus/prometheus
+
+The Prometheus monitoring system and time series database.
+
+63.0k
+openai/codex
+
+Lightweight coding agent that runs in your terminal
+
+63.0k
+resume/resume.github.com
+
+Resumes generated using the GitHub informations
+
+62.8k
+alacritty/alacritty
+
+A cross-platform, OpenGL terminal emulator.
+
+62.8k
+OpenBB-finance/OpenBB
+
+Financial data platform for analysts, quants and AI agents.
+
+62.5k
+openinterpreter/open-interpreter
+
+A natural language interface for computers
+
+62.5k
+nocodb/nocodb
+
+🔥 🔥 🔥 A Free & Self-hostable Airtable Alternative
+
+62.3k
+rust-lang/rustlings
+
+:crab: Small exercises to get you used to reading and writing Rust code!
+
+62.0k
+traefik/traefik
+
+The Cloud Native Application Proxy
+
+62.0k
+FuelLabs/sway
+
+🌴 Empowering everyone to build reliable and efficient smart contracts.
+
+61.9k
+gorhill/uBlock
+
+uBlock Origin - An efficient blocker for Chromium and Firefox. Fast and lean.
+
+61.9k
+ryanoasis/nerd-fonts
+
+Iconic font aggregator, collection, & patcher. 3,600+ icons, 50+ patched fonts: Hack, Source Code Pro, more. Glyph collections: Font Awesome, Material Design Icons, Octicons, & more
+
+61.8k
+daytonaio/daytona
+
+Daytona is a Secure and Elastic Infrastructure for Running AI-Generated Code
+
+61.8k
+lodash/lodash
+
+A modern JavaScript utility library delivering modularity, performance, & extras.
+
+61.6k
+tldr-pages/tldr
+
+📚 Collaborative cheatsheets for console commands
+
+61.5k
+reduxjs/redux
+
+A JS library for predictable global state management
+
+61.4k
+unclecode/crawl4ai
+
+🚀🤖 Crawl4AI: Open-source LLM Friendly Web Crawler & Scraper. Don't be shy, join here: https://discord.gg/jP8KfhDhyN
+
+61.4k
+atom/atom
+
+:atom: The hackable text editor
+
+61.0k
+LadybirdBrowser/ladybird
+
+Truly independent web browser
+
+61.0k
+xingshaocheng/architect-awesome
+
+后端架构师技术图谱
+
+60.8k
+h5bp/Front-end-Developer-Interview-Questions
+
+A list of helpful front-end related questions you can use to interview potential candidates, test yourself or completely ignore.
+
+60.8k
+youngyangyang04/leetcode-master
+
+《代码随想录》LeetCode 刷题攻略：200道经典题目刷题顺序，共60w字的详细图解，视频难点剖析，50余张思维导图，支持C++，Java，Python，Go，JavaScript等多语言版本，从此算法学习不再迷茫！🔥🔥 来看看，你会发现相见恨晚！🚀
+
+60.6k
+BurntSushi/ripgrep
+
+ripgrep recursively searches directories for a regex pattern while respecting your gitignore
+
+60.5k
+minio/minio
+
+MinIO is a high-performance, S3 compatible object store, open sourced under GNU AGPLv3 license.
+
+60.4k
+commaai/openpilot
+
+openpilot is an operating system for robotics. Currently, it upgrades the driver assistance system on 300+ supported cars.
+
+60.2k
+adam-p/markdown-here
+
+Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending.
+
+60.2k
+affaan-m/everything-claude-code
+
+The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Cowork, and beyond.
+
+59.9k
+nuxt/nuxt
+
+The Full-Stack Vue Framework.
+
+59.8k
+spring-projects/spring-framework
+
+Spring Framework
+
+59.7k
+jgraph/drawio-desktop
+
+Official electron build of draw.io
+
+59.7k
+pathwaycom/pathway
+
+Python ETL framework for stream processing, real-time analytics, LLM pipelines, and RAG.
+
+59.5k
+CorentinJ/Real-Time-Voice-Cloning
+
+Clone a voice in 5 seconds to generate arbitrary speech in real-time
+
+59.5k
+shadowsocks/shadowsocks-windows
+
+A C# port of shadowsocks
+
+59.3k
+meta-llama/llama
+
+Inference code for Llama models
+
+59.2k
+topjohnwu/Magisk
+
+The Magic Mask for Android
+
+59.0k
+Asabeneh/30-Days-Of-Python
+
+The 30 Days of Python programming challenge is a step-by-step guide to learn the Python programming language in 30 days. This challenge may take more than 100 days. Follow your own pace. These videos ...
+
+59.0k
+cline/cline
+
+Autonomous coding agent right in your IDE, capable of creating/editing files, executing commands, using the browser, and more with your permission every step of the way.
+
+58.6k
+FiloSottile/mkcert
+
+A simple zero-config tool to make locally trusted development certificates with any names you'd like.
+
+58.2k
+FFmpeg/FFmpeg
+
+Mirror of https://git.ffmpeg.org/ffmpeg.git
+
+57.6k
+sharkdp/bat
+
+A cat(1) clone with wings.
+
+57.5k
+usememos/memos
+
+An open-source, self-hosted note-taking service. Your thoughts, your data, your control — no tracking, no ads, no subscription fees.
+
+57.5k
+FuelLabs/fuel-core
+
+Rust full node implementation of the Fuel v2 protocol.
+
+57.3k
+withastro/astro
+
+The web framework for content-driven websites. ⭐️ Star to support our work!
+
+57.3k
+pmndrs/zustand
+
+🐻 Bear necessities for state management in React
+
+57.2k
+scutan90/DeepLearning-500-questions
+
+深度学习500问，以问答形式对常用的概率知识、线性代数、机器学习、深度学习、计算机视觉等热点问题进行阐述，以帮助自己及有需要的读者。 全书分为18个章节，50余万字。由于水平有限，书中不妥之处恳请广大读者批评指正。 未完待续............ 如有意合作，联系scutjy2015@163.com 版权所有，违权必究 Tan 2018.0...
+
+57.2k
+zylon-ai/private-gpt
+
+Interact with your documents using the power of GPT, 100% privately, no data leaks
+
+57.1k
+ultralytics/yolov5
+
+YOLOv5 🚀 in PyTorch > ONNX > CoreML > TFLite
+
+56.9k
+soimort/you-get
+
+:arrow_double_down: Dumb downloader that scrapes the web
+
+56.8k
+pocketbase/pocketbase
+
+Open Source realtime backend in 1 file
+
+56.5k
+remix-run/react-router
+
+Declarative routing for React
+
+56.3k
+dani-garcia/vaultwarden
+
+Unofficial Bitwarden compatible server written in Rust, formerly known as bitwarden_rs
+
+56.3k
+pathwaycom/llm-app
+
+Ready-to-run cloud templates for RAG, AI pipelines, and enterprise search with live data. 🐳Docker-friendly.⚡Always in sync with Sharepoint, Google Drive, S3, Kafka, PostgreSQL, real-time data APIs, a...
+
+56.2k
+meilisearch/meilisearch
+
+A lightning-fast search engine API bringing AI-powered hybrid search to your sites and applications.
+
+56.2k
+ageitgey/face_recognition
+
+The world's simplest facial recognition api for Python and the command line
+
+56.2k
+pi-hole/pi-hole
+
+A black hole for Internet advertisements
+
+56.0k
+gatsbyjs/gatsby
+
+React-based framework with performance, scalability, and security built in.
+
+55.9k
+rclone/rclone
+
+"rsync for cloud storage" - Google Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Wasabi, Google Cloud Storage, Azure Blob, Azure Files, Yandex Files
+
+55.8k
+azl397985856/leetcode
+
+LeetCode Solutions: A Record of My Problem Solving Journey.( leetcode题解，记录自己的leetcode解题之路。)
+
+55.8k
+Textualize/rich
+
+Rich is a Python library for rich text and beautiful formatting in the terminal.
+
+55.7k
+golang-standards/project-layout
+
+Standard Go Project Layout
+
+55.5k
+RVC-Boss/GPT-SoVITS
+
+1 min voice data can also be used to train a good TTS model! (few shot voice cloning)
+
+55.5k
+tiimgreen/github-cheat-sheet
+
+A list of cool features of Git and GitHub.
+
+55.5k
+Mintplex-Labs/anything-llm
+
+The all-in-one Desktop & Docker AI application with built-in RAG, AI agents, No-code agent builder, MCP compatibility, and more.
+
+55.4k
+AntonOsika/gpt-engineer
+
+CLI platform to experiment with codegen. Precursor to: https://lovable.dev
+
+55.2k
+Z4nzu/hackingtool
+
+ALL IN ONE Hacking Tool For Hackers
+
+55.2k
+microsoft/autogen
+
+A programming framework for agentic AI
+
+55.2k
+deepfakes/faceswap
+
+Deepfakes Software For All
+
+55.0k
+appwrite/appwrite
+
+Appwrite® - complete cloud infrastructure for your web, mobile and AI apps. Including Auth, Databases, Storage, Functions, Messaging, Hosting, Realtime and more
+
+55.0k
+docling-project/docling
+
+Get your documents ready for gen AI
+
+54.8k
+starship/starship
+
+☄🌌️ The minimal, blazing-fast, and infinitely customizable prompt for any shell!
+
+54.5k
+lencx/ChatGPT
+
+🔮 ChatGPT Desktop Application (Mac, Windows and Linux)
+
+54.4k
+What is DeepWiki?
+
+DeepWiki provides up-to-date documentation you can talk to, for every repo in the world. Think Deep Research for GitHub.
+
+
+
+DeepWiki
+
+666ghj/MiroFish
+
+Index your code with
+Devin
+Edit Wiki
+Share
+Last indexed: 7 March 2026 (985f89)
+MiroFish Overview
+System Architecture
+Five-Stage Workflow
+Getting Started
+Installation
+Configuration
+Docker Deployment
+User Guide
+Creating a Simulation
+Graph Building (Stage 1)
+Environment Setup (Stage 2)
+Running Simulations (Stage 3)
+Report Generation (Stage 4)
+Deep Interaction (Stage 5)
+Viewing Simulation History
+Core Concepts
+GraphRAG and Knowledge Graphs
+OASIS Multi-Agent Simulation
+ReACT Pattern and ReportAgent
+Memory and Context Management
+Frontend Architecture
+Component Overview
+Routing and Navigation
+API Client Layer
+Graph Visualization
+Real-time Updates and Polling
+Backend Architecture
+Simulation Management Service
+Report Generation Service
+OASIS Simulation Execution
+Task Management and Async Jobs
+Data Models and Storage
+API Reference
+Simulation API
+Report API
+Interview and IPC API
+Advanced Topics
+Custom Agent Profiles
+ZepToolsService and Custom Tools
+Graph Memory Updates
+LLM Configuration and Optimization
+Troubleshooting
+Setup and Configuration Issues
+Simulation Failures
+Report Generation Issues
+MiroFish Overview
+Relevant source files
+Purpose and Scope
+
+This document provides a comprehensive introduction to MiroFish, covering its core capabilities, system architecture, workflow stages, and technology stack. It serves as the entry point for understanding how MiroFish operates as a collective intelligence engine for multi-agent simulation and prediction.
+
+For detailed information about specific subsystems, see:
+
+System architecture details: System Architecture
+Workflow stage explanations: Five-Stage Workflow
+Installation and setup: Getting Started
+User-facing features: User Guide
+Technical implementation: Frontend Architecture and Backend Architecture
+What is MiroFish?
+
+MiroFish is a multi-agent simulation engine that constructs high-fidelity digital worlds to predict future outcomes. It extracts information from real-world documents (news reports, policy drafts, financial signals, or even novels) and uses thousands of LLM-powered agents to simulate social interactions on Twitter and Reddit platforms. The system produces detailed analytical reports and enables interactive exploration of the simulated world.
+
+Core Capabilities
+Capability	Description	Use Cases
+GraphRAG Construction	Extracts entities, relationships, and temporal facts from documents to build a knowledge graph	Policy impact analysis, narrative prediction
+Dual-Platform Simulation	Runs parallel simulations on Twitter and Reddit environments with autonomous agents	Public opinion forecasting, social dynamics modeling
+Intelligent Report Generation	Uses ReACT pattern with specialized tools to analyze simulation results	Decision support, trend prediction
+Deep Interaction	Enables conversations with simulated agents and the report agent	Scenario exploration, what-if analysis
+Historical Tracking	Maintains a database of past simulations for comparative analysis	Pattern recognition, iterative refinement
+Target Applications
+
+Macro-Level Predictions: Policy rehearsal laboratories where decisions can be tested in zero-risk environments before real-world implementation.
+
+Micro-Level Exploration: Creative sandboxes for exploring hypothetical scenarios, from predicting novel endings to analyzing social phenomena.
+
+Sources: 
+README.md
+27-42
+ 
+README-EN.md
+27-42
+
+System Architecture
+
+MiroFish follows a three-tier architecture with clear separation between presentation, business logic, and external services.
+
+Architectural Layers
+
+Data Storage
+
+External Services
+
+Execution Layer
+
+Backend Service Layer
+
+API Client Layer
+
+Presentation Layer
+
+Home.vue
+File Upload & Requirements
+
+Process.vue
+Graph Building Status
+
+SimulationView.vue
+Environment Setup
+
+SimulationRunView.vue
+Simulation Execution
+
+ReportView.vue
+Report Generation
+
+InteractionView.vue
+Deep Interaction
+
+HistoryDatabase.vue
+Past Simulations
+
+simulation.js
+22 endpoint functions
+
+report.js
+6 endpoint functions
+
+graph.js
+Graph queries
+
+simulation_bp
+Flask Blueprint
+
+report_bp
+Flask Blueprint
+
+project_bp
+Flask Blueprint
+
+SimulationManager
+State & Lifecycle
+
+ReportManager
+File Management
+
+TaskManager
+Async Jobs
+
+SimulationRunner
+Subprocess Orchestration
+
+run_parallel_simulation.py
+OASIS Wrapper
+
+ReportAgent
+ReACT Loop
+
+ZepToolsService
+Graph Queries
+
+LLM Service
+OpenAI-compatible API
+
+Zep Cloud
+Knowledge Graph
+
+OASIS Framework
+camel-ai
+
+Projects/
+Simulations/
+Reports/
+
+twitter_simulation.db
+reddit_simulation.db
+
+state.json
+progress.json
+profiles
+
+Component Responsibilities
+
+Presentation Layer: Vue.js single-page application with components for each workflow stage
+API Client Layer: JavaScript modules that abstract HTTP communication (
+frontend/src/services/simulation.js
+ 
+frontend/src/services/report.js
+)
+Backend Service Layer: Flask blueprints and manager classes that handle business logic
+Execution Layer: Python scripts that orchestrate LLM-based agents and manage simulations
+External Services: Third-party APIs for language models, knowledge graphs, and social simulation
+Data Storage: File-based persistence for projects, JSON state files, and SQLite traces
+
+Sources: 
+README.md
+86-93
+ High-level system architecture diagram
+
+Five-Stage Workflow
+
+MiroFish processes user inputs through five sequential stages, each transforming data and passing results to the next stage.
+
+Workflow Pipeline
+
+Stage 5: Deep Interaction
+
+Stage 4: Report Generation
+
+Stage 3: Simulation Execution
+
+Stage 2: Environment Setup
+
+Stage 1: Graph Building
+
+User Documents
+PDF, MD, TXT
+
+Document Processing
+Entity Extraction
+
+Zep Knowledge Graph
+graph_id
+
+OasisProfileGenerator
+Config Generation
+
+twitter_profiles.csv
+reddit_profiles.json
+simulation.json
+
+run_parallel_simulation.py
+OASIS Subprocess
+
+actions.jsonl
+twitter_simulation.db
+reddit_simulation.db
+
+ReportAgent
+ReACT Loop
+
+insight_forge
+panorama_search
+interview_agents
+
+outline.json
+section_XX.md
+full_report.md
+
+Chat with ReportAgent
+or Simulated Agents
+
+Agent Batch Interviews
+IPC Communication
+
+Stage Handoffs
+
+Stage	Input	Output	Key Files
+1: Graph Building	User documents + requirements	graph_id, project_id	
+backend/app/services/document_processor.py
+
+2: Environment Setup	graph_id	simulation_id, agent profiles, config	
+backend/app/services/oasis_profile_generator.py
+
+3: Simulation Execution	simulation_id	Action logs, SQLite traces	
+backend/app/oasis/run_parallel_simulation.py
+
+4: Report Generation	SQLite traces, Zep graph	report_id, markdown report	
+backend/app/services/report_agent.py
+
+5: Deep Interaction	Report + simulation context	Conversation logs	
+backend/app/routes/ipc.py
+
+Sources: 
+README.md
+86-93
+ 
+README-EN.md
+86-93
+ Five-stage workflow diagram
+
+Technology Stack
+Frontend Stack
+Technology	Version	Purpose
+Vue.js	3.x	Reactive UI framework
+Vite	Latest	Build tool and dev server
+Vue Router	4.x	Client-side routing
+D3.js	7.x	Knowledge graph visualization (
+frontend/src/components/GraphPanel.vue
+)
+Axios	Latest	HTTP client for API calls
+Backend Stack
+Technology	Version	Purpose
+Python	3.11-3.12	Runtime environment
+Flask	Latest	Web framework and REST API
+uv	Latest	Python package manager
+SQLite	3.x	Simulation trace storage
+External Services
+Service	Purpose	Configuration
+LLM API	Agent reasoning and content generation	LLM_API_KEY, LLM_BASE_URL, LLM_MODEL_NAME
+Zep Cloud	GraphRAG knowledge graph storage	ZEP_API_KEY
+OASIS	Multi-agent social simulation framework	Integrated via 
+camel-ai
+Deployment Options
+
+Development Mode: Concurrent frontend (Vite dev server on port 3000) and backend (Flask on port 5001)
+
+npm run dev  # Starts both services using concurrently
+
+Production Mode: Docker Compose with separate containers for frontend (Nginx) and backend (Python)
+
+docker compose up -d
+
+Sources: 
+README.md
+100-176
+ 
+README-EN.md
+100-177
+ 
+package.json
+1-30
+
+Key Components
+
+This section bridges natural language system names to concrete code entities.
+
+Frontend Components to Code Mapping
+
+API Services
+
+Vue Components
+
+uses
+
+uses
+
+uses
+
+uses
+
+uses
+
+uses
+
+renders
+
+renders
+
+renders
+
+renders
+
+renders
+
+Home.vue
+
+Process.vue
+
+SimulationView.vue
+
+Step2EnvSetup.vue
+
+SimulationRunView.vue
+
+Step3Simulation.vue
+
+ReportView.vue
+
+Step4Report.vue
+
+InteractionView.vue
+
+Step5Interaction.vue
+
+GraphPanel.vue
+D3 visualization
+
+simulation.js
+createSimulation()
+prepareSimulation()
+startSimulation()
+getRunStatus()
+
+report.js
+generateReport()
+getReportStatus()
+chatWithReport()
+interviewAgents()
+
+Key Frontend Files
+
+Router: 
+frontend/src/router/index.js
+ - Defines routes /, /process, /simulation, /simulation-run, /report, /interaction, /history
+API Clients: 
+frontend/src/services/simulation.js
+ 
+frontend/src/services/report.js
+ 
+frontend/src/services/graph.js
+Main Components: 
+frontend/src/views/
+ directory contains all workflow views
+Shared Components: 
+frontend/src/components/GraphPanel.vue
+ for D3.js graph rendering
+
+Sources: Frontend architecture diagram
+
+Backend Services to Code Mapping
+
+OASIS Layer
+
+Service Layer
+
+Flask Blueprints
+
+simulation_bp
+/api/simulation/*
+
+report_bp
+/api/report/*
+
+project_bp
+/api/project/*
+
+graph_bp
+/api/graph/*
+
+ipc_bp
+/api/ipc/*
+
+SimulationManager
+backend/app/services/simulation_manager.py
+
+SimulationRunner
+backend/app/services/simulation_runner.py
+
+ReportAgent
+backend/app/services/report_agent.py
+
+ZepToolsService
+backend/app/services/zep_tools_service.py
+
+OasisProfileGenerator
+backend/app/services/oasis_profile_generator.py
+
+TaskManager
+backend/app/services/task_manager.py
+
+run_parallel_simulation.py
+backend/app/oasis/
+
+ipc_command_handler.py
+Agent interview logic
+
+ZepGraphMemoryUpdater
+backend/app/oasis/memory/
+
+Key Backend Files
+
+File Path	Class/Function	Purpose
+
+backend/app/routes/simulation.py
+	simulation_bp	REST API endpoints for simulation lifecycle
+
+backend/app/routes/report.py
+	report_bp	REST API endpoints for report generation
+
+backend/app/services/simulation_manager.py
+	SimulationManager	Manages simulation state and file operations
+
+backend/app/services/simulation_runner.py
+	SimulationRunner	Spawns and monitors OASIS subprocess
+
+backend/app/services/report_agent.py
+	ReportAgent	Implements ReACT loop for report generation
+
+backend/app/services/zep_tools_service.py
+	ZepToolsService	Provides tools: insight_forge, panorama_search, interview_agents
+
+backend/app/oasis/run_parallel_simulation.py
+	main()	Entry point for dual-platform OASIS simulation
+
+Sources: Backend architecture diagram, 
+backend/app/routes/
+ 
+backend/app/services/
+
+Data Flow
+File System Structure
+
+MiroFish persists all data to the file system in a structured hierarchy:
+
+Projects/
+├── {project_id}/
+│   ├── documents/           # Uploaded seed materials
+│   ├── requirements.txt     # User-specified simulation requirements
+│   └── graph_metadata.json  # Zep graph ID and configuration
+│
+Simulations/
+├── {simulation_id}/
+│   ├── twitter/
+│   │   ├── profiles.csv              # Twitter agent profiles
+│   │   ├── simulation.json           # Platform configuration
+│   │   ├── run_state.json            # Real-time execution state
+│   │   ├── actions.jsonl             # Agent action logs
+│   │   └── twitter_simulation.db     # SQLite trace database
+│   │
+│   ├── reddit/
+│   │   ├── profiles.json             # Reddit agent profiles
+│   │   ├── simulation.json           # Platform configuration
+│   │   ├── run_state.json            # Real-time execution state
+│   │   ├── actions.jsonl             # Agent action logs
+│   │   └── reddit_simulation.db      # SQLite trace database
+│   │
+│   └── state.json           # Overall simulation state
+│
+Reports/
+└── {report_id}/
+    ├── outline.json         # Report structure
+    ├── section_01.md        # Generated sections
+    ├── section_02.md
+    ├── full_report.md       # Complete report
+    ├── agent_log.jsonl      # ReportAgent reasoning trace
+    └── console_log.txt      # Execution logs
+
+State Transitions
+
+Upload documents
+
+Start graph construction
+
+Zep graph ready
+
+Create simulation
+
+Start preparation
+
+Profiles & config generated
+
+Start simulation
+
+Agents act (actions.jsonl updated)
+
+Simulation ends
+
+User stops
+
+Generate report
+
+Report ready
+
+Deep interaction
+
+ProjectCreated
+
+GraphBuilding
+
+GraphComplete
+
+SimulationCreated
+
+Preparing
+
+Ready
+
+Running
+
+Completed
+
+Stopped
+
+ReportGenerating
+
+ReportComplete
+
+Interactive
+
+State Files
+
+Projects/{project_id}/state.json: Tracks graph building progress
+Simulations/{simulation_id}/state.json: Overall simulation status (preparing, ready, running, completed, stopped)
+Simulations/{simulation_id}/{platform}/run_state.json: Real-time platform-specific state updated during simulation
+Reports/{report_id}/state.json: Report generation progress
+
+Sources: Data flow diagram, 
+backend/app/services/simulation_manager.py
+ 
+backend/app/oasis/run_parallel_simulation.py
+
+External Service Integration
+
+MiroFish depends on three critical external services, each requiring configuration in the .env file.
+
+LLM Service Configuration
+# Primary LLM for agent reasoning and report generation
+LLM_API_KEY=your_api_key
+LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+LLM_MODEL_NAME=qwen-plus
+ 
+# Optional: Boost LLM to prevent rate limiting during parallel simulation
+LLM_BOOST_API_KEY=your_boost_api_key
+LLM_BOOST_BASE_URL=https://api.openai.com/v1
+LLM_BOOST_MODEL_NAME=gpt-4
+
+Usage in Code:
+
+ReportAgent (
+backend/app/services/report_agent.py
+) uses primary LLM for reasoning
+OasisProfileGenerator (
+backend/app/services/oasis_profile_generator.py
+) uses primary LLM for profile generation
+OASIS agents (
+backend/app/oasis/run_parallel_simulation.py
+) use both primary and boost LLMs during simulation
+Zep Cloud Configuration
+# GraphRAG knowledge graph storage
+ZEP_API_KEY=your_zep_api_key
+
+Usage in Code:
+
+ZepToolsService (
+backend/app/services/zep_tools_service.py
+) queries the graph using search_graph(), get_entities(), get_episodes()
+ZepGraphMemoryUpdater (
+backend/app/oasis/memory/zep_graph_memory_updater.py
+) writes simulation activities back to Zep
+OASIS Framework
+
+MiroFish integrates the OASIS framework from 
+camel-ai
+ to provide:
+
+Dual-platform social simulation (Twitter and Reddit environments)
+LLM-powered agent action generation
+SQLite trace logging for post-simulation analysis
+
+Integration Point: 
+backend/app/oasis/run_parallel_simulation.py
+ wraps OASIS and manages the subprocess lifecycle.
+
+Sources: 
+README.md
+106-128
+ 
+README-EN.md
+106-128
+ External service integration diagram
+
+Quick Start
+Installation and Configuration
+Clone the repository
+git clone https://github.com/666ghj/MiroFish
+cd MiroFish
+Configure environment variables
+cp .env.example .env
+# Edit .env with your API keys
+Install dependencies
+npm run setup:all  # Installs Node.js and Python dependencies
+Start services
+npm run dev  # Starts frontend (port 3000) and backend (port 5001)
+First Simulation
+Navigate to http://localhost:3000
+Upload seed documents (PDF, Markdown, or text files)
+Describe your prediction requirements in natural language
+Follow the five-stage workflow through graph building, environment setup, simulation execution, report generation, and deep interaction
+
+For detailed instructions, see Getting Started and User Guide.
+
+Sources: 
+README.md
+94-176
+ 
+README-EN.md
+94-177
+
+System Characteristics
+Performance Considerations
+Aspect	Details
+Simulation Duration	Varies based on round count (recommend <40 rounds for initial testing)
+LLM Consumption	High token usage during parallel agent simulation
+Memory Requirements	Graph and simulation traces stored in SQLite (hundreds of MB per simulation)
+Concurrent Simulations	One active simulation per simulation_id; multiple projects supported
+Scalability
+Horizontal Scaling: Backend can run multiple Flask instances behind a load balancer
+Agent Count: Tested with hundreds of agents per platform; limited by LLM rate limits
+Graph Size: Zep Cloud handles graphs with thousands of entities and relationships
+Reliability
+State Persistence: All progress saved to disk; simulations can resume after crashes
+Error Handling: TaskManager tracks async job failures; detailed logs in console_log.txt
+Graceful Shutdown: SimulationRunner sends SIGTERM to OASIS subprocess for clean termination
+
+Sources: 
+backend/app/services/simulation_runner.py
+ 
+backend/app/services/task_manager.py
+
+Next Steps
+
+This overview provides the foundation for understanding MiroFish. To dive deeper:
+
+Architecture Details: System Architecture and Five-Stage Workflow
+Setup and Deployment: Installation, Configuration, Docker Deployment
+Usage Tutorials: User Guide covers each workflow stage in detail
+Core Concepts: GraphRAG, OASIS Simulation, ReACT Pattern
+API Reference: Simulation API, Report API, IPC API
+Advanced Topics: Custom Agent Profiles, ZepTools Extension, LLM Optimization
+
+Sources: Table of contents structure
+
+ This wiki is featured in the repository
+
+Dismiss
+
+Refresh this wiki
+
+This wiki was recently refreshed. Please wait 2 days to refresh again.
+
+On this page
+MiroFish Overview
+Purpose and Scope
+What is MiroFish?
+Core Capabilities
+Target Applications
+System Architecture
+Architectural Layers
+Five-Stage Workflow
+Workflow Pipeline
+Technology Stack
+Frontend Stack
+Backend Stack
+External Services
+Deployment Options
+Key Components
+Frontend Components to Code Mapping
+Backend Services to Code Mapping
+Data Flow
+File System Structure
+State Transitions
+External Service Integration
+LLM Service Configuration
+Zep Cloud Configuration
+OASIS Framework
+Quick Start
+Installation and Configuration
+First Simulation
+System Characteristics
+Performance Considerations
+Scalability
+Reliability
+Next Steps
+Ask Devin about 666ghj/MiroFish
+Fast
+
+
+
+DeepWiki
+
+666ghj/MiroFish
+
+Index your code with
+Devin
+Edit Wiki
+Share
+Last indexed: 7 March 2026 (985f89)
+MiroFish Overview
+System Architecture
+Five-Stage Workflow
+Getting Started
+Installation
+Configuration
+Docker Deployment
+User Guide
+Creating a Simulation
+Graph Building (Stage 1)
+Environment Setup (Stage 2)
+Running Simulations (Stage 3)
+Report Generation (Stage 4)
+Deep Interaction (Stage 5)
+Viewing Simulation History
+Core Concepts
+GraphRAG and Knowledge Graphs
+OASIS Multi-Agent Simulation
+ReACT Pattern and ReportAgent
+Memory and Context Management
+Frontend Architecture
+Component Overview
+Routing and Navigation
+API Client Layer
+Graph Visualization
+Real-time Updates and Polling
+Backend Architecture
+Simulation Management Service
+Report Generation Service
+OASIS Simulation Execution
+Task Management and Async Jobs
+Data Models and Storage
+API Reference
+Simulation API
+Report API
+Interview and IPC API
+Advanced Topics
+Custom Agent Profiles
+ZepToolsService and Custom Tools
+Graph Memory Updates
+LLM Configuration and Optimization
+Troubleshooting
+Setup and Configuration Issues
+Simulation Failures
+Report Generation Issues
+Core Concepts
+Relevant source files
+Purpose and Scope
+
+This document explains the four fundamental architectural concepts that power MiroFish's prediction engine. These concepts work together to transform raw documents into future predictions through multi-agent simulation and intelligent analysis.
+
+Covered topics:
+
+How GraphRAG structures knowledge for simulation
+How OASIS executes parallel multi-agent simulations
+How ReACT enables intelligent report generation
+How Zep Cloud manages long-term memory and context
+
+Related pages:
+
+For implementation details of the backend services, see Backend Architecture
+For API endpoints and usage, see API Reference
+For user-facing workflow, see User Guide
+Conceptual Overview
+
+MiroFish is built on four interconnected concepts that form a complete prediction pipeline:
+
+Concept	Purpose	Primary Implementation
+GraphRAG	Structures unstructured documents into a queryable knowledge graph with entities, relationships, and temporal facts	ZepToolsService (
+backend/app/services/zep_tools.py
+)
+OASIS Simulation	Executes parallel multi-agent social simulations on Twitter and Reddit platforms	run_parallel_simulation.py (
+backend/oasis_files/run_parallel_simulation.py
+)
+ReACT Pattern	Iterative reasoning + acting loop that generates reports by calling tools to gather information	ReportAgent (
+backend/app/services/report_agent.py
+)
+Zep Memory	Persistent graph storage with temporal tracking, enabling memory episodes and context across sessions	Zep Cloud API via zep_cloud.client.Zep
+System Architecture: Core Concepts Integration
+
+Zep Memory Concept
+
+ReACT Pattern Concept
+
+OASIS Simulation Concept
+
+GraphRAG Concept
+
+Input Processing
+
+User Documents
+(PDF, MD, TXT)
+
+Simulation Requirement
+(Natural Language)
+
+zep_cloud.client.Zep
+
+Graph Construction
+Entity Extraction
+
+Zep Cloud Graph Storage
+graph_id: 'mirofish_*'
+
+ZepToolsService
+insight_forge()
+panorama_search()
+quick_search()
+
+run_parallel_simulation.py
+
+Twitter + Reddit
+Parallel Environments
+
+LLM-Powered Agents
+twitter_profiles.csv
+reddit_profiles.json
+
+SQLite Traces
+twitter_simulation.db
+reddit_simulation.db
+
+actions.jsonl
+Agent Actions
+
+ReportAgent
+_generate_section_react()
+
+ReACT Loop
+Thought → Action → Observation
+
+Tool Execution
+_execute_tool()
+
+LLMClient
+chat() / chat_json()
+
+ZepGraphMemoryUpdater
+write_activities_to_zep()
+
+Temporal Facts
+valid_at / invalid_at
+expired_at
+
+Graph Context
+get_simulation_context()
+
+Sources: 
+backend/app/services/report_agent.py
+1-1500
+ 
+backend/app/services/zep_tools.py
+1-400
+ 
+README.md
+86-92
+
+GraphRAG: Knowledge Graph with Retrieval-Augmented Generation
+
+GraphRAG combines graph databases with retrieval-augmented generation to structure knowledge for simulation and analysis.
+
+Core Components
+Component	Class/Function	Description
+Graph Client	zep_cloud.client.Zep	Python SDK for Zep Cloud graph API
+Node Representation	NodeInfo	Entities with uuid, name, labels, summary, attributes
+Edge Representation	EdgeInfo	Relationships with fact, temporal fields (valid_at, invalid_at, expired_at)
+Search Interface	ZepToolsService.search_graph()	Hybrid semantic + BM25 search with reranking
+Graph Structure
+
+Retrieval Tools
+
+Edge with Temporal Metadata
+
+Node Types (labels)
+
+Person Entity
+
+Organization Entity
+
+Event Entity
+
+Location Entity
+
+Edge
+name: 'expressed_opinion'
+fact: 'Student A criticized...'
+valid_at: '2025-01-01T10:00:00'
+invalid_at: null
+expired_at: null
+
+insight_forge()
+Multi-dimensional search
+Sub-query decomposition
+
+panorama_search()
+Full context with history
+Active + expired facts
+
+quick_search()
+Simple fact lookup
+
+Key Operations
+
+Graph Construction (
+backend/app/services/zep_tools.py
+650-676
+):
+
+get_all_nodes(graph_id) retrieves all entities using pagination
+get_all_edges(graph_id, include_temporal=True) retrieves relationships with time metadata
+Entities have labels array to classify types (Person, Organization, Event, etc.)
+
+Search and Retrieval (
+backend/app/services/zep_tools.py
+464-544
+):
+
+# Hybrid search with semantic + BM25
+search_results = self.client.graph.search(
+    graph_id=graph_id,
+    query=query,
+    limit=limit,
+    scope="edges",  # or "nodes"
+    reranker="cross_encoder"
+)
+
+Temporal Fact Management (
+backend/app/services/zep_tools.py
+82-134
+):
+
+Facts have valid_at timestamp marking when they became true
+invalid_at marks when they became false
+expired_at marks historical data
+Enables tracking of opinion evolution and event progression
+
+Sources: 
+backend/app/services/zep_tools.py
+1-890
+ 
+README.md
+88
+
+OASIS: Multi-Agent Social Simulation Framework
+
+OASIS (Open Agent Social Interaction Simulations) orchestrates parallel dual-platform simulations where LLM-powered agents interact in Twitter and Reddit environments.
+
+Simulation Architecture
+
+Output Artifacts
+
+Agent Behavior
+
+Reddit Platform
+
+Twitter Platform
+
+Simulation Entry Point
+
+SimulationRunner
+start_simulation()
+
+run_parallel_simulation.py
+--twitter_rounds
+--reddit_rounds
+--update_graph
+
+TwitterEnv
+
+twitter_profiles.csv
+Agent personas
+
+Twitter Agents
+50-200 agents
+
+twitter_simulation.db
+SQLite traces
+
+RedditEnv
+
+reddit_profiles.json
+Agent personas
+
+Reddit Agents
+50-200 agents
+
+reddit_simulation.db
+SQLite traces
+
+LLM API Calls
+OpenAI-compatible
+LLM_MODEL_NAME
+
+Action Types
+post, repost, comment
+create_post, reply
+
+Agent Memory
+Recent actions
+Conversation history
+
+actions.jsonl
+Chronological log
+
+state.json
+Simulation state
+
+run_state.json
+Real-time progress
+
+Key Implementation Details
+
+Profile Generation (
+backend/app/services/oasis_profile_generator.py
+):
+
+OasisProfileGenerator extracts entities from Zep graph
+Generates Twitter profiles in CSV format with columns: agent_id, username, profile_information, political_affiliation
+Generates Reddit profiles in JSON format with user_id, username, bio
+
+Parallel Execution:
+
+run_parallel_simulation.py spawns as subprocess
+--twitter_rounds and --reddit_rounds control simulation length
+Each platform runs independently, agents act asynchronously
+Actions logged to actions.jsonl in real-time
+
+Agent Actions:
+
+Twitter: post, repost, reply_to_post, like, follow
+Reddit: create_post, create_comment, upvote_post, upvote_comment
+Each action includes agent_id, timestamp, content, target (if applicable)
+
+IPC Interview System:
+
+InterviewCoordinator at 
+backend/app/services/interview_coordinator.py
+ manages live agent interviews
+Sends questions to running simulation process via IPC
+Agent responds from current memory state
+Used by interview_agents tool in ReportAgent
+
+Sources: 
+README.md
+90
+ 
+backend/oasis_files/run_parallel_simulation.py
+ 
+backend/app/services/simulation_runner.py
+
+ReACT Pattern: Reasoning and Acting
+
+ReACT (Reasoning + Acting) is an iterative LLM prompting pattern where the agent alternates between thinking and taking actions until it gathers sufficient information.
+
+ReACT Loop Implementation
+
+Yes
+
+Yes
+
+No
+
+No
+
+Yes
+
+Yes
+
+No
+
+No
+
+Start Section Generation
+_generate_section_react()
+
+System Prompt
+SECTION_SYSTEM_PROMPT_TEMPLATE
+Tools description
+Context
+
+User Prompt
+Section title
+Previous sections
+
+LLM Generates Response
+llm.chat()
+
+Parse Response
+_parse_tool_calls()
+
+Contains
+tool_call?
+
+Contains
+'Final Answer:'?
+
+tool_calls_count
+≥ min_tool_calls?
+
+tool_calls_count
+≥ MAX_TOOL_CALLS?
+
+Execute Tool
+_execute_tool()
+Call ZepToolsService
+
+Inject Observation
+REACT_OBSERVATION_TEMPLATE
+Append to messages
+
+Force Final Answer
+REACT_FORCE_FINAL_MSG
+
+Reject Final Answer
+REACT_INSUFFICIENT_TOOLS_MSG
+Require more tools
+
+Extract Content
+After 'Final Answer:'
+
+Clean Markdown
+Remove # headers
+
+Return Section Content
+
+ReACT Configuration
+Parameter	Value	Purpose
+MAX_TOOL_CALLS_PER_SECTION	5	Maximum tool invocations per section
+min_tool_calls	3	Minimum required tool calls before allowing Final Answer
+max_iterations	5	Maximum ReACT loop iterations
+temperature	0.5	LLM sampling temperature for section generation
+max_tokens	4096	Maximum tokens per LLM response
+Tool Call Parsing
+
+Format Support (
+backend/app/services/report_agent.py
+1066-1124
+):
+
+XML-style (preferred):
+
+<tool_call>
+{"name": "insight_forge", "parameters": {"query": "..."}}
+</tool_call>
+
+Bare JSON (fallback):
+
+{"name": "panorama_search", "parameters": {"query": "...", "include_expired": true}}
+
+Validation (
+backend/app/services/report_agent.py
+1113-1124
+):
+
+Tool name must be in VALID_TOOL_NAMES: insight_forge, panorama_search, quick_search, interview_agents
+Supports both {"name": ..., "parameters": ...} and {"tool": ..., "params": ...} formats
+Invalid tools result in error message injection
+Tool Execution Flow
+
+Tool Registry (
+backend/app/services/report_agent.py
+918-953
+):
+
+self.tools = {
+    "insight_forge": {
+        "name": "insight_forge",
+        "description": TOOL_DESC_INSIGHT_FORGE,
+        "parameters": {
+            "query": "Deep analysis question",
+            "report_context": "Optional context"
+        }
+    },
+    "panorama_search": {...},
+    "quick_search": {...},
+    "interview_agents": {...}
+}
+
+Execution (
+backend/app/services/report_agent.py
+955-1061
+):
+
+def _execute_tool(self, tool_name: str, parameters: Dict[str, Any], report_context: str = "") -> str:
+    if tool_name == "insight_forge":
+        result = self.zep_tools.insight_forge(
+            graph_id=self.graph_id,
+            query=parameters.get("query"),
+            simulation_requirement=self.simulation_requirement,
+            report_context=report_context
+        )
+        return result.to_text()
+    # ... other tools
+Observation Injection
+
+After tool execution, results are injected back into the conversation (
+backend/app/services/report_agent.py
+795-805
+):
+
+Observation（检索结果）:
+
+═══ 工具 {tool_name} 返回 ═══
+{result}
+
+═══════════════════════════════════════════════════════════════
+已调用工具 {tool_calls_count}/{max_tool_calls} 次（已用: {used_tools_str}）
+- 如果信息充分：以 "Final Answer:" 开头输出章节内容
+- 如果需要更多信息：调用一个工具继续检索
+═══════════════════════════════════════════════════════════════
+
+
+Sources: 
+backend/app/services/report_agent.py
+1220-1400
+ 
+backend/app/services/report_agent.py
+470-825
+
+Zep Memory: Persistent Context Management
+
+Zep Cloud provides persistent graph storage with temporal tracking, enabling MiroFish to maintain context across simulation stages and user sessions.
+
+Memory Architecture
+
+Context Aggregation
+
+Memory Retrieval
+
+Memory Storage in Zep
+
+Memory Writing
+
+actions.jsonl
+Simulation outputs
+
+ZepGraphMemoryUpdater
+write_activities_to_zep()
+
+Memory Episodes
+Activity batches
+
+Graph Node/Edge Updates
+add_episode()
+
+Nodes (Entities)
+uuid, name, labels
+summary, attributes
+
+Edges (Facts)
+fact, source, target
+created_at, valid_at
+invalid_at, expired_at
+
+Temporal Index
+Valid facts
+Historical facts
+
+Graph Search API
+Semantic + BM25
+cross_encoder reranker
+
+Node Get API
+Fetch by UUID
+
+Edge List API
+Paginated fetch
+
+ZepToolsService
+Abstraction layer
+
+get_simulation_context()
+Combines search + stats
+
+get_graph_statistics()
+Entity type counts
+
+get_entity_summary()
+Related facts
+
+Temporal Fact Management
+
+Fact Lifecycle (
+backend/app/services/zep_tools.py
+82-134
+):
+
+@dataclass
+class EdgeInfo:
+    uuid: str
+    name: str
+    fact: str
+    source_node_uuid: str
+    target_node_uuid: str
+    # Temporal metadata
+    created_at: Optional[str] = None
+    valid_at: Optional[str] = None      # When fact became true
+    invalid_at: Optional[str] = None    # When fact became false
+    expired_at: Optional[str] = None    # Historical marker
+    
+    @property
+    def is_expired(self) -> bool:
+        return self.expired_at is not None
+    
+    @property
+    def is_invalid(self) -> bool:
+        return self.invalid_at is not None
+
+Fact Classification:
+
+Active Facts: invalid_at == None and expired_at == None - Currently true in simulation
+Historical Facts: invalid_at != None or expired_at != None - Past states or invalidated information
+Used by panorama_search() to show evolution over time
+Context Retrieval Patterns
+
+Simulation Context (
+backend/app/services/zep_tools.py
+890-941
+):
+
+def get_simulation_context(
+    self, 
+    graph_id: str,
+    simulation_requirement: str,
+    limit: int = 30
+) -> Dict[str, Any]:
+    # Search for relevant facts
+    search_result = self.search_graph(
+        graph_id=graph_id,
+        query=simulation_requirement,
+        limit=limit
+    )
+    
+    # Get statistics
+    stats = self.get_graph_statistics(graph_id)
+    
+    # Get all entities
+    all_nodes = self.get_all_nodes(graph_id)
+    
+    return {
+        "simulation_requirement": simulation_requirement,
+        "related_facts": search_result.facts,
+        "graph_statistics": stats,
+        "entities": entities[:limit],
+        "total_entities": len(entities)
+    }
+Memory Update Pipeline
+
+Graph Update Process:
+
+Simulation writes actions.jsonl during execution
+ZepGraphMemoryUpdater reads actions post-simulation
+Groups actions into memory episodes
+Calls client.graph.add_episode(graph_id, episodes) to persist
+Zep extracts entities and relationships from episode text
+New nodes/edges added or existing ones updated with temporal markers
+
+Configuration:
+
+--update_graph flag in run_parallel_simulation.py enables automatic memory updates
+Updates happen after simulation completes
+Allows future simulations to build on previous results
+Session Persistence
+
+Cross-Session Context:
+
+Each simulation uses same graph_id (e.g., mirofish_project123)
+Knowledge accumulates across multiple simulation runs
+ReportAgent accesses entire graph history via ZepToolsService
+Temporal facts allow distinguishing recent vs. historical information
+
+API Key Management:
+
+ZEP_API_KEY environment variable
+Free tier supports basic usage
+API key stored in backend, never exposed to frontend
+
+Sources: 
+backend/app/services/zep_tools.py
+1-1400
+ 
+backend/app/utils/zep_paging.py
+ 
+backend/app/services/zep_graph_memory_updater.py
+
+Data Flow Through Core Concepts
+ZepToolsService
+ReportAgent (ReACT)
+ZepGraphMemoryUpdater
+run_parallel_simulation.py
+Zep Graph (GraphRAG)
+ProjectManager
+Frontend
+User
+ZepToolsService
+ReportAgent (ReACT)
+ZepGraphMemoryUpdater
+run_parallel_simulation.py
+Zep Graph (GraphRAG)
+ProjectManager
+Frontend
+User
+alt
+[Need more info]
+loop
+[For each section]
+Upload docs + requirement
+Create project
+Build graph from documents
+Return graph_id
+Start simulation
+Fetch entities for profiles
+Entity list
+Generate agent profiles
+Execute parallel Twitter/Reddit
+actions.jsonl + databases
+Write activities
+add_episode() with temporal facts
+Updated graph
+Generate report
+get_simulation_context()
+Context + stats
+Plan outline (LLM)
+ReACT loop starts
+insight_forge(query)
+search_graph() + get_entities()
+Facts + entities + relationships
+InsightForgeResult
+Inject Observation
+LLM decides: more tools or final?
+panorama_search() or interview_agents()
+IPC interview (if interview_agents)
+Agent responses
+Fetch historical facts
+Active + expired facts
+PanoramaResult or InterviewResult
+Final Answer generated
+Complete report
+Display report + graph viz
+
+Sources: 
+backend/app/services/report_agent.py
+1136-1500
+ 
+backend/app/services/zep_tools.py
+943-1230
+ 
+backend/app/services/simulation_runner.py
+
+Related Subsections
+
+For detailed exploration of each concept:
+
+GraphRAG and Knowledge Graphs - Entity extraction, graph construction, Zep Cloud integration
+OASIS Multi-Agent Simulation - Platform environments, agent behaviors, profile generation
+ReACT Pattern and ReportAgent - Prompt engineering, tool execution, report generation workflow
+Memory and Context Management - Temporal facts, memory episodes, cross-session persistence
+
+ This wiki is featured in the repository
+
+Dismiss
+
+Refresh this wiki
+
+This wiki was recently refreshed. Please wait 2 days to refresh again.
+
+On this page
+Core Concepts
+Purpose and Scope
+Conceptual Overview
+System Architecture: Core Concepts Integration
+GraphRAG: Knowledge Graph with Retrieval-Augmented Generation
+Core Components
+Graph Structure
+Key Operations
+OASIS: Multi-Agent Social Simulation Framework
+Simulation Architecture
+Key Implementation Details
+ReACT Pattern: Reasoning and Acting
+ReACT Loop Implementation
+ReACT Configuration
+Tool Call Parsing
+Tool Execution Flow
+Observation Injection
+Zep Memory: Persistent Context Management
+Memory Architecture
+Temporal Fact Management
+Context Retrieval Patterns
+Memory Update Pipeline
+Session Persistence
+Data Flow Through Core Concepts
+Related Subsections
+Ask Devin about 666ghj/MiroFish
+Fast
+
+
+
+DeepWiki
+
+666ghj/MiroFish
+
+Index your code with
+Devin
+Edit Wiki
+Share
+Last indexed: 7 March 2026 (985f89)
+MiroFish Overview
+System Architecture
+Five-Stage Workflow
+Getting Started
+Installation
+Configuration
+Docker Deployment
+User Guide
+Creating a Simulation
+Graph Building (Stage 1)
+Environment Setup (Stage 2)
+Running Simulations (Stage 3)
+Report Generation (Stage 4)
+Deep Interaction (Stage 5)
+Viewing Simulation History
+Core Concepts
+GraphRAG and Knowledge Graphs
+OASIS Multi-Agent Simulation
+ReACT Pattern and ReportAgent
+Memory and Context Management
+Frontend Architecture
+Component Overview
+Routing and Navigation
+API Client Layer
+Graph Visualization
+Real-time Updates and Polling
+Backend Architecture
+Simulation Management Service
+Report Generation Service
+OASIS Simulation Execution
+Task Management and Async Jobs
+Data Models and Storage
+API Reference
+Simulation API
+Report API
+Interview and IPC API
+Advanced Topics
+Custom Agent Profiles
+ZepToolsService and Custom Tools
+Graph Memory Updates
+LLM Configuration and Optimization
+Troubleshooting
+Setup and Configuration Issues
+Simulation Failures
+Report Generation Issues
+Installation
+Relevant source files
+
+This page provides step-by-step instructions for installing MiroFish dependencies and setting up the development environment. It covers prerequisite requirements, environment configuration, dependency installation, and service startup procedures.
+
+For information about Docker-based deployment, see Docker Deployment. For details on environment variables and API configuration, see Configuration.
+
+Prerequisites
+
+MiroFish requires three core tools to be installed before proceeding with setup. These tools provide the runtime environments and package management capabilities for both frontend and backend components.
+
+Required Tools
+Tool	Version Requirement	Purpose	Verification Command
+Node.js	≥18.0.0	Frontend runtime and build tooling, includes npm	node -v
+Python	≥3.11, ≤3.12	Backend runtime environment	python --version
+uv	Latest	Fast Python package manager for dependency resolution	uv --version
+
+The version constraints are enforced in the project configuration files: Node.js version is specified in 
+package.json
+18-19
+ and Python version is specified in 
+backend/pyproject.toml
+5
+
+Sources: 
+README.md
+100-104
+ 
+README-EN.md
+100-104
+ 
+package.json
+17-20
+ 
+backend/pyproject.toml
+1-10
+
+Installation Methods
+
+MiroFish supports two installation approaches: a single-command automated setup and a multi-step manual process. Both methods achieve the same result but offer different levels of control.
+
+Manual Process
+
+Automated Process
+
+Installation Options
+
+Installation Start
+
+Verify Prerequisites
+node -v, python --version, uv --version
+
+Configure Environment
+cp .env.example .env
+Edit .env file
+
+Automated Setup
+npm run setup:all
+
+Manual Setup
+
+npm install
+(root directory)
+
+cd frontend && npm install
+
+cd backend && uv sync
+
+npm run setup
+(root + frontend)
+
+npm run setup:backend
+(backend only)
+
+Installation Complete
+
+Start Services
+npm run dev
+
+Diagram: Installation Process Flow
+
+Sources: 
+README.md
+130-145
+ 
+README-EN.md
+130-145
+ 
+package.json
+5-8
+
+Environment Configuration
+
+Before installing dependencies, create and configure the .env file with required API credentials. MiroFish requires external LLM and Zep Cloud services to function.
+
+Creating the Environment File
+# Copy the example configuration file to .env
+cp .env.example .env
+
+The .env file must be placed in the project root directory. It is read by both frontend and backend services during startup.
+
+Required Environment Variables
+
+The following variables must be set in the .env file:
+
+Variable	Description	Example Value	Required
+LLM_API_KEY	API key for OpenAI-compatible LLM service	sk-...	Yes
+LLM_BASE_URL	Base URL for LLM API endpoint	https://dashscope.aliyuncs.com/compatible-mode/v1	Yes
+LLM_MODEL_NAME	Model identifier to use	qwen-plus	Yes
+ZEP_API_KEY	API key for Zep Cloud graph service	z_...	Yes
+
+The README recommends using Alibaba's Qwen-plus model via the Bailian platform (
+https
+), and notes that Zep Cloud's free monthly quota is sufficient for basic usage (
+https
+).
+
+Example Configuration:
+
+# LLM API Configuration (OpenAI SDK compatible)
+LLM_API_KEY=your_api_key_here
+LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+LLM_MODEL_NAME=qwen-plus
+# Zep Cloud Configuration
+ZEP_API_KEY=your_zep_api_key_here
+
+Sources: 
+README.md
+106-128
+ 
+README-EN.md
+106-128
+
+Dependency Installation
+
+MiroFish has a three-tier dependency structure: root-level Node.js packages, frontend Node.js packages, and backend Python packages.
+
+Directory Structure and Dependencies
+
+Backend Dependencies
+
+Frontend Dependencies
+
+Root Dependencies
+
+Project Root
+package.json
+
+frontend/
+package.json
+
+backend/
+pyproject.toml
+
+concurrently@^9.1.2
+(Development only)
+
+Vite
+(Dev server)
+
+Vue.js 3
+(Framework)
+
+D3.js
+(Graph visualization)
+
+Axios
+(HTTP client)
+
+flask>=3.0.0
+flask-cors>=6.0.0
+
+openai>=1.0.0
+(LLM client)
+
+zep-cloud==3.13.0
+(Graph API)
+
+camel-oasis==0.2.5
+camel-ai==0.2.78
+
+PyMuPDF>=1.24.0
+(Document parsing)
+
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+charset-normalizer>=3.0.0
+
+Diagram: Dependency Tree Structure
+
+Automated Installation (Recommended)
+
+Install all dependencies with a single command:
+
+npm run setup:all
+
+This command executes the setup:all script defined in 
+package.json
+8
+ which runs npm run setup && npm run setup:backend sequentially.
+
+What happens internally:
+
+Executes npm install in the root directory (installs concurrently)
+Executes npm install in the frontend/ directory
+Executes uv sync in the backend/ directory (creates virtual environment and installs Python packages)
+Manual Installation (Step-by-Step)
+
+Alternatively, install dependencies in separate steps:
+
+Step 1: Install Node.js Dependencies
+npm run setup
+
+This installs Node.js packages for both the root directory and the frontend/ subdirectory (
+package.json
+6
+).
+
+Step 2: Install Python Dependencies
+npm run setup:backend
+
+This navigates to the backend/ directory and executes uv sync (
+package.json
+7
+), which:
+
+Creates a virtual environment (.venv/) if it doesn't exist
+Reads dependencies from 
+backend/pyproject.toml
+11-35
+Installs all required Python packages with version constraints
+Generates a uv.lock file for reproducible builds
+Key Backend Dependencies
+
+The backend's Python dependencies are defined in 
+backend/pyproject.toml
+11-35
+:
+
+Core Framework:
+
+flask>=3.0.0 - Web framework for REST API
+flask-cors>=6.0.0 - Cross-origin resource sharing support
+
+External Services:
+
+openai>=1.0.0 - LLM API client
+zep-cloud==3.13.0 - Zep graph database client
+
+Simulation Engine:
+
+camel-oasis==0.2.5 - OASIS social simulation framework
+camel-ai==0.2.78 - CAMEL AI multi-agent library
+
+Document Processing:
+
+PyMuPDF>=1.24.0 - PDF parsing
+charset-normalizer>=3.0.0 - Text encoding detection
+chardet>=5.0.0 - Character encoding detection
+
+Utilities:
+
+python-dotenv>=1.0.0 - Environment variable management
+pydantic>=2.0.0 - Data validation
+
+Sources: 
+package.json
+5-8
+ 
+backend/pyproject.toml
+11-35
+
+Starting the Application
+
+After successful installation, MiroFish can be started in development mode with hot-reloading enabled for both frontend and backend.
+
+Development Mode (Recommended)
+
+Start both frontend and backend simultaneously:
+
+npm run dev
+
+This command uses the concurrently package to run both services in parallel (
+package.json
+9
+):
+
+Backend process: cd backend && uv run python run.py
+Frontend process: cd frontend && npm run dev
+
+The concurrently configuration uses color-coded output (green for backend, cyan for frontend) and automatically kills all processes when one exits.
+
+Service Endpoints
+Service	URL	Port
+Frontend (Vite Dev Server)	http://localhost:3000	3000
+Backend API (Flask)	http://localhost:5001	5001
+
+The frontend automatically proxies API requests to the backend during development.
+
+Individual Service Startup
+
+For debugging or development purposes, services can be started separately:
+
+# Start backend only
+npm run backend
+ 
+# Start frontend only
+npm run frontend
+
+These commands correspond to 
+package.json
+10-11
+
+Runtime Architecture
+
+External Services
+
+Development Environment
+
+HTTP GET /
+
+HTTP /api/*
+(proxied)
+
+reads .env
+
+uses packages
+
+LLM requests
+
+Graph queries
+
+serves
+
+User Browser
+localhost:3000
+
+Vite Dev Server
+Port 3000
+frontend/
+
+Flask Server
+Port 5001
+backend/run.py
+
+Python Virtual Env
+backend/.venv/
+
+LLM Service
+$LLM_BASE_URL
+
+Zep Cloud API
+api.getzep.com
+
+.env File
+LLM_API_KEY
+ZEP_API_KEY
+
+Vue SPA
+React components
+D3 visualizations
+
+Diagram: Development Runtime Architecture
+
+Sources: 
+README.md
+148-163
+ 
+README-EN.md
+148-163
+ 
+package.json
+9-12
+
+Verification
+
+After starting the services, verify the installation by accessing the application:
+
+Frontend Verification
+Open http://localhost:3000 in a web browser
+The MiroFish home page should load, displaying the file upload interface
+The browser console should not show any critical errors
+Backend Verification
+Open http://localhost:5001/health (if a health endpoint exists)
+Alternatively, check the terminal output for:
+* Running on http://localhost:5001
+* Serving Flask app 'app'
+
+Verify that environment variables are loaded (Flask should log successful .env reading)
+Common Startup Issues
+Issue	Symptom	Solution
+Port already in use	EADDRINUSE error	Kill existing process on port 3000 or 5001
+Missing .env file	KeyError or authentication errors	Ensure .env exists in project root with all required keys
+Python version mismatch	uv sync fails	Verify Python version is between 3.11 and 3.12
+Node version mismatch	npm install fails	Verify Node.js version is 18.0.0 or higher
+Invalid API keys	401/403 errors in logs	Verify LLM_API_KEY and ZEP_API_KEY are valid
+Next Steps
+
+Once installation is verified, proceed to Configuration for detailed information about optional environment variables and advanced configuration options. To begin using MiroFish, see Creating a Simulation.
+
+Sources: 
+README.md
+94-163
+ 
+README-EN.md
+94-163
+
+Installation Directory Layout
+
+After successful installation, the project structure contains the following key directories and files:
+
+MiroFish/
+├── .env                          # Environment configuration (created by user)
+├── .env.example                  # Example environment file
+├── package.json                  # Root npm scripts and dependencies
+├── package-lock.json            # Root npm lock file
+├── node_modules/                # Root Node.js dependencies
+│   └── concurrently/            # Process orchestration tool
+├── frontend/
+│   ├── package.json             # Frontend dependencies
+│   ├── package-lock.json        # Frontend lock file
+│   ├── node_modules/            # Frontend Node.js dependencies
+│   │   ├── vue/                 # Vue.js framework
+│   │   ├── vite/                # Build tool and dev server
+│   │   └── d3/                  # Graph visualization library
+│   └── src/                     # Vue application source
+├── backend/
+│   ├── pyproject.toml           # Python dependencies definition
+│   ├── uv.lock                  # Python lock file (generated)
+│   ├── .venv/                   # Python virtual environment
+│   │   ├── bin/python           # Python interpreter
+│   │   └── lib/python3.11/      # Installed Python packages
+│   ├── run.py                   # Flask application entry point
+│   └── app/                     # Backend source code
+└── static/                      # Static assets
+
+
+Key Points:
+
+The .venv/ directory is created by uv sync and contains an isolated Python environment
+The .env file must be manually created by copying .env.example
+Three separate node_modules/ directories exist (root, frontend, backend if applicable)
+Lock files (package-lock.json, uv.lock) ensure reproducible installations
+
+Sources: 
+package.json
+1-22
+ 
+backend/pyproject.toml
+1-56
+
+ This wiki is featured in the repository
+
+Dismiss
+
+Refresh this wiki
+
+This wiki was recently refreshed. Please wait 2 days to refresh again.
+
+On this page
+Installation
+Prerequisites
+Required Tools
+Installation Methods
+Environment Configuration
+Creating the Environment File
+Required Environment Variables
+Dependency Installation
+Directory Structure and Dependencies
+Automated Installation (Recommended)
+Manual Installation (Step-by-Step)
+Step 1: Install Node.js Dependencies
+Step 2: Install Python Dependencies
+Key Backend Dependencies
+Starting the Application
+Development Mode (Recommended)
+Service Endpoints
+Individual Service Startup
+Runtime Architecture
+Verification
+Frontend Verification
+Backend Verification
+Common Startup Issues
+Next Steps
+Installation Directory Layout
+Ask Devin about 666ghj/MiroFish
+Fast
+
+
+
+DeepWiki
+
+666ghj/MiroFish
+
+Index your code with
+Devin
+Edit Wiki
+Share
+Last indexed: 7 March 2026 (985f89)
+MiroFish Overview
+System Architecture
+Five-Stage Workflow
+Getting Started
+Installation
+Configuration
+Docker Deployment
+User Guide
+Creating a Simulation
+Graph Building (Stage 1)
+Environment Setup (Stage 2)
+Running Simulations (Stage 3)
+Report Generation (Stage 4)
+Deep Interaction (Stage 5)
+Viewing Simulation History
+Core Concepts
+GraphRAG and Knowledge Graphs
+OASIS Multi-Agent Simulation
+ReACT Pattern and ReportAgent
+Memory and Context Management
+Frontend Architecture
+Component Overview
+Routing and Navigation
+API Client Layer
+Graph Visualization
+Real-time Updates and Polling
+Backend Architecture
+Simulation Management Service
+Report Generation Service
+OASIS Simulation Execution
+Task Management and Async Jobs
+Data Models and Storage
+API Reference
+Simulation API
+Report API
+Interview and IPC API
+Advanced Topics
+Custom Agent Profiles
+ZepToolsService and Custom Tools
+Graph Memory Updates
+LLM Configuration and Optimization
+Troubleshooting
+Setup and Configuration Issues
+Simulation Failures
+Report Generation Issues
+Getting Started
+Relevant source files
+
+This page provides the essential steps to install, configure, and run MiroFish for the first time. You will learn how to set up the development environment, configure external service connections, and verify that both frontend and backend services are running correctly.
+
+For detailed installation procedures, see Installation. For comprehensive configuration options, see Configuration. For production deployment using Docker, see Docker Deployment.
+
+Prerequisites
+
+MiroFish requires specific runtime environments and external service accounts to function. Before proceeding, ensure you have the following:
+
+Runtime Requirements
+Component	Version	Purpose	Verification Command
+Node.js	18.0.0 or higher	Frontend development server and build tools	node -v
+Python	3.11 - 3.12	Backend runtime environment	python --version
+uv	Latest stable	Python dependency management	uv --version
+External Service Accounts
+
+MiroFish integrates with external services that require API credentials:
+
+Service	Purpose	Registration URL	Cost
+LLM Provider	Powers agent intelligence and report generation	Varies by provider	Paid (recommended: Alibaba Qwen-plus)
+Zep Cloud	Knowledge graph storage and memory management	https://app.getzep.com/	Free tier available
+
+Important: The system will not function without valid API keys for both services. You must configure these in the .env file before starting the application.
+
+Sources: 
+README-EN.md
+98-104
+ 
+.env.example
+1-16
+
+Deployment Architecture Overview
+
+MiroFish supports two deployment modes: Development Mode (recommended for getting started) and Docker Mode (for production).
+
+Development Mode Architecture
+
+Developer Workstation
+
+Local Storage
+
+External Services
+
+Backend Process
+
+Frontend Process
+
+Concurrent Process Manager
+
+Project Root
+
+npm run dev
+
+spawns
+
+loads
+
+starts
+
+starts
+
+serves
+
+runs
+
+HTTP requests
+
+API calls
+
+API calls
+
+read/write
+
+File System
+backend/uploads/
+Projects, Simulations
+
+Developer
+
+package.json
+(npm scripts)
+
+concurrently
+(npm run dev)
+
+.env file
+(API Keys)
+
+Vite Dev Server
+localhost:3000
+
+Flask Server
+localhost:5001
+
+frontend/src/
+(Vue components)
+
+backend/app/
+(Python services)
+
+LLM API
+(LLM_BASE_URL)
+
+Zep Cloud
+(ZEP_API_KEY)
+
+Sources: 
+package.json
+9
+ 
+README-EN.md
+149-163
+
+Quick Start Summary
+
+The fastest path to running MiroFish involves these steps:
+
+Clone the repository and navigate to the project root
+Configure environment variables by copying and editing .env.example
+Install dependencies using the provided npm scripts
+Start the development servers with a single command
+Verify both frontend and backend are accessible
+
+The following sections provide commands and verification steps.
+
+Installation Flow
+
+Dependency Installation Process
+
+Backend Directory
+
+Frontend Directory
+
+Root Directory
+
+Project Root
+
+Copy .env.example
+to .env
+
+npm install
+(concurrently)
+
+cd frontend &&
+npm install
+
+Frontend Ready
+(node_modules)
+
+cd backend &&
+uv sync
+
+Virtual Environment
+(.venv created)
+
+Backend Ready
+(dependencies installed)
+
+All Dependencies
+Installed
+
+Automated Installation Command:
+
+# One-command installation (recommended)
+npm run setup:all
+
+This script executes the following sequence:
+
+npm run setup - Installs root and frontend dependencies
+npm run setup:backend - Creates Python virtual environment and installs backend packages
+
+Sources: 
+package.json
+6-8
+ 
+README-EN.md
+132-145
+
+Configuration Requirements
+
+Before starting the services, you must configure the .env file in the project root.
+
+Minimum Required Configuration
+
+# LLM API Configuration
+LLM_API_KEY=your_api_key_here
+LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+LLM_MODEL_NAME=qwen-plus
+# Zep Cloud Configuration
+ZEP_API_KEY=your_zep_api_key_here
+
+Configuration Process:
+
+Copy the example file: cp .env.example .env
+Edit .env with your preferred text editor
+Replace your_api_key_here with actual API keys
+Do not commit .env to version control (already in .gitignore)
+
+Optional Boost Configuration:
+
+For parallel simulations to avoid rate limiting, you can configure a secondary LLM endpoint:
+
+LLM_BOOST_API_KEY=your_boost_api_key
+LLM_BOOST_BASE_URL=your_boost_base_url
+LLM_BOOST_MODEL_NAME=your_boost_model
+
+Important: If you do not use boost configuration, do not include these variables in your .env file at all.
+
+For detailed configuration options, see Configuration.
+
+Sources: 
+.env.example
+1-16
+ 
+README-EN.md
+106-128
+
+Starting the Services
+
+Service Startup Flow
+
+Frontend Startup
+
+Backend Startup
+
+Concurrently Process Manager
+
+npm run dev
+(from project root)
+
+Parse package.json
+dev script
+
+Spawn 2 processes
+
+npm run backend
+
+cd backend &&
+uv run python run.py
+
+.env loaded by
+python-dotenv
+
+Flask server starts
+app/init.py
+
+Listening on
+localhost:5001
+
+npm run frontend
+
+cd frontend &&
+npm run dev
+
+Vite builds
+dev bundle
+
+Listening on
+localhost:3000
+
+Both Services Running
+
+Start Command:
+
+# Start both frontend and backend simultaneously
+npm run dev
+
+Expected Console Output:
+
+[backend] * Running on http://127.0.0.1:5001
+[frontend] VITE v5.x.x ready in XXX ms
+[frontend] ➜ Local: http://localhost:3000/
+
+
+Individual Service Commands (for debugging):
+
+# Start only the backend
+npm run backend
+ 
+# Start only the frontend
+npm run frontend
+
+Sources: 
+package.json
+9-11
+ 
+README-EN.md
+148-163
+
+Verification Steps
+
+After starting the services, verify that MiroFish is running correctly.
+
+Frontend Verification
+Navigate to http://localhost:3000 in your web browser
+Expected: The MiroFish home page should load with the file upload interface
+Component: The Home.vue component should render
+
+Troubleshooting:
+
+If page does not load, check the frontend console output for errors
+Verify Node.js version is 18 or higher
+Check that port 3000 is not already in use
+Backend Verification
+Navigate to http://localhost:5001/api/health (if health endpoint exists)
+Alternatively, check the backend console for Flask startup messages
+Expected: Flask server should show no errors and display "Running on http://127.0.0.1:5001"
+
+Troubleshooting:
+
+If backend fails to start, verify .env file exists and contains valid API keys
+Check Python version is between 3.11 and 3.12
+Verify backend/.venv directory was created during installation
+Check that port 5001 is not already in use
+API Key Validation
+
+The backend will fail to start or show warnings if API keys are invalid. Check the console output for messages like:
+
+Error: Invalid LLM_API_KEY
+Error: Cannot connect to Zep Cloud
+
+
+If you see these errors, verify your .env configuration.
+
+Sources: 
+README-EN.md
+154-156
+ 
+backend/pyproject.toml
+1-56
+
+File System Structure After Setup
+
+After successful installation and first startup, your project directory should contain:
+
+MiroFish/
+├── .env                          # Your API keys (DO NOT COMMIT)
+├── .env.example                  # Template for .env
+├── package.json                  # Root npm configuration
+├── node_modules/                 # Root npm dependencies (concurrently)
+├── frontend/
+│   ├── node_modules/             # Frontend npm dependencies
+│   ├── src/                      # Vue.js source code
+│   └── package.json              # Frontend npm configuration
+├── backend/
+│   ├── .venv/                    # Python virtual environment
+│   ├── app/                      # Backend Python source code
+│   ├── uploads/                  # Created on first project creation
+│   ├── pyproject.toml            # Backend dependencies
+│   └── run.py                    # Backend entry point
+└── static/                       # Static assets
+
+
+Key Directories Created During Setup:
+
+node_modules/ (root and frontend)
+backend/.venv/ (Python virtual environment)
+
+Directories Created at Runtime:
+
+backend/uploads/ - Stores user-uploaded files and simulation data
+backend/logs/ - Application logs (if logging is configured)
+
+Sources: 
+package.json
+1-21
+ 
+backend/pyproject.toml
+1-56
+ 
+.gitignore
+1-60
+
+Next Steps
+
+Once both services are verified as running:
+
+Navigate to http://localhost:3000 in your browser
+Upload seed materials - Documents (PDF, MD, TXT) containing information for simulation
+Enter simulation requirements - Natural language description of what you want to predict
+Follow the five-stage workflow - See Five-Stage Workflow for an overview
+
+Recommended First Simulation:
+
+Use a small document (a few pages)
+Request fewer than 40 simulation rounds
+Monitor console output to understand the process
+
+For a complete walkthrough of creating and running a simulation, see User Guide.
+
+For understanding the underlying architecture, see System Architecture.
+
+For troubleshooting common issues, see Troubleshooting.
+
+Sources: 
+README-EN.md
+29-42
+ 
+README.md
+86-93
+
+Alternative: Docker Deployment
+
+For production environments or if you prefer containerized deployment, MiroFish can be deployed using Docker Compose. This approach encapsulates all dependencies and provides a consistent runtime environment.
+
+Quick Docker Start:
+
+# 1. Configure environment variables
+cp .env.example .env
+# Edit .env with your API keys
+ 
+# 2. Start containers
+docker compose up -d
+
+Docker Architecture: The docker-compose.yml file defines two services:
+
+Frontend Container: Nginx serving static build from frontend/
+Backend Container: Python application with uv package manager
+
+Both containers read the .env file from the project root and expose the same ports (3000 for frontend, 5001 for backend).
+
+For complete Docker deployment instructions, see Docker Deployment.
+
+Sources: 
+README-EN.md
+165-177
+ 
+README.md
+166-177
+
+ This wiki is featured in the repository
+
+Dismiss
+
+Refresh this wiki
+
+This wiki was recently refreshed. Please wait 2 days to refresh again.
+
+On this page
+Getting Started
+Prerequisites
+Runtime Requirements
+External Service Accounts
+Deployment Architecture Overview
+Quick Start Summary
+Installation Flow
+Configuration Requirements
+Starting the Services
+Verification Steps
+Frontend Verification
+Backend Verification
+API Key Validation
+File System Structure After Setup
+Next Steps
+Alternative: Docker Deployment
+Ask Devin about 666ghj/MiroFish
+Fast
+
+
+
+DeepWiki
+
+666ghj/MiroFish
+
+Index your code with
+Devin
+Edit Wiki
+Share
+Last indexed: 7 March 2026 (985f89)
+MiroFish Overview
+System Architecture
+Five-Stage Workflow
+Getting Started
+Installation
+Configuration
+Docker Deployment
+User Guide
+Creating a Simulation
+Graph Building (Stage 1)
+Environment Setup (Stage 2)
+Running Simulations (Stage 3)
+Report Generation (Stage 4)
+Deep Interaction (Stage 5)
+Viewing Simulation History
+Core Concepts
+GraphRAG and Knowledge Graphs
+OASIS Multi-Agent Simulation
+ReACT Pattern and ReportAgent
+Memory and Context Management
+Frontend Architecture
+Component Overview
+Routing and Navigation
+API Client Layer
+Graph Visualization
+Real-time Updates and Polling
+Backend Architecture
+Simulation Management Service
+Report Generation Service
+OASIS Simulation Execution
+Task Management and Async Jobs
+Data Models and Storage
+API Reference
+Simulation API
+Report API
+Interview and IPC API
+Advanced Topics
+Custom Agent Profiles
+ZepToolsService and Custom Tools
+Graph Memory Updates
+LLM Configuration and Optimization
+Troubleshooting
+Setup and Configuration Issues
+Simulation Failures
+Report Generation Issues
+MiroFish Overview
+Relevant source files
+Purpose and Scope
+
+This document provides a comprehensive introduction to MiroFish, covering its core capabilities, system architecture, workflow stages, and technology stack. It serves as the entry point for understanding how MiroFish operates as a collective intelligence engine for multi-agent simulation and prediction.
+
+For detailed information about specific subsystems, see:
+
+System architecture details: System Architecture
+Workflow stage explanations: Five-Stage Workflow
+Installation and setup: Getting Started
+User-facing features: User Guide
+Technical implementation: Frontend Architecture and Backend Architecture
+What is MiroFish?
+
+MiroFish is a multi-agent simulation engine that constructs high-fidelity digital worlds to predict future outcomes. It extracts information from real-world documents (news reports, policy drafts, financial signals, or even novels) and uses thousands of LLM-powered agents to simulate social interactions on Twitter and Reddit platforms. The system produces detailed analytical reports and enables interactive exploration of the simulated world.
+
+Core Capabilities
+Capability	Description	Use Cases
+GraphRAG Construction	Extracts entities, relationships, and temporal facts from documents to build a knowledge graph	Policy impact analysis, narrative prediction
+Dual-Platform Simulation	Runs parallel simulations on Twitter and Reddit environments with autonomous agents	Public opinion forecasting, social dynamics modeling
+Intelligent Report Generation	Uses ReACT pattern with specialized tools to analyze simulation results	Decision support, trend prediction
+Deep Interaction	Enables conversations with simulated agents and the report agent	Scenario exploration, what-if analysis
+Historical Tracking	Maintains a database of past simulations for comparative analysis	Pattern recognition, iterative refinement
+Target Applications
+
+Macro-Level Predictions: Policy rehearsal laboratories where decisions can be tested in zero-risk environments before real-world implementation.
+
+Micro-Level Exploration: Creative sandboxes for exploring hypothetical scenarios, from predicting novel endings to analyzing social phenomena.
+
+Sources: 
+README.md
+27-42
+ 
+README-EN.md
+27-42
+
+System Architecture
+
+MiroFish follows a three-tier architecture with clear separation between presentation, business logic, and external services.
+
+Architectural Layers
+
+Data Storage
+
+External Services
+
+Execution Layer
+
+Backend Service Layer
+
+API Client Layer
+
+Presentation Layer
+
+Home.vue
+File Upload & Requirements
+
+Process.vue
+Graph Building Status
+
+SimulationView.vue
+Environment Setup
+
+SimulationRunView.vue
+Simulation Execution
+
+ReportView.vue
+Report Generation
+
+InteractionView.vue
+Deep Interaction
+
+HistoryDatabase.vue
+Past Simulations
+
+simulation.js
+22 endpoint functions
+
+report.js
+6 endpoint functions
+
+graph.js
+Graph queries
+
+simulation_bp
+Flask Blueprint
+
+report_bp
+Flask Blueprint
+
+project_bp
+Flask Blueprint
+
+SimulationManager
+State & Lifecycle
+
+ReportManager
+File Management
+
+TaskManager
+Async Jobs
+
+SimulationRunner
+Subprocess Orchestration
+
+run_parallel_simulation.py
+OASIS Wrapper
+
+ReportAgent
+ReACT Loop
+
+ZepToolsService
+Graph Queries
+
+LLM Service
+OpenAI-compatible API
+
+Zep Cloud
+Knowledge Graph
+
+OASIS Framework
+camel-ai
+
+Projects/
+Simulations/
+Reports/
+
+twitter_simulation.db
+reddit_simulation.db
+
+state.json
+progress.json
+profiles
+
+Component Responsibilities
+
+Presentation Layer: Vue.js single-page application with components for each workflow stage
+API Client Layer: JavaScript modules that abstract HTTP communication (
+frontend/src/services/simulation.js
+ 
+frontend/src/services/report.js
+)
+Backend Service Layer: Flask blueprints and manager classes that handle business logic
+Execution Layer: Python scripts that orchestrate LLM-based agents and manage simulations
+External Services: Third-party APIs for language models, knowledge graphs, and social simulation
+Data Storage: File-based persistence for projects, JSON state files, and SQLite traces
+
+Sources: 
+README.md
+86-93
+ High-level system architecture diagram
+
+Five-Stage Workflow
+
+MiroFish processes user inputs through five sequential stages, each transforming data and passing results to the next stage.
+
+Workflow Pipeline
+
+Stage 5: Deep Interaction
+
+Stage 4: Report Generation
+
+Stage 3: Simulation Execution
+
+Stage 2: Environment Setup
+
+Stage 1: Graph Building
+
+User Documents
+PDF, MD, TXT
+
+Document Processing
+Entity Extraction
+
+Zep Knowledge Graph
+graph_id
+
+OasisProfileGenerator
+Config Generation
+
+twitter_profiles.csv
+reddit_profiles.json
+simulation.json
+
+run_parallel_simulation.py
+OASIS Subprocess
+
+actions.jsonl
+twitter_simulation.db
+reddit_simulation.db
+
+ReportAgent
+ReACT Loop
+
+insight_forge
+panorama_search
+interview_agents
+
+outline.json
+section_XX.md
+full_report.md
+
+Chat with ReportAgent
+or Simulated Agents
+
+Agent Batch Interviews
+IPC Communication
+
+Stage Handoffs
+
+Stage	Input	Output	Key Files
+1: Graph Building	User documents + requirements	graph_id, project_id	
+backend/app/services/document_processor.py
+
+2: Environment Setup	graph_id	simulation_id, agent profiles, config	
+backend/app/services/oasis_profile_generator.py
+
+3: Simulation Execution	simulation_id	Action logs, SQLite traces	
+backend/app/oasis/run_parallel_simulation.py
+
+4: Report Generation	SQLite traces, Zep graph	report_id, markdown report	
+backend/app/services/report_agent.py
+
+5: Deep Interaction	Report + simulation context	Conversation logs	
+backend/app/routes/ipc.py
+
+Sources: 
+README.md
+86-93
+ 
+README-EN.md
+86-93
+ Five-stage workflow diagram
+
+Technology Stack
+Frontend Stack
+Technology	Version	Purpose
+Vue.js	3.x	Reactive UI framework
+Vite	Latest	Build tool and dev server
+Vue Router	4.x	Client-side routing
+D3.js	7.x	Knowledge graph visualization (
+frontend/src/components/GraphPanel.vue
+)
+Axios	Latest	HTTP client for API calls
+Backend Stack
+Technology	Version	Purpose
+Python	3.11-3.12	Runtime environment
+Flask	Latest	Web framework and REST API
+uv	Latest	Python package manager
+SQLite	3.x	Simulation trace storage
+External Services
+Service	Purpose	Configuration
+LLM API	Agent reasoning and content generation	LLM_API_KEY, LLM_BASE_URL, LLM_MODEL_NAME
+Zep Cloud	GraphRAG knowledge graph storage	ZEP_API_KEY
+OASIS	Multi-agent social simulation framework	Integrated via 
+camel-ai
+Deployment Options
+
+Development Mode: Concurrent frontend (Vite dev server on port 3000) and backend (Flask on port 5001)
+
+npm run dev  # Starts both services using concurrently
+
+Production Mode: Docker Compose with separate containers for frontend (Nginx) and backend (Python)
+
+docker compose up -d
+
+Sources: 
+README.md
+100-176
+ 
+README-EN.md
+100-177
+ 
+package.json
+1-30
+
+Key Components
+
+This section bridges natural language system names to concrete code entities.
+
+Frontend Components to Code Mapping
+
+API Services
+
+Vue Components
+
+uses
+
+uses
+
+uses
+
+uses
+
+uses
+
+uses
+
+renders
+
+renders
+
+renders
+
+renders
+
+renders
+
+Home.vue
+
+Process.vue
+
+SimulationView.vue
+
+Step2EnvSetup.vue
+
+SimulationRunView.vue
+
+Step3Simulation.vue
+
+ReportView.vue
+
+Step4Report.vue
+
+InteractionView.vue
+
+Step5Interaction.vue
+
+GraphPanel.vue
+D3 visualization
+
+simulation.js
+createSimulation()
+prepareSimulation()
+startSimulation()
+getRunStatus()
+
+report.js
+generateReport()
+getReportStatus()
+chatWithReport()
+interviewAgents()
+
+Key Frontend Files
+
+Router: 
+frontend/src/router/index.js
+ - Defines routes /, /process, /simulation, /simulation-run, /report, /interaction, /history
+API Clients: 
+frontend/src/services/simulation.js
+ 
+frontend/src/services/report.js
+ 
+frontend/src/services/graph.js
+Main Components: 
+frontend/src/views/
+ directory contains all workflow views
+Shared Components: 
+frontend/src/components/GraphPanel.vue
+ for D3.js graph rendering
+
+Sources: Frontend architecture diagram
+
+Backend Services to Code Mapping
+
+OASIS Layer
+
+Service Layer
+
+Flask Blueprints
+
+simulation_bp
+/api/simulation/*
+
+report_bp
+/api/report/*
+
+project_bp
+/api/project/*
+
+graph_bp
+/api/graph/*
+
+ipc_bp
+/api/ipc/*
+
+SimulationManager
+backend/app/services/simulation_manager.py
+
+SimulationRunner
+backend/app/services/simulation_runner.py
+
+ReportAgent
+backend/app/services/report_agent.py
+
+ZepToolsService
+backend/app/services/zep_tools_service.py
+
+OasisProfileGenerator
+backend/app/services/oasis_profile_generator.py
+
+TaskManager
+backend/app/services/task_manager.py
+
+run_parallel_simulation.py
+backend/app/oasis/
+
+ipc_command_handler.py
+Agent interview logic
+
+ZepGraphMemoryUpdater
+backend/app/oasis/memory/
+
+Key Backend Files
+
+File Path	Class/Function	Purpose
+
+backend/app/routes/simulation.py
+	simulation_bp	REST API endpoints for simulation lifecycle
+
+backend/app/routes/report.py
+	report_bp	REST API endpoints for report generation
+
+backend/app/services/simulation_manager.py
+	SimulationManager	Manages simulation state and file operations
+
+backend/app/services/simulation_runner.py
+	SimulationRunner	Spawns and monitors OASIS subprocess
+
+backend/app/services/report_agent.py
+	ReportAgent	Implements ReACT loop for report generation
+
+backend/app/services/zep_tools_service.py
+	ZepToolsService	Provides tools: insight_forge, panorama_search, interview_agents
+
+backend/app/oasis/run_parallel_simulation.py
+	main()	Entry point for dual-platform OASIS simulation
+
+Sources: Backend architecture diagram, 
+backend/app/routes/
+ 
+backend/app/services/
+
+Data Flow
+File System Structure
+
+MiroFish persists all data to the file system in a structured hierarchy:
+
+Projects/
+├── {project_id}/
+│   ├── documents/           # Uploaded seed materials
+│   ├── requirements.txt     # User-specified simulation requirements
+│   └── graph_metadata.json  # Zep graph ID and configuration
+│
+Simulations/
+├── {simulation_id}/
+│   ├── twitter/
+│   │   ├── profiles.csv              # Twitter agent profiles
+│   │   ├── simulation.json           # Platform configuration
+│   │   ├── run_state.json            # Real-time execution state
+│   │   ├── actions.jsonl             # Agent action logs
+│   │   └── twitter_simulation.db     # SQLite trace database
+│   │
+│   ├── reddit/
+│   │   ├── profiles.json             # Reddit agent profiles
+│   │   ├── simulation.json           # Platform configuration
+│   │   ├── run_state.json            # Real-time execution state
+│   │   ├── actions.jsonl             # Agent action logs
+│   │   └── reddit_simulation.db      # SQLite trace database
+│   │
+│   └── state.json           # Overall simulation state
+│
+Reports/
+└── {report_id}/
+    ├── outline.json         # Report structure
+    ├── section_01.md        # Generated sections
+    ├── section_02.md
+    ├── full_report.md       # Complete report
+    ├── agent_log.jsonl      # ReportAgent reasoning trace
+    └── console_log.txt      # Execution logs
+
+State Transitions
+
+Upload documents
+
+Start graph construction
+
+Zep graph ready
+
+Create simulation
+
+Start preparation
+
+Profiles & config generated
+
+Start simulation
+
+Agents act (actions.jsonl updated)
+
+Simulation ends
+
+User stops
+
+Generate report
+
+Report ready
+
+Deep interaction
+
+ProjectCreated
+
+GraphBuilding
+
+GraphComplete
+
+SimulationCreated
+
+Preparing
+
+Ready
+
+Running
+
+Completed
+
+Stopped
+
+ReportGenerating
+
+ReportComplete
+
+Interactive
+
+State Files
+
+Projects/{project_id}/state.json: Tracks graph building progress
+Simulations/{simulation_id}/state.json: Overall simulation status (preparing, ready, running, completed, stopped)
+Simulations/{simulation_id}/{platform}/run_state.json: Real-time platform-specific state updated during simulation
+Reports/{report_id}/state.json: Report generation progress
+
+Sources: Data flow diagram, 
+backend/app/services/simulation_manager.py
+ 
+backend/app/oasis/run_parallel_simulation.py
+
+External Service Integration
+
+MiroFish depends on three critical external services, each requiring configuration in the .env file.
+
+LLM Service Configuration
+# Primary LLM for agent reasoning and report generation
+LLM_API_KEY=your_api_key
+LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+LLM_MODEL_NAME=qwen-plus
+ 
+# Optional: Boost LLM to prevent rate limiting during parallel simulation
+LLM_BOOST_API_KEY=your_boost_api_key
+LLM_BOOST_BASE_URL=https://api.openai.com/v1
+LLM_BOOST_MODEL_NAME=gpt-4
+
+Usage in Code:
+
+ReportAgent (
+backend/app/services/report_agent.py
+) uses primary LLM for reasoning
+OasisProfileGenerator (
+backend/app/services/oasis_profile_generator.py
+) uses primary LLM for profile generation
+OASIS agents (
+backend/app/oasis/run_parallel_simulation.py
+) use both primary and boost LLMs during simulation
+Zep Cloud Configuration
+# GraphRAG knowledge graph storage
+ZEP_API_KEY=your_zep_api_key
+
+Usage in Code:
+
+ZepToolsService (
+backend/app/services/zep_tools_service.py
+) queries the graph using search_graph(), get_entities(), get_episodes()
+ZepGraphMemoryUpdater (
+backend/app/oasis/memory/zep_graph_memory_updater.py
+) writes simulation activities back to Zep
+OASIS Framework
+
+MiroFish integrates the OASIS framework from 
+camel-ai
+ to provide:
+
+Dual-platform social simulation (Twitter and Reddit environments)
+LLM-powered agent action generation
+SQLite trace logging for post-simulation analysis
+
+Integration Point: 
+backend/app/oasis/run_parallel_simulation.py
+ wraps OASIS and manages the subprocess lifecycle.
+
+Sources: 
+README.md
+106-128
+ 
+README-EN.md
+106-128
+ External service integration diagram
+
+Quick Start
+Installation and Configuration
+Clone the repository
+git clone https://github.com/666ghj/MiroFish
+cd MiroFish
+Configure environment variables
+cp .env.example .env
+# Edit .env with your API keys
+Install dependencies
+npm run setup:all  # Installs Node.js and Python dependencies
+Start services
+npm run dev  # Starts frontend (port 3000) and backend (port 5001)
+First Simulation
+Navigate to http://localhost:3000
+Upload seed documents (PDF, Markdown, or text files)
+Describe your prediction requirements in natural language
+Follow the five-stage workflow through graph building, environment setup, simulation execution, report generation, and deep interaction
+
+For detailed instructions, see Getting Started and User Guide.
+
+Sources: 
+README.md
+94-176
+ 
+README-EN.md
+94-177
+
+System Characteristics
+Performance Considerations
+Aspect	Details
+Simulation Duration	Varies based on round count (recommend <40 rounds for initial testing)
+LLM Consumption	High token usage during parallel agent simulation
+Memory Requirements	Graph and simulation traces stored in SQLite (hundreds of MB per simulation)
+Concurrent Simulations	One active simulation per simulation_id; multiple projects supported
+Scalability
+Horizontal Scaling: Backend can run multiple Flask instances behind a load balancer
+Agent Count: Tested with hundreds of agents per platform; limited by LLM rate limits
+Graph Size: Zep Cloud handles graphs with thousands of entities and relationships
+Reliability
+State Persistence: All progress saved to disk; simulations can resume after crashes
+Error Handling: TaskManager tracks async job failures; detailed logs in console_log.txt
+Graceful Shutdown: SimulationRunner sends SIGTERM to OASIS subprocess for clean termination
+
+Sources: 
+backend/app/services/simulation_runner.py
+ 
+backend/app/services/task_manager.py
+
+Next Steps
+
+This overview provides the foundation for understanding MiroFish. To dive deeper:
+
+Architecture Details: System Architecture and Five-Stage Workflow
+Setup and Deployment: Installation, Configuration, Docker Deployment
+Usage Tutorials: User Guide covers each workflow stage in detail
+Core Concepts: GraphRAG, OASIS Simulation, ReACT Pattern
+API Reference: Simulation API, Report API, IPC API
+Advanced Topics: Custom Agent Profiles, ZepTools Extension, LLM Optimization
+
+Sources: Table of contents structure
+
+ This wiki is featured in the repository
+
+Dismiss
+
+Refresh this wiki
+
+This wiki was recently refreshed. Please wait 2 days to refresh again.
+
+On this page
+MiroFish Overview
+Purpose and Scope
+What is MiroFish?
+Core Capabilities
+Target Applications
+System Architecture
+Architectural Layers
+Five-Stage Workflow
+Workflow Pipeline
+Technology Stack
+Frontend Stack
+Backend Stack
+External Services
+Deployment Options
+Key Components
+Frontend Components to Code Mapping
+Backend Services to Code Mapping
+Data Flow
+File System Structure
+State Transitions
+External Service Integration
+LLM Service Configuration
+Zep Cloud Configuration
+OASIS Framework
+Quick Start
+Installation and Configuration
+First Simulation
+System Characteristics
+Performance Considerations
+Scalability
+Reliability
+Next Steps
+Ask Devin about 666ghj/MiroFish
+Fast
+
+
+
+DeepWiki
+
+666ghj/MiroFish
+
+Index your code with
+Devin
+Edit Wiki
+Share
+Last indexed: 7 March 2026 (985f89)
+MiroFish Overview
+System Architecture
+Five-Stage Workflow
+Getting Started
+Installation
+Configuration
+Docker Deployment
+User Guide
+Creating a Simulation
+Graph Building (Stage 1)
+Environment Setup (Stage 2)
+Running Simulations (Stage 3)
+Report Generation (Stage 4)
+Deep Interaction (Stage 5)
+Viewing Simulation History
+Core Concepts
+GraphRAG and Knowledge Graphs
+OASIS Multi-Agent Simulation
+ReACT Pattern and ReportAgent
+Memory and Context Management
+Frontend Architecture
+Component Overview
+Routing and Navigation
+API Client Layer
+Graph Visualization
+Real-time Updates and Polling
+Backend Architecture
+Simulation Management Service
+Report Generation Service
+OASIS Simulation Execution
+Task Management and Async Jobs
+Data Models and Storage
+API Reference
+Simulation API
+Report API
+Interview and IPC API
+Advanced Topics
+Custom Agent Profiles
+ZepToolsService and Custom Tools
+Graph Memory Updates
+LLM Configuration and Optimization
+Troubleshooting
+Setup and Configuration Issues
+Simulation Failures
+Report Generation Issues
+Deep Interaction (Stage 5)
+Relevant source files
+Purpose and Scope
+
+Stage 5 provides interactive exploration of completed simulation reports. Users can ask questions about simulation results through two mechanisms: conversing with the Report Agent (which has access to the full knowledge graph and report context) or directly interviewing simulated agents that participated in the simulation. This stage completes the MiroFish workflow by enabling deep analytical dialogue beyond the static report generated in Stage 4.
+
+For information about report generation, see Report Generation (Stage 4). For details on the knowledge graph structure, see GraphRAG and Knowledge Graphs.
+
+Overview
+
+Stage 5 offers two distinct interaction modes:
+
+Report Agent Chat: Conversational interface with the Report Agent, which can autonomously invoke retrieval tools (insight_forge, panorama_search, quick_search, interview_agents) to answer questions about simulation results
+Agent Interviews: Direct communication with simulated agents via IPC (Inter-Process Communication), supporting both single-agent conversations and batch surveys
+
+The stage is accessible after report generation completes. Users navigate to the InteractionView, which displays the completed report alongside interactive panels for chat and surveys.
+
+System Architecture
+
+Data Sources
+
+Service Layer
+
+Backend API Layer
+
+Frontend Layer
+
+UI Panels
+
+Chat with Report Agent
+
+Agent Surveys
+
+Single Agent Chat
+
+InteractionView.vue
+/interaction/:reportId
+
+Step5Interaction.vue
+Main Component
+
+Left Panel
+Report Display
+
+Right Panel
+Action Bar + Chat/Survey
+
+/api/report/chat
+POST
+
+/api/simulation/interview/batch
+POST
+
+/api/simulation/interview/single
+POST
+
+ReportAgent
+chat() method
+
+ZepToolsService
+4 retrieval tools
+
+ParallelIPCHandler
+in run_parallel_simulation.py
+
+Zep Cloud
+Knowledge Graph
+
+Simulation Process
+OASIS Environments
+
+SQLite DBs
+twitter_simulation.db
+reddit_simulation.db
+
+Architecture: Stage 5 Interaction System
+
+The interaction system operates in two parallel pathways. The Report Agent pathway uses synchronous HTTP requests to invoke the agent's chat method, which can perform multi-step reasoning with tool calls. The agent interview pathway uses asynchronous IPC commands written to the simulation directory's ipc_commands/ folder, which the running OASIS simulation process polls and executes.
+
+Sources: 
+frontend/src/views/InteractionView.vue
+1-214
+ 
+frontend/src/components/Step5Interaction.vue
+1-150
+ 
+backend/app/api/report.py
+467-559
+ 
+backend/scripts/run_parallel_simulation.py
+217-516
+
+Chat with Report Agent
+Mechanism
+
+The Report Agent chat operates using a simplified ReACT (Reasoning + Acting) loop with tool-calling capabilities. Unlike the full report generation process, chat interactions are limited to 1-2 tool calls per message to maintain responsiveness.
+
+Zep Cloud
+ZepToolsService
+ReportAgent.chat()
+/api/report/chat
+Step5Interaction.vue
+User
+Zep Cloud
+ZepToolsService
+ReportAgent.chat()
+/api/report/chat
+Step5Interaction.vue
+User
+alt
+[Tool call detected]
+[Final answer]
+loop
+[Max 2 iterations]
+Enter question
+POST {message, chat_history}
+chat(message, history)
+LLM generates response
+Execute tool
+Query graph
+Return results
+Tool output
+Generate response
+{response, tool_calls}
+JSON response
+Display answer
+
+Flow: Report Agent Chat Interaction
+
+Sources: 
+backend/app/services/report_agent.py
+1225-1377
+ 
+backend/app/api/report.py
+467-559
+
+Tool System
+
+The Report Agent has access to four specialized retrieval tools during chat:
+
+Tool Name	Purpose	Key Parameters
+insight_forge	Deep multi-dimensional search with automatic sub-query generation	query, report_context
+panorama_search	Broad search returning all relevant facts (active and historical)	query, include_expired
+quick_search	Fast lightweight search for specific facts	query, limit
+interview_agents	Conduct interviews with simulated agents via IPC	interview_topic, max_agents
+
+The tool descriptions are defined in prompt constants TOOL_DESC_INSIGHT_FORGE, TOOL_DESC_PANORAMA_SEARCH, TOOL_DESC_QUICK_SEARCH, and TOOL_DESC_INTERVIEW_AGENTS at 
+backend/app/services/report_agent.py
+475-547
+
+Frontend Implementation
+
+The chat interface is implemented in the Step5Interaction.vue component with separate UI states for Report Agent chat and individual agent chat:
+
+Special Displays
+
+Chat Display
+
+Chat Target Selection
+
+Report Agent Tab
+chatTarget='report_agent'
+
+Agent Dropdown
+chatTarget='agent'
+
+chatHistory
+role: user/assistant
+
+chatHistoryCache
+Per-target caching
+
+Chat Input Area
+textarea + send button
+
+Report Agent Tools Card
+4 tool descriptions
+
+Agent Profile Card
+Bio and metadata
+
+Structure: Chat UI Components in Step5Interaction.vue
+
+The component maintains separate chat histories for each conversation target using chatHistoryCache, a dictionary keyed by 'report_agent' or 'agent_{index}'. When users switch chat targets, the current history is saved and the new target's history is restored.
+
+Sources: 
+frontend/src/components/Step5Interaction.vue
+434-539
+
+API Endpoint: /api/report/chat
+
+Request Body:
+
+{
+  "simulation_id": "sim_abc123",
+  "message": "What were the main concerns expressed by students?",
+  "chat_history": [
+    {"role": "user", "content": "Previous question"},
+    {"role": "assistant", "content": "Previous answer"}
+  ]
+}
+
+Response:
+
+{
+  "success": true,
+  "data": {
+    "response": "Based on the simulation data...",
+    "tool_calls": [
+      {"tool_name": "insight_forge", "parameters": {...}}
+    ],
+    "sources": ["fact1", "fact2"]
+  }
+}
+
+The endpoint creates a ReportAgent instance, invokes agent.chat(), and returns the structured result. The agent internally constructs a chat-specific system prompt using CHAT_SYSTEM_PROMPT_TEMPLATE that includes the full report content for context.
+
+Sources: 
+backend/app/api/report.py
+467-559
+ 
+backend/app/services/report_agent.py
+826-856
+
+Agent Interviews and Surveys
+IPC Communication Mechanism
+
+Agent interviews use an IPC (Inter-Process Communication) system where the Flask backend writes command files to the simulation directory, and the running OASIS simulation process polls for and executes these commands.
+
+SQLite Traces
+
+OASIS Simulation Process
+
+Simulation Directory
+
+Backend Flask Server
+
+/api/simulation/interview/batch
+
+Write command to
+sim_dir/ipc_commands/
+cmd_id.json
+
+Poll for response in
+sim_dir/ipc_responses/
+cmd_id.json
+
+ipc_commands/
+
+ipc_responses/
+
+env_status.json
+
+ParallelIPCHandler
+poll_command()
+
+Execute INTERVIEW action
+ManualAction(INTERVIEW)
+
+Write response
+send_response()
+
+Twitter/Reddit Environments
+Agent.step()
+
+twitter_simulation.db
+trace table
+
+reddit_simulation.db
+trace table
+
+Diagram: IPC Command Flow for Agent Interviews
+
+The simulation process runs a ParallelIPCHandler that periodically calls poll_command() to check for new command files. When an interview command is detected, it executes the interview by creating ManualAction(ActionType.INTERVIEW) instances and stepping the OASIS environment. Interview responses are written to the SQLite trace database and extracted back into the response file.
+
+Sources: 
+backend/scripts/run_parallel_simulation.py
+217-547
+ 
+backend/app/api/simulation.py
+
+Batch Interview Execution
+
+The ParallelIPCHandler.handle_batch_interview() method processes multiple interviews efficiently:
+
+Receive batch_interview command
+{interviews: [{agent_id, prompt}]}
+
+Group by platform preference
+twitter_interviews[]
+reddit_interviews[]
+both_platforms_interviews[]
+
+Execute Twitter batch
+actions = {agent: ManualAction}
+
+Execute Reddit batch
+actions = {agent: ManualAction}
+
+await twitter_env.step(actions)
+
+await reddit_env.step(actions)
+
+Extract results from DB
+_get_interview_result()
+
+send_response()
+{interviews_count, results}
+
+Flow: Batch Interview Processing
+
+Batch interviews are executed in a single env.step() call per platform, allowing the OASIS framework to process all interviews in parallel. This is significantly more efficient than sequential single-agent interviews.
+
+Sources: 
+backend/scripts/run_parallel_simulation.py
+416-515
+
+Frontend Survey Interface
+
+The survey mode in Step5Interaction.vue provides a multi-agent selection interface:
+
+Key Components:
+
+Agent Selection Grid: Checkbox cards for each available agent, displaying username, profession, and avatar
+Question Input: Textarea for the survey question
+Results Display: Cards showing each agent's response with their profile information
+
+The component maintains selectedAgents as a Set of agent indices and surveyResults as an array of response objects. When the user clicks "发送问卷" (Send Survey), the submitSurvey() method constructs a batch interview request:
+
+const interviews = Array.from(selectedAgents.value).map(idx => ({
+  agent_id: idx,
+  prompt: surveyQuestion.value
+}))
+ 
+const res = await interviewAgents(simulationId, interviews)
+
+Sources: 
+frontend/src/components/Step5Interaction.vue
+315-407
+
+API Endpoints
+
+Single Agent Interview: POST /api/simulation/interview/single
+
+{
+  "simulation_id": "sim_abc123",
+  "agent_id": 3,
+  "prompt": "What is your opinion on the policy?",
+  "platform": "twitter"  // optional: "twitter", "reddit", or null for both
+}
+
+Batch Interview: POST /api/simulation/interview/batch
+
+{
+  "simulation_id": "sim_abc123",
+  "interviews": [
+    {"agent_id": 0, "prompt": "Question 1"},
+    {"agent_id": 5, "prompt": "Question 2"}
+  ],
+  "platform": null  // null = both platforms
+}
+
+Both endpoints follow the same pattern: create IPC command → poll for response → return results. The timeout and polling interval are configured in the API handlers.
+
+Sources: 
+backend/app/api/simulation.py
+
+UI Component Structure
+InteractionView.vue
+
+The top-level view component for Stage 5:
+
+Section	Purpose	Key State
+Header	Navigation, view mode switcher (graph/split/workbench)	viewMode
+Left Panel	GraphPanel display of knowledge graph	graphData, graphLoading
+Right Panel	Step5Interaction component	currentReportId, simulationId
+
+The view defaults to viewMode='workbench', which hides the graph panel and maximizes the interaction workspace. Users can switch to 'split' (50/50) or 'graph' (graph only) modes.
+
+Sources: 
+frontend/src/views/InteractionView.vue
+1-214
+
+Step5Interaction.vue Structure
+
+Right Panel - Interaction
+
+Left Panel - Report Display
+
+Survey Mode
+
+Chat Mode
+
+Step5Interaction.vue
+Main Container
+
+Report Header
+Title, Summary, Metadata
+
+Sections List
+Collapsible sections
+
+Generated Content
+Markdown rendering
+
+Action Bar
+Tab selection + Agent dropdown
+
+Report Agent Tools Card
+4 tool descriptions
+
+Agent Profile Card
+Bio, profession
+
+Chat Messages
+User + Assistant bubbles
+
+Chat Input Area
+Textarea + Send button
+
+Agent Selection Grid
+Checkbox cards
+
+Survey Question Input
+
+Survey Results List
+Response cards
+
+Diagram: Step5Interaction.vue Component Hierarchy
+
+The component uses a two-column layout with the completed report on the left (read-only) and interactive tools on the right. The right panel switches between chat and survey modes based on activeTab state.
+
+Sources: 
+frontend/src/components/Step5Interaction.vue
+1-650
+
+State Management
+
+Key Reactive State Variables:
+
+const activeTab = ref('chat')                    // 'chat' | 'survey'
+const chatTarget = ref('report_agent')           // 'report_agent' | 'agent'
+const selectedAgent = ref(null)                  // Current agent for 1-on-1 chat
+const chatHistory = ref([])                      // Current conversation
+const chatHistoryCache = ref({})                 // Persisted histories per target
+const selectedAgents = ref(new Set())            // Survey recipients
+const surveyResults = ref([])                    // Survey responses
+const profiles = ref([])                         // All agent profiles
+
+The component loads agent profiles via getSimulationProfilesRealtime(simulationId) on mount, which reads from twitter_profiles.csv in the simulation directory.
+
+Sources: 
+frontend/src/components/Step5Interaction.vue
+425-454
+
+Tool Invocation in Chat Context
+
+When the Report Agent processes a chat message, it constructs a simplified system prompt using CHAT_SYSTEM_PROMPT_TEMPLATE that includes:
+
+The simulation requirement
+The complete generated report content
+Available tool descriptions
+Instructions to answer concisely and only use tools when necessary
+
+The chat method ReportAgent.chat() implements a constrained ReACT loop:
+
+# Maximum 2 tool calls in chat mode
+MAX_TOOL_CALLS_PER_CHAT = 2
+ 
+def chat(self, message: str, chat_history: List[Dict] = None) -> Dict:
+    # Build messages with system prompt + history + new message
+    messages = self._build_chat_messages(message, chat_history)
+    
+    tool_calls_count = 0
+    
+    while tool_calls_count < self.MAX_TOOL_CALLS_PER_CHAT:
+        response = self.llm.chat(messages, tools=self.tools)
+        
+        # Parse tool calls
+        tool_calls = self._parse_tool_calls(response)
+        
+        if not tool_calls:
+            # No tools, return final answer
+            return {"response": response, "tool_calls": []}
+        
+        # Execute tools and append results
+        for tool_call in tool_calls:
+            result = self._execute_tool(...)
+            messages.append(observation_message)
+            tool_calls_count += 1
+    
+    # Limit reached, force final response
+    final_response = self.llm.chat(messages)
+    return {"response": final_response, "tool_calls": all_tool_calls}
+
+This simplified loop ensures responsive chat interactions while still allowing the agent to access necessary context through tools.
+
+Sources: 
+backend/app/services/report_agent.py
+1225-1377
+ 
+backend/app/services/report_agent.py
+874-881
+
+Advanced Features
+Multi-Platform Interview Results
+
+When an interview is executed without specifying a platform, the system interviews the same agent on both Twitter and Reddit platforms simultaneously. The response structure includes separate results per platform:
+
+{
+  "agent_id": 3,
+  "prompt": "What do you think?",
+  "platforms": {
+    "twitter": {
+      "platform": "twitter",
+      "response": "Twitter answer...",
+      "timestamp": "2024-..."
+    },
+    "reddit": {
+      "platform": "reddit", 
+      "response": "Reddit answer...",
+      "timestamp": "2024-..."
+    }
+  }
+}
+
+This allows comparing how the same simulated agent behaves differently across platform contexts.
+
+Sources: 
+backend/scripts/run_parallel_simulation.py
+345-414
+
+Interview Result Extraction
+
+After executing an interview action, results are extracted from the SQLite trace database:
+
+def _get_interview_result(self, agent_id: int, platform: str) -> Dict:
+    db_path = os.path.join(self.simulation_dir, f"{platform}_simulation.db")
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    
+    # Query most recent INTERVIEW action
+    cursor.execute("""
+        SELECT user_id, info, created_at
+        FROM trace
+        WHERE action = ? AND user_id = ?
+        ORDER BY created_at DESC
+        LIMIT 1
+    """, (ActionType.INTERVIEW.value, agent_id))
+    
+    row = cursor.fetchone()
+    if row:
+        info = json.loads(row[1])
+        return {
+            "agent_id": agent_id,
+            "response": info.get("response"),
+            "timestamp": row[2]
+        }
+
+The trace table stores all agent actions during simulation, including interview responses triggered by manual IPC commands.
+
+Sources: 
+backend/scripts/run_parallel_simulation.py
+517-547
+
+Environment Status Monitoring
+
+The simulation process maintains env_status.json in the simulation directory, updated via ParallelIPCHandler.update_status():
+
+{
+  "status": "waiting",
+  "twitter_available": true,
+  "reddit_available": true,
+  "timestamp": "2024-12-09T10:30:00"
+}
+
+The backend APIs can check this file to verify whether the simulation environments are still running before attempting IPC commands.
+
+Sources: 
+backend/scripts/run_parallel_simulation.py
+246-254
+
+API Reference Summary
+Endpoint	Method	Purpose
+/api/report/chat	POST	Chat with Report Agent
+/api/simulation/interview/single	POST	Interview one agent
+/api/simulation/interview/batch	POST	Interview multiple agents
+/api/simulation/profiles-realtime	GET	Get agent profiles from simulation
+/api/report/<report_id>	GET	Retrieve report details
+
+All endpoints require the simulation to have completed successfully. The interview endpoints additionally require the simulation process to still be running (not terminated).
+
+Sources: 
+backend/app/api/report.py
+467-559
+ 
+backend/app/api/simulation.py
+
+ This wiki is featured in the repository
+
+Dismiss
+
+Refresh this wiki
+
+This wiki was recently refreshed. Please wait 2 days to refresh again.
+
+On this page
+Deep Interaction (Stage 5)
+Purpose and Scope
+Overview
+System Architecture
+Chat with Report Agent
+Mechanism
+Tool System
+Frontend Implementation
+API Endpoint: `/api/report/chat`
+Agent Interviews and Surveys
+IPC Communication Mechanism
+Batch Interview Execution
+Frontend Survey Interface
+API Endpoints
+UI Component Structure
+InteractionView.vue
+Step5Interaction.vue Structure
+State Management
+Tool Invocation in Chat Context
+Advanced Features
+Multi-Platform Interview Results
+Interview Result Extraction
+Environment Status Monitoring
+API Reference Summary
+Ask Devin about 666ghj/MiroFish
+Fast
+
+
+
+DeepWiki
+
+666ghj/MiroFish
+
+Index your code with
+Devin
+Edit Wiki
+Share
+Last indexed: 7 March 2026 (985f89)
+MiroFish Overview
+System Architecture
+Five-Stage Workflow
+Getting Started
+Installation
+Configuration
+Docker Deployment
+User Guide
+Creating a Simulation
+Graph Building (Stage 1)
+Environment Setup (Stage 2)
+Running Simulations (Stage 3)
+Report Generation (Stage 4)
+Deep Interaction (Stage 5)
+Viewing Simulation History
+Core Concepts
+GraphRAG and Knowledge Graphs
+OASIS Multi-Agent Simulation
+ReACT Pattern and ReportAgent
+Memory and Context Management
+Frontend Architecture
+Component Overview
+Routing and Navigation
+API Client Layer
+Graph Visualization
+Real-time Updates and Polling
+Backend Architecture
+Simulation Management Service
+Report Generation Service
+OASIS Simulation Execution
+Task Management and Async Jobs
+Data Models and Storage
+API Reference
+Simulation API
+Report API
+Interview and IPC API
+Advanced Topics
+Custom Agent Profiles
+ZepToolsService and Custom Tools
+Graph Memory Updates
+LLM Configuration and Optimization
+Troubleshooting
+Setup and Configuration Issues
+Simulation Failures
+Report Generation Issues
+Report Generation (Stage 4)
+Relevant source files
+
+Purpose: This document describes Stage 4 of the MiroFish workflow, where the system generates analytical prediction reports using a ReACT-pattern agent that autonomously retrieves information from the knowledge graph and simulated agents. This stage transforms raw simulation results into structured, insight-rich reports.
+
+Scope: This page covers the ReportAgent architecture, the four-tool retrieval suite (insight_forge, panorama_search, quick_search, interview_agents), the two-phase generation process (planning and section-by-section generation), real-time logging infrastructure, and the frontend visualization system. For the subsequent interactive chat and survey features, see Deep Interaction (Stage 5). For the underlying knowledge graph mechanics, see GraphRAG and Knowledge Graphs.
+
+Overview
+
+Stage 4 employs an autonomous agent-based approach to report generation. Unlike template-driven systems, the ReportAgent uses a Reasoning + Acting (ReACT) pattern where:
+
+The agent first plans a report outline (2-5 sections) based on simulation context
+For each section, it iteratively reasons about what information is needed
+It acts by calling retrieval tools (3-5 calls per section minimum)
+It synthesizes findings into coherent markdown content
+All actions are logged to structured JSONL files for transparency
+
+The system is designed for asynchronous execution with real-time progress tracking. Frontend components poll detailed logs to visualize tool calls, LLM reasoning, and content generation as they happen.
+
+Sources: 
+backend/app/services/report_agent.py
+1-100
+ 
+frontend/src/components/Step4Report.vue
+1-50
+
+System Architecture
+Report Generation Pipeline
+
+Storage
+
+External Services
+
+Logging Infrastructure
+
+Service Layer
+
+API Layer
+
+Frontend Layer
+
+Step4Report.vue
+Left: Report Preview
+Right: Workflow Timeline
+
+Polling Loop
+Every 2s
+
+POST /api/report/generate
+Returns task_id + report_id
+
+POST /api/report/generate/status
+Query progress
+
+GET /api/report/report_id/agent-log
+Incremental JSONL
+
+GET /api/report/report_id/console-log
+Text logs
+
+TaskManager
+Async job tracking
+
+ReportAgent
+ReACT orchestrator
+
+ZepToolsService
+4 retrieval tools
+
+ReportLogger
+agent_log.jsonl
+
+ReportConsoleLogger
+console_log.txt
+
+LLM Service
+qwen-plus
+
+Zep Cloud
+Knowledge Graph
+
+OASIS IPC
+Agent Interviews
+
+File System
+reports/report_id/
+outline.json
+section_XX.md
+full_report.md
+agent_log.jsonl
+console_log.txt
+
+Sources: 
+backend/app/api/report.py
+24-196
+ 
+frontend/src/components/Step4Report.vue
+392-430
+ 
+backend/app/services/report_agent.py
+35-304
+
+ReportAgent Architecture
+Core Components
+
+The ReportAgent class 
+backend/app/services/report_agent.py
+864-917
+ is the central orchestrator with these responsibilities:
+
+Component	Purpose	Key Methods
+ReportAgent	Main agent orchestrator	generate_report(), _plan_outline(), _generate_section()
+ReportLogger	Structured JSONL logging	log_tool_call(), log_llm_response(), log_section_complete()
+ReportConsoleLogger	Console output capture	Attaches to Python logging handlers
+LLMClient	LLM communication	chat() method for completion
+ZepToolsService	Retrieval tool suite	insight_forge(), panorama_search(), etc.
+ReACT Loop Implementation
+
+Yes
+
+Yes, >= 5
+
+No, < 5
+
+No
+
+Yes
+
+No, neither
+
+Yes, >= 3
+
+No, < 3
+
+Section Generation Start
+
+Build system prompt
+SECTION_SYSTEM_PROMPT_TEMPLATE
++tools_description
+
+Build user prompt
+SECTION_USER_PROMPT_TEMPLATE
++previous_content
+
+messages = [system, user]
+tool_calls_count = 0
+
+LLM.chat(messages)
+Max 15 iterations
+
+Parse response:
+- Tool call XML?
+- Tool call JSON?
+- Final Answer?
+
+Has tool_call?
+
+Has Final Answer?
+
+tool_calls_count >= 3?
+
+tool_calls_count >= 5?
+
+Execute tool via
+ZepToolsService
+
+ReportLogger.log_tool_call()
+ReportLogger.log_tool_result()
+
+Add Observation message
+with tool result
+
+tool_calls_count++
+
+Add message:
+'Please output Final Answer'
+
+Add message:
+'Need more info, call tools'
+
+Extract content after
+'Final Answer:'
+
+Clean markdown:
+Remove ## headers
+Strip section title
+
+Save to
+section_XX.md
+
+ReportLogger.log_section_complete()
+
+Section Complete
+
+Sources: 
+backend/app/services/report_agent.py
+1190-1408
+
+Key Design Decisions
+Minimum 3 tool calls: Prevents shallow reports; ensures multi-source evidence 
+backend/app/services/report_agent.py
+1318-1330
+Maximum 5 tool calls: Controls cost and latency while encouraging depth 
+backend/app/services/report_agent.py
+874
+No section headers in content: System adds headers automatically; prevents duplicate formatting 
+backend/app/services/report_agent.py
+667-703
+Mandatory tool usage: Agent cannot generate content from prior knowledge; must retrieve from simulation data 
+backend/app/services/report_agent.py
+640-647
+ZepToolsService: The Four-Tool Suite
+
+The ZepToolsService 
+backend/app/services/zep_tools.py
+400-432
+ provides four specialized retrieval tools, each optimized for different information-seeking patterns:
+
+Tool Architecture
+
+External Services
+
+LLM-Powered Analysis
+
+Zep Graph Operations
+
+ZepToolsService
+
+insight_forge()
+Deep multi-dimensional retrieval
+
+panorama_search()
+Breadth + temporal view
+
+quick_search()
+Fast keyword search
+
+interview_agents()
+Agent interviews via IPC
+
+client.graph.search()
+Semantic + BM25 hybrid
+
+fetch_all_nodes()
+Paginated retrieval
+
+fetch_all_edges()
+With temporal metadata
+
+Generate sub-queries
+Decompose complex questions
+
+Select interview targets
+Based on profiles
+
+Synthesize interview results
+Extract key quotes
+
+Zep Cloud API
+Knowledge Graph
+
+/api/simulation/interview/batch
+Dual-platform interviews
+
+LLM Service
+Sub-query generation
+
+Sources: 
+backend/app/services/zep_tools.py
+400-900
+
+Tool Specifications
+1. insight_forge - Deep Insight Retrieval
+
+Purpose: Most powerful tool; automatically decomposes questions into sub-queries and performs multi-dimensional retrieval.
+
+Implementation: 
+backend/app/services/zep_tools.py
+890-1055
+
+Parameters:
+
+query (str): Analysis question
+report_context (str, optional): Current report section context
+
+Process:
+
+LLM generates 3-5 sub-queries from main query 
+line 940-980
+For each sub-query, executes semantic search
+Retrieves entity details for key nodes
+Constructs relationship chains
+Returns consolidated InsightForgeResult
+
+Output Structure (InsightForgeResult):
+
+{
+    "query": str,
+    "simulation_requirement": str,
+    "sub_queries": List[str],
+    "semantic_facts": List[str],        # Direct quotes for citation
+    "entity_insights": List[Dict],      # Entity summaries + related_facts_count
+    "relationship_chains": List[str],   # "Source --[relation]--> Target" format
+    "total_facts": int,
+    "total_entities": int,
+    "total_relationships": int
+}
+
+Sources: 
+backend/app/services/zep_tools.py
+137-211
+
+2. panorama_search - Panoramic View
+
+Purpose: Retrieves complete graph view including historical/expired facts; ideal for understanding evolution over time.
+
+Implementation: 
+backend/app/services/zep_tools.py
+1057-1187
+
+Parameters:
+
+query (str): Search query for relevance ranking
+include_expired (bool): Whether to include expired edges (default: True)
+
+Process:
+
+Fetches all graph edges with temporal metadata
+Separates active vs. expired/invalid facts
+Retrieves all entities
+Ranks by relevance to query
+
+Output Structure (PanoramaResult):
+
+{
+    "query": str,
+    "all_nodes": List[NodeInfo],
+    "all_edges": List[EdgeInfo],        # Includes created_at, valid_at, invalid_at, expired_at
+    "active_facts": List[str],          # Current simulation state
+    "historical_facts": List[str],      # Evolution record
+    "total_nodes": int,
+    "total_edges": int,
+    "active_count": int,
+    "historical_count": int
+}
+
+Sources: 
+backend/app/services/zep_tools.py
+213-281
+
+3. quick_search - Fast Keyword Retrieval
+
+Purpose: Lightweight search for specific facts or quick validation; uses hybrid semantic + BM25 search.
+
+Implementation: 
+backend/app/services/zep_tools.py
+464-544
+
+Parameters:
+
+query (str): Search string
+limit (int): Max results (default: 10)
+
+Process:
+
+Calls Zep Cloud search API with hybrid mode
+Falls back to local keyword matching if API fails
+Returns simple fact list
+
+Output Structure (SearchResult):
+
+{
+    "facts": List[str],
+    "edges": List[Dict],
+    "nodes": List[Dict],
+    "query": str,
+    "total_count": int
+}
+
+Sources: 
+backend/app/services/zep_tools.py
+26-54
+
+4. interview_agents - Real Agent Interviews
+
+Purpose: Conducts actual interviews with OASIS-simulated agents via IPC; not LLM simulation but real agent responses.
+
+Implementation: 
+backend/app/services/zep_tools.py
+1189-1487
+
+Parameters:
+
+interview_topic (str): Interview theme (e.g., "student perspectives on event")
+max_agents (int): Max number to interview (default: 5, max: 10)
+
+Process:
+
+Reads agent profile files (twitter_profiles.csv, reddit_profiles.json) 
+line 1206-1240
+LLM selects most relevant agents based on topic 
+line 1243-1296
+LLM generates 3 interview questions 
+line 1299-1346
+Calls /api/simulation/interview/batch for dual-platform interviews 
+line 1349-1400
+LLM synthesizes responses, extracts quotes, generates summary 
+line 1403-1487
+
+Output Structure (InterviewResult):
+
+{
+    "interview_topic": str,
+    "interview_questions": List[str],
+    "selected_agents": List[Dict],
+    "interviews": List[{
+        "agent_name": str,
+        "agent_role": str,
+        "agent_bio": str,
+        "question": str,
+        "response": str,           # Combined from Twitter + Reddit
+        "key_quotes": List[str]
+    }],
+    "selection_reasoning": str,
+    "summary": str,
+    "total_agents": int,
+    "interviewed_count": int
+}
+
+Sources: 
+backend/app/services/zep_tools.py
+340-398
+
+Two-Phase Generation Process
+Phase 1: Planning
+
+Entry Point: ReportAgent.generate_report() → _plan_outline() 
+backend/app/services/report_agent.py
+1034-1189
+
+Process:
+
+ZepToolsService
+LLM Service
+ReportLogger
+ReportAgent
+/api/report/generate
+Step4Report.vue
+ZepToolsService
+LLM Service
+ReportLogger
+ReportAgent
+/api/report/generate
+Step4Report.vue
+Build PLAN_SYSTEM_PROMPT
++ PLAN_USER_PROMPT_TEMPLATE
+Parse JSON
+Validate 2-5 sections
+Create ReportOutline
+POST {simulation_id}
+generate_report()
+log_start()
+log_planning_start()
+get_graph_statistics()
+quick_search(simulation_requirement)
+Sample facts
+log_planning_context(stats + facts)
+chat([system, user])
+JSON outline
+log_planning_complete(outline)
+ReportOutline created
+
+Planning Prompt Design 
+backend/app/services/report_agent.py
+551-610
+:
+
+Core Directive: Write from "God's view" of simulation; report is a future prediction, not current analysis
+Section Limits: Min 2, max 5 sections (no subsections)
+Context Provided: Graph statistics (node count, edge count, entity types), sample simulation facts
+Output Format: JSON with title, summary, sections: [{title, description}]
+
+Output Files:
+
+reports/{report_id}/outline.json - Saved via ReportManager.save_outline() 
+backend/app/services/report_agent.py
+1180
+
+Sources: 
+backend/app/services/report_agent.py
+1034-1189
+ 
+backend/app/services/report_agent.py
+551-610
+
+Phase 2: Section-by-Section Generation
+
+Entry Point: ReportAgent._generate_section() 
+backend/app/services/report_agent.py
+1190-1408
+
+Process for Each Section:
+
+Step	Action	Tool Calls	Output
+1. Initialize	Build system + user prompts with section context	0	messages = [system, user]
+2. Iteration Loop	LLM reasoning + tool calls (max 15 iterations)	3-5 required	Accumulated observations
+3. Force Final Answer	If tool limit reached, inject "output Final Answer"	-	Triggers content generation
+4. Extract Content	Parse content after "Final Answer:" marker	-	Raw markdown text
+5. Clean Content	Remove duplicate headers, clean formatting	-	Clean markdown
+6. Save Section	Write to section_XX.md	-	Persistent file
+7. Log Completion	Record in agent_log.jsonl	-	Frontend can poll
+
+Section Prompt Design 
+backend/app/services/report_agent.py
+613-791
+:
+
+Mandatory Tool Usage: Must call tools 3+ times; cannot use prior knowledge 
+line 640-647
+Citation Requirement: Must quote original agent statements using > markdown 
+line 648-657
+Language Consistency: Must translate English tool results to report language (e.g., Chinese) 
+line 654-660
+No Headers: Content must not include any # headers; use **bold** instead 
+line 667-703
+Tool Diversity: Encouraged to mix different tools (not just one type) 
+line 710-714
+
+Iteration Control 
+backend/app/services/report_agent.py
+1240-1350
+:
+
+Min Tools Check: If tool_calls_count < 3 and agent outputs Final Answer, inject rejection message 
+line 1318-1330
+Max Tools Enforcement: If tool_calls_count >= 5, force Final Answer 
+line 1332-1341
+Max Iterations: Hard limit of 15 ReACT iterations to prevent infinite loops 
+line 1222
+
+Sources: 
+backend/app/services/report_agent.py
+1190-1408
+ 
+backend/app/services/report_agent.py
+613-791
+
+Logging Infrastructure
+Dual Logging System
+
+MiroFish employs a dual logging approach for complete observability:
+
+Log Type	File	Format	Purpose	Updated By
+Agent Log	agent_log.jsonl	JSONL (JSON per line)	Structured action records	ReportLogger
+Console Log	console_log.txt	Plain text	Human-readable progress	ReportConsoleLogger
+ReportLogger (Structured JSONL)
+
+Class: ReportLogger 
+backend/app/services/report_agent.py
+35-304
+
+Log Entry Schema:
+
+{
+  "timestamp": "2025-01-14T19:46:14.123456",
+  "elapsed_seconds": 12.5,
+  "report_id": "report_abc123",
+  "action": "tool_call|tool_result|llm_response|section_complete|...",
+  "stage": "pending|planning|generating|completed",
+  "section_title": "Chapter Title",
+  "section_index": 1,
+  "details": {
+    "tool_name": "insight_forge",
+    "parameters": {...},
+    "result": "...",
+    "result_length": 2500
+  }
+}
+
+Key Log Actions 
+backend/app/services/report_agent.py
+66-303
+:
+
+Action	Timing	Details Included
+report_start	Generation begins	simulation_id, graph_id, simulation_requirement
+planning_start	Planning phase starts	-
+planning_complete	Outline generated	Full outline JSON
+section_start	Section generation begins	section_title, section_index
+tool_call	Tool invoked	iteration, tool_name, parameters
+tool_result	Tool returns	tool_name, full result (no truncation), result_length
+llm_response	LLM completes	iteration, full response, has_tool_calls, has_final_answer
+section_content	Content extracted	full content, content_length, tool_calls_count
+section_complete	Section saved	full content (for frontend to display)
+report_complete	All sections done	total_sections, total_time_seconds
+error	Any error occurs	error message, stage
+
+Important Design Note: Tool results and LLM responses are stored without truncation 
+line 196-210, 221-234
+ This enables full reproduction of the generation process.
+
+Sources: 
+backend/app/services/report_agent.py
+35-304
+
+ReportConsoleLogger (Plain Text)
+
+Class: ReportConsoleLogger 
+backend/app/services/report_agent.py
+306-386
+
+Implementation: Attaches a logging.FileHandler to Python loggers:
+
+mirofish.report_agent
+mirofish.zep_tools
+
+Format: [HH:MM:SS] LEVEL: message
+
+Example Output:
+
+[19:46:14] INFO: 图谱搜索: graph_id=mirofish_abc, query=学生反应...
+[19:46:14] INFO: 搜索完成: 找到 15 条相关事实
+[19:46:16] INFO: 执行工具: insight_forge, 参数: {'query': '...'}
+[19:46:18] INFO: 工具执行完成: insight_forge
+
+
+Sources: 
+backend/app/services/report_agent.py
+306-386
+
+Frontend Log Polling
+
+Component: Step4Report.vue 
+frontend/src/components/Step4Report.vue
+392-430
+
+Polling Strategy:
+
+// Start polling when report generation begins
+const startPolling = () => {
+  pollingInterval.value = setInterval(async () => {
+    await fetchAgentLog()    // Incremental: from_line=current
+    await fetchConsoleLog()  // Incremental: from_line=current
+  }, 2000)  // Poll every 2 seconds
+}
+
+Incremental Fetch 
+frontend/src/components/Step4Report.vue
+1080-1120
+:
+
+Each poll requests logs from from_line (last fetched line number)
+Backend returns only new lines
+Frontend appends to local arrays
+Automatically scrolls timeline to show latest activity
+
+Display Components:
+
+Agent Log Timeline (right panel):
+
+Shows each action as a timeline item
+Expandable tool parameters and results
+Color-coded by action type (tool_call, tool_result, llm_response, etc.)
+Custom display components: InterviewDisplay, InsightDisplay, PanoramaDisplay, QuickSearchDisplay
+
+Console Log (bottom panel):
+
+Plain text log lines
+Auto-scrolls to bottom
+Color-coded by log level (INFO, WARNING, ERROR)
+
+Sources: 
+frontend/src/components/Step4Report.vue
+392-430
+ 
+frontend/src/components/Step4Report.vue
+1080-1150
+
+Frontend Visualization
+Step4Report Component Structure
+
+Custom Tool Displays
+
+Timeline Item Types
+
+Right Panel Contents
+
+Left Panel Contents
+
+Step4Report.vue
+
+Left Panel
+.left-panel.report-style
+
+Right Panel
+.right-panel
+
+Console Panel
+.console-logs
+
+Report Header
+title, summary, id
+
+Sections List
+.sections-list
+
+Section Items
+.report-section-item
+
+Workflow Overview
+metrics + progress
+
+Workflow Steps
+status-based timeline
+
+Timeline Items
+agent log display
+
+report_start
+simulation info
+
+planning_start/complete
+outline display
+
+section_start
+section badge
+
+tool_call
+tool badge + params
+
+tool_result
+structured display
+
+llm_response
+iteration + final_answer flag
+
+section_complete
+completion badge
+
+report_complete
+completion banner
+
+InterviewDisplay
+agent cards + answers
+
+InsightDisplay
+facts + entities + relations
+
+PanoramaDisplay
+active + historical facts
+
+QuickSearchDisplay
+fact list
+
+Sources: 
+frontend/src/components/Step4Report.vue
+1-390
+
+Key UI Elements
+1. Report Preview (Left Panel)
+
+Layout: 
+frontend/src/components/Step4Report.vue
+6-77
+
+Header Block: Report metadata (tag, ID), title, summary
+Sections List: Collapsible/expandable sections with status indicators
+is-active: Currently generating (with spinner)
+is-completed: Finished (shows full content, collapsible)
+is-pending: Not yet started (grayed out)
+Markdown Rendering: Uses renderMarkdown() helper 
+line 554-639
+ to convert markdown to HTML with syntax highlighting
+2. Workflow Timeline (Right Panel)
+
+Layout: 
+frontend/src/components/Step4Report.vue
+80-374
+
+Workflow Metrics 
+line 90-106
+:
+
+┌────────────────────────────────────────┐
+│ Sections: 2/3    Elapsed: 00:05:32    │
+│ Tools: 14        Status: ● Generating  │
+└────────────────────────────────────────┘
+
+
+Workflow Steps (status-based compact view) 
+line 108-137
+:
+
+Displays major workflow stages (planning, section 1, section 2, etc.)
+Each step shows: number, title, meta (e.g., "3 tools")
+Color-coded status: pending, active, completed
+
+Timeline Items (detailed log entries) 
+line 142-366
+:
+
+Each timeline item has:
+
+Connector: Vertical line + dot (color varies by action type)
+Header: Action label + timestamp
+Body: Action-specific content (collapsible for large content)
+Footer: Elapsed time + action buttons (e.g., "Show Params", "Raw Output")
+
+Action-Specific Displays:
+
+Action	Display	Expandable
+tool_call	Tool badge with icon + parameters	Show/Hide Params
+tool_result (interview)	InterviewDisplay component	Structured/Raw toggle
+tool_result (insight)	InsightDisplay component	Structured/Raw toggle
+tool_result (panorama)	PanoramaDisplay component	Structured/Raw toggle
+tool_result (quick)	QuickSearchDisplay component	Structured/Raw toggle
+llm_response	Iteration tags (tools, final_answer)	Show/Hide Response
+
+Sources: 
+frontend/src/components/Step4Report.vue
+80-374
+
+3. Console Log Panel (Bottom)
+
+Layout: 
+frontend/src/components/Step4Report.vue
+378-388
+
+Fixed-height scrollable area
+Monospace font for log lines
+Color-coded by level (extracted from log text)
+Auto-scrolls to bottom on new entries 
+line 1148
+
+Sources: 
+frontend/src/components/Step4Report.vue
+378-388
+
+Custom Tool Result Display Components
+
+These components parse structured tool results and present them in user-friendly formats:
+
+InterviewDisplay
+
+Purpose: Displays agent interview results with agent cards, questions, dual-platform answers, and key quotes.
+
+Data Parsing: 
+frontend/src/components/Step4Report.vue
+687-900
+
+Rendered Structure:
+
+┌─────────────────────────────────────────┐
+│ 📊 Agent Interview                      │
+│ Topic: [interview_topic]                │
+│ Interviewed: 5 / 9 agents               │
+├─────────────────────────────────────────┤
+│ Selection Reasoning: ...                │
+├─────────────────────────────────────────┤
+│ Interview #1: [agent_title]            │
+│ ┌─────────────────────────────────────┐ │
+│ │ [A] [agent_name] ([role])           │ │
+│ │ Bio: [agent_bio]                    │ │
+│ │ Q: [questions...]                   │ │
+│ │ A (Twitter): [twitter_answer]       │ │
+│ │ A (Reddit): [reddit_answer]         │ │
+│ │ Key Quotes:                         │ │
+│ │   > "quote 1"                       │ │
+│ │   > "quote 2"                       │ │
+│ └─────────────────────────────────────┘ │
+│ ... (more interviews)                   │
+├─────────────────────────────────────────┤
+│ Summary: ...                            │
+└─────────────────────────────────────────┘
+
+
+Sources: 
+frontend/src/components/Step4Report.vue
+275-277
+ 
+frontend/src/components/Step4Report.vue
+687-900
+
+InsightDisplay
+
+Purpose: Displays deep insight results with sub-queries, facts, entities, and relationship chains.
+
+Data Parsing: 
+frontend/src/components/Step4Report.vue
+542-623
+
+Rendered Structure:
+
+┌─────────────────────────────────────────┐
+│ 💡 Deep Insight                         │
+│ Query: [query]                          │
+│ Stats: [facts] facts, [entities] entities │
+├─────────────────────────────────────────┤
+│ Sub-queries Analyzed:                   │
+│   1. [sub_query_1]                      │
+│   2. [sub_query_2]                      │
+├─────────────────────────────────────────┤
+│ Key Facts:                              │
+│   • [fact_1]                            │
+│   • [fact_2]                            │
+├─────────────────────────────────────────┤
+│ Core Entities:                          │
+│   [entity_name] ([type])                │
+│     Summary: [summary]                  │
+│     Related Facts: [count]              │
+├─────────────────────────────────────────┤
+│ Relationship Chains:                    │
+│   [source] --[relation]--> [target]     │
+└─────────────────────────────────────────┘
+
+
+Sources: 
+frontend/src/components/Step4Report.vue
+279-282
+ 
+frontend/src/components/Step4Report.vue
+542-623
+
+PanoramaDisplay
+
+Purpose: Shows panoramic view with active vs. historical facts, and all entities.
+
+Data Parsing: 
+frontend/src/components/Step4Report.vue
+625-685
+
+Rendered Structure:
+
+┌─────────────────────────────────────────┐
+│ 🌐 Panorama Search                      │
+│ Query: [query]                          │
+│ Stats: [nodes] nodes, [edges] edges     │
+├─────────────────────────────────────────┤
+│ ✅ Active Facts ([count]):              │
+│   1. [fact_1]                           │
+│   2. [fact_2]                           │
+├─────────────────────────────────────────┤
+│ 🕰️ Historical Facts ([count]):         │
+│   1. [historical_fact_1]                │
+│   2. [historical_fact_2]                │
+├─────────────────────────────────────────┤
+│ Entities Involved:                      │
+│   • [entity_name] ([type])              │
+└─────────────────────────────────────────┘
+
+
+Sources: 
+frontend/src/components/Step4Report.vue
+285-287
+ 
+frontend/src/components/Step4Report.vue
+625-685
+
+QuickSearchDisplay
+
+Purpose: Simple fact list display for quick search results.
+
+Data Parsing: 
+frontend/src/components/Step4Report.vue
+902-930
+
+Rendered Structure:
+
+┌─────────────────────────────────────────┐
+│ ⚡ Quick Search                         │
+│ Query: [query]                          │
+│ Found: [count] results                  │
+├─────────────────────────────────────────┤
+│   • [fact_1]                            │
+│   • [fact_2]                            │
+│   • [fact_3]                            │
+└─────────────────────────────────────────┘
+
+
+Sources: 
+frontend/src/components/Step4Report.vue
+290-292
+ 
+frontend/src/components/Step4Report.vue
+902-930
+
+API Reference
+Report Generation Endpoints
+POST /api/report/generate
+
+Description: Initiates asynchronous report generation. Returns immediately with task_id and report_id.
+
+Request Body:
+
+{
+  "simulation_id": "sim_abc123",
+  "force_regenerate": false  // optional
+}
+
+Response:
+
+{
+  "success": true,
+  "data": {
+    "simulation_id": "sim_abc123",
+    "report_id": "report_xyz789",
+    "task_id": "task_def456",
+    "status": "generating",
+    "message": "报告生成任务已启动，请通过 /api/report/generate/status 查询进度",
+    "already_generated": false
+  }
+}
+
+Implementation: 
+backend/app/api/report.py
+24-196
+
+Async Execution Flow:
+
+Generate report_id upfront 
+line 109-110
+Create TaskManager task 
+line 114-121
+Spawn background thread with run_generate() 
+line 124-171
+Thread executes ReportAgent.generate_report() 
+line 148-152
+Progress callbacks update task status 
+line 141-146
+
+Sources: 
+backend/app/api/report.py
+24-196
+
+POST /api/report/generate/status
+
+Description: Queries report generation task progress.
+
+Request Body:
+
+{
+  "task_id": "task_def456",      // optional
+  "simulation_id": "sim_abc123"  // optional
+}
+
+Response:
+
+{
+  "success": true,
+  "data": {
+    "task_id": "task_def456",
+    "status": "processing",  // pending|processing|completed|failed
+    "progress": 65,          // 0-100
+    "message": "[generating] 正在生成章节: 关键发现",
+    "created_at": "2025-01-14T19:45:00",
+    "updated_at": "2025-01-14T19:46:30"
+  }
+}
+
+Implementation: 
+backend/app/api/report.py
+198-267
+
+Smart Lookup: If simulation_id provided, first checks if report already completed before checking task 
+line 227-240
+
+Sources: 
+backend/app/api/report.py
+198-267
+
+Log Retrieval Endpoints
+GET /api/report/<report_id>/agent-log
+
+Description: Retrieves structured agent action log (JSONL). Supports incremental fetch.
+
+Query Parameters:
+
+from_line (int, optional): Start reading from this line number (default: 0)
+
+Response:
+
+{
+  "success": true,
+  "data": {
+    "logs": [
+      {
+        "timestamp": "2025-01-14T19:46:14.123456",
+        "elapsed_seconds": 12.5,
+        "report_id": "report_xyz789",
+        "action": "tool_call",
+        "stage": "generating",
+        "section_title": "执行摘要",
+        "section_index": 1,
+        "details": {
+          "iteration": 2,
+          "tool_name": "insight_forge",
+          "parameters": {"query": "学生群体的舆论反应"},
+          "message": "调用工具: insight_forge"
+        }
+      }
+    ],
+    "total_lines": 25,
+    "from_line": 0,
+    "has_more": false
+  }
+}
+
+Implementation: 
+backend/app/api/report.py
+752-809
+
+Backend Logic (ReportManager.get_agent_log()):
+
+Reads agent_log.jsonl from reports/{report_id}/ directory
+Parses each line as JSON 
+backend/app/services/report_agent.py
+2066-2095
+Returns only lines from from_line onwards (incremental)
+Sets has_more flag if more lines exist
+
+Sources: 
+backend/app/api/report.py
+752-809
+ 
+backend/app/services/report_agent.py
+2066-2095
+
+GET /api/report/<report_id>/console-log
+
+Description: Retrieves plain text console log. Supports incremental fetch.
+
+Query Parameters:
+
+from_line (int, optional): Start reading from this line number (default: 0)
+
+Response:
+
+{
+  "success": true,
+  "data": {
+    "logs": [
+      "[19:46:14] INFO: 图谱搜索: graph_id=mirofish_abc, query=学生反应...",
+      "[19:46:14] INFO: 搜索完成: 找到 15 条相关事实",
+      "[19:46:16] INFO: 执行工具: insight_forge, 参数: {'query': '...'}"
+    ],
+    "total_lines": 100,
+    "from_line": 0,
+    "has_more": false
+  }
+}
+
+Implementation: 
+backend/app/api/report.py
+848-891
+
+Backend Logic (ReportManager.get_console_log()):
+
+Reads console_log.txt from reports/{report_id}/ directory
+Splits by newline, returns raw text lines
+Supports incremental fetch from from_line
+
+Sources: 
+backend/app/api/report.py
+848-891
+ 
+backend/app/services/report_agent.py
+2097-2132
+
+Chat Endpoint
+POST /api/report/chat
+
+Description: Chat with the Report Agent in a lightweight mode (max 2 tool calls). Agent has full report context and can use all retrieval tools.
+
+Request Body:
+
+{
+  "simulation_id": "sim_abc123",
+  "message": "请解释一下舆情走向",
+  "chat_history": [  // optional
+    {"role": "user", "content": "之前的问题"},
+    {"role": "assistant", "content": "之前的回答"}
+  ]
+}
+
+Response:
+
+{
+  "success": true,
+  "data": {
+    "response": "基于报告内容，舆情走向呈现以下特征：...",
+    "tool_calls": [
+      {"tool": "quick_search", "query": "舆情走向"}
+    ],
+    "sources": ["来源：模拟数据检索结果"]
+  }
+}
+
+Implementation: 
+backend/app/api/report.py
+467-559
+
+Agent Chat Method: ReportAgent.chat() 
+backend/app/services/report_agent.py
+1410-1557
+
+Chat Prompt Design 
+backend/app/services/report_agent.py
+827-856
+:
+
+Includes full generated report content in system prompt
+Directive: Answer primarily from report; only call tools if report insufficient
+Max 2 tool calls to keep responses fast 
+line 881
+Simplified ReACT loop (no minimum tool requirement)
+
+Sources: 
+backend/app/api/report.py
+467-559
+ 
+backend/app/services/report_agent.py
+1410-1557
+
+Data Structures
+Report Domain Models
+
+File: 
+backend/app/services/report_agent.py
+388-467
+
+ReportStatus (Enum)
+class ReportStatus(str, Enum):
+    PENDING = "pending"        # Not started
+    PLANNING = "planning"      # Creating outline
+    GENERATING = "generating"  # Generating sections
+    COMPLETED = "completed"    # All done
+    FAILED = "failed"          # Error occurred
+ReportSection
+@dataclass
+class ReportSection:
+    title: str
+    content: str = ""
+    
+    def to_markdown(self, level: int = 2) -> str:
+        # Returns: "## {title}\n\n{content}\n\n"
+ReportOutline
+@dataclass
+class ReportOutline:
+    title: str
+    summary: str
+    sections: List[ReportSection]
+    
+    def to_dict() -> Dict[str, Any]
+    def to_markdown() -> str
+Report
+@dataclass
+class Report:
+    report_id: str
+    simulation_id: str
+    graph_id: str
+    simulation_requirement: str
+    status: ReportStatus
+    outline: Optional[ReportOutline] = None
+    markdown_content: str = ""
+    created_at: str = ""
+    completed_at: str = ""
+    error: Optional[str] = None
+    
+    def to_dict() -> Dict[str, Any]
+
+Sources: 
+backend/app/services/report_agent.py
+388-467
+
+Tool Result Structures
+
+File: 
+backend/app/services/zep_tools.py
+26-398
+
+SearchResult
+@dataclass
+class SearchResult:
+    facts: List[str]
+    edges: List[Dict[str, Any]]
+    nodes: List[Dict[str, Any]]
+    query: str
+    total_count: int
+    
+    def to_text() -> str  # LLM-readable format
+InsightForgeResult
+@dataclass
+class InsightForgeResult:
+    query: str
+    simulation_requirement: str
+    sub_queries: List[str]
+    semantic_facts: List[str]        # For citation
+    entity_insights: List[Dict]       # name, type, summary, related_facts_count
+    relationship_chains: List[str]    # "Source --[rel]--> Target"
+    total_facts: int
+    total_entities: int
+    total_relationships: int
+    
+    def to_text() -> str
+PanoramaResult
+@dataclass
+class PanoramaResult:
+    query: str
+    all_nodes: List[NodeInfo]
+    all_edges: List[EdgeInfo]
+    active_facts: List[str]         # Current simulation state
+    historical_facts: List[str]     # Evolution record
+    total_nodes: int
+    total_edges: int
+    active_count: int
+    historical_count: int
+    
+    def to_text() -> str
+InterviewResult
+@dataclass
+class InterviewResult:
+    interview_topic: str
+    interview_questions: List[str]
+    selected_agents: List[Dict]
+    interviews: List[AgentInterview]
+    selection_reasoning: str
+    summary: str
+    total_agents: int
+    interviewed_count: int
+    
+    def to_text() -> str
+ 
+@dataclass
+class AgentInterview:
+    agent_name: str
+    agent_role: str
+    agent_bio: str
+    question: str
+    response: str  # Combined Twitter + Reddit
+    key_quotes: List[str]
+    
+    def to_text() -> str
+
+Sources: 
+backend/app/services/zep_tools.py
+26-398
+
+File System Structure
+Report Directory Layout
+uploads/
+└── reports/
+    └── {report_id}/
+        ├── state.json              # Report metadata + status
+        ├── outline.json            # Report outline (title, summary, sections)
+        ├── section_01.md           # Section 1 content (no header)
+        ├── section_02.md           # Section 2 content (no header)
+        ├── section_03.md           # Section 3 content (no header)
+        ├── full_report.md          # Complete assembled report
+        ├── agent_log.jsonl         # Structured action log (one JSON per line)
+        └── console_log.txt         # Plain text console output
+
+
+File Management: ReportManager class 
+backend/app/services/report_agent.py
+1559-2216
+
+Key Methods:
+
+save_report() - Writes state.json 
+line 1591-1621
+save_outline() - Writes outline.json 
+line 1623-1634
+save_section() - Writes section_XX.md 
+line 1636-1664
+assemble_full_report() - Combines sections → full_report.md 
+line 1666-1718
+get_agent_log() - Reads agent_log.jsonl incrementally 
+line 2066-2095
+get_console_log() - Reads console_log.txt incrementally 
+line 2097-2132
+
+Sources: 
+backend/app/services/report_agent.py
+1559-2216
+
+Performance Characteristics
+Resource Usage
+Metric	Typical Value	Notes
+Total Time	3-8 minutes	Depends on section count and tool calls
+Planning Phase	30-60 seconds	Single LLM call + graph statistics
+Per Section	1-2 minutes	3-5 tool calls + 5-10 LLM iterations
+LLM Token Cost	~50k tokens	Per 3-section report (planning + generation)
+Graph Queries	12-20 queries	Includes search, node fetch, edge fetch
+Agent Interviews	20-40 seconds	Dual-platform IPC calls (if used)
+Optimization Strategies
+
+Parallel Section Generation (Not Implemented): Sections currently generated sequentially; could parallelize for speed 
+backend/app/services/report_agent.py
+1028-1032
+
+Tool Result Caching: ZepToolsService could cache identical queries within same report generation session
+
+Incremental LLM Streaming: Currently waits for full LLM completion; could stream tokens for faster perceived latency
+
+Section Outline Buffering: Frontend could start rendering section structure before content generation
+
+Sources: 
+backend/app/services/report_agent.py
+1000-1408
+
+Error Handling
+Common Failure Modes
+Error Type	Cause	Recovery Strategy	Logged As
+Planning Failure	LLM returns invalid JSON	Retry with explicit format instruction	error action in agent_log.jsonl
+Tool Execution Timeout	Zep API slow/unavailable	Retry with exponential backoff (3 attempts)	Console log: "Zep XXX 第 N 次尝试失败"
+Section Generation Loop	LLM never outputs Final Answer	Hard limit of 15 iterations, then force output	Console log: "达到最大迭代次数"
+Minimum Tools Not Met	Agent tries to finish with <3 tools	Inject rejection message, force more tool calls	llm_response with rejection in details
+Interview IPC Failure	OASIS simulation not running	Return error message in tool result	tool_result with error in result field
+
+Error Logging: 
+backend/app/services/report_agent.py
+292-303
+
+def log_error(self, error_message: str, stage: str, section_title: str = None):
+    self.log(
+        action="error",
+        stage=stage,
+        section_title=section_title,
+        section_index=None,
+        details={
+            "error": error_message,
+            "message": f"发生错误: {error_message}"
+        }
+    )
+
+Sources: 
+backend/app/services/report_agent.py
+292-303
+ 
+backend/app/services/zep_tools.py
+441-462
+
+Configuration
+ReportAgent Constants
+
+File: 
+backend/app/services/report_agent.py
+874-881
+
+class ReportAgent:
+    MAX_TOOL_CALLS_PER_SECTION = 5    # Upper limit per section
+    MAX_REFLECTION_ROUNDS = 3         # (Not currently used)
+    MAX_TOOL_CALLS_PER_CHAT = 2       # For chat() method
+Prompt Templates
+
+All prompts are defined as module-level constants 
+backend/app/services/report_agent.py
+469-856
+:
+
+Template	Purpose	Key Directives
+PLAN_SYSTEM_PROMPT	Planning system prompt	"God's view", future prediction, 2-5 sections
+PLAN_USER_PROMPT_TEMPLATE	Planning user prompt	Graph stats + sample facts
+SECTION_SYSTEM_PROMPT_TEMPLATE	Section system prompt	Tool usage rules, citation rules, no headers
+SECTION_USER_PROMPT_TEMPLATE	Section user prompt	Previous content + current task
+REACT_OBSERVATION_TEMPLATE	After tool execution	Tool result + progress indicator
+CHAT_SYSTEM_PROMPT_TEMPLATE	Chat mode system prompt	Report content + simplified rules
+
+Customization: Modify these templates to change agent behavior without code changes.
+
+Sources: 
+backend/app/services/report_agent.py
+469-856
+
+Summary
+
+Stage 4 (Report Generation) is a fully autonomous, observable, and iterative process where:
+
+ReportAgent orchestrates multi-phase generation using ReACT pattern
+Four specialized tools (insight_forge, panorama_search, quick_search, interview_agents) provide diverse retrieval capabilities
+Dual logging (structured JSONL + plain text) enables complete process transparency
+Frontend polling provides real-time visualization of agent actions and reasoning
+Asynchronous execution with TaskManager allows non-blocking workflow
+
+The system prioritizes evidence-based generation (minimum 3 tool calls per section), traceability (no truncation in logs), and user transparency (all actions visible in UI).
+
+For the next stage where users can chat with the Report Agent or survey simulated agents, see Deep Interaction (Stage 5).
+
+Sources: 
+backend/app/services/report_agent.py
+864-1557
+ 
+frontend/src/components/Step4Report.vue
+1-1150
+ 
+backend/app/services/zep_tools.py
+400-1487
+
+ This wiki is featured in the repository
+
+Dismiss
+
+Refresh this wiki
+
+This wiki was recently refreshed. Please wait 2 days to refresh again.
+
+On this page
+Report Generation (Stage 4)
+Overview
+System Architecture
+Report Generation Pipeline
+ReportAgent Architecture
+Core Components
+ReACT Loop Implementation
+Key Design Decisions
+ZepToolsService: The Four-Tool Suite
+Tool Architecture
+Tool Specifications
+1. `insight_forge` - Deep Insight Retrieval
+2. `panorama_search` - Panoramic View
+3. `quick_search` - Fast Keyword Retrieval
+4. `interview_agents` - Real Agent Interviews
+Two-Phase Generation Process
+Phase 1: Planning
+Phase 2: Section-by-Section Generation
+Logging Infrastructure
+Dual Logging System
+ReportLogger (Structured JSONL)
+ReportConsoleLogger (Plain Text)
+Frontend Log Polling
+Frontend Visualization
+Step4Report Component Structure
+Key UI Elements
+1. Report Preview (Left Panel)
+2. Workflow Timeline (Right Panel)
+3. Console Log Panel (Bottom)
+Custom Tool Result Display Components
+InterviewDisplay
+InsightDisplay
+PanoramaDisplay
+QuickSearchDisplay
+API Reference
+Report Generation Endpoints
+POST `/api/report/generate`
+POST `/api/report/generate/status`
+Log Retrieval Endpoints
+GET `/api/report/<report_id>/agent-log`
+GET `/api/report/<report_id>/console-log`
+Chat Endpoint
+POST `/api/report/chat`
+Data Structures
+Report Domain Models
+ReportStatus (Enum)
+ReportSection
+ReportOutline
+Report
+Tool Result Structures
+SearchResult
+InsightForgeResult
+PanoramaResult
+InterviewResult
+File System Structure
+Report Directory Layout
+Performance Characteristics
+Resource Usage
+Optimization Strategies
+Error Handling
+Common Failure Modes
+Configuration
+ReportAgent Constants
+Prompt Templates
+Summary
+Ask Devin about 666ghj/MiroFish
+Fast
+
+
+

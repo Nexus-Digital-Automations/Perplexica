@@ -5,23 +5,19 @@ import SessionManager from '@/lib/session';
 import { Message, ReasoningResearchBlock } from '@/lib/types';
 import formatChatHistoryAsString from '@/lib/utils/formatHistory';
 import { ToolCall } from '@/lib/models/types';
+import { calculateCost } from '@/lib/pricing/modelPricing';
 
 class Researcher {
   async research(
     session: SessionManager,
     input: ResearcherInput,
   ): Promise<ResearcherOutput> {
-    let maxIteration = input.maxIterations ??
-      (input.config.mode === 'speed'
-        ? 2
-        : input.config.mode === 'balanced'
-          ? 6
-          : 25);
+    let maxIteration = input.maxIterations ?? 6;
+    const urlCache = new Map<string, string>();
 
     const availableTools = ActionRegistry.getAvailableActionTools({
       classification: input.classification,
       fileIds: input.config.fileIds,
-      mode: input.config.mode,
       sources: input.config.sources,
     });
 
@@ -29,7 +25,6 @@ class Researcher {
       ActionRegistry.getAvailableActionsDescriptions({
         classification: input.classification,
         fileIds: input.config.fileIds,
-        mode: input.config.mode,
         sources: input.config.sources,
       });
 
@@ -40,6 +35,9 @@ class Researcher {
       type: 'research',
       data: {
         subSteps: [],
+        question: input.question,
+        questionIndex: input.questionIndex,
+        questionTotal: input.questionTotal,
       },
     });
 
@@ -65,10 +63,14 @@ class Researcher {
       },
     ];
 
+    const modelId =
+      (input.config.llm as any).config?.model as string ?? '';
+
     for (let i = 0; i < maxIteration; i++) {
+      if (input.budgetTracker?.hasExceeded()) break;
+
       const researcherPrompt = getResearcherPrompt(
         availableActionsDescription,
-        input.config.mode,
         i,
         maxIteration,
         input.config.fileIds,
@@ -91,8 +93,19 @@ class Researcher {
       let reasoningId = crypto.randomUUID();
 
       let finalToolCalls: ToolCall[] = [];
+      let accumulatedReasoningContent = '';
+      let lastUsage: { prompt_tokens: number; completion_tokens: number } | null = null;
 
       for await (const partialRes of actionStream) {
+        if (partialRes.reasoningContentChunk) {
+          accumulatedReasoningContent += partialRes.reasoningContentChunk;
+        }
+        if (partialRes.done && partialRes.additionalInfo?.usage) {
+          lastUsage = partialRes.additionalInfo.usage as {
+            prompt_tokens: number;
+            completion_tokens: number;
+          };
+        }
         if (partialRes.toolCallChunk.length > 0) {
           partialRes.toolCallChunk.forEach((tc) => {
             if (
@@ -156,6 +169,11 @@ class Researcher {
         }
       }
 
+      if (lastUsage) {
+        const iterCost = calculateCost(lastUsage, modelId);
+        if (iterCost !== null) input.budgetTracker?.record(iterCost);
+      }
+
       if (finalToolCalls.length === 0) {
         break;
       }
@@ -168,6 +186,9 @@ class Researcher {
         role: 'assistant',
         content: '',
         tool_calls: finalToolCalls,
+        ...(accumulatedReasoningContent && {
+          reasoning_content: accumulatedReasoningContent,
+        }),
       });
 
       const actionResults = await ActionRegistry.executeAll(finalToolCalls, {
@@ -176,6 +197,7 @@ class Researcher {
         session: session,
         researchBlockId: researchBlockId,
         fileIds: input.config.fileIds,
+        urlCache,
       });
 
       actionOutput.push(...actionResults);
@@ -188,6 +210,22 @@ class Researcher {
           content: JSON.stringify(action),
         });
       });
+
+      // Sufficiency nudge: hint the LLM to call done() when enough sources gathered
+      const uniqueUrls = new Set(
+        actionOutput
+          .filter((a) => a.type === 'search_results')
+          .flatMap((a) => a.results)
+          .map((r) => r.metadata?.url)
+          .filter(Boolean),
+      );
+      const sufficiencyThreshold = 5;
+      if (uniqueUrls.size >= sufficiencyThreshold) {
+        agentMessageHistory.push({
+          role: 'user',
+          content: `[System Note] You have gathered ${uniqueUrls.size} unique sources so far. If they sufficiently answer the query, call done() now to proceed to the writing phase rather than searching further.`,
+        });
+      }
     }
 
     const searchResults = actionOutput

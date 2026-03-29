@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "fd941b6c-41e5-4485-adbf-858b740f2a47",
+    "data": {
+      "session_id": "fd941b6c-41e5-4485-adbf-858b740f2a47",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/fd941b6c-41e5-4485-adbf-858b740f2a47.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "Stop authorized. The fix is in place \u2014 restart Claude Code to pick up the new MCP server flags."
+    },
+    "persisted_at": "2026-03-12T14:31:17.954316"
+  },
+  "stored_at": "2026-03-12T14:31:17.954449"
+}

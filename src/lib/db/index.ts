@@ -5,6 +5,7 @@ import path from 'path';
 
 const DATA_DIR = process.env.DATA_DIR || process.cwd();
 const sqlite = new Database(path.join(DATA_DIR, './data/db.sqlite'));
+sqlite.pragma('journal_mode = WAL');
 const db = drizzle(sqlite, {
   schema: schema,
 });

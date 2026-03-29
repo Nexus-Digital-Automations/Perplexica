@@ -1,7 +1,7 @@
 'use client';
 
 /* eslint-disable @next/next/no-img-element */
-import React, { useMemo, MutableRefObject } from 'react';
+import React, { useMemo, useState, useCallback, MutableRefObject } from 'react';
 import { cn } from '@/lib/utils';
 import {
   BookCopy,
@@ -16,14 +16,14 @@ import Markdown, { MarkdownToJSX, RuleType } from 'markdown-to-jsx';
 import Copy from './MessageActions/Copy';
 import Rewrite from './MessageActions/Rewrite';
 import MessageSources from './MessageSources';
-import SearchImages from './SearchImages';
-import SearchVideos from './SearchVideos';
 import { useSpeech } from 'react-text-to-speech';
 import ThinkBox from './ThinkBox';
 import { useChat, Section } from '@/lib/hooks/useChat';
 import Citation from './MessageRenderer/Citation';
-import ActivityFeed from './ActivityFeed';
-import { CostBlock as CostBlockType, VerificationBlock as VerificationBlockType } from '@/lib/types';
+import dynamic from 'next/dynamic';
+const ActivityFeed = dynamic(() => import('./ActivityFeed'), { ssr: false });
+import { CostBlock as CostBlockType, VerificationBlock as VerificationBlockType, CitationDetail } from '@/lib/types';
+import CitationPanel from './CitationPanel';
 import Renderer from './Widgets/Renderer';
 import CodeBlock from './MessageRenderer/CodeBlock';
 import VerificationBadge from './VerificationBadge';
@@ -82,6 +82,21 @@ const MessageBox = React.memo(function MessageBox({
 
   const hasContent = section.parsedTextBlocks.length > 0;
 
+  const [citationPanelOpen, setCitationPanelOpen] = useState(false);
+  const [activeCitation, setActiveCitation] = useState<number | null>(null);
+
+  const verificationResults = useMemo<CitationDetail[]>(() => {
+    const vBlock = section.message.responseBlocks.find(
+      (b): b is VerificationBlockType => b.type === 'verification',
+    );
+    return vBlock?.data.results || [];
+  }, [section.message.responseBlocks]);
+
+  const handleCitationClick = useCallback((index: number) => {
+    setActiveCitation(index);
+    setCitationPanelOpen(true);
+  }, []);
+
   const { speechStatus, start, stop } = useSpeech({ text: speechMessage });
 
   const markdownOverrides = useMemo<MarkdownToJSX.Options>(
@@ -110,10 +125,13 @@ const MessageBox = React.memo(function MessageBox({
         },
         citation: {
           component: Citation,
+          props: {
+            onClick: handleCitationClick,
+          },
         },
       },
     }),
-    [thinkingEnded],
+    [thinkingEnded, handleCitationClick],
   );
 
   return (
@@ -124,10 +142,10 @@ const MessageBox = React.memo(function MessageBox({
         </h2>
       </div>
 
-      <div className="flex flex-col space-y-9 lg:space-y-0 lg:flex-row lg:justify-between lg:space-x-9">
+      <div className="flex flex-col space-y-9">
         <div
           ref={dividerRef}
-          className="flex flex-col space-y-6 w-full lg:w-9/12"
+          className="flex flex-col space-y-6 w-full"
         >
           {sources.length > 0 && (
             <div className="flex flex-col space-y-2">
@@ -292,21 +310,15 @@ const MessageBox = React.memo(function MessageBox({
           </div>
         </div>
 
-        {hasContent && (
-          <div className="lg:sticky lg:top-20 flex flex-col items-center space-y-3 w-full lg:w-3/12 z-30 h-full pb-4">
-            <SearchImages
-              query={section.message.query}
-              chatHistory={chatHistory}
-              messageId={section.message.messageId}
-            />
-            <SearchVideos
-              chatHistory={chatHistory}
-              query={section.message.query}
-              messageId={section.message.messageId}
-            />
-          </div>
-        )}
       </div>
+
+      <CitationPanel
+        open={citationPanelOpen}
+        onClose={() => setCitationPanelOpen(false)}
+        activeCitationIndex={activeCitation}
+        citations={verificationResults}
+        sources={sources}
+      />
     </div>
   );
 });

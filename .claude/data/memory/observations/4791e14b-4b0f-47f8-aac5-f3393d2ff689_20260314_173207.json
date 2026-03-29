@@ -1,0 +1,10 @@
+{
+  "session_id": "4791e14b-4b0f-47f8-aac5-f3393d2ff689",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "feature",
+    "prompt": "okay. add the perplexica mcp to the user scope\n\nYou can add MCP servers to Claude Code non-interactively from your terminal by using the `claude mcp add \u2026 -- <command> <args\u2026>` pattern (good for `npx`-hosted servers), or by writing a `.mcp.json` file in a project to declare one or more MCP servers that Claude Code will load. [reddit](https://www.reddit.com/r/ClaudeAI/comments/1jf4hnt/setting_up_mcp_servers_in_claude_code_a_tech/)\n\n## Add an MCP server (CLI)\nThese examples install MCP servers tha",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-14T17:32:07.878497"
+}

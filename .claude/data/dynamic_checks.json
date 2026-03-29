@@ -1,0 +1,61 @@
+{
+  "project_root": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+  "registered_at": "2026-03-22T17:35:07.350668",
+  "checks": {
+    "tests": {
+      "command": "npm test",
+      "expected_pattern": "Tests  198 passed",
+      "description": "Vitest unit tests - 198 tests across 14 files",
+      "registered_at": "2026-03-25T20:12:04.786168",
+      "deepseek_reviewed": true,
+      "deepseek_approved": true,
+      "deepseek_verdict": "Command runs actual test suite with specific pass count pattern.",
+      "deepseek_rejection_reason": "",
+      "run_result": null
+    },
+    "build": {
+      "command": "npm run build",
+      "expected_pattern": "Build",
+      "description": "Next.js production build verification",
+      "registered_at": "2026-03-25T20:12:26.289757",
+      "deepseek_reviewed": true,
+      "deepseek_approved": true,
+      "deepseek_verdict": "Command runs the build process and pattern matches typical output.",
+      "deepseek_rejection_reason": "",
+      "run_result": null
+    },
+    "app_starts": {
+      "command": "curl -s -o /dev/null -w '%{http_code}' http://localhost:3000",
+      "expected_pattern": "200",
+      "description": "App running on localhost:3000 returns HTTP 200",
+      "registered_at": "2026-03-25T20:12:28.850645",
+      "deepseek_reviewed": true,
+      "deepseek_approved": true,
+      "deepseek_verdict": "Command uses curl to check HTTP status code, matching app_starts validation.",
+      "deepseek_rejection_reason": "",
+      "run_result": null
+    },
+    "api": {
+      "command": "curl -s 'http://localhost:4000/search?q=test&format=json' | head -100",
+      "expected_pattern": "results",
+      "description": "SearXNG search API returns results for test query",
+      "registered_at": "2026-03-25T20:12:31.556162",
+      "deepseek_reviewed": true,
+      "deepseek_approved": true,
+      "deepseek_verdict": "Command uses curl to call a local API endpoint and expects a pattern indicating results, which matches the api check type.",
+      "deepseek_rejection_reason": "",
+      "run_result": null
+    },
+    "frontend": {
+      "command": "npx playwright test tests/playwright/comprehensive.spec.ts --reporter=list --timeout=30000",
+      "expected_pattern": "passed",
+      "description": "Playwright comprehensive tests pass for all UI pages",
+      "registered_at": "2026-03-25T20:12:34.277886",
+      "deepseek_reviewed": true,
+      "deepseek_approved": true,
+      "deepseek_verdict": "Command runs comprehensive Playwright frontend tests with appropriate timeout and reporter, matching the frontend check type.",
+      "deepseek_rejection_reason": "",
+      "run_result": null
+    }
+  }
+}

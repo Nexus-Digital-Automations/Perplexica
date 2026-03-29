@@ -1,0 +1,10 @@
+{
+  "session_id": "3e2fc1f3-ee3e-498c-85ed-ed6f62064338",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "request",
+    "prompt": "<task-notification>\n<task-id>bljohd3dx</task-id>\n<tool-use-id>toolu_018vocL2SHFX4tePzMMM5kxk</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/3e2fc1f3-ee3e-498c-85ed-ed6f62064338/tasks/bljohd3dx.output</output-file>\n<status>completed</status>\n<summary>Background command \"Start native SearXNG + Next.js dev server\" completed (exit code 0)</summary>\n</task-notification>\nRead the output file to retrieve the result: /private/tmp/claude-5",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-22T21:29:21.139962"
+}

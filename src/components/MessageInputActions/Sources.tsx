@@ -8,7 +8,6 @@ import {
 import {
   GlobeIcon,
   GraduationCapIcon,
-  NetworkIcon,
 } from '@phosphor-icons/react';
 import { AnimatePresence, motion } from 'motion/react';
 
@@ -22,11 +21,6 @@ const sourcesList = [
     name: 'Academic',
     key: 'academic',
     icon: <GraduationCapIcon className="h-[16px] w-auto" />,
-  },
-  {
-    name: 'Social',
-    key: 'discussions',
-    icon: <NetworkIcon className="h-[16px] w-auto" />,
   },
 ];
 

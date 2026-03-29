@@ -90,7 +90,7 @@
   }
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 1023px) {
   select,
   textarea,
   input {

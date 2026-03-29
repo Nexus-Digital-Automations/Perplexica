@@ -1,5 +1,9 @@
 import BaseEmbedding from '@/lib/models/base/embedding';
 import UploadStore from '@/lib/uploads/store';
+import {
+  BALANCED_RESEARCH_STRATEGY,
+  QUALITY_RESEARCH_STRATEGY,
+} from '@/lib/prompts/research-agent';
 
 const getSpeedPrompt = (
   actionDesc: string,
@@ -118,6 +122,13 @@ const getBalancedPrompt = (
   Aim for at least two information-gathering calls when the answer is not already obvious; only skip the second if the question is trivial or you already have sufficient context.
   Do not spam searches—pick the most targeted queries.
   </core_principle>
+
+  <research_strategy>
+  ${BALANCED_RESEARCH_STRATEGY}
+
+  After web_search identifies promising sources, use read_page on the most relevant 1-2 URLs to extract exact passages. The writer can only faithfully cite what you explicitly extract — search snippets are summaries, not citable evidence.
+  Strategy: web_search to discover sources → read_page on the best URLs → done.
+  </research_strategy>
 
   <done_usage>
   Call done only after the reasoning plus the necessary tool calls are completed and you have enough to answer. If you call done early, stop. If you reach the tool cap, call done to conclude.
@@ -277,6 +288,11 @@ const getQualityPrompt = (
   5. **Reviews/opinions** - What do experts say?
   6. **Use cases** - How is it being used?
   7. **Limitations/critiques** - What are the downsides?
+
+  ${QUALITY_RESEARCH_STRATEGY}
+
+  IMPORTANT: After web_search identifies the most informative sources, use read_page on the top 2-3 URLs to extract exact verbatim passages. The writer can only faithfully cite what you explicitly extract — search snippets are summaries, not citable evidence.
+  Strategy: web_search to discover sources → read_page on the best URLs for exact quotes → done.
   </research_strategy>
 
   <mistakes_to_avoid>
@@ -319,13 +335,10 @@ const getQualityPrompt = (
 
 export const getResearcherPrompt = (
   actionDesc: string,
-  mode: 'speed' | 'balanced' | 'quality',
   i: number,
   maxIteration: number,
   fileIds: string[],
 ) => {
-  let prompt = '';
-
   const filesData = UploadStore.getFileData(fileIds);
 
   const fileDesc = filesData
@@ -335,20 +348,5 @@ export const getResearcherPrompt = (
     )
     .join('\n');
 
-  switch (mode) {
-    case 'speed':
-      prompt = getSpeedPrompt(actionDesc, i, maxIteration, fileDesc);
-      break;
-    case 'balanced':
-      prompt = getBalancedPrompt(actionDesc, i, maxIteration, fileDesc);
-      break;
-    case 'quality':
-      prompt = getQualityPrompt(actionDesc, i, maxIteration, fileDesc);
-      break;
-    default:
-      prompt = getSpeedPrompt(actionDesc, i, maxIteration, fileDesc);
-      break;
-  }
-
-  return prompt;
+  return getBalancedPrompt(actionDesc, i, maxIteration, fileDesc);
 };

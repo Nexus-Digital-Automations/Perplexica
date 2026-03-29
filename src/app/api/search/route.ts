@@ -1,4 +1,4 @@
-import ModelRegistry from '@/lib/models/registry';
+import { modelRegistry } from '@/lib/models/registry';
 import { ModelWithProvider } from '@/lib/models/types';
 import SessionManager from '@/lib/session';
 import { ChatTurnMessage } from '@/lib/types';
@@ -7,7 +7,6 @@ import APISearchAgent from '@/lib/agents/search/api';
 import { PipelineOverrides } from '@/lib/config/pipeline';
 
 interface ChatRequestBody {
-  optimizationMode: 'speed' | 'balanced' | 'quality';
   sources: SearchSources[];
   chatModel: ModelWithProvider;
   embeddingModel: ModelWithProvider;
@@ -30,14 +29,11 @@ export const POST = async (req: Request) => {
     }
 
     body.history = body.history || [];
-    body.optimizationMode = body.optimizationMode || 'speed';
     body.stream = body.stream || false;
 
-    const registry = new ModelRegistry();
-
     const [llm, embeddings] = await Promise.all([
-      registry.loadChatModel(body.chatModel.providerId, body.chatModel.key),
-      registry.loadEmbeddingModel(
+      modelRegistry.loadChatModel(body.chatModel.providerId, body.chatModel.key),
+      modelRegistry.loadEmbeddingModel(
         body.embeddingModel.providerId,
         body.embeddingModel.key,
       ),
@@ -59,7 +55,6 @@ export const POST = async (req: Request) => {
         embedding: embeddings,
         llm: llm,
         sources: body.sources,
-        mode: body.optimizationMode,
         fileIds: [],
         systemInstructions: body.systemInstructions || '',
         overrides: body.overrides,

@@ -4,9 +4,14 @@ import {
   AdditionalConfig,
   ClassifierOutput,
   ResearchAction,
-  SearchAgentConfig,
   SearchSources,
 } from '../../types';
+
+type ActionConfig = {
+  classification: ClassifierOutput;
+  fileIds: string[];
+  sources: SearchSources[];
+};
 
 class ActionRegistry {
   private static actions: Map<string, ResearchAction> = new Map();
@@ -19,44 +24,29 @@ class ActionRegistry {
     return this.actions.get(name);
   }
 
-  static getAvailableActions(config: {
-    classification: ClassifierOutput;
-    fileIds: string[];
-    mode: SearchAgentConfig['mode'];
-    sources: SearchSources[];
-  }): ResearchAction[] {
+  static getAvailableActions(config: ActionConfig): ResearchAction[] {
     return Array.from(
       this.actions.values().filter((action) => action.enabled(config)),
     );
   }
 
-  static getAvailableActionTools(config: {
-    classification: ClassifierOutput;
-    fileIds: string[];
-    mode: SearchAgentConfig['mode'];
-    sources: SearchSources[];
-  }): Tool[] {
+  static getAvailableActionTools(config: ActionConfig): Tool[] {
     const availableActions = this.getAvailableActions(config);
 
     return availableActions.map((action) => ({
       name: action.name,
-      description: action.getToolDescription({ mode: config.mode }),
+      description: action.getToolDescription(),
       schema: action.schema,
     }));
   }
 
-  static getAvailableActionsDescriptions(config: {
-    classification: ClassifierOutput;
-    fileIds: string[];
-    mode: SearchAgentConfig['mode'];
-    sources: SearchSources[];
-  }): string {
+  static getAvailableActionsDescriptions(config: ActionConfig): string {
     const availableActions = this.getAvailableActions(config);
 
     return availableActions
       .map(
         (action) =>
-          `<tool name="${action.name}">\n${action.getDescription({ mode: config.mode })}\n</tool>`,
+          `<tool name="${action.name}">\n${action.getDescription()}\n</tool>`,
       )
       .join('\n\n');
   }

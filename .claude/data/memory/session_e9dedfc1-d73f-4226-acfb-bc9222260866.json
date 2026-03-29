@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "e9dedfc1-d73f-4226-acfb-bc9222260866",
+    "data": {
+      "session_id": "e9dedfc1-d73f-4226-acfb-bc9222260866",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/e9dedfc1-d73f-4226-acfb-bc9222260866.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "Done. `.next` cache cleared, `yarn dev` should work cleanly now."
+    },
+    "persisted_at": "2026-03-23T17:03:03.263020"
+  },
+  "stored_at": "2026-03-23T17:03:03.263755"
+}

@@ -1,8 +1,10 @@
+name: perplexica-dev
+
 services:
   searxng:
     image: searxng/searxng:latest
     ports:
-      - '8080:8080'
+      - '4000:8080'
     volumes:
       - ./searxng:/etc/searxng:ro
     environment:

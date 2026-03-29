@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "4d0b5c70-97ea-436f-8c6e-e626dbf7027c",
+    "data": {
+      "session_id": "4d0b5c70-97ea-436f-8c6e-e626dbf7027c",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/4d0b5c70-97ea-436f-8c6e-e626dbf7027c.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "Everything is complete. The RSS feed system is merged to master and ready to use."
+    },
+    "persisted_at": "2026-03-11T22:50:28.484280"
+  },
+  "stored_at": "2026-03-11T22:50:28.484447"
+}

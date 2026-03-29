@@ -1,57 +1,21 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Settings } from 'lucide-react';
 import EmptyChatMessageInput from './EmptyChatMessageInput';
-import { File } from './ChatWindow';
-import Link from 'next/link';
-import NewsArticleWidget from './NewsArticleWidget';
 import SettingsButtonMobile from '@/components/Settings/SettingsButtonMobile';
-import { getShowNewsWidget } from '@/lib/config/clientRegistry';
 
 const EmptyChat = () => {
-  const [showNews, setShowNews] = useState(() =>
-    typeof window !== 'undefined' ? getShowNewsWidget() : true,
-  );
-
-  useEffect(() => {
-    const updateWidgetVisibility = () => {
-      setShowNews(getShowNewsWidget());
-    };
-
-    updateWidgetVisibility();
-
-    window.addEventListener('client-config-changed', updateWidgetVisibility);
-    window.addEventListener('storage', updateWidgetVisibility);
-
-    return () => {
-      window.removeEventListener(
-        'client-config-changed',
-        updateWidgetVisibility,
-      );
-      window.removeEventListener('storage', updateWidgetVisibility);
-    };
-  }, []);
-
   return (
     <div className="relative">
       <div className="absolute w-full flex flex-row items-center justify-end mr-5 mt-5">
         <SettingsButtonMobile />
       </div>
-      <div className="flex flex-col items-center justify-center min-h-screen max-w-screen-sm mx-auto p-2 space-y-4">
+      <div className="flex flex-col items-center justify-center min-h-screen max-w-screen-sm mx-auto p-2">
         <div className="flex flex-col items-center justify-center w-full space-y-8">
           <h2 className="text-black/70 dark:text-white/70 text-3xl font-medium -mt-8">
             Research begins here.
           </h2>
           <EmptyChatMessageInput />
         </div>
-        {showNews && (
-          <div className="flex flex-col w-full gap-4 mt-2 sm:flex-row sm:justify-center">
-            <div className="flex-1 w-full">
-              <NewsArticleWidget />
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

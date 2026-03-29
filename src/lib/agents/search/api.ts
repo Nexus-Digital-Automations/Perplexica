@@ -1,4 +1,4 @@
-import { ResearcherOutput, SearchAgentInput } from './types';
+import { ResearcherOutput, SearchAgentInput, ActionOutput } from './types';
 import SessionManager from '@/lib/session';
 import { classify } from './classifier';
 import Researcher from './researcher';
@@ -6,17 +6,41 @@ import { getWriterPrompt } from '@/lib/prompts/search/writer';
 import { WidgetExecutor } from './widgets';
 import { streamWithVerification } from '@/lib/verification/streamVerifier';
 import { resolvePipelineConfig, toVerificationConfig } from '@/lib/config/pipeline';
+import { searchSearxng } from '@/lib/searxng';
+import { Chunk } from '@/lib/types';
+import { aggregateEvidence } from './aggregator';
+
+function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error(`${label} timed out after ${ms}ms`)), ms),
+    ),
+  ]);
+}
 
 class APISearchAgent {
   async searchAsync(session: SessionManager, input: SearchAgentInput) {
-    const resolved = resolvePipelineConfig(input.config.mode, input.config.overrides);
+    const resolved = resolvePipelineConfig(input.config.overrides);
 
-    const classification = await classify({
-      chatHistory: input.chatHistory,
-      enabledSources: input.config.sources,
-      query: input.followUp,
-      llm: input.config.llm,
-    });
+    const [classification, prelimSearxng] = await Promise.all([
+      withTimeout(
+        classify({
+          chatHistory: input.chatHistory,
+          enabledSources: input.config.sources,
+          query: input.followUp,
+          llm: input.config.llm,
+        }),
+        20_000,
+        'classifier',
+      ),
+      input.config.sources.includes('web')
+        ? searchSearxng(input.followUp, {
+            categories: ['general'],
+            engines: ['google'],
+          }).catch(() => ({ results: [], suggestions: [] as string[] }))
+        : Promise.resolve({ results: [], suggestions: [] as string[] }),
+    ]);
 
     const widgetPromise = WidgetExecutor.executeAll({
       classification,
@@ -37,7 +61,14 @@ class APISearchAgent {
         followUp: input.followUp,
         classification: classification,
         config: input.config,
-        maxIterations: resolved.maxIterations,
+        maxIterations: resolved.sourcesPerQuestion,
+        initialActionOutput: prelimSearxng.results.length > 0 ? [{
+          type: 'search_results' as const,
+          results: prelimSearxng.results.map((r) => ({
+            content: r.content || r.title,
+            metadata: { title: r.title, url: r.url },
+          })),
+        }] : [],
       });
     }
 
@@ -57,13 +88,9 @@ class APISearchAgent {
       type: 'researchComplete',
     });
 
-    const finalContext =
-      searchResults?.searchFindings
-        .map(
-          (f, index) =>
-            `<result index=${index + 1} title=${f.metadata.title}>${f.content}</result>`,
-        )
-        .join('\n') || '';
+    const finalContext = searchResults?.searchFindings?.length
+      ? aggregateEvidence(searchResults.searchFindings)
+      : '';
 
     const widgetContext = widgetOutputs
       .map((o) => {

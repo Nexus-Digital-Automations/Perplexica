@@ -1,0 +1,10 @@
+{
+  "session_id": "4a7440ce-732c-401f-9a35-34cb8f3ea50c",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "bug",
+    "prompt": "the settings page looks different. it doesn't fit in the window. I can't even see half of it. it's too big and too far to the right. fix it please",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-23T16:56:00.718717"
+}

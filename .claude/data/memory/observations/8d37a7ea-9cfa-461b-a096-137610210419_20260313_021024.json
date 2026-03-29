@@ -1,0 +1,9 @@
+{
+  "session_id": "8d37a7ea-9cfa-461b-a096-137610210419",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "request",
+    "prompt": "explain the problem with the stop hook to me"
+  },
+  "timestamp": "2026-03-13T02:10:24.603250"
+}

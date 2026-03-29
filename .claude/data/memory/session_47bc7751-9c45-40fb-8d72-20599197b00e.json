@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "47bc7751-9c45-40fb-8d72-20599197b00e",
+    "data": {
+      "session_id": "47bc7751-9c45-40fb-8d72-20599197b00e",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/47bc7751-9c45-40fb-8d72-20599197b00e.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "All verified with genuine evidence:\n\n- **Lint**: `tsc --noEmit --diagnostics` \u2192 4657 files checked, exit 0, zero errors\n- **Happy path**: Raw curl \u2192 `HTTP_STATUS:200` with full Ollama provider JSON (chatModels: llama3.2:1b, nomic-embed-text:latest)\n- **Error case**: Raw curl \u2192 `{\"message\":\"Provider not found\"} HTTP_STATUS:500` for unknown provider ID\n- **Frontend**: grep confirms `RefreshCw`, `handleReload`, `isReloading`, `animate-spin` all present at correct lines in ModelProvider.tsx"
+    },
+    "persisted_at": "2026-03-13T18:11:09.510533"
+  },
+  "stored_at": "2026-03-13T18:11:09.510685"
+}

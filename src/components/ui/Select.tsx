@@ -13,7 +13,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <div
         className={cn(
           'relative inline-flex w-full items-center',
-          disabled && 'opacity-60',
+          disabled && 'opacity-50',
         )}
       >
         <select
@@ -21,7 +21,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ref={ref}
           disabled={disabled || loading}
           className={cn(
-            'bg-light-secondary dark:bg-dark-secondary px-3 py-2 flex items-center overflow-hidden border border-light-200 dark:border-dark-200 dark:text-white rounded-lg appearance-none w-full pr-10 text-xs lg:text-sm',
+            'bg-light-secondary/50 dark:bg-dark-secondary/40 px-3 py-2 flex items-center overflow-hidden border border-light-200/80 dark:border-dark-200/60 dark:text-white rounded-md appearance-none w-full pr-8 text-[11px] lg:text-xs transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/20 focus-visible:border-sky-500/40 dark:focus-visible:ring-sky-400/15 dark:focus-visible:border-sky-400/30',
             className,
           )}
         >
@@ -33,7 +33,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             );
           })}
         </select>
-        <span className="pointer-events-none absolute right-3 flex h-4 w-4 items-center justify-center text-black/50 dark:text-white/60">
+        <span className="pointer-events-none absolute right-3 flex h-4 w-4 items-center justify-center text-black/35 dark:text-white/35">
           {loading ? (
             <Loader2 className="h-4 w-4 animate-spin" />
           ) : (

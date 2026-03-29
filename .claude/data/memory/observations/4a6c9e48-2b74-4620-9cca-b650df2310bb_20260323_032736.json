@@ -1,0 +1,10 @@
+{
+  "session_id": "4a6c9e48-2b74-4620-9cca-b650df2310bb",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "request",
+    "prompt": "no. I was thinking that instead of one advanced config icon, we split the current advanced config into a few sections then have each have their own icons and whatnot. have them all line up across the bottom of the search bar on the right next to the others",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-23T03:27:36.758791"
+}

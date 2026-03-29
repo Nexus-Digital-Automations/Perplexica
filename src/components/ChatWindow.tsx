@@ -8,6 +8,7 @@ import { useChat } from '@/lib/hooks/useChat';
 import SettingsButtonMobile from './Settings/SettingsButtonMobile';
 import { Block } from '@/lib/types';
 import Loader from './ui/Loader';
+import SettingsButton from './Settings/SettingsButton';
 
 export interface BaseMessage {
   chatId: string;
@@ -34,7 +35,7 @@ export interface Widget {
 }
 
 const ChatWindow = () => {
-  const { hasError, notFound, messages, isReady } = useChat();
+  const { hasError, errorMessage, notFound, messages, isReady } = useChat();
 
   if (hasError) {
     return (
@@ -42,10 +43,11 @@ const ChatWindow = () => {
         <div className="absolute w-full flex flex-row items-center justify-end mr-5 mt-5">
           <SettingsButtonMobile />
         </div>
-        <div className="flex flex-col items-center justify-center min-h-screen">
-          <p className="dark:text-white/70 text-black/70 text-sm">
-            Failed to connect to the server. Please try again later.
+        <div className="flex flex-col items-center justify-center min-h-screen gap-4">
+          <p className="dark:text-white/70 text-black/70 text-sm text-center max-w-sm">
+            {errorMessage || 'Failed to connect to the server. Please try again later.'}
           </p>
+          <SettingsButton />
         </div>
       </div>
     );

@@ -101,16 +101,30 @@ export async function streamWithVerification(
   }
 
   if (report.failed > 0 && config.maxCorrectionRetries > 0) {
-    for (let retry = 0; retry < config.maxCorrectionRetries; retry++) {
+    // If any failed citation was against a verbatim source, use extra retries —
+    // the exact text is available so corrections are high-value.
+    const hasVerbatimFailures = report.results.some(
+      (r) => r.status === 'fail' && sources[r.citationIndex - 1]?.metadata?.isVerbatim,
+    );
+    const effectiveRetries = hasVerbatimFailures
+      ? Math.max(config.maxCorrectionRetries, 2)
+      : config.maxCorrectionRetries;
+
+    // Run corrections sequentially with increasing temperature.
+    // Stop as soon as a correction eliminates all failures.
+    const temperatures = [0.1, 0.3];
+
+    for (let retry = 0; retry < effectiveRetries; retry++) {
+      const temp = temperatures[Math.min(retry, temperatures.length - 1)];
       const correctedText = await correctFailedCitations(
         fullText,
         report,
         sources,
         llm,
-        config,
-      );
+        { ...config, correctionTemperature: temp },
+      ).catch(() => null);
 
-      if (!correctedText) break;
+      if (!correctedText) continue;
 
       const newReport = verifyCitations(correctedText, sources, config);
 
@@ -129,12 +143,15 @@ export async function streamWithVerification(
           });
         }
 
+        // Stop if all failures are resolved
         if (newReport.failed === 0) break;
-      } else {
-        break;
       }
     }
   }
+
+  const avgScore = report.results.length > 0
+    ? report.results.reduce((sum, r) => sum + r.similarity, 0) / report.results.length
+    : 0;
 
   session.emit('data', {
     type: 'verificationComplete',
@@ -145,6 +162,14 @@ export async function streamWithVerification(
       weak: report.weak,
       failed: report.failed,
       wasCorrected: report.wasCorrected,
+      accuracyScore: Math.round(avgScore * 100),
+      results: (report.results || []).map((r) => ({
+        citationIndex: r.citationIndex,
+        status: r.status,
+        similarity: r.similarity,
+        matchedSnippet: r.matchedSnippet,
+        sentence: r.sentence,
+      })),
     },
   });
 

@@ -1,0 +1,9 @@
+{
+  "session_id": "e1a49bef-d648-4293-ad39-93d1ca6fb98a",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "bug",
+    "prompt": "please stop @scripts/dev.sh \n\nand please try to look into these alternatives:\n\nColima, OrbStack, and Podman are popular open-source alternatives to Docker Desktop on macOS, designed to run containers with less overhead\u2014no heavy VM always eating 7GB like you're seeing. They're especially appealing for devs like you avoiding licensing fees and resource hogs.\n\n**Colima** is a lightweight CLI tool (built on Lima VM) that spins up a minimal Linux VM for Docker/containerd. Install via `brew install co"
+  },
+  "timestamp": "2026-03-13T13:16:39.640901"
+}

@@ -1,0 +1,10 @@
+{
+  "session_id": "4a7440ce-732c-401f-9a35-34cb8f3ea50c",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "request",
+    "prompt": "<task-notification>\n<task-id>bqb07ctzw</task-id>\n<tool-use-id>toolu_01QWqXrj4BgfrApMA8W33Swu</tool-use-id>\n<output-file>/private/tmp/claude-501/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/e7da9068-6129-4198-a751-df82c7567078/tasks/bqb07ctzw.output</output-file>\n<status>failed</status>\n<summary>Background command \"Record remaining and authorize\" failed with exit code 1</summary>\n</task-notification>\nRead the output file to retrieve the result: /private/tmp/claude-501/-Users-jere",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-23T17:12:08.071992"
+}

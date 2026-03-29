@@ -47,7 +47,11 @@ export function extractCitations(text: string): ExtractedCitation[] {
     }
 
     if (indices.length > 0) {
-      const sentenceText = sentence.replace(citationPattern, '').trim();
+      const sentenceText = sentence
+        .replace(citationPattern, '')
+        .replace(/\s+([.,!?;:])/g, '$1')
+        .replace(/\s+/g, ' ')
+        .trim();
       results.push({
         sentenceText,
         citationIndices: [...new Set(indices)],

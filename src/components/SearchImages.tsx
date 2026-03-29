@@ -14,6 +14,9 @@ type Image = {
   title: string;
 };
 
+const proxyUrl = (src: string) =>
+  `/api/image-proxy?url=${encodeURIComponent(src)}`;
+
 const SearchImages = ({
   query,
   chatHistory,
@@ -63,7 +66,7 @@ const SearchImages = ({
             setSlides(
               images.map((image: Image) => {
                 return {
-                  src: image.img_src,
+                  src: proxyUrl(image.img_src),
                 };
               }),
             );
@@ -103,7 +106,7 @@ const SearchImages = ({
                       ]);
                     }}
                     key={i}
-                    src={image.img_src}
+                    src={proxyUrl(image.img_src)}
                     alt={image.title}
                     className="h-full w-full aspect-video object-cover rounded-lg transition duration-200 active:scale-95 hover:scale-[1.02] cursor-zoom-in"
                   />
@@ -119,7 +122,7 @@ const SearchImages = ({
                       ]);
                     }}
                     key={i}
-                    src={image.img_src}
+                    src={proxyUrl(image.img_src)}
                     alt={image.title}
                     className="h-full w-full aspect-video object-cover rounded-lg transition duration-200 active:scale-95 hover:scale-[1.02] cursor-zoom-in"
                   />
@@ -133,7 +136,7 @@ const SearchImages = ({
                   {images.slice(3, 6).map((image, i) => (
                     <img
                       key={i}
-                      src={image.img_src}
+                      src={proxyUrl(image.img_src)}
                       alt={image.title}
                       className="h-6 w-12 rounded-md lg:h-3 lg:w-6 lg:rounded-sm aspect-video object-cover"
                     />

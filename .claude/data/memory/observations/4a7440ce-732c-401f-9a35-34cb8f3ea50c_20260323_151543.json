@@ -1,0 +1,10 @@
+{
+  "session_id": "4a7440ce-732c-401f-9a35-34cb8f3ea50c",
+  "tool_name": "_user_request",
+  "tool_input": {
+    "category": "request",
+    "prompt": "wait. the deepseek models are included in it too, right? we're using deepseek-chat",
+    "project": "Perplexica"
+  },
+  "timestamp": "2026-03-23T15:15:43.729548"
+}

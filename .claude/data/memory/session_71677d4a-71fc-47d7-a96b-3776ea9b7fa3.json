@@ -1,0 +1,16 @@
+{
+  "value": {
+    "session_id": "71677d4a-71fc-47d7-a96b-3776ea9b7fa3",
+    "data": {
+      "session_id": "71677d4a-71fc-47d7-a96b-3776ea9b7fa3",
+      "transcript_path": "/Users/jeremyparker/.claude/projects/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/71677d4a-71fc-47d7-a96b-3776ea9b7fa3.jsonl",
+      "cwd": "/Users/jeremyparker/Desktop/Claude Coding Projects/Perplexica",
+      "permission_mode": "acceptEdits",
+      "hook_event_name": "Stop",
+      "stop_hook_active": true,
+      "last_assistant_message": "Stop authorized."
+    },
+    "persisted_at": "2026-03-23T03:21:35.994335"
+  },
+  "stored_at": "2026-03-23T03:21:35.994890"
+}
