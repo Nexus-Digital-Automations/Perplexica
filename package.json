@@ -10,7 +10,7 @@
     "dev:native": "bash scripts/dev.sh",
     "dev:setup": "bash scripts/setup-searxng.sh",
     "dev:colima": "bash scripts/dev-colima.sh",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "tsc --noEmit",
     "test": "vitest run",
