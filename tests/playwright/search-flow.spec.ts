@@ -68,7 +68,7 @@ function buildInteractiveSSEStream(sessionId: string): string {
   // Stream stays open here — the backend is waiting for selection
   // In the test we'll fulfill the selection API call which triggers
   // the backend to continue (simulated by sending more events)
-  return events.map((e) => JSON.stringify(e)).join('\n');
+  return events.map((e) => JSON.stringify(e)).join('\n') + '\n';
 }
 
 function buildPostSelectionEvents(): string {

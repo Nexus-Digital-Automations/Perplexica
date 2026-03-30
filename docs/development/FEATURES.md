@@ -350,3 +350,28 @@ Magi...
 **Request:** is it live on the mac mini m1? is it done so it automatically deploys and updates there?
 - [ ] Pending
 -----
+
+-----
+### [FEATURE] 2026-03-29 14:27
+**Session:** `a02fe5f7...`
+**Request:** okay please add to your memory that you need to run that when pushing this specific codebase
+- [ ] Pending
+-----
+
+-----
+### [FEATURE] 2026-03-29 14:28
+**Session:** `b059e199...`
+**Request:** Auto-deploy pipeline is working. Full flow verified:
+
+  1. git push mini master → pushes to bare repo on Mac Mini
+  2. Post-receive hook runs: checkout → build → copy static → pm2 restart
+  3. App liv...
+- [ ] Pending
+-----
+
+-----
+### [FEATURE] 2026-03-29 20:26
+**Session:** `03efb85f...`
+**Request:** please make it so perplexica mcp and public facing api is updated. I want it to be comprehensive for the search features
+- [ ] Pending
+-----

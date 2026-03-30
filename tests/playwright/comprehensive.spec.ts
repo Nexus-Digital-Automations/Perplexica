@@ -337,13 +337,13 @@ test.describe('Comprehensive UI tests', () => {
 
     await page.evaluate(() => { const g = document.querySelector('svg.lucide-settings') as HTMLElement; g?.closest('div')?.click(); });
     await pause(1000);
-    await expect(page.getByRole('dialog')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Back' })).toBeVisible();
 
     await page.getByRole('button', { name: 'Back' }).click();
     await pause(500);
     await shot(page, 'settings_closed');
 
-    await expect(page.getByRole('dialog')).not.toBeVisible();
+    await expect(page.getByRole('button', { name: 'Back' })).not.toBeVisible();
   });
 
   test('Keyboard shortcut "/" focuses textarea', async ({ page }) => {

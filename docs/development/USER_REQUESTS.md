@@ -1660,3 +1660,100 @@ IPv6
 **Request:** yes please set that up
 **Status:** [ ] Pending
 -----
+
+-----
+### [FEATURE] 2026-03-29 14:27
+**Session:** `a02fe5f7...`
+**Request:** okay please add to your memory that you need to run that when pushing this specific codebase
+**Status:** [ ] Pending
+-----
+
+-----
+### [FEATURE] 2026-03-29 14:28
+**Session:** `b059e199...`
+**Request:** Auto-deploy pipeline is working. Full flow verified:
+
+  1. git push mini master → pushes to bare repo on Mac Mini
+  2. Post-receive hook runs: checkout → build → copy static → pm2 restart
+  3. App live at http://100.119.211.101:3000 — HTTP 200
+
+  Going forward, to deploy any change:
+  git commit -m "your message"
+  git push mini master
+
+  Or: bash scripts/deploy.sh
+
+please add to your memory that you need to run this everytime you push this perplexica codebase
+**Status:** [ ] Pending
+-----
+
+-----
+### [REQUEST] 2026-03-29 14:42
+**Session:** `b059e199...`
+**Request:** <task-notification>
+<task-id>bf43xy3kv</task-id>
+<tool-use-id>toolu_014YpuZPtKrRtJFBVDuUR8nc</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-jeremyparker-Desktop-Claude-Coding-Projects-Perplexica/9cb844f7-f4e6-47c9-bdda-66e14c933680/tasks/bf43xy3kv.output</output-file>
+<status>failed</status>
+<summary>Background command "Authorize stop — no project code was modified this session" failed with exit code 1</summary>
+</task-notification>
+Read the output file to retrieve the result: /privat...
+**Status:** [ ] Pending
+-----
+
+-----
+### [BUG] 2026-03-29 14:42
+**Session:** `b059e199...`
+**Request:** jplease tell me what's going wrong with this double check system
+**Status:** [ ] Pending
+-----
+
+-----
+### [FEATURE] 2026-03-29 20:26
+**Session:** `03efb85f...`
+**Request:** please make it so perplexica mcp and public facing api is updated. I want it to be comprehensive for the search features
+**Status:** [ ] Pending
+-----
+
+-----
+### [REQUEST] 2026-03-29 20:30
+**Session:** `03efb85f...`
+**Request:** you didn't ask me what I wanted and clarified things first before you started/designed the plan
+
+why didn't you? is it in your prompts? did you simply not listen to them?
+**Status:** [ ] Pending
+-----
+
+-----
+### [QUESTION] 2026-03-29 20:39
+**Session:** `03efb85f...`
+**Request:** what's the url to put into my macbook to access the perplexica app again hosted on my mac mini?
+**Status:** [ ] Pending
+-----
+
+-----
+### [BUG] 2026-03-30 12:13
+**Session:** `9e2c811d...`
+**Request:** ⎿  Plan saved to: ~/.claude/plans/floofy-questing-oasis.md · /plan to edit
+     ---title: Comprehensive MCP + Public API for Search Features
+     status: active
+     created: 2026-03-29
+     updated: 2026-03-29
+     priority: high
+
+     Context
+
+     The MCP server and /api/search route both have gaps that limit what AI agents can do.
+     Primary consumer is AI agents via MCP. Four problems to fix:
+
+     1. overridesSchema in MCP is wrong and incomplete — maxIterations doesn't exist in
+     Pip...
+**Status:** [ ] Pending
+-----
+
+-----
+### [QUESTION] 2026-03-30 12:34
+**Session:** `9e2c811d...`
+**Request:** what are you working on?
+**Status:** [ ] Pending
+-----

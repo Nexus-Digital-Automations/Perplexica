@@ -1,0 +1,491 @@
+openapi: 3.1.0
+info:
+  title: Perplexica API
+  version: '4.0.0'
+  description: |
+    REST API for Perplexica — an AI-powered search and research engine.
+
+    ## Endpoints
+
+    - **POST /api/search** — Stateless web/image/video search. Supports streaming (NDJSON) and non-streaming JSON responses.
+    - **POST /api/chat** — Persistent conversation with full deep-research capabilities. Always returns an NDJSON stream.
+
+    ## Model Fields
+
+    Both endpoints require `chatModel` and `embeddingModel` objects identifying which provider and model key to use.
+    Call `GET /api/providers` to list available providers and their model keys.
+
+    ## Pipeline Overrides
+
+    Both endpoints accept an optional `overrides` object to tune research depth, response format, source quality,
+    citation verification, and budget. All fields are optional — omitted fields use the server defaults.
+
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+tags:
+  - name: Search
+    description: Stateless search (web, images, videos)
+  - name: Chat
+    description: Persistent conversations with deep research
+
+paths:
+  /api/search:
+    post:
+      operationId: search
+      tags: [Search]
+      summary: Stateless search with optional streaming
+      description: |
+        Performs an AI-powered web search (or image/video search) and returns an answer with citations.
+
+        Set `stream: true` to receive results as an NDJSON stream (one JSON object per line).
+        Set `stream: false` (default) to receive a single JSON response after the search completes.
+
+        **Streaming response events (NDJSON, one per line):**
+        - `{ type: 'init', data: 'Stream connected', sessionId: string }` — first event; sessionId can be used with `/api/reconnect/{id}`
+        - `{ type: 'response', data: string }` — incremental text chunk
+        - `{ type: 'sources', data: Source[] }` — search results used
+        - `{ type: 'verificationStart' }` — citation verification begun
+        - `{ type: 'verificationComplete', data: VerificationResult }` — verification done
+        - `{ type: 'correctedResponse', data: string }` — corrected answer after failed citations
+        - `{ type: 'done' }` — stream finished
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+            examples:
+              basic:
+                summary: Basic web search (non-streaming)
+                value:
+                  query: 'What is quantum entanglement?'
+                  sources: [web]
+                  stream: false
+                  chatModel: { providerId: openai-1, key: gpt-4o }
+                  embeddingModel: { providerId: openai-1, key: text-embedding-3-small }
+              streaming:
+                summary: Streaming web search with overrides
+                value:
+                  query: 'Latest AI research breakthroughs 2025'
+                  sources: [web, academic]
+                  stream: true
+                  chatModel: { providerId: openai-1, key: gpt-4o }
+                  embeddingModel: { providerId: openai-1, key: text-embedding-3-small }
+                  overrides:
+                    numQuestions: 3
+                    responseLength: comprehensive
+                    interactiveQuestions: false
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              description: Non-streaming response (`stream: false`)
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            text/event-stream:
+              description: |
+                Streaming NDJSON (`stream: true`). Each line is a JSON object.
+                See endpoint description for event types.
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/chat:
+    post:
+      operationId: chat
+      tags: [Chat]
+      summary: Persistent conversation with deep research
+      description: |
+        Sends a message in a persistent conversation. Conversations are saved to the database
+        and can be continued by passing the same `chatId` in future requests.
+
+        Always returns an NDJSON stream (one JSON object per line).
+
+        **Stream events (NDJSON, one per line):**
+        - `{ type: 'sessionId', data: string }` — first event; internal session ID for `/api/reconnect/{id}`
+        - `{ type: 'block', block: Block }` — new content block added (see Block types below)
+        - `{ type: 'updateBlock', blockId: string, patch: RFC6902Patch[] }` — RFC 6902 JSON Patch applied to an existing block
+        - `{ type: 'researchProgress', questionsCompleted: number, questionTotal: number }` — research progress update
+        - `{ type: 'researchComplete' }` — all sub-questions researched
+        - `{ type: 'verificationStart' }` — citation verification begun
+        - `{ type: 'verificationComplete', data: VerificationResult }` — verification done
+        - `{ type: 'messageEnd' }` — stream finished; all blocks are in final state
+        - `{ type: 'error', data: any }` — error occurred
+
+        **Block types** (emitted via `block` events, updated via `updateBlock` patches):
+        - `text` — the final answer text (built incrementally via patches)
+        - `source` — search result sources
+        - `suggestion` — follow-up question suggestions
+        - `research` — deep-research sub-steps (reasoning, searching, reading)
+        - `widget` — structured data widget (e.g. calculation result)
+        - `verification` — citation verification summary
+
+        **Agent usage tip:** Set `overrides.interactiveQuestions: false` to skip the
+        120-second human question-selection pause.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+            examples:
+              new_conversation:
+                summary: Start a new conversation
+                value:
+                  message:
+                    messageId: 550e8400-e29b-41d4-a716-446655440000
+                    chatId: 550e8400-e29b-41d4-a716-446655440001
+                    content: 'Explain the Fermi paradox'
+                  sources: [web]
+                  history: []
+                  files: []
+                  chatModel: { providerId: openai-1, key: gpt-4o }
+                  embeddingModel: { providerId: openai-1, key: text-embedding-3-small }
+                  overrides:
+                    interactiveQuestions: false
+              continue_conversation:
+                summary: Continue an existing conversation
+                value:
+                  message:
+                    messageId: 550e8400-e29b-41d4-a716-446655440002
+                    chatId: 550e8400-e29b-41d4-a716-446655440001
+                    content: 'What are the most popular proposed solutions?'
+                  sources: [web, academic]
+                  history:
+                    - [human, 'Explain the Fermi paradox']
+                    - [assistant, 'The Fermi paradox is...']
+                  files: []
+                  chatModel: { providerId: openai-1, key: gpt-4o }
+                  embeddingModel: { providerId: openai-1, key: text-embedding-3-small }
+                  overrides:
+                    interactiveQuestions: false
+                    responseLength: comprehensive
+      responses:
+        '200':
+          description: NDJSON stream of block events
+          content:
+            text/event-stream:
+              schema:
+                type: string
+                format: binary
+              description: |
+                NDJSON stream. Each line is a JSON object. See endpoint description for event types.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  schemas:
+    ModelWithProvider:
+      type: object
+      required: [providerId, key]
+      properties:
+        providerId:
+          type: string
+          description: Provider ID as returned by GET /api/providers
+          example: openai-1
+        key:
+          type: string
+          description: Model key as returned by GET /api/providers
+          example: gpt-4o
+
+    PipelineOverrides:
+      type: object
+      description: Optional overrides for pipeline parameters. All fields are optional.
+      properties:
+        numQuestions:
+          type: integer
+          minimum: 1
+          maximum: 50
+          description: Number of research sub-questions to generate (default 5)
+        sourcesPerQuestion:
+          type: integer
+          minimum: 1
+          maximum: 25
+          description: Number of sources to retrieve per sub-question (default 2)
+        questionsParallel:
+          type: boolean
+          description: Run sub-question research in parallel (default true)
+        maxConcurrentResearchers:
+          type: integer
+          minimum: 1
+          maximum: 10
+          description: Max parallel researcher agents when questionsParallel=true (default 5)
+        budgetUsd:
+          type: number
+          minimum: 0
+          nullable: true
+          description: USD cost cap per request — research stops when reached. null = unlimited (default null)
+        responseLength:
+          type: string
+          enum: [brief, standard, comprehensive]
+          description: 'Response length: brief (300-500 words), standard (default), comprehensive (2000+ words)'
+        writerTemperature:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: LLM temperature for the writer (default 0.2)
+        credibilityThresholdAdjustment:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Tighten source credibility filtering — higher = stricter (default 0.03)
+        verificationEnabled:
+          type: boolean
+          description: Enable citation accuracy verification (default true)
+        passThreshold:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Similarity threshold to pass a citation check (default 0.30)
+        verbatimPassThreshold:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Similarity threshold for verbatim/exact match (default 0.50)
+        weakThreshold:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Similarity threshold for a weak citation match (default 0.18)
+        maxCorrectionRetries:
+          type: integer
+          minimum: 0
+          maximum: 5
+          description: Max retries for correcting failed citations (default 1)
+        correctionTimeoutMs:
+          type: integer
+          minimum: 0
+          maximum: 60000
+          description: Timeout for citation correction in milliseconds (default 12000)
+        correctionTemperature:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: LLM temperature for citation correction (default 0.1)
+        interactiveQuestions:
+          type: boolean
+          description: |
+            Pause for user to confirm sub-questions before researching (default true).
+            Set to false for agent/API use to skip the 120-second selection timeout.
+
+    Source:
+      type: object
+      description: A source document returned by the search
+      properties:
+        content:
+          type: string
+          description: Extracted text content from the source
+        metadata:
+          type: object
+          properties:
+            title:
+              type: string
+            url:
+              type: string
+            score:
+              type: number
+          additionalProperties: true
+
+    VerificationResult:
+      type: object
+      description: Citation verification summary
+      properties:
+        status:
+          type: string
+          enum: [verified, partial, none]
+        totalCitations:
+          type: integer
+        passed:
+          type: integer
+        weak:
+          type: integer
+        failed:
+          type: integer
+        wasCorrected:
+          type: boolean
+        citations:
+          type: array
+          items:
+            type: object
+            properties:
+              citationIndex:
+                type: integer
+              status:
+                type: string
+                enum: [pass, weak, fail]
+              similarity:
+                type: number
+              matchedSnippet:
+                type: string
+              sentence:
+                type: string
+
+    SearchRequest:
+      type: object
+      required: [query, sources, chatModel, embeddingModel]
+      properties:
+        query:
+          type: string
+          description: The search query
+          minLength: 1
+        sources:
+          type: array
+          items:
+            type: string
+            enum: [web, discussions, academic]
+          description: Source types to search
+          default: [web]
+        history:
+          type: array
+          items:
+            type: array
+            prefixItems:
+              - type: string
+                description: Role (human or assistant)
+              - type: string
+                description: Message content
+            minItems: 2
+            maxItems: 2
+          description: Prior conversation turns as [role, content] pairs
+          default: []
+        stream:
+          type: boolean
+          description: Whether to stream results as NDJSON (true) or return a single JSON response (false)
+          default: false
+        chatModel:
+          $ref: '#/components/schemas/ModelWithProvider'
+        embeddingModel:
+          $ref: '#/components/schemas/ModelWithProvider'
+        systemInstructions:
+          type: string
+          description: Custom system instructions for the AI writer
+        overrides:
+          $ref: '#/components/schemas/PipelineOverrides'
+
+    SearchResponse:
+      type: object
+      description: Non-streaming search response
+      properties:
+        message:
+          type: string
+          description: The AI-generated answer
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          description: Source documents used to generate the answer
+        verificationResult:
+          $ref: '#/components/schemas/VerificationResult'
+          description: Citation verification result (present only if verification ran)
+
+    ChatRequest:
+      type: object
+      required: [message, chatModel, embeddingModel]
+      properties:
+        message:
+          type: object
+          required: [messageId, chatId, content]
+          properties:
+            messageId:
+              type: string
+              format: uuid
+              description: Unique ID for this message (generate a UUID)
+            chatId:
+              type: string
+              format: uuid
+              description: Conversation ID. Use the same value to continue an existing conversation.
+            content:
+              type: string
+              minLength: 1
+              description: The message text
+        sources:
+          type: array
+          items:
+            type: string
+            enum: [web, discussions, academic]
+          description: Source types to search
+          default: []
+        history:
+          type: array
+          items:
+            type: array
+            prefixItems:
+              - type: string
+                description: Role (human or assistant)
+              - type: string
+                description: Message content
+            minItems: 2
+            maxItems: 2
+          description: Prior conversation turns as [role, content] pairs (not stored — provided by client for context)
+          default: []
+        files:
+          type: array
+          items:
+            type: string
+          description: File IDs from the upload API to include in the search context
+          default: []
+        chatModel:
+          $ref: '#/components/schemas/ModelWithProvider'
+        embeddingModel:
+          $ref: '#/components/schemas/ModelWithProvider'
+        systemInstructions:
+          type: string
+          nullable: true
+          description: Custom system instructions for the AI writer
+        overrides:
+          $ref: '#/components/schemas/PipelineOverrides'
+
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error description
+        error:
+          type: array
+          description: Validation error details (present on 400 responses from /api/chat)
+          items:
+            type: object
+            properties:
+              path:
+                type: string
+                description: Dot-separated path to the invalid field
+              message:
+                type: string
+                description: Validation error message for this field
+
+  responses:
+    BadRequest:
+      description: Invalid request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            missing_field:
+              value:
+                message: 'Missing chatModel: providerId and key are required'
+            validation_error:
+              value:
+                message: Invalid request body
+                error:
+                  - path: message.chatId
+                    message: Chat ID is required
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            message: An error occurred while processing chat request

@@ -28,6 +28,20 @@ export const POST = async (req: Request) => {
       );
     }
 
+    if (!body.chatModel?.providerId || !body.chatModel?.key) {
+      return Response.json(
+        { message: 'Missing chatModel: providerId and key are required' },
+        { status: 400 },
+      );
+    }
+
+    if (!body.embeddingModel?.providerId || !body.embeddingModel?.key) {
+      return Response.json(
+        { message: 'Missing embeddingModel: providerId and key are required' },
+        { status: 400 },
+      );
+    }
+
     body.history = body.history || [];
     body.stream = body.stream || false;
 
@@ -72,6 +86,7 @@ export const POST = async (req: Request) => {
         ) => {
           let message = '';
           let sources: any[] = [];
+          let verificationResult: any = undefined;
 
           session.subscribe((event: string, data: Record<string, any>) => {
             if (event === 'data') {
@@ -80,6 +95,8 @@ export const POST = async (req: Request) => {
                   message += data.data;
                 } else if (data.type === 'searchResults') {
                   sources = data.data;
+                } else if (data.type === 'verificationComplete') {
+                  verificationResult = data.data;
                 }
               } catch (error) {
                 reject(
@@ -92,7 +109,11 @@ export const POST = async (req: Request) => {
             }
 
             if (event === 'end') {
-              resolve(Response.json({ message, sources }, { status: 200 }));
+              const responseBody: Record<string, any> = { message, sources };
+              if (verificationResult !== undefined) {
+                responseBody.verificationResult = verificationResult;
+              }
+              resolve(Response.json(responseBody, { status: 200 }));
             }
 
             if (event === 'error') {
@@ -122,6 +143,7 @@ export const POST = async (req: Request) => {
             JSON.stringify({
               type: 'init',
               data: 'Stream connected',
+              sessionId: session.id,
             }) + '\n',
           ),
         );

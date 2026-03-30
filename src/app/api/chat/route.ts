@@ -169,6 +169,16 @@ export const POST = async (req: Request) => {
     const writer = responseStream.writable.getWriter();
     const encoder = new TextEncoder();
 
+    // Emit session ID first so clients can reconnect if needed
+    writer.write(
+      encoder.encode(
+        JSON.stringify({
+          type: 'sessionId',
+          data: session.id,
+        }) + '\n',
+      ),
+    );
+
     const disconnect = session.subscribe((event: string, data: any) => {
       if (event === 'data') {
         if (data.type === 'block') {

@@ -1,5 +1,7 @@
 import { FastMCP } from 'fastmcp';
 import { z } from 'zod';
+import { randomUUID } from 'crypto';
+import { applyPatch } from 'rfc6902';
 import {
   resolvePipelineConfig,
   toVerificationConfig,
@@ -8,7 +10,7 @@ import {
 import { verifyCitations } from '../lib/verification/verifier.js';
 import { extractCitations } from '../lib/verification/citationExtractor.js';
 import { bestWindowMatch } from '../lib/verification/textSimilarity.js';
-import type { Chunk } from '../lib/types.js';
+import type { Chunk, VerificationBlock } from '../lib/types.js';
 
 const BASE_URL = process.env.PERPLEXICA_URL || 'http://localhost:3000';
 
@@ -117,15 +119,44 @@ async function resolveModels(opts?: {
 // ---------------------------------------------------------------------------
 
 const overridesSchema = {
-  maxIterations: z.number().min(1).max(50).optional(),
-  responseLength: z.enum(['brief', 'standard', 'comprehensive']).optional(),
-  writerTemperature: z.number().min(0).max(1).optional(),
-  verificationEnabled: z.boolean().optional(),
-  passThreshold: z.number().min(0).max(1).optional(),
-  weakThreshold: z.number().min(0).max(1).optional(),
-  maxCorrectionRetries: z.number().min(0).max(5).optional(),
-  correctionTimeoutMs: z.number().min(0).max(60000).optional(),
-  correctionTemperature: z.number().min(0).max(1).optional(),
+  // Research depth
+  sourcesPerQuestion: z.number().min(1).max(25).optional()
+    .describe('Number of sources to retrieve per question (1-25, default 2)'),
+  numQuestions: z.number().min(1).max(50).optional()
+    .describe('Number of research sub-questions to generate (1-50, default 5)'),
+  questionsParallel: z.boolean().optional()
+    .describe('Run sub-question research in parallel (default true)'),
+  maxConcurrentResearchers: z.number().min(1).max(10).optional()
+    .describe('Max parallel researcher agents (1-10, default 5)'),
+  // Budget
+  budgetUsd: z.number().min(0).nullable().optional()
+    .describe('USD cost cap per request — agent stops when reached (null = unlimited)'),
+  // Response format
+  responseLength: z.enum(['brief', 'standard', 'comprehensive']).optional()
+    .describe('Response length: brief (300-500 words), standard, or comprehensive (2000+ words)'),
+  writerTemperature: z.number().min(0).max(1).optional()
+    .describe('LLM temperature for the writer (0-1, default 0.2)'),
+  // Source quality
+  credibilityThresholdAdjustment: z.number().min(0).max(1).optional()
+    .describe('Tighten source credibility filtering — higher = stricter (0-1, default 0.03)'),
+  // Citation verification
+  verificationEnabled: z.boolean().optional()
+    .describe('Enable citation accuracy verification (default true)'),
+  passThreshold: z.number().min(0).max(1).optional()
+    .describe('Similarity threshold to pass citation check (0-1, default 0.30)'),
+  verbatimPassThreshold: z.number().min(0).max(1).optional()
+    .describe('Similarity threshold for verbatim/exact match (0-1, default 0.50)'),
+  weakThreshold: z.number().min(0).max(1).optional()
+    .describe('Similarity threshold for weak citation match (0-1, default 0.18)'),
+  maxCorrectionRetries: z.number().min(0).max(5).optional()
+    .describe('Max retries for correcting failed citations (0-5, default 1)'),
+  correctionTimeoutMs: z.number().min(0).max(60000).optional()
+    .describe('Timeout for citation correction in ms (default 12000)'),
+  correctionTemperature: z.number().min(0).max(1).optional()
+    .describe('LLM temperature for citation correction (0-1, default 0.1)'),
+  // Interaction
+  interactiveQuestions: z.boolean().optional()
+    .describe('Pause for user to select sub-questions before researching (default true; set false for agent use)'),
 };
 
 const chatHistorySchema = z
@@ -332,7 +363,168 @@ All types accept: query, chatHistory, chatModelProvider, chatModelKey.`,
 });
 
 // ---------------------------------------------------------------------------
-// Tool 5: get_suggestions
+// Tool 5: chat (persistent DB conversation with full research capabilities)
+// ---------------------------------------------------------------------------
+
+server.addTool({
+  name: 'chat',
+  description: `Start or continue a persistent chat conversation with full research capabilities.
+Unlike 'search' (stateless), 'chat' saves conversations to the database, supports multi-question
+deep research, file attachments, and citation verification. Returns structured result with
+chatId (use to continue the conversation), text, sources, and verificationSummary.
+Set interactiveQuestions=false in overrides (the default for this tool) to skip the
+120-second question-selection pause that is designed for human users.`,
+  parameters: z.object({
+    content: z.string().describe('The message to send'),
+    chatId: z
+      .string()
+      .optional()
+      .describe('Chat ID to continue an existing conversation (auto-generated UUID if omitted)'),
+    messageId: z
+      .string()
+      .optional()
+      .describe('Message ID (auto-generated UUID if omitted)'),
+    sources: z
+      .array(z.enum(['web', 'discussions', 'academic']))
+      .optional()
+      .default(['web'])
+      .describe('Source types to search'),
+    history: chatHistorySchema,
+    systemInstructions: z
+      .string()
+      .optional()
+      .describe('Custom system instructions for the AI writer'),
+    overrides: z
+      .object(overridesSchema)
+      .optional()
+      .describe('Pipeline parameter overrides. interactiveQuestions defaults to false for agent use.'),
+    chatModelProvider: z
+      .string()
+      .optional()
+      .describe('Chat model provider ID (auto-detected if omitted)'),
+    chatModelKey: z
+      .string()
+      .optional()
+      .describe('Chat model key (auto-detected if omitted)'),
+    embeddingModelProvider: z
+      .string()
+      .optional()
+      .describe('Embedding model provider ID (auto-detected if omitted)'),
+    embeddingModelKey: z
+      .string()
+      .optional()
+      .describe('Embedding model key (auto-detected if omitted)'),
+  }),
+  execute: async (args) => {
+    const models = await resolveModels({
+      chatModelProvider: args.chatModelProvider,
+      chatModelKey: args.chatModelKey,
+      embeddingModelProvider: args.embeddingModelProvider,
+      embeddingModelKey: args.embeddingModelKey,
+    });
+
+    const chatId = args.chatId ?? randomUUID();
+    const messageId = args.messageId ?? randomUUID();
+
+    // Default interactiveQuestions=false for agent use (avoids 120s human selection timeout)
+    const overrides: PipelineOverrides = {
+      interactiveQuestions: false,
+      ...(args.overrides as PipelineOverrides | undefined),
+    };
+
+    const body = {
+      message: { messageId, chatId, content: args.content },
+      sources: args.sources ?? ['web'],
+      history: args.history ?? [],
+      files: [],
+      chatModel: models.chatModel,
+      embeddingModel: models.embeddingModel,
+      systemInstructions: args.systemInstructions ?? '',
+      overrides,
+    };
+
+    const url = `${BASE_URL}/api/chat`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) {
+      const errText = await res.text().catch(() => '');
+      throw new Error(`Perplexica chat API error ${res.status} ${res.statusText}: ${errText}`);
+    }
+
+    if (!res.body) {
+      throw new Error('Perplexica chat API returned no response body');
+    }
+
+    // Read NDJSON stream, apply RFC 6902 patches, collect blocks
+    const blockMap = new Map<string, Record<string, unknown>>();
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let streamDone = false;
+
+    while (!streamDone) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() ?? '';
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed) continue;
+
+        let msg: Record<string, unknown>;
+        try {
+          msg = JSON.parse(trimmed) as Record<string, unknown>;
+        } catch {
+          continue;
+        }
+
+        if (msg.type === 'block') {
+          const block = msg.block as Record<string, unknown>;
+          blockMap.set(block.id as string, block);
+        } else if (msg.type === 'updateBlock') {
+          const block = blockMap.get(msg.blockId as string);
+          if (block) {
+            applyPatch(block, msg.patch as Parameters<typeof applyPatch>[1]);
+          }
+        } else if (msg.type === 'messageEnd') {
+          streamDone = true;
+          break;
+        } else if (msg.type === 'error') {
+          throw new Error(`Chat stream error: ${JSON.stringify(msg.data)}`);
+        }
+      }
+    }
+
+    reader.cancel().catch(() => {});
+
+    // Extract data from final block state
+    let text = '';
+    let sources: unknown[] = [];
+    let verificationSummary: unknown = null;
+
+    for (const block of blockMap.values()) {
+      if (block.type === 'text') {
+        text = block.data as string;
+      } else if (block.type === 'source') {
+        sources = block.data as unknown[];
+      } else if (block.type === 'verification') {
+        verificationSummary = block.data;
+      }
+    }
+
+    return JSON.stringify({ chatId, text, sources, verificationSummary }, null, 2);
+  },
+});
+
+// ---------------------------------------------------------------------------
+// Tool 6: get_suggestions
 // ---------------------------------------------------------------------------
 
 server.addTool({
